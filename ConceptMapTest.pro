@@ -82,7 +82,7 @@ include(../RibiClasses/CppFileIo/CppFileIo.pri)
 include(../RibiClasses/CppRibiRegex/CppRibiRegex.pri)
 #include(../RibiClasses/CppRibiSystem/CppRibiSystem.pri)
 #include(../RibiClasses/CppRibiTime/CppRibiTime.pri)
-#include(../RibiClasses/CppTrace/CppTrace.pri)
+include(../RibiClasses/CppTrace/CppTrace.pri)
 include(../RibiClasses/CppXml/CppXml.pri)
 #include(../RibiClasses/CppXml/CppXmlTest.pri)
 
