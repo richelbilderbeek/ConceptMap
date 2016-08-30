@@ -31,10 +31,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapexamplesfactory.h"
 #include "conceptmaphelper.h"
 #include "conceptmapregex.h"
-
-#include "counter.h"
-#include "trace.h"
-#include "xml.h"
 #pragma GCC diagnostic push
 
 ribi::cmap::ConceptFactory::ConceptFactory() noexcept

@@ -23,14 +23,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapexamplesfactory.h"
 
 #include <cassert>
-
+#include <vector>
 #include "conceptmapexample.h"
 #include "conceptmapexamplefactory.h"
 #include "conceptmapexamples.h"
 #include "conceptmaphelper.h"
 #include "conceptmapregex.h"
-
-#include "trace.h"
 #pragma GCC diagnostic pop
 
 ribi::cmap::ExamplesFactory::ExamplesFactory() noexcept

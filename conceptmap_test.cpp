@@ -29,13 +29,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <boost/graph/vf2_sub_graph_iso.hpp>
 #include <boost/lexical_cast.hpp>
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
-#include <QRegExp>
-#pragma GCC diagnostic pop
-
 #include "conceptmapcenternodefactory.h"
 #include "conceptmapcompetency.h"
 #include "conceptmapconceptfactory.h"
@@ -53,7 +46,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapisexamplesverticesisomorphic.h"
 #include "conceptmapnodefactory.h"
 #include "conceptmapnode.h"
-#include "container.h"
 #include "custom_vertex_invariant.h"
 #include "fileio.h"
 #include "install_vertex_custom_type.h"
@@ -63,8 +55,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "make_custom_and_selectable_vertices_writer.h"
 #include "my_custom_vertex.h"
-#include "testtimer.h"
-#include "xml.h"
 
 #include <boost/test/unit_test.hpp>
 

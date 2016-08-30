@@ -94,7 +94,7 @@ struct Node
   ///The Concept
   Concept m_concept;
 
-  int m_id; //Unique ID
+  int m_id; // Unique ID
 
   bool m_is_center_node;
 
@@ -104,7 +104,7 @@ struct Node
   ///The y-coordinat
   double m_y;
 
-  static int sm_ids; //ID to assign
+  static int sm_ids; //!OCLINT ID to assign, static is easiest to track number of instances
 
   friend bool HaveSameIds(const Node& lhs, const Node& rhs) noexcept;
 };

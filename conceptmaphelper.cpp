@@ -30,12 +30,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/algorithm/string.hpp>
 #include <QFile>
-#include <QRegExp>
 
 #include "fileio.h"
 #include "conceptmapregex.h"
-
-#include "trace.h"
 #pragma GCC diagnostic pop
 
 std::size_t ribi::cmap::FindLastSpaceBeforeMaxLen(

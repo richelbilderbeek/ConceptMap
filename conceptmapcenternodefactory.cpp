@@ -38,11 +38,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapnode.h"
 #include "conceptmapnodefactory.h"
 #include "conceptmapregex.h"
-//#include "counter.h"
-//#include "ribi_regex.h"
-
-//#include "trace.h"
-//#include "xml.h"
 #pragma GCC diagnostic pop
 
 ribi::cmap::CenterNodeFactory::CenterNodeFactory()

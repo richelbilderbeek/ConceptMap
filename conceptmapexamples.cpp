@@ -28,8 +28,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/bind.hpp>
 #include <boost/lambda/lambda.hpp>
-#include <QRegExp>
-#include "counter.h"
 #include "conceptmapregex.h"
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"
@@ -37,8 +35,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapexample.h"
 #include "conceptmapexamplefactory.h"
 #include "conceptmapexamplesfactory.h"
-
-#include "trace.h"
 #pragma GCC diagnostic pop
 
 

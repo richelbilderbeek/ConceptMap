@@ -27,8 +27,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <cmath>
 #include <iostream>
 #include <boost/lambda/lambda.hpp>
+#include <boost/lexical_cast.hpp>
 
-#include "counter.h"
 #include "container.h"
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
@@ -39,7 +39,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmaphelper.h"
 #include "conceptmapregex.h"
 
-#include "trace.h"
 #include "xml.h"
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"

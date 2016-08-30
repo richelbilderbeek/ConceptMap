@@ -31,7 +31,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapregex.h"
 #include "container.h"
 
-#include "trace.h"
 #include "xml.h"
 #pragma GCC diagnostic pop
 

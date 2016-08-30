@@ -33,7 +33,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include <boost/array.hpp>
 #include <boost/numeric/conversion/cast.hpp>
-//#include <boost/shared_ptr.hpp>
 #pragma GCC diagnostic pop
 
 namespace ribi {
@@ -125,14 +124,15 @@ const std::vector<std::vector<T> > GetCombinations(const std::vector<T>& v)
 {
   std::vector<std::vector<T> > result;
   const int sz = boost::numeric_cast<int>(v.size());
-  const int n_combinations = (1 << sz);
+  const int n_combinations{1 << sz};
 
   for (int i=0; i!=n_combinations; ++i)
   {
     std::vector<T> w;
     for (int j=0; j!=sz; ++j)
     {
-      if ((1 << j) & i)
+      const int is_exponent{(1 << j) & i};
+      if (is_exponent)
       {
         w.push_back(v[j]);
       }

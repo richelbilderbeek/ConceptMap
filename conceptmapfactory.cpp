@@ -30,7 +30,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "add_custom_and_selectable_edge_between_vertices.h"
 #include "conceptmapcenternodefactory.h"
-#include "container.h"
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
 #include "conceptmap.h"
@@ -42,9 +41,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapnode.h"
 #include "conceptmapnodefactory.h"
 #include "conceptmapregex.h"
-#include "trace.h"
 #include "set_my_custom_vertexes.h"
-#include "xml.h"
 
 #pragma GCC diagnostic pop
 

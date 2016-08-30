@@ -24,12 +24,9 @@ struct examples_vertex_invariant {
   void collect_custom() noexcept {
     for (auto vd : boost::make_iterator_range(boost::vertices(m_graph))) {
       const size_t next_id = m_mappings.size();
-      auto ins = m_mappings.insert(
+      m_mappings.insert(
         { boost::get(boost::vertex_custom_type, m_graph, vd), next_id}
       );
-      if (ins.second) {
-        //std::cout << "Mapped '" << ins.first->first << "' to " << ins.first->second << "\n";
-      }
     }
   }
 };

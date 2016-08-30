@@ -26,9 +26,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <sstream>
 
 #include <boost/lambda/lambda.hpp>
+#include <boost/lexical_cast.hpp>
 
-#include "counter.h"
-#include "container.h"
 #include "conceptmap.h"
 #include "conceptmapconcept.h"
 #include "conceptmapedgefactory.h"
@@ -40,8 +39,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"
 #include "is_graphviz_friendly.h"
-
-#include "trace.h"
 #include "xml.h"
 #pragma GCC diagnostic pop
 

@@ -1,9 +1,10 @@
 #include "conceptmapexamples.h"
 
+#include <vector>
 #include <boost/test/unit_test.hpp>
 #include <boost/numeric/conversion/cast.hpp>
+#include "conceptmapexamples.h"
 #include "conceptmapexamplesfactory.h"
-#include "trace.h"
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_examples_test)
 {
@@ -123,8 +124,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_examples_test)
     Examples f;
     BOOST_CHECK(e != f);
     s >> f;
-    if (e != f) { TRACE(e); TRACE(f); }
-    BOOST_CHECK(e == f);
+    BOOST_CHECK_EQUAL(e, f);
   }
   //Single stream
   {
@@ -135,10 +135,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_examples_test)
     Examples g;
     Examples h;
     s >> g >> h;
-    if (e != g) { TRACE(e); TRACE(g); }
-    if (f != h) { TRACE(f); TRACE(h); }
-    BOOST_CHECK(e == g);
-    BOOST_CHECK(f == h);
+    BOOST_CHECK_EQUAL(e, g);
+    BOOST_CHECK_EQUAL(f, h);
   }
   //Nasty examples
   for (const Examples e: ExamplesFactory().GetNastyTests())
@@ -146,10 +144,9 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_examples_test)
     std::stringstream s;
     s << e;
     Examples f;
-    BOOST_CHECK(e != f);
+    BOOST_CHECK_NE(e, f);
     s >> f;
-    if (e != f) { TRACE(e); TRACE(f); }
-    BOOST_CHECK(e == f);
+    BOOST_CHECK_EQUAL(e, f);
   }
   //Nasty examples
   for (const Examples e: ExamplesFactory().GetNastyTests())
@@ -159,9 +156,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_examples_test)
     Examples g;
     Examples h;
     s >> g >> h;
-    if (e != g) { TRACE(e); TRACE(g); }
-    if (e != h) { TRACE(e); TRACE(h); }
-    BOOST_CHECK(e == g);
-    BOOST_CHECK(e == h);
+    BOOST_CHECK_EQUAL(e, g);
+    BOOST_CHECK_EQUAL(e, h);
   }
 }

@@ -26,37 +26,38 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include "conceptmaphelper.h"
 #include "conceptmapconceptfactory.h"
-#include "counter.h"
-#include "testtimer.h"
-#include "trace.h"
 #pragma GCC diagnostic pop
 
 #include <boost/test/unit_test.hpp>
 
+BOOST_AUTO_TEST_CASE(ribi_concept_map_copy_constructor)
+{
+  using namespace ribi::cmap;
+  const Concept c = ConceptFactory().Create();
+  Concept d(c);
+  BOOST_CHECK(d == c);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_assignment_operator)
+{
+  using namespace ribi::cmap;
+  const Concept c = ConceptFactory().GetTest(1);
+  const Concept d = ConceptFactory().GetTest(2);
+  BOOST_CHECK(c != d);
+  Concept e(c);
+  BOOST_CHECK(e == c);
+  BOOST_CHECK(e != d);
+  e = d;
+  BOOST_CHECK(e != c);
+  BOOST_CHECK(e == d);
+}
+
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_test)
 {
   using namespace ribi::cmap;
-  const bool verbose{false};
 
-  if (verbose) { TRACE("Copy constructor"); }
-  {
-    const Concept c = ConceptFactory().Create();
-    Concept d(c);
-    BOOST_CHECK(d == c);
-  }
-  if (verbose) { TRACE("Assignment operator"); }
-  {
-    const Concept c = ConceptFactory().GetTest(1);
-    const Concept d = ConceptFactory().GetTest(2);
-    BOOST_CHECK(c != d);
-    Concept e(c);
-    BOOST_CHECK(e == c);
-    BOOST_CHECK(e != d);
-    e = d;
-    BOOST_CHECK(e != c);
-    BOOST_CHECK(e == d);
-  }
-  if (verbose) { TRACE("Test operator== and operator!="); }
+  //if (verbose) { TRACE("Test operator== and operator!="); }
   {
     const int sz = static_cast<int>(ConceptFactory().GetTests().size());
     BOOST_CHECK(sz > 0);
@@ -96,9 +97,9 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_test)
       }
     }
   }
-  if (verbose) { TRACE("Test operator<"); }
+  //if (verbose) { TRACE("Test operator<"); }
   {
-    if (verbose) { TRACE("operator< must order by name"); }
+    //if (verbose) { TRACE("operator< must order by name"); }
     {
       const Concept a = ConceptFactory().Create("1");
             Concept b = ConceptFactory().Create("1");
@@ -107,7 +108,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_test)
       BOOST_CHECK(a < c); BOOST_CHECK(a < d);
       BOOST_CHECK(b < c); BOOST_CHECK(b < d);
     }
-    if (verbose) { TRACE("operator< must order by examples' size, sizes 0 versus 1"); }
+    //if (verbose) { TRACE("operator< must order by examples' size, sizes 0 versus 1"); }
     {
       const Concept a = ConceptFactory().Create("1");
             Concept b = ConceptFactory().Create("1");
@@ -116,7 +117,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_test)
       BOOST_CHECK(a < c); BOOST_CHECK(a < d);
       BOOST_CHECK(b < c); BOOST_CHECK(b < d);
     }
-    if (verbose) { TRACE("operator< must order by examples' size, sizes 1 versus 2"); }
+    //if (verbose) { TRACE("operator< must order by examples' size, sizes 1 versus 2"); }
     {
       const Concept a = ConceptFactory().Create("1", { {"2",Competency::misc} } );
             Concept b = ConceptFactory().Create("1", { {"2",Competency::misc} } );
@@ -125,7 +126,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_test)
       BOOST_CHECK(a < c); BOOST_CHECK(a < d);
       BOOST_CHECK(b < c); BOOST_CHECK(b < d);
     }
-    if (verbose) { TRACE("Check correct ordering for equal examples' size, lexicographically in the 2nd text"); }
+    //if (verbose) { TRACE("Check correct ordering for equal examples' size, lexicographically in the 2nd text"); }
     {
       const Concept a = ConceptFactory().Create("1", { {"2",Competency::misc},{"3",Competency::misc} } ); //!OCLINT
             Concept b = ConceptFactory().Create("1", { {"2",Competency::misc},{"3",Competency::misc} } ); //!OCLINT
@@ -149,10 +150,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_test)
     Concept g;
     Concept h;
     s >> g >> h;
-    if (e != g) { TRACE(e); TRACE(g); }
-    if (f != h) { TRACE(f); TRACE(h); }
-    BOOST_CHECK(e == g);
-    BOOST_CHECK(f == h);
+    BOOST_CHECK_EQUAL(e, g);
+    BOOST_CHECK_EQUAL(f, h);
   }
   //Nasty examples
   for (const Concept e: ConceptFactory().GetNastyTests())
@@ -162,8 +161,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_test)
     Concept f;
     BOOST_CHECK(e != f);
     s >> f;
-    if (e != f) { TRACE(e); TRACE(f); }
-    BOOST_CHECK(e == f);
+    BOOST_CHECK_EQUAL(e, f);
   }
   //Nasty examples
   for (const Concept e: ConceptFactory().GetNastyTests())
@@ -173,9 +171,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_test)
     Concept g;
     Concept h;
     s >> g >> h;
-    if (e != g) { TRACE(e); TRACE(g); }
-    if (e != h) { TRACE(e); TRACE(h); }
-    BOOST_CHECK(e == g);
-    BOOST_CHECK(e == h);
+    BOOST_CHECK_EQUAL(e, g);
+    BOOST_CHECK_EQUAL(e, h);
   }
 }

@@ -34,7 +34,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "convert_dot_to_svg.h"
 #include "convert_svg_to_png.h"
 #include "fileio.h"
-#include "trace.h"
 #include "xml.h"
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"

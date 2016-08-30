@@ -30,20 +30,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include <sstream>
 
 #include <boost/lexical_cast.hpp>
-#include <QRegExp>
 
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"
-#include "counter.h"
 #include "conceptmapregex.h"
 #include "conceptmapcompetencies.h"
 #include "conceptmapcompetency.h"
 #include "conceptmapexample.h"
 #include "conceptmapexamplefactory.h"
 #include "conceptmaphelper.h"
-#include "ribi_regex.h"
-
-#include "trace.h"
 #include "xml.h"
 #pragma GCC diagnostic pop
 
