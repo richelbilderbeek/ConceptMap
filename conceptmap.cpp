@@ -260,6 +260,21 @@ ribi::cmap::Node ribi::cmap::GetFirstNode(const ConceptMap& c)
   return GetNode(*vertices(c).first, c);
 }
 
+std::string ribi::cmap::GetFocusName(
+  const ConceptMap& sub_conceptmap)
+{
+  if (boost::num_vertices(sub_conceptmap) == 0)
+  {
+    std::stringstream msg;
+    msg << __func__ << ": cannot get the name of a focal node, "
+      << "when there are zero nodes"
+    ;
+    throw std::logic_error(msg.str());
+  }
+  const Concept focal_concept(ribi::cmap::GetFirstNode(sub_conceptmap).GetConcept());
+  return focal_concept.GetName();
+}
+
 ribi::cmap::Node ribi::cmap::GetFrom(const Edge& edge, const ConceptMap& c) noexcept
 {
   return GetFrom(::find_first_custom_edge_with_my_edge(edge, c), c);

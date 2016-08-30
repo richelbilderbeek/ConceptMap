@@ -49,6 +49,9 @@ Edge GetEdge(const EdgeDescriptor vd, const ConceptMap& c) noexcept;
 std::vector<Edge> GetEdges(const ConceptMap& c) noexcept;
 Edge GetFirstEdge(const ConceptMap& c);
 Node GetFirstNode(const ConceptMap& c);
+
+std::string GetFocusName(const ConceptMap& sub_conceptmap);
+
 Node GetFrom(const Edge& edge, const ConceptMap& c) noexcept;
 Node GetFrom(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
 Node GetNode(const VertexDescriptor vd, const ConceptMap& c) noexcept;
