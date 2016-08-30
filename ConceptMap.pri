@@ -1,5 +1,4 @@
-INCLUDEPATH += \
-    ../RibiClasses/CppConceptMap
+INCLUDEPATH += $$PWD
 
 HEADERS += \
     $$PWD/conceptmapcenternodefactory.h \
