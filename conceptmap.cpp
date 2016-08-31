@@ -138,6 +138,37 @@ int ribi::cmap::CountCenterNodes(const ConceptMap& c) noexcept
   return CountCenterNodes(GetNodes(c));
 }
 
+int ribi::cmap::CountSelectedEdges(const ConceptMap& c) noexcept
+{
+  const auto eip = edges(c);
+  return static_cast<int>(
+    std::count_if(eip.first, eip.second,
+      [c](const EdgeDescriptor vd)
+      {
+        const auto is_selected_map
+          = get(boost::edge_is_selected, c);
+        return get(is_selected_map,vd);
+      }
+    )
+  );
+}
+
+int ribi::cmap::CountSelectedNodes(const ConceptMap& c) noexcept
+{
+  const auto vip = vertices(c);
+  return static_cast<int>(
+    std::count_if(vip.first, vip.second,
+      [c](const VertexDescriptor vd)
+      {
+        const auto is_selected_map
+          = get(boost::vertex_is_selected, c);
+        return get(is_selected_map,vd);
+      }
+    )
+  );
+}
+
+
 std::vector<ribi::cmap::ConceptMap>
 ribi::cmap::CreateDirectNeighbourConceptMaps(const ConceptMap& c)
 {

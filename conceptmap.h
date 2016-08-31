@@ -37,6 +37,9 @@ namespace cmap {
 //Concept map definition is in 'conceptmapgraphtypes.h'
 
 int CountCenterNodes(const ConceptMap& c) noexcept;
+int CountSelectedEdges(const ConceptMap& c) noexcept;
+int CountSelectedNodes(const ConceptMap& c) noexcept;
+
 ConceptMap CreateDirectNeighbourConceptMap(const VertexDescriptor vd, const ConceptMap& c);
 std::vector<ConceptMap> CreateDirectNeighbourConceptMaps(const ConceptMap& c);
 void DecodeConceptMap(ConceptMap& g) noexcept;

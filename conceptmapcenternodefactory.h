@@ -57,6 +57,7 @@ struct CenterNodeFactory
   Node GetTest(const int test_index) const noexcept;
 
   int GetNumberOfNastyTests() const noexcept;
+  Node GetNasty0() const noexcept;
   std::vector<Node> GetNastyTests() const noexcept;
   Node GetNastyTest(const int test_index) const noexcept;
 };

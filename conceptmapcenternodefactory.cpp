@@ -88,6 +88,13 @@ ribi::cmap::Node ribi::cmap::CenterNodeFactory::CreateFromStrings(
   return node;
 }
 
+ribi::cmap::Node ribi::cmap::CenterNodeFactory::GetNasty0() const noexcept
+{
+  auto node = NodeFactory().GetNasty0();
+  node.SetIsCenterNode(true);
+  return node;
+}
+
 int ribi::cmap::CenterNodeFactory::GetNumberOfTests() const noexcept
 {
   return NodeFactory().GetNumberOfTests();
