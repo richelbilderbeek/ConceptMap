@@ -52,11 +52,11 @@ Node GetFirstNode(const ConceptMap& c);
 
 std::string GetFocusName(const ConceptMap& sub_conceptmap);
 
-Node GetFrom(const Edge& edge, const ConceptMap& c) noexcept;
+Node GetFrom(const Edge& edge, const ConceptMap& c);
 Node GetFrom(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
 Node GetNode(const VertexDescriptor vd, const ConceptMap& c) noexcept;
 Node GetTo(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
-Node GetTo(const Edge& edge, const ConceptMap& c) noexcept;
+Node GetTo(const Edge& edge, const ConceptMap& c);
 
 /// Because 'get_my_custom_vertexes(c)' does not work yet
 std::vector<Node> GetNodes(const ConceptMap& c) noexcept;
@@ -70,7 +70,7 @@ void SaveToFile(const ConceptMap& g, const std::string& dot_filename);
 void SaveToImage(const ConceptMap& g, const std::string& png_filename);
 void SaveSummaryToImage(const ConceptMap& g, const std::string& png_filename);
 void SaveSummaryToFile(const ConceptMap& g, const std::string& dot_filename);
-void SelectRandomNode(ConceptMap& conceptmap, std::mt19937& rng_engine) noexcept;
+void SelectRandomNode(ConceptMap& conceptmap, std::mt19937& rng_engine);
 std::string ToXml(const ConceptMap& conceptmap) noexcept;
 std::string ToDot(const ConceptMap& conceptmap) noexcept;
 ConceptMap UnselectEdges(ConceptMap conceptmap) noexcept;

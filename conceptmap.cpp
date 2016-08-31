@@ -191,7 +191,7 @@ ribi::cmap::VertexDescriptor ribi::cmap::FindCenterNode(const ConceptMap& g)
       << "Cannot find the one center node, as there are "
       << CountCenterNodes(g)
     ;
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   using vd = VertexDescriptor;
   const auto vip = vertices(g);
@@ -215,7 +215,7 @@ ribi::cmap::Node ribi::cmap::GetCenterNode(const ConceptMap& c)
       << "Cannot get the one center node, as there are "
       << CountCenterNodes(c)
     ;
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   return GetNode(FindCenterNode(c), c);
 }
@@ -243,7 +243,14 @@ std::vector<ribi::cmap::Edge> ribi::cmap::GetEdges(const ConceptMap& c) noexcept
 
 ribi::cmap::Edge ribi::cmap::GetFirstEdge(const ConceptMap& c)
 {
-  assert(boost::num_edges(c) > 0);
+  if (boost::num_edges(c) == 0)
+  {
+    std::stringstream msg;
+    msg << __func__ << ": "
+      << "Cannot get the first edge if there are zero edges"
+    ;
+    throw std::invalid_argument(msg.str());
+  }
   return GetEdge(*edges(c).first, c);
 }
 
@@ -253,9 +260,9 @@ ribi::cmap::Node ribi::cmap::GetFirstNode(const ConceptMap& c)
   {
     std::stringstream msg;
     msg << __func__ << ": "
-      << "Cannot get the first node, if there are zero nodes"
+      << "Cannot get the first node if there are zero nodes"
     ;
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   return GetNode(*vertices(c).first, c);
 }
@@ -269,13 +276,13 @@ std::string ribi::cmap::GetFocusName(
     msg << __func__ << ": cannot get the name of a focal node, "
       << "when there are zero nodes"
     ;
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   const Concept focal_concept(ribi::cmap::GetFirstNode(sub_conceptmap).GetConcept());
   return focal_concept.GetName();
 }
 
-ribi::cmap::Node ribi::cmap::GetFrom(const Edge& edge, const ConceptMap& c) noexcept
+ribi::cmap::Node ribi::cmap::GetFrom(const Edge& edge, const ConceptMap& c)
 {
   return GetFrom(::find_first_custom_edge_with_my_edge(edge, c), c);
 }
@@ -321,7 +328,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::GetSortedNodes(const ConceptMap& c) no
   return v;
 }
 
-ribi::cmap::Node ribi::cmap::GetTo(const Edge& edge, const ConceptMap& c) noexcept
+ribi::cmap::Node ribi::cmap::GetTo(const Edge& edge, const ConceptMap& c)
 {
   return GetTo(::find_first_custom_edge_with_my_edge(edge, c), c);
 }
@@ -448,7 +455,7 @@ void ribi::cmap::SaveSummaryToFile(const ConceptMap& g, const std::string& dot_f
 void ribi::cmap::SelectRandomNode(
   ConceptMap& g,
   std::mt19937& rng_engine
-) noexcept
+)
 {
   select_random_vertex(g, rng_engine);
 }

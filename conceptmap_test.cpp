@@ -246,3 +246,275 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_count_center_nodes)
     BOOST_CHECK(CountCenterNodes(map) == 0 || CountCenterNodes(map) == 1);
   }
 }
+
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_find_center_node)
+{
+  using namespace ribi::cmap;
+
+  //Valid concept map
+  BOOST_CHECK_NO_THROW(
+    FindCenterNode(ConceptMapFactory().Get1())
+  );
+
+  //Empty concept map
+  BOOST_CHECK_THROW(
+    FindCenterNode(ConceptMapFactory().Get0()),
+    std::invalid_argument
+  );
+
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_get_center_node)
+{
+  using namespace ribi::cmap;
+
+  //Valid concept map
+  BOOST_CHECK_NO_THROW(
+    GetCenterNode(ConceptMapFactory().Get1())
+  );
+
+  //Empty concept map
+  BOOST_CHECK_THROW(
+    GetCenterNode(ConceptMapFactory().Get0()),
+    std::invalid_argument
+  );
+
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_get_first_edge)
+{
+  using namespace ribi::cmap;
+
+  //Valid concept map
+  BOOST_CHECK_NO_THROW(
+    GetFirstEdge(ConceptMapFactory().Get3())
+  );
+
+  //Empty concept map
+  BOOST_CHECK_THROW(
+    GetFirstEdge(ConceptMapFactory().Get0()),
+    std::invalid_argument
+  );
+
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_get_focus_name)
+{
+  using namespace ribi::cmap;
+
+  //Valid concept map
+  BOOST_CHECK_NO_THROW(
+    GetFocusName(ConceptMapFactory().Get1())
+  );
+
+  //Empty concept map
+  BOOST_CHECK_THROW(
+    GetFocusName(ConceptMapFactory().Get0()),
+    std::invalid_argument
+  );
+
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_get_from)
+{
+  using namespace ribi::cmap;
+
+  const auto g = ConceptMapFactory().Get3();
+  const auto edge = GetFirstEdge(g);
+
+  //Valid
+  BOOST_CHECK_NO_THROW(
+    GetFrom(edge, g)
+  );
+
+  //Empty concept map
+  BOOST_CHECK_THROW(
+    GetFrom(
+      edge,
+      ConceptMapFactory().Get0()
+    ),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_get_to)
+{
+  using namespace ribi::cmap;
+
+  //Valid
+  BOOST_CHECK_NO_THROW(
+    GetTo(
+      GetFirstEdge(ConceptMapFactory().Get3()),
+      ConceptMapFactory().Get3()
+    )
+  );
+
+  //Empty concept map
+  BOOST_CHECK_THROW(
+    GetTo(
+      GetFirstEdge(ConceptMapFactory().Get3()),
+      ConceptMapFactory().Get0()
+    ),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_remove_first_node)
+{
+  using namespace ribi::cmap;
+  auto g = ConceptMapFactory().Get3();
+  assert(boost::num_vertices(g) == 2);
+
+  g = RemoveFirstNode(g);
+  g = RemoveFirstNode(g);
+
+  assert(boost::num_vertices(g) == 0);
+
+  //Empty concept map
+  BOOST_CHECK_THROW(
+    RemoveFirstNode(g),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_save_to_image)
+{
+  using namespace ribi::cmap;
+  const ribi::FileIo f;
+  const std::string filename{"ribi_concept_map_save_to_image.png"};
+
+  if (f.IsRegularFile(filename))
+  {
+    f.DeleteFile(filename);
+  }
+  assert(!f.IsRegularFile(filename));
+
+  SaveToImage(ConceptMapFactory().Get3(), filename);
+  BOOST_CHECK(f.IsRegularFile(filename));
+  f.DeleteFile(filename);
+  BOOST_CHECK(!f.IsRegularFile(filename));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_image)
+{
+  using namespace ribi::cmap;
+  const ribi::FileIo f;
+  const std::string filename{"ribi_concept_map_save_summary_to_image.png"};
+
+  if (f.IsRegularFile(filename))
+  {
+    f.DeleteFile(filename);
+  }
+  assert(!f.IsRegularFile(filename));
+
+  SaveSummaryToImage(ConceptMapFactory().Get3(), filename);
+  BOOST_CHECK(f.IsRegularFile(filename));
+  f.DeleteFile(filename);
+  BOOST_CHECK(!f.IsRegularFile(filename));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_file)
+{
+  using namespace ribi::cmap;
+  const ribi::FileIo f;
+  const std::string filename{"ribi_concept_map_save_summary_to_image.dot"};
+
+  if (f.IsRegularFile(filename))
+  {
+    f.DeleteFile(filename);
+  }
+  assert(!f.IsRegularFile(filename));
+
+  SaveSummaryToFile(ConceptMapFactory().Get3(), filename);
+  BOOST_CHECK(f.IsRegularFile(filename));
+  f.DeleteFile(filename);
+  BOOST_CHECK(!f.IsRegularFile(filename));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_select_random_node)
+{
+  using namespace ribi::cmap;
+  std::mt19937 rng_engine;
+  auto good_graph = ConceptMapFactory().Get1();
+  auto bad_graph = ConceptMapFactory().Get0();
+
+  BOOST_CHECK_NO_THROW(
+    SelectRandomNode(
+      good_graph,
+      rng_engine
+    )
+  );
+
+  BOOST_CHECK_THROW(
+    SelectRandomNode(
+      bad_graph,
+      rng_engine
+    ),
+    std::invalid_argument
+  );
+
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_unselect_edges)
+{
+  using namespace ribi::cmap;
+
+  BOOST_CHECK_NO_THROW(
+    UnselectEdges(ConceptMapFactory().Get3())
+  );
+
+  //No edges, sure, no problem
+  BOOST_CHECK_NO_THROW(
+    UnselectEdges(ConceptMapFactory().Get0())
+  );
+
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_unselect_everything)
+{
+  using namespace ribi::cmap;
+
+  BOOST_CHECK_NO_THROW(
+    UnselectEverything(ConceptMapFactory().Get3())
+  );
+
+  //No edges nor node, sure, no problem
+  BOOST_CHECK_NO_THROW(
+    UnselectEverything(ConceptMapFactory().Get0())
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
+{
+  using namespace ribi::cmap;
+
+  BOOST_CHECK_THROW(
+    XmlToConceptMap("too short"),
+    std::invalid_argument
+  );
+
+  BOOST_CHECK_THROW(
+    XmlToConceptMap("incorrect starting tag"),
+    std::invalid_argument
+  );
+
+  const auto g = ConceptMapFactory().Get3();
+  const auto xml = ToXml(g);
+  const auto h = XmlToConceptMap(xml);
+  BOOST_CHECK_EQUAL(g, h);
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
