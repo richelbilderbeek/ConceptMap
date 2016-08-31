@@ -525,7 +525,7 @@ ribi::cmap::ConceptMap ribi::cmap::XmlToConceptMap(const std::string& s)
     msg << __func__ << ": string too short, "
       << "received '" << s << "'"
     ;
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   const std::string required_tag{"<conceptmap>"};
   const int required_tag_size{static_cast<int>(required_tag.size())};
@@ -542,7 +542,7 @@ ribi::cmap::ConceptMap ribi::cmap::XmlToConceptMap(const std::string& s)
   {
     std::stringstream msg;
     msg << __func__ << ": incorrect ending tag";
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   //Need to write the DOT to file
   const std::string dot_filename = ribi::fileio::FileIo().GetTempFileName(".dot");
