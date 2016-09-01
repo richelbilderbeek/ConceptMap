@@ -184,22 +184,40 @@ void ribi::cmap::Concept::SetName(const std::string& name) noexcept
   m_name = name;
 }
 
-void ribi::cmap::Concept::SetRatingComplexity(const int rating_complexity) noexcept
+void ribi::cmap::Concept::SetRatingComplexity(const int rating_complexity)
 {
+  if (rating_complexity < -1 || rating_complexity > 2)
+  {
+    throw std::invalid_argument(
+      "ribi::cmap::Concept::SetRatingComplexity: invalid complexity"
+    );
+  }
   m_rating_complexity = rating_complexity;
   assert(m_rating_complexity >= -1);
   assert(m_rating_complexity <=  2);
 }
 
-void ribi::cmap::Concept::SetRatingConcreteness(const int rating_concreteness) noexcept
+void ribi::cmap::Concept::SetRatingConcreteness(const int rating_concreteness)
 {
+  if (rating_concreteness < -1 || rating_concreteness > 2)
+  {
+    throw std::invalid_argument(
+      "ribi::cmap::Concept::SetRatingConcreteness: invalid concreteness"
+    );
+  }
   m_rating_concreteness = rating_concreteness;
   assert(m_rating_concreteness >= -1);
   assert(m_rating_concreteness <=  2);
 }
 
-void ribi::cmap::Concept::SetRatingSpecificity(const int rating_specificity) noexcept
+void ribi::cmap::Concept::SetRatingSpecificity(const int rating_specificity)
 {
+  if (rating_specificity < -1 || rating_specificity > 2)
+  {
+    throw std::invalid_argument(
+      "ribi::cmap::Concept::SetRatingSpecificity: invalid specificity"
+    );
+  }
   m_rating_specificity = rating_specificity;
   assert(m_rating_specificity >= -1);
   assert(m_rating_specificity <=  2);

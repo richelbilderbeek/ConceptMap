@@ -271,3 +271,81 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_examples)
   concept.SetExamples(examples);
   BOOST_CHECK_EQUAL(examples, concept.GetExamples());
 }
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_is_complex)
+{
+  using namespace ribi::cmap;
+  Concept concept = ConceptFactory().GetNasty2();
+  concept.SetIsComplex(true);
+  BOOST_CHECK(concept.GetIsComplex());
+  concept.SetIsComplex(false);
+  BOOST_CHECK(!concept.GetIsComplex());
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_name)
+{
+  using namespace ribi::cmap;
+  Concept concept = ConceptFactory().GetNasty2();
+  const std::string name{"ribi_concept_map_concept_set_name"};
+  concept.SetName(name);
+  BOOST_CHECK_EQUAL(concept.GetName(), name);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_complexity)
+{
+  using namespace ribi::cmap;
+  Concept concept = ConceptFactory().GetNasty2();
+
+  //Use
+  const int rating{2};
+  concept.SetRatingComplexity(rating);
+  BOOST_CHECK_EQUAL(concept.GetRatingComplexity(), rating);
+
+  //Abuse
+  BOOST_CHECK_THROW(
+    concept.SetRatingComplexity(-4),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_concreteness)
+{
+  using namespace ribi::cmap;
+  Concept concept = ConceptFactory().GetNasty2();
+
+  //Use
+  const int rating{2};
+  concept.SetRatingConcreteness(rating);
+  BOOST_CHECK_EQUAL(concept.GetRatingConcreteness(), rating);
+
+  //Abuse
+  BOOST_CHECK_THROW(
+    concept.SetRatingConcreteness(-4),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_specificity)
+{
+  using namespace ribi::cmap;
+  Concept concept = ConceptFactory().GetNasty2();
+
+  //Use
+  const int rating{2};
+  concept.SetRatingSpecificity(rating);
+  BOOST_CHECK_EQUAL(concept.GetRatingSpecificity(), rating);
+
+  //Abuse
+  BOOST_CHECK_THROW(
+    concept.SetRatingSpecificity(-4),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_to_str)
+{
+  using namespace ribi::cmap;
+  BOOST_CHECK(
+    !ConceptFactory().GetNasty2().ToStr().empty()
+  );
+}

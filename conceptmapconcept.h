@@ -97,15 +97,15 @@ struct Concept
 
   ///Set the rating of this Concept for complexity
   ///-1: not rated, 0: lowest, 2: highest
-  void SetRatingComplexity(const int rating_complexity) noexcept;
+  void SetRatingComplexity(const int rating_complexity);
 
   ///Set the rating of this Concept for concreteness
   ///-1: not rated, 0: lowest, 2: highest
-  void SetRatingConcreteness(const int rating_concreteness) noexcept;
+  void SetRatingConcreteness(const int rating_concreteness);
 
   ///Set the rating of this Concept for specificity
   ///-1: not rated, 0: lowest, 2: highest
-  void SetRatingSpecificity(const int rating_specificity) noexcept;
+  void SetRatingSpecificity(const int rating_specificity);
 
   ///Convert Concept to a short std::string
   std::string ToStr() const noexcept;
