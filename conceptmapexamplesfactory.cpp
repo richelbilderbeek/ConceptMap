@@ -59,6 +59,12 @@ ribi::cmap::Examples ribi::cmap::ExamplesFactory::GetTest(const int i) const noe
   return GetTests()[i];
 }
 
+ribi::cmap::Examples ribi::cmap::ExamplesFactory::Get0() const noexcept
+{
+  assert(!GetTests().empty());
+  return GetTests()[0];
+}
+
 std::vector<ribi::cmap::Examples> ribi::cmap::ExamplesFactory::GetNastyTests() const noexcept
 {
   std::vector<Examples> v;

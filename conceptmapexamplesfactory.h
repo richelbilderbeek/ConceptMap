@@ -44,6 +44,7 @@ struct ExamplesFactory
 
   int GetNumberOfTests() const noexcept { return static_cast<int>(GetTests().size()); }
   Examples GetTest(const int i) const noexcept;
+  Examples Get0() const noexcept;
   std::vector<Examples> GetNastyTests() const noexcept;
   std::vector<Examples> GetTests() const noexcept;
 };
