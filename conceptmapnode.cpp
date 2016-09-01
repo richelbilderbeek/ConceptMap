@@ -111,7 +111,7 @@ double ribi::cmap::ExtractYfromXml(const std::string& s)
   return boost::lexical_cast<double>(ribi::xml::StripXmlTag(v[0]));
 }
 
-
+/*
 std::vector<ribi::cmap::Node>::const_iterator
 ribi::cmap::FindCenterNode(const std::vector<Node>& nodes) noexcept
 {
@@ -123,6 +123,7 @@ ribi::cmap::FindCenterNode(const std::vector<Node>& nodes) noexcept
     }
   );
 }
+*/
 
 std::vector<ribi::cmap::Node> ribi::cmap::Node::GetTests() noexcept
 {
