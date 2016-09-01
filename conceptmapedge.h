@@ -62,9 +62,6 @@ struct Edge
 
   int GetId() const noexcept { return m_id; }
 
-  static std::string GetVersion() noexcept;
-  static std::vector<std::string> GetVersionHistory() noexcept;
-
   ///These arrows are needed: the graph is an undirected graph
   ///with/without arrows at either/both sides
   ///This cannot be done by using a directed

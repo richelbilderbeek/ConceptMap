@@ -5,6 +5,7 @@
 
 #include "ribi_regex.h"
 
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_helper_test)
 {
   using Regex = ribi::Regex;
@@ -191,3 +192,4 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_helper_test)
     }
   }
 }
+

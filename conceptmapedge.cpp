@@ -62,21 +62,6 @@ ribi::cmap::Edge::~Edge() noexcept
 
 }
 
-std::string ribi::cmap::Edge::GetVersion() noexcept
-{
-  return "2.0";
-}
-
-std::vector<std::string> ribi::cmap::Edge::GetVersionHistory() noexcept
-{
-  return {
-    "2013-xx-xx: Version 1.0: initial version",
-    "2014-06-01: Version 1.1: replaced Concept, X and Y by a Node",
-    "2015-11-07: Version 1.2: use Node instead of a Node smart pointer",
-    "2015-12-28: Version 2.0: Edge is part of a Boost.Graph",
-  };
-}
-
 void ribi::cmap::Edge::SetNode(const Node& node) noexcept
 {
   m_node = node;

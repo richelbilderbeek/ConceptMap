@@ -506,7 +506,32 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
 
 }
 
+BOOST_AUTO_TEST_CASE(ribi_concept_map_count_selected_edges)
+{
+  using namespace ribi::cmap;
+  BOOST_CHECK_EQUAL(
+    CountSelectedEdges(ConceptMapFactory().Get3()),
+    0
+  );
+}
 
+BOOST_AUTO_TEST_CASE(ribi_concept_map_count_selected_nodes)
+{
+  using namespace ribi::cmap;
+  BOOST_CHECK_EQUAL(
+    CountSelectedNodes(ConceptMapFactory().Get3()),
+    0
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_create_direct_neighbour_concept_maps)
+{
+  using namespace ribi::cmap;
+  BOOST_CHECK_EQUAL(
+    CreateDirectNeighbourConceptMaps(ConceptMapFactory().Get3()).size(),
+    2
+  );
+}
 
 
 
