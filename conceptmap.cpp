@@ -567,7 +567,7 @@ ribi::cmap::ConceptMap ribi::cmap::XmlToConceptMap(const std::string& s)
       << "required '" << required_tag << "', "
       << "received '" << s << "'"
     ;
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   if (s.substr(s.size() - 13,13) != "</conceptmap>")
   {
