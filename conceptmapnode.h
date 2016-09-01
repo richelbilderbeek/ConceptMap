@@ -106,7 +106,7 @@ struct Node
 
   static int sm_ids; //!OCLINT ID to assign, static is easiest to track number of instances
 
-  friend bool HaveSameIds(const Node& lhs, const Node& rhs) noexcept;
+  //friend bool HaveSameIds(const Node& lhs, const Node& rhs) noexcept;
 };
 
 ///Count the number of CenterNodes

@@ -115,6 +115,7 @@ double ribi::cmap::ExtractYfromXml(const std::string& s)
 std::vector<ribi::cmap::Node>::const_iterator
 ribi::cmap::FindCenterNode(const std::vector<Node>& nodes) noexcept
 {
+  assert(!"Am I used?");
   return std::find_if(
     std::begin(nodes),std::end(nodes),
     [](const Node& node) {
@@ -144,10 +145,12 @@ bool ribi::cmap::HasSameContent(const Node& lhs, const Node& rhs) noexcept
   return lhs.GetConcept() == rhs.GetConcept();
 }
 
+/*
 bool ribi::cmap::HaveSameIds(const Node& lhs, const Node& rhs) noexcept
 {
   return lhs.m_id == rhs.m_id;
 }
+*/
 
 bool ribi::cmap::IsCenterNode(const Node& node) noexcept
 {
@@ -200,19 +203,19 @@ ribi::cmap::Node ribi::cmap::XmlToNode(const std::string& s)
   {
     std::stringstream msg;
     msg << __func__ << ": string too short";
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   if (s.substr(0,6) != "<node>")
   {
     std::stringstream msg;
     msg << __func__ << ": incorrect starting tag";
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   if (s.substr(s.size() - 7,7) != "</node>")
   {
     std::stringstream msg;
     msg << __func__ << ": incorrect ending tag";
-    throw std::logic_error(msg.str());
+    throw std::invalid_argument(msg.str());
   }
   return Node(
     ExtractConceptFromXml(s),

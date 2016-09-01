@@ -3,6 +3,7 @@
 
 #include "conceptmapnodefactory.h"
 #include "conceptmapconceptfactory.h"
+#include "conceptmapcenternodefactory.h"
 
 BOOST_AUTO_TEST_CASE(ribi_cmap_node_copy_of_default_should_match)
 {
@@ -51,25 +52,26 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_one)
   BOOST_CHECK(a == b);
 }
 
-
-BOOST_AUTO_TEST_CASE(ribi_cmap_node_test)
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_to_xml_and_node)
 {
   using namespace ribi::cmap;
-  {
-    const std::vector<Node> v = Node::GetTests();
-    std::for_each(v.begin(),v.end(),
-      [](const Node& node)
-      {
-        //Test copy constructor
-        const Node c(node);
-        BOOST_CHECK(node == c);
-        const std::string s{ToXml(c)};
-        const Node d = XmlToNode(s);
-        BOOST_CHECK(c == d);
-      }
-    );
-  }
-  //Test HasSameContent
+  const std::vector<Node> v = Node::GetTests();
+  std::for_each(v.begin(),v.end(),
+    [](const Node& node)
+    {
+      //Test copy constructor
+      const Node c(node);
+      BOOST_CHECK(node == c);
+      const std::string s{ToXml(c)};
+      const Node d = XmlToNode(s);
+      BOOST_CHECK(c == d);
+    }
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_has_same_content)
+{
+  using namespace ribi::cmap;
   {
     {
       const Concept c(ConceptFactory().Create("1"));
@@ -151,63 +153,73 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_test)
       BOOST_CHECK(!HasSameContent(a,b));
     }
   }
-  //Test ConceptFactory reproductions
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_concept_factory_reproductions)
+{
+  using namespace ribi::cmap;
+  const int sz = static_cast<int>(ConceptFactory().GetTests().size());
+  for (int i=0; i!=sz; ++i)
   {
-    const int sz = static_cast<int>(ConceptFactory().GetTests().size());
-    for (int i=0; i!=sz; ++i)
+    BOOST_CHECK(i < static_cast<int>(ConceptFactory().GetTests().size()));
+    const Concept c = ConceptFactory().GetTests()[i];
+    const Concept d = ConceptFactory().GetTests()[i];
+    BOOST_CHECK(c == d);
+    const Node a{c};
+    const Node b{d};
+    BOOST_CHECK(HasSameContent(a,b));
+    BOOST_CHECK(a == b);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_concept_factory_reproductions_too)
+{
+  using namespace ribi::cmap;
+  const int sz = static_cast<int>(ConceptFactory().GetTests().size());
+  for (int i=0; i!=sz; ++i)
+  {
+    for (int j=0; j!=sz; ++j)
     {
       BOOST_CHECK(i < static_cast<int>(ConceptFactory().GetTests().size()));
       const Concept c = ConceptFactory().GetTests()[i];
-      const Concept d = ConceptFactory().GetTests()[i];
-      BOOST_CHECK(c == d);
-      const Node a{c};
-      const Node b{d};
-      BOOST_CHECK(HasSameContent(a,b));
-      BOOST_CHECK(a == b);
-    }
-  }
-  //Test ConceptFactory reproductions
-  {
-    const int sz = static_cast<int>(ConceptFactory().GetTests().size());
-    for (int i=0; i!=sz; ++i)
-    {
-      for (int j=0; j!=sz; ++j)
+      const Concept d = ConceptFactory().GetTests()[j];
+      if (i!=j)
       {
-        BOOST_CHECK(i < static_cast<int>(ConceptFactory().GetTests().size()));
-        const Concept c = ConceptFactory().GetTests()[i];
-        const Concept d = ConceptFactory().GetTests()[j];
-        if (i!=j)
-        {
-          BOOST_CHECK(c != d);
-          const Node a{c};
-          const Node b{d};
-          BOOST_CHECK(!HasSameContent(a,b));
-          BOOST_CHECK(a != b);
-        }
-        else
-        {
-          BOOST_CHECK(c == d);
-          const Node a{c};
-          const Node b{d};
-          BOOST_CHECK(HasSameContent(a,b));
-          BOOST_CHECK(a == b);
-        }
+        BOOST_CHECK(c != d);
+        const Node a{c};
+        const Node b{d};
+        BOOST_CHECK(!HasSameContent(a,b));
+        BOOST_CHECK(a != b);
+      }
+      else
+      {
+        BOOST_CHECK(c == d);
+        const Node a{c};
+        const Node b{d};
+        BOOST_CHECK(HasSameContent(a,b));
+        BOOST_CHECK(a == b);
       }
     }
   }
-  //Stream two
-  {
-    const Node e = NodeFactory().GetTest(1);
-    const Node f = NodeFactory().GetTest(2);
-    std::stringstream s;
-    s << e << " " << f;
-    Node g;
-    Node h;
-    s >> g >> h;
-    BOOST_CHECK_EQUAL(e, g);
-    BOOST_CHECK_EQUAL(f, h);
-  }
-  //Nasty examples
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_twice)
+{
+  using namespace ribi::cmap;
+  const Node e = NodeFactory().GetTest(1);
+  const Node f = NodeFactory().GetTest(2);
+  std::stringstream s;
+  s << e << " " << f;
+  Node g;
+  Node h;
+  s >> g >> h;
+  BOOST_CHECK_EQUAL(e, g);
+  BOOST_CHECK_EQUAL(f, h);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_nasty_once)
+{
+  using namespace ribi::cmap;
   for (const Node e: NodeFactory().GetNastyTests())
   {
     std::stringstream s;
@@ -217,7 +229,12 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_test)
     s >> f;
     BOOST_CHECK_EQUAL(e, f);
   }
-  //Nasty examples
+
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_nasty_twice)
+{
+  using namespace ribi::cmap;
   for (const Node e: NodeFactory().GetNastyTests())
   {
     std::stringstream s;
@@ -229,3 +246,100 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_test)
     BOOST_CHECK_EQUAL(e, h);
   }
 }
+
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_extract_is_center_node_from_xml)
+{
+  using namespace ribi::cmap;
+
+  BOOST_CHECK_NO_THROW(
+    ExtractIsCenterNodeFromXml(ToXml(CenterNodeFactory().GetNasty0()))
+  );
+
+  BOOST_CHECK_THROW(
+    ExtractIsCenterNodeFromXml("no is_center_node tag"),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_extract_x_from_xml)
+{
+  using namespace ribi::cmap;
+
+  BOOST_CHECK_NO_THROW(
+    ExtractXfromXml(ToXml(CenterNodeFactory().GetNasty0()))
+  );
+
+  BOOST_CHECK_THROW(
+    ExtractXfromXml("no x tag"),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_extract_y_from_xml)
+{
+  using namespace ribi::cmap;
+
+  BOOST_CHECK_NO_THROW(
+    ExtractYfromXml(ToXml(CenterNodeFactory().GetNasty0()))
+  );
+
+  BOOST_CHECK_THROW(
+    ExtractYfromXml("no y tag"),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_set_concept)
+{
+  using namespace ribi::cmap;
+
+  auto node = NodeFactory().GetNasty0();
+  const auto concept = ConceptFactory().Get2();
+  assert(node.GetConcept() != concept);
+  node.SetConcept(concept);
+
+  BOOST_CHECK_EQUAL(node.GetConcept(), concept);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_to_str)
+{
+  using namespace ribi::cmap;
+
+  BOOST_CHECK(
+    !NodeFactory().GetNasty0().ToStr().empty()
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_xml_to_node)
+{
+  using namespace ribi::cmap;
+
+  BOOST_CHECK_THROW(
+    XmlToNode("too short"),
+    std::invalid_argument
+  );
+
+  BOOST_CHECK_THROW(
+    XmlToNode("no node starting tag"),
+    std::invalid_argument
+  );
+
+  BOOST_CHECK_THROW(
+    XmlToNode("<node> no node ending tag"),
+    std::invalid_argument
+  );
+
+  BOOST_CHECK_NO_THROW(
+    XmlToNode(ToXml(NodeFactory().GetNasty2()))
+  );
+}
+
+
+
+
+
+
+
+
+
