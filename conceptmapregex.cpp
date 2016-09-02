@@ -13,6 +13,7 @@ ribi::cmap::Regex::Regex()
 
 std::string ribi::cmap::Regex::GetRegexCenterNode() const noexcept
 {
+  assert(!"Am I used?");
   return "(<center_node>.*?</center_node>)";
 }
 
@@ -49,11 +50,13 @@ std::string ribi::cmap::Regex::GetRegexConcreteness() const noexcept
 
 std::string ribi::cmap::Regex::GetRegexEdge() const noexcept
 {
+  assert(!"Am I used?");
   return "(<edge>.*?</edge>)";
 }
 
 std::string ribi::cmap::Regex::GetRegexEdges() const noexcept
 {
+  assert(!"Am I used?");
   return "(<edges>.*?</edges>)";
 }
 
@@ -69,6 +72,7 @@ std::string ribi::cmap::Regex::GetRegexExamples() const noexcept
 
 std::string ribi::cmap::Regex::GetRegexFrom() const noexcept
 {
+  assert(!"Am I used?");
   return "(<from>.*?</from>)";
 }
 
@@ -109,11 +113,13 @@ std::string ribi::cmap::Regex::GetRegexName() const noexcept
 
 std::string ribi::cmap::Regex::GetRegexNode() const noexcept
 {
+  assert(!"Am I used?");
   return "(<node>.*?</node>)";
 }
 
 std::string ribi::cmap::Regex::GetRegexNodes() const noexcept
 {
+  assert(!"Am I used?");
   return "(<nodes>.*?</nodes>)";
 }
 
@@ -130,6 +136,7 @@ std::string ribi::cmap::Regex::GetRegexText() const noexcept
 
 std::string ribi::cmap::Regex::GetRegexTo() const noexcept
 {
+  assert(!"Am I used?");
   return "(<to>.*?</to>)";
 }
 
