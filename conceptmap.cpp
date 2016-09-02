@@ -49,6 +49,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "load_directed_custom_and_selectable_edges_and_vertices_graph_from_dot.h"
 #include "find_first_custom_edge_with_my_edge.h"
 #include "find_first_custom_vertex_with_my_vertex.h"
+#include "remove_selected_custom_edges_and_vertices.h"
 #include "get_my_custom_edge.h"
 #include "get_my_custom_edges.h"
 #include "select_random_vertex.h"
