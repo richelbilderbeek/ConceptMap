@@ -11,13 +11,6 @@ ribi::cmap::Regex::Regex()
 
 }
 
-std::string ribi::cmap::Regex::GetRegexCenterNode() const noexcept
-{
-  assert(!"Am I used?");
-  return "(<center_node>.*?</center_node>)";
-}
-
-
 std::string ribi::cmap::Regex::GetRegexCompetency() const noexcept
 {
   return "(<competency>.*?</competency>)";
@@ -48,18 +41,6 @@ std::string ribi::cmap::Regex::GetRegexConcreteness() const noexcept
   return "(<concreteness>.*?</concreteness>)";
 }
 
-std::string ribi::cmap::Regex::GetRegexEdge() const noexcept
-{
-  assert(!"Am I used?");
-  return "(<edge>.*?</edge>)";
-}
-
-std::string ribi::cmap::Regex::GetRegexEdges() const noexcept
-{
-  assert(!"Am I used?");
-  return "(<edges>.*?</edges>)";
-}
-
 std::string ribi::cmap::Regex::GetRegexExample() const noexcept
 {
   return "(<example>.*?</example>)";
@@ -68,12 +49,6 @@ std::string ribi::cmap::Regex::GetRegexExample() const noexcept
 std::string ribi::cmap::Regex::GetRegexExamples() const noexcept
 {
   return "(<examples>.*?</examples>)";
-}
-
-std::string ribi::cmap::Regex::GetRegexFrom() const noexcept
-{
-  assert(!"Am I used?");
-  return "(<from>.*?</from>)";
 }
 
 std::string ribi::cmap::Regex::GetRegexHasHead() const noexcept
@@ -111,18 +86,6 @@ std::string ribi::cmap::Regex::GetRegexName() const noexcept
   return "(<name>.*?</name>)";
 }
 
-std::string ribi::cmap::Regex::GetRegexNode() const noexcept
-{
-  assert(!"Am I used?");
-  return "(<node>.*?</node>)";
-}
-
-std::string ribi::cmap::Regex::GetRegexNodes() const noexcept
-{
-  assert(!"Am I used?");
-  return "(<nodes>.*?</nodes>)";
-}
-
 std::string ribi::cmap::Regex::GetRegexSpecificity() const noexcept
 {
   return "(<specificity>.*?</specificity>)";
@@ -132,12 +95,6 @@ std::string ribi::cmap::Regex::GetRegexSpecificity() const noexcept
 std::string ribi::cmap::Regex::GetRegexText() const noexcept
 {
   return "(<text>.*?</text>)";
-}
-
-std::string ribi::cmap::Regex::GetRegexTo() const noexcept
-{
-  assert(!"Am I used?");
-  return "(<to>.*?</to>)";
 }
 
 std::string ribi::cmap::Regex::GetRegexX() const noexcept
