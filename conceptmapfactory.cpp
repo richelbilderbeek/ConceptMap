@@ -94,7 +94,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get2() const noexcept
   AddVertex(CenterNodeFactory().GetTest(1),g);
   AddVertex(NodeFactory().GetTest(0), g);
   AddVertex(NodeFactory().GetTest(1), g);
-  return g;
+  return RepositionNodes(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get3() const noexcept
@@ -106,7 +106,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get3() const noexcept
   AddEdge(
     EdgeFactory().GetTest(1),vd_1,vd_2,g
   );
-  return g;
+  return RepositionNodes(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get4() const noexcept
@@ -123,7 +123,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get4() const noexcept
     EdgeFactory().GetTest(2),
     vd_2,vd_3,g
   );
-  return g;
+  return RepositionNodes(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get5() const noexcept
@@ -135,7 +135,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get5() const noexcept
   AddEdge(EdgeFactory().GetNastyTest(0),vd_1,vd_2,g);
   AddEdge(EdgeFactory().GetNastyTest(1),vd_2,vd_3,g);
   AddEdge(EdgeFactory().GetNastyTest(2),vd_3,vd_1,g);
-  return g;
+  return RepositionNodes(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get6() const noexcept
@@ -169,7 +169,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get7() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty2(),false,true), vd_2, vd_5, g);
   AddEdge(Edge(NodeFactory().GetNasty1(),false,true), vd_1, vd_2, g);
 
-  return g;
+  return RepositionNodes(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get8() const noexcept
@@ -188,7 +188,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get8() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty2(),false,true), vd_2, vd_5, g);
   AddEdge(Edge(NodeFactory().GetNasty0(),false,true), vd_1, vd_2, g);
 
-  return g;
+  return RepositionNodes(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get9() const noexcept
@@ -206,7 +206,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get9() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty0(),false,true), vd_2, vd_5, g);
   AddEdge(Edge(NodeFactory().GetNasty1(),false,true), vd_1, vd_2, g);
 
-  return g;
+  return RepositionNodes(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get10() const noexcept
@@ -234,7 +234,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get10() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty1(),false,true), vd_2, vd_5, g);
   AddEdge(Edge(NodeFactory().GetNasty2(),false,true), vd_1, vd_2, g);
 
-  return g;
+  return RepositionNodes(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept

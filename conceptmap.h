@@ -67,6 +67,10 @@ std::vector<Node> GetNodes(const ConceptMap& c) noexcept;
 std::vector<Edge> GetSortedEdges(const ConceptMap& c) noexcept;
 std::vector<Node> GetSortedNodes(const ConceptMap& c) noexcept;
 bool HasCenterNode(const ConceptMap& c) noexcept;
+
+///Is the Edge connected to the Node?
+bool IsConnectedTo(const Edge& edge, const Node& node, const ConceptMap& c);
+
 ConceptMap LoadFromFile(const std::string& dot_filename);
 ConceptMap RemoveFirstNode(ConceptMap g);
 void SaveToFile(const ConceptMap& g, const std::string& dot_filename);

@@ -382,6 +382,11 @@ bool ribi::cmap::HasCenterNode(const ConceptMap& c) noexcept
   return i != std::end(nodes);
 }
 
+bool ribi::cmap::IsConnectedTo(const Edge& edge, const Node& node, const ConceptMap& c)
+{
+  return GetFrom(edge,c) == node || GetTo(edge, c) == node;
+}
+
 ribi::cmap::ConceptMap ribi::cmap::LoadFromFile(const std::string& dot_filename)
 {
   auto g = load_undirected_custom_and_selectable_edges_and_vertices_graph_from_dot<
