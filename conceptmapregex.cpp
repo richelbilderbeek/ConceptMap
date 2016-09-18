@@ -4,8 +4,6 @@
 
 #include "ribi_regex.h"
 
-#include "trace.h"
-
 ribi::cmap::Regex::Regex()
 {
 
