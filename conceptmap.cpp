@@ -324,6 +324,22 @@ ribi::cmap::Node ribi::cmap::GetFrom(const EdgeDescriptor ed, const ConceptMap& 
   return GetNode(boost::source(ed, c), c);
 }
 
+std::pair<ribi::cmap::Node, ribi::cmap::Node>
+ribi::cmap::GetFromTo(
+  const EdgeDescriptor ed, const ConceptMap& conceptmap
+)
+{
+  assert(boost::num_edges(conceptmap));
+  const VertexDescriptor vd_from = boost::source(ed, conceptmap);
+  const VertexDescriptor vd_to = boost::target(ed, conceptmap);
+  assert(vd_from != vd_to);
+  const auto vertex_map = get(boost::vertex_custom_type, conceptmap);
+  const Node from = get(vertex_map, vd_from);
+  const Node to = get(vertex_map, vd_to);
+  assert(from.GetId() != to.GetId());
+  return std::make_pair(from ,to);
+}
+
 ribi::cmap::Node ribi::cmap::GetNode(
   const ribi::cmap::VertexDescriptor vd, const ribi::cmap::ConceptMap& g
 ) noexcept
