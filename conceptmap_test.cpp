@@ -389,7 +389,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_to_image)
     f.DeleteFile(filename);
   }
   assert(!f.IsRegularFile(filename));
-
+  BOOST_CHECKPOINT("if error 'child has exited' then install GraphViz");
   SaveToImage(ConceptMapFactory().Get3(), filename);
   BOOST_CHECK(f.IsRegularFile(filename));
   f.DeleteFile(filename);
