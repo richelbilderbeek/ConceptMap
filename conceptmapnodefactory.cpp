@@ -68,12 +68,10 @@ int ribi::cmap::NodeFactory::GetNumberOfNastyTests() const noexcept
   return static_cast<int>(GetNastyTests().size());
 }
 
-ribi::cmap::Node ribi::cmap::NodeFactory::GetTest(const int i) const noexcept
+ribi::cmap::Node ribi::cmap::NodeFactory::GetTest(const int i) const
 {
   const auto tests = GetTests();
-  assert(i >= 0);
-  assert(i < static_cast<int>(tests.size()));
-  return tests[i];
+  return tests.at(i);
 }
 
 ribi::cmap::Node ribi::cmap::NodeFactory::GetNasty0() const noexcept

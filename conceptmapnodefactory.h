@@ -49,7 +49,7 @@ struct NodeFactory
 
   int GetNumberOfTests() const noexcept;
   std::vector<Node> GetTests() const noexcept;
-  Node GetTest(const int test) const noexcept;
+  Node GetTest(const int test) const;
 
   int GetNumberOfNastyTests() const noexcept;
   std::vector<Node> GetNastyTests() const noexcept;
