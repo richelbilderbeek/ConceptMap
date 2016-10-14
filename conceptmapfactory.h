@@ -64,8 +64,11 @@ public:
   ConceptMap Get11() const noexcept;
   ConceptMap GetNasty0() const noexcept;
 
-  private:
+  ///Example Used by QtRateConceptTallyDialog
+  ConceptMap GetRateConceptTallyDialogExample() const noexcept;
 
+  ///Example Used by QtRatedConceptDialog
+  ConceptMap GetQtRatedConceptDialogExample() const noexcept;
 };
 
 void AddEdge(

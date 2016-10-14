@@ -273,6 +273,67 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetNasty0() const noexcept
   return g;
 }
 
+ribi::cmap::ConceptMap
+ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample() const noexcept
+{
+  ConceptMap g;
+  const Examples examples_1(
+    {
+      Example("Always establish order first"),
+      Example("Punishment"),
+    }
+  );
+  const Examples examples_2(
+    {
+      Example("Students teaching each other, get to know each other")
+    }
+  );
+
+  const Concept concept1("Learning environment");
+  const Concept concept2("Order");
+  const Concept concept3("Social safety");
+  const auto vd_1 = AddVertex(Node(concept1), g);
+  const auto vd_2 = AddVertex(Node(concept2), g);
+  const auto vd_3 = AddVertex(Node(concept3), g);
+  AddEdge(Edge(Node(Concept("prerequisite", examples_1)),true),vd_2,vd_1,g);
+  AddEdge(Edge(Node(Concept("strengthen", examples_2)),true,true),vd_2,vd_3,g);
+  return g;
+}
+
+ribi::cmap::ConceptMap
+ribi::cmap::ConceptMapFactory::GetQtRatedConceptDialogExample() const noexcept
+{
+  ConceptMap g;
+  const Examples examples_node_1(
+    {
+      Example("Arduino course"),
+      Example("Dojo")
+    }
+  );
+
+  const Examples examples_edge_1(
+    {
+      Example("Always establish order first"),
+      Example("Punishment"),
+    }
+  );
+  const Examples examples_edge_2(
+    {
+      Example("Students teaching each other, get to know each other")
+    }
+  );
+
+  const Concept concept1("Learning environment", examples_node_1);
+  const Concept concept2("Order");
+  const Concept concept3("Social safety");
+  const auto vd_1 = AddVertex(Node(concept1), g);
+  const auto vd_2 = AddVertex(Node(concept2), g);
+  const auto vd_3 = AddVertex(Node(concept3), g);
+  AddEdge(Edge(Node(Concept("prerequisite", examples_edge_1)),true),vd_2,vd_1,g);
+  AddEdge(Edge(Node(Concept("strengthen", examples_edge_2)),true,true),vd_2,vd_3,g);
+  return g;
+}
+
 std::vector<ribi::cmap::ConceptMap >
 ribi::cmap::ConceptMapFactory::GetAllTests() const noexcept
 {
