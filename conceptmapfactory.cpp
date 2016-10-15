@@ -256,7 +256,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty0(),false,true), vd_1, vd_4, g);
   AddEdge(Edge(NodeFactory().GetNasty1(),false,true), vd_1, vd_5, g);
 
-  return g;
+  return RepositionNodes(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetNasty0() const noexcept
