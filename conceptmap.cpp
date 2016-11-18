@@ -114,6 +114,50 @@ make_edge_writer(
 } //~namespace ribi
 } //~namespace cmap
 
+int ribi::cmap::CalculateRichnessExperimental(const ConceptMap& c) noexcept
+{
+  return CalculateRichnessExperimental(TallyCompetencies(c));
+}
+
+int ribi::cmap::CalculateRichnessExperimental(
+  std::map<cmap::Competency,int> m
+) noexcept
+{
+  assert(m.count(Competency::uninitialized) == 0);
+  assert(m.count(Competency::n_competencies) == 0);
+
+  //Remove category 'misc'
+  m.erase(cmap::Competency::misc);
+
+  //a: the number of different categories, used in equation at page 617
+  const int a{static_cast<int>(m.size())};
+  assert(a >= 0 && a <= 6);
+
+  const int n_examples{CountTallyTotal(m)};
+
+  //The min number of a compency being used to count as having contributed to an even distribution
+  const int my_min = static_cast<int>(std::ceil( static_cast<double>(n_examples) / 12.0));
+
+  //The max number of a compency being used to count as having contributed to an even distribution
+  const int my_max = static_cast<int>(std::floor(static_cast<double>(n_examples) /  4.0));
+
+  //The number of competencies having contributed to an even distribution
+  const int b = std::count_if(std::begin(m), std::end(m),
+    [my_min,my_max](const auto& p)
+    {
+      return p.second >= my_min && p.second <= my_max;
+    }
+  );
+
+  return static_cast<int>(
+    std::round(
+      100.0 * ( static_cast<double>(a+b) / 12.0)
+    )
+  );
+
+}
+
+
 std::vector<ribi::cmap::Competency> ribi::cmap::CollectCompetenies(
   const ConceptMap& g
 ) noexcept

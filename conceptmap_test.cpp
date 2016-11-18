@@ -534,6 +534,68 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_create_direct_neighbour_concept_maps)
 }
 
 
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
+{
+  using ribi::cmap::CalculateRichnessExperimental;
+  using ribi::cmap::Competency;
+  {
+    //An empty map has no richness
+    const std::map<Competency, int> empty_map;
+    BOOST_CHECK_EQUAL(
+      CalculateRichnessExperimental(empty_map),
+      0
+    );
+  }
+  {
+    //An even distribution over the domains, 1 scores per competency
+    const std::map<Competency, int> m =
+    {
+      { ribi::cmap::Competency::organisations, 1 },
+      { ribi::cmap::Competency::profession, 1 },
+      { ribi::cmap::Competency::prof_growth, 1 },
+      { ribi::cmap::Competency::social_surroundings, 1 },
+      { ribi::cmap::Competency::target_audience, 1 },
+      { ribi::cmap::Competency::ti_knowledge, 1 }
+    };
+    BOOST_CHECK_EQUAL(
+      CalculateRichnessExperimental(m), 100
+    );
+  }
+  {
+    //An even distribution over the domains, 10 scores per competency
+    const std::map<Competency, int> m =
+    {
+      { ribi::cmap::Competency::organisations, 10 },
+      { ribi::cmap::Competency::profession, 10 },
+      { ribi::cmap::Competency::prof_growth, 10 },
+      { ribi::cmap::Competency::social_surroundings, 10 },
+      { ribi::cmap::Competency::target_audience, 10 },
+      { ribi::cmap::Competency::ti_knowledge, 10 }
+    };
+    BOOST_CHECK_EQUAL(
+      CalculateRichnessExperimental(m), 100
+    );
+  }
+  {
+    //misc is ignored
+    const std::map<Competency, int> m =
+    {
+      { ribi::cmap::Competency::organisations, 10 },
+      { ribi::cmap::Competency::profession, 10 },
+      { ribi::cmap::Competency::prof_growth, 10 },
+      { ribi::cmap::Competency::social_surroundings, 10 },
+      { ribi::cmap::Competency::target_audience, 10 },
+      { ribi::cmap::Competency::ti_knowledge, 10 },
+      { ribi::cmap::Competency::misc, 100 }
+    };
+    BOOST_CHECK_EQUAL(
+      CalculateRichnessExperimental(m), 100
+    );
+  }
+
+}
+
+
 
 
 

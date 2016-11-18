@@ -16,6 +16,12 @@ namespace cmap {
 
 //Concept map definition is in 'conceptmapgraphtypes.h'
 
+///Calculate the richness of a concept map, which is determined by a tally of competencies
+int CalculateRichnessExperimental(const ConceptMap& c) noexcept;
+
+///Calculate the richness of a concept map, from a tally of competencies
+int CalculateRichnessExperimental(std::map<cmap::Competency,int> m) noexcept;
+
 ///Collect all competenties of a concept map, with no intended
 ///ordering. Used to tally the competencies by TallyCompetencies
 std::vector<Competency> CollectCompetenies(const ConceptMap& c) noexcept;
