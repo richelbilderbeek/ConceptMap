@@ -239,6 +239,35 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept
   return RepositionNodes(g);
 }
 
+///Completely rated simple readable concept map
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetWithExamplesWithCompetencies(
+  const std::vector<Competency>& competencies
+) const noexcept
+{
+  ConceptMap g;
+
+  const auto vd_1 = AddVertex(CenterNodeFactory().CreateFromStrings("A center node is ..."), g);
+  Node n = NodeFactory().CreateFromStrings("not me");
+  std::vector<Example> examples;
+  {
+    int i = 0;
+    for (const auto competency: competencies)
+    {
+      const std::string text = "Example " + std::to_string(i);
+      examples.push_back(
+        Example(text, competency)
+      );
+      ++i;
+    }
+  }
+  n.GetConcept().SetExamples(Examples(examples));
+  const auto vd_2 = AddVertex(n, g);
+
+  AddEdge(Edge(NodeFactory().GetTest(0),false,false), vd_1, vd_2, g);
+
+  return RepositionNodes(g);
+}
+
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetNasty0() const noexcept
 {
   ConceptMap g;

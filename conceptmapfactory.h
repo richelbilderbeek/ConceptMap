@@ -42,6 +42,14 @@ public:
 
   /// Complex rated concept map with all nodes connected
   ConceptMap Get11() const noexcept;
+
+  ///Creates a simple concept map with a center and normal node
+  ///The normal node will have examples that are attributed the
+  ///competencies supplied.
+  ConceptMap GetWithExamplesWithCompetencies(
+    const std::vector<Competency>& competencies
+  ) const noexcept;
+
   ConceptMap GetNasty0() const noexcept;
 
   ///Example Used by QtRateConceptTallyDialog
