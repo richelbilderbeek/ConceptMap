@@ -577,7 +577,39 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
     );
   }
   {
-    //misc is ignored
+    //Below 12%, a competency does not contribute to b, use 10% here
+    const std::map<Competency, int> m =
+    {
+      { ribi::cmap::Competency::organisations, 9 },
+      { ribi::cmap::Competency::profession, 1 },
+    };
+    // a: 2
+    // b: 1
+    // r: 100 * (a + b) / 12
+    BOOST_CHECK_EQUAL(
+      CalculateRichnessExperimental(m), 25
+    );
+  }
+  {
+    //Above 25%, a competency does not contribute to b, use 33% here
+    const std::map<Competency, int> m =
+    {
+      { ribi::cmap::Competency::organisations, 33 },
+      { ribi::cmap::Competency::profession, 13 },
+      { ribi::cmap::Competency::prof_growth, 14 },
+      { ribi::cmap::Competency::social_surroundings, 13 },
+      { ribi::cmap::Competency::target_audience, 13 },
+      { ribi::cmap::Competency::ti_knowledge, 14 }
+    };
+    // a: 6 (all are present
+    // b: 5 (all but one are between 12%-25%)
+    // r: 100 * (a + b) / 12 = 92
+    BOOST_CHECK_EQUAL(
+      CalculateRichnessExperimental(m), 92
+    );
+  }
+  {
+    //misc is ignored without changing the calculation
     const std::map<Competency, int> m =
     {
       { ribi::cmap::Competency::organisations, 10 },
@@ -590,6 +622,29 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
     };
     BOOST_CHECK_EQUAL(
       CalculateRichnessExperimental(m), 100
+    );
+  }
+
+  {
+    //uninitialized throws an exception
+    const std::map<Competency, int> m =
+    {
+      { ribi::cmap::Competency::uninitialized, 1 }
+    };
+    BOOST_CHECK_THROW(
+      CalculateRichnessExperimental(m),
+      std::invalid_argument
+    );
+  }
+  {
+    //n_competencies throws an exception
+    const std::map<Competency, int> m =
+    {
+      { ribi::cmap::Competency::n_competencies, 1 }
+    };
+    BOOST_CHECK_THROW(
+      CalculateRichnessExperimental(m),
+      std::invalid_argument
     );
   }
 

@@ -122,13 +122,25 @@ int ribi::cmap::CalculateRichnessExperimental(const ConceptMap& c) noexcept
 
 int ribi::cmap::CalculateRichnessExperimental(
   std::map<cmap::Competency,int> m
-) noexcept
+)
 {
-  assert(m.count(Competency::uninitialized) == 0);
-  assert(m.count(Competency::n_competencies) == 0);
+  if (m.count(Competency::uninitialized))
+  {
+    throw std::invalid_argument(
+      "cannot calculate richness from unitialized examples"
+    );
+  }
+  if(m.count(Competency::n_competencies))
+  {
+    throw std::invalid_argument(
+      "cannot calculate richness from examples with invalid competency 'n_competencies'"
+    );
+  }
 
   //Remove category 'misc'
   m.erase(cmap::Competency::misc);
+
+  if (m.empty()) return 0;
 
   //a: the number of different categories, used in equation at page 617
   const int a{static_cast<int>(m.size())};
