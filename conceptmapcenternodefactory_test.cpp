@@ -21,6 +21,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_center_node_factory_must_construct_center_
   BOOST_CHECK(concept == node.GetConcept());
   BOOST_CHECK(node.GetX() == x);
   BOOST_CHECK(node.GetY() == y);
+  BOOST_CHECK(node.GetConcept().GetExamples().Get().empty());
 }
 
 
@@ -36,6 +37,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_center_node_factory_must_construct_center_
   ;
   const auto node = XmlToNode(xml);
   BOOST_CHECK(node.IsCenterNode());
+  BOOST_CHECK(IsCenterNode(node));
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_center_node_factory_test_sizes_must_match)
@@ -54,3 +56,12 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_center_node_factory_test_sizes_must_match)
   }
 }
 
+BOOST_AUTO_TEST_CASE(ribi_cmap_test_center_nodes_must_have_no_exampes)
+{
+  using namespace ribi::cmap;
+  const CenterNodeFactory f;
+  for (const Node& node: f.GetTests())
+  {
+    BOOST_CHECK(node.GetConcept().GetExamples().Get().empty());
+  }
+}
