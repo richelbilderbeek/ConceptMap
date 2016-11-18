@@ -16,6 +16,10 @@ namespace cmap {
 
 //Concept map definition is in 'conceptmapgraphtypes.h'
 
+///Collect all competenties of a concept map, with no intended
+///ordering. Used to tally the competencies by TallyCompetencies
+std::vector<Competency> CollectCompetenies(const ConceptMap& c) noexcept;
+
 int CountCenterNodes(const ConceptMap& c) noexcept;
 int CountSelectedEdges(const ConceptMap& c) noexcept;
 int CountSelectedNodes(const ConceptMap& c) noexcept;
@@ -63,6 +67,9 @@ void SaveToImage(const ConceptMap& g, const std::string& png_filename);
 void SaveSummaryToImage(const ConceptMap& g, const std::string& png_filename);
 void SaveSummaryToFile(const ConceptMap& g, const std::string& dot_filename);
 void SelectRandomNode(ConceptMap& conceptmap, std::mt19937& rng_engine);
+
+std::map<Competency,int> TallyCompetencies(const ConceptMap& g) noexcept;
+
 std::string ToXml(const ConceptMap& conceptmap) noexcept;
 std::string ToDot(const ConceptMap& conceptmap) noexcept;
 ConceptMap UnselectEdges(ConceptMap conceptmap) noexcept;

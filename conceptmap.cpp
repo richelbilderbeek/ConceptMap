@@ -11,6 +11,7 @@
 #include "conceptmapconcept.h"
 #include "conceptmapexamples.h"
 #include "conceptmapexample.h"
+#include "conceptmaphelper.h"
 #include "convert_dot_to_svg.h"
 #include "convert_svg_to_png.h"
 #include "fileio.h"
@@ -113,6 +114,20 @@ make_edge_writer(
 } //~namespace ribi
 } //~namespace cmap
 
+std::vector<ribi::cmap::Competency> ribi::cmap::CollectCompetenies(
+  const ConceptMap& g
+) noexcept
+{
+  std::vector<Competency> v;
+  for (const Node& node: GetNodes(g))
+  {
+    for (const Example& example: node.GetConcept().GetExamples().Get())
+    {
+      v.push_back(example.GetCompetency());
+    }
+  }
+  return v;
+}
 
 int ribi::cmap::CountCenterNodes(const ConceptMap& c) noexcept
 {
@@ -329,8 +344,6 @@ ribi::cmap::Node ribi::cmap::GetNode(
 
 std::vector<ribi::cmap::Node> ribi::cmap::GetNodes(const ConceptMap& c) noexcept
 {
-  //return get_my_custom_vertexes(g);
-
   const auto vip = vertices(c);
   std::vector<Node> v(boost::num_vertices(c));
   std::transform(vip.first,vip.second,std::begin(v),
@@ -491,6 +504,14 @@ void ribi::cmap::SelectRandomNode(
 )
 {
   select_random_vertex(g, rng_engine);
+}
+
+std::map<ribi::cmap::Competency,int> ribi::cmap::TallyCompetencies(
+  const ConceptMap& g
+) noexcept
+{
+  const std::vector<Competency> competencies = CollectCompetenies(g);
+  return CreateTally(competencies);
 }
 
 std::string ribi::cmap::ToDot(const ConceptMap& g) noexcept
