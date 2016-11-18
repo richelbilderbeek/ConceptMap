@@ -116,6 +116,7 @@ make_edge_writer(
 
 int ribi::cmap::CalculateRichnessExperimental(const ConceptMap& c) noexcept
 {
+  assert(!HasUninitializedExamples(c));
   return CalculateRichnessExperimental(TallyCompetencies(c));
 }
 
@@ -433,6 +434,12 @@ bool ribi::cmap::HasCenterNode(const ConceptMap& c) noexcept
     }
   );
   return i != std::end(nodes);
+}
+
+bool ribi::cmap::HasUninitializedExamples(const ConceptMap& c) noexcept
+{
+  const auto m = TallyCompetencies(c);
+  return m.count(Competency::uninitialized);
 }
 
 bool ribi::cmap::IsConnectedTo(const Edge& edge, const Node& node, const ConceptMap& c)

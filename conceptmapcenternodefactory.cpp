@@ -107,6 +107,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::CenterNodeFactory::GetNastyTests() con
   for (Node& node: v)
   {
     node.SetIsCenterNode(true);
+
     //A center node does not have examples
     node.GetConcept().GetExamples().Get().clear();
   }

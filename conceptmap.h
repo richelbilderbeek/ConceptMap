@@ -63,6 +63,9 @@ std::vector<Edge> GetSortedEdges(const ConceptMap& c) noexcept;
 std::vector<Node> GetSortedNodes(const ConceptMap& c) noexcept;
 bool HasCenterNode(const ConceptMap& c) noexcept;
 
+///Are the examples present that are not rated yet?
+bool HasUninitializedExamples(const ConceptMap& c) noexcept;
+
 ///Is the Edge connected to the Node?
 bool IsConnectedTo(const Edge& edge, const Node& node, const ConceptMap& c);
 
