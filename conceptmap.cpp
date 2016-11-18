@@ -114,7 +114,33 @@ make_edge_writer(
 } //~namespace ribi
 } //~namespace cmap
 
-int ribi::cmap::CalculateRichnessExperimental(const ConceptMap& c) noexcept
+int ribi::cmap::CalculateComplexityEstimated(const ConceptMap& c)
+{
+  //Remove the center node to simplify the calculation
+  assert(IsCenterNode(GetFirstNode(c)));
+  const auto g = ribi::cmap::RemoveFirstNode(c);
+
+  const int n_nodes = boost::num_vertices(g);
+
+  if (n_nodes < 2)
+  {
+    throw std::invalid_argument("Cannot CalculateComplexityEstimated");
+  }
+
+  ///This works, because focal node has already been deleted
+  const int nrntf{static_cast<int>(boost::num_edges(g))}; //n_relations_not_to_focus
+  return static_cast<int>(
+    std::round(100.0
+      * std::pow(
+        static_cast<double>(nrntf * 2)
+        / static_cast<double>(n_nodes * (n_nodes - 1) ),
+        0.25
+      )
+    )
+  );
+}
+
+int ribi::cmap::CalculateRichnessExperimental(const ConceptMap& c)
 {
   assert(!HasUninitializedExamples(c));
   return CalculateRichnessExperimental(TallyCompetencies(c));

@@ -58,9 +58,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #include <boost/test/unit_test.hpp>
 
+using namespace ribi::cmap;
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_is_copy_constructable)
 {
-  using namespace ribi::cmap;
   const ConceptMap a;
   const ConceptMap b(a);
   BOOST_CHECK(a == b);
@@ -68,7 +69,6 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_is_copy_constructable)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_operator_is_equal)
 {
-  using namespace ribi::cmap;
   const ConceptMap a = ConceptMapFactory().Get1();
   const ConceptMap b = ConceptMapFactory().Get2();
   BOOST_CHECK(a != b);
@@ -82,7 +82,6 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_operator_is_equal)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_load_node)
 {
-  using namespace ribi::cmap;
   const std::string s{
     "<node><concept><name>A</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept><x>0</x><y>0</y><is_center_node>0</is_center_node></node>"
   };
@@ -114,7 +113,6 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_load_node)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_dot_conversion)
 {
-  using namespace ribi::cmap;
   for (ConceptMap c: ConceptMapFactory().GetAllTests())
   {
     const std::string dot{ToDot(c)};
@@ -127,7 +125,6 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_dot_conversion)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_conversion)
 {
-  using namespace ribi::cmap;
   for (ConceptMap c: ConceptMapFactory().GetAllTests())
   {
     const std::string xml{ToXml(c)};
@@ -140,7 +137,6 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_conversion)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_streaming_empty_graph)
 {
-  using namespace ribi::cmap;
   ConceptMap a;
   std::stringstream s;
   s << a;
@@ -650,8 +646,111 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
 
 }
 
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateComplexityEstimated_use)
+{
+  {
+    //Concept map with one center node and two normal unconnected nodes
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    AddVertex(NodeFactory().GetTest(0),g);
+    AddVertex(NodeFactory().GetTest(0),g);
+    assert(boost::num_vertices(g) == 3);
+    assert(boost::num_edges(g) == 0);
+    assert(CountCenterNodes(g) == 1);
+    BOOST_CHECK_EQUAL(CalculateComplexityEstimated(g), 0);
+  }
+  {
+    //Concept map with one center node and two normal connected nodes
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    const auto vd_from = AddVertex(NodeFactory().GetTest(0),g);
+    const auto vd_to = AddVertex(NodeFactory().GetTest(0),g);
+    AddEdge(EdgeFactory().GetTest(0), vd_from, vd_to, g);
+    assert(boost::num_vertices(g) == 3);
+    assert(boost::num_edges(g) == 1);
+    assert(CountCenterNodes(g) == 1);
+    BOOST_CHECK_EQUAL(CalculateComplexityEstimated(g), 100);
+  }
+  {
+    //Concept map with one center node and three normal unconnected nodes
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    AddVertex(NodeFactory().GetTest(0),g);
+    AddVertex(NodeFactory().GetTest(0),g);
+    AddVertex(NodeFactory().GetTest(0),g);
+    assert(boost::num_vertices(g) == 4);
+    assert(boost::num_edges(g) == 0);
+    assert(CountCenterNodes(g) == 1);
+    BOOST_CHECK_EQUAL(CalculateComplexityEstimated(g), 0);
+  }
+  {
+    //Concept map with one center node and three normal nodes
+    //that have one connection
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    const auto vd_from = AddVertex(NodeFactory().GetTest(0),g);
+    const auto vd_to = AddVertex(NodeFactory().GetTest(0),g);
+    AddVertex(NodeFactory().GetTest(0),g);
+    AddEdge(EdgeFactory().GetTest(0), vd_from, vd_to, g);
+    assert(boost::num_vertices(g) == 4);
+    assert(boost::num_edges(g) == 1);
+    assert(CountCenterNodes(g) == 1);
+    BOOST_CHECK_EQUAL(CalculateComplexityEstimated(g), 76);
+  }
+  {
+    //Concept map with one center node and three normal nodes
+    //that have two connection
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    const auto vd_a = AddVertex(NodeFactory().GetTest(0),g);
+    const auto vd_b = AddVertex(NodeFactory().GetTest(0),g);
+    const auto vd_c = AddVertex(NodeFactory().GetTest(0),g);
+    AddEdge(EdgeFactory().GetTest(0), vd_a, vd_b, g);
+    AddEdge(EdgeFactory().GetTest(0), vd_a, vd_c, g);
+    assert(boost::num_vertices(g) == 4);
+    assert(boost::num_edges(g) == 2);
+    assert(CountCenterNodes(g) == 1);
+    BOOST_CHECK_EQUAL(CalculateComplexityEstimated(g), 90);
+  }
+}
 
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateComplexityEstimated_abuse)
+{
+  {
+    //Cannot calculate the complexity of an empty concept map
+    ConceptMap g;
+    BOOST_CHECK_THROW(
+      CalculateComplexityEstimated(g),
+      std::invalid_argument
+    );
+  }
+  {
+    //Cannot calculate the complexity of a concept map with one center node
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    assert(boost::num_vertices(g) == 1);
+    assert(CountCenterNodes(g) == 1);
+    BOOST_CHECK_THROW(
+      CalculateComplexityEstimated(g),
+      std::invalid_argument
+    );
 
+  }
+  {
+    //Cannot calculate the complexity of a concept map with one center node
+    //and one normal node
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    AddVertex(NodeFactory().GetTest(0),g);
+    assert(boost::num_vertices(g) == 2);
+    assert(CountCenterNodes(g) == 1);
+    BOOST_CHECK_THROW(
+      CalculateComplexityEstimated(g),
+      std::invalid_argument
+    );
+
+  }
+}
 
 
 
