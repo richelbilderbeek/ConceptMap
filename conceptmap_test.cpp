@@ -646,6 +646,128 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
 
 }
 
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateComplexityExperimental_use)
+{
+  {
+    //Concept map with a center node and one normal node of complexity zero
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    node.GetConcept().SetRatingComplexity(0);
+    AddVertex(node,g);
+    BOOST_CHECK_EQUAL(
+      CalculateComplexityExperimental(g),
+      0
+    );
+  }
+  {
+    //Concept map with a center node and one normal node of complexity one
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    node.GetConcept().SetRatingComplexity(1);
+    AddVertex(node,g);
+    BOOST_CHECK_EQUAL(
+      CalculateComplexityExperimental(g),
+      50
+    );
+  }
+  {
+    //Concept map with a center node and one normal node of complexity two
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    node.GetConcept().SetRatingComplexity(2);
+    AddVertex(node,g);
+    BOOST_CHECK_EQUAL(
+      CalculateComplexityExperimental(g),
+      100
+    );
+  }
+  {
+    //Concept map with a center node and two normal node of complexities zero and zero
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node_1 = NodeFactory().GetTest(0);
+    node_1.GetConcept().SetRatingComplexity(0);
+    AddVertex(node_1,g);
+    Node node_2 = NodeFactory().GetTest(0);
+    node_2.GetConcept().SetRatingComplexity(0);
+    AddVertex(node_2,g);
+    BOOST_CHECK_EQUAL(
+      CalculateComplexityExperimental(g),
+      0
+    );
+  }
+  {
+    //Concept map with a center node and two normal node of complexities zero and one
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node_1 = NodeFactory().GetTest(0);
+    node_1.GetConcept().SetRatingComplexity(0);
+    AddVertex(node_1,g);
+    Node node_2 = NodeFactory().GetTest(0);
+    node_2.GetConcept().SetRatingComplexity(1);
+    AddVertex(node_2,g);
+    BOOST_CHECK_EQUAL(
+      CalculateComplexityExperimental(g),
+      25
+    );
+  }
+  {
+    //Concept map with a center node and two normal node of complexities zero and two
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node_1 = NodeFactory().GetTest(0);
+    node_1.GetConcept().SetRatingComplexity(0);
+    AddVertex(node_1,g);
+    Node node_2 = NodeFactory().GetTest(0);
+    node_2.GetConcept().SetRatingComplexity(2);
+    AddVertex(node_2,g);
+    BOOST_CHECK_EQUAL(
+      CalculateComplexityExperimental(g),
+      50
+    );
+  }
+  {
+    //Concept map with a center node and two normal node of complexities one and two
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node_1 = NodeFactory().GetTest(0);
+    node_1.GetConcept().SetRatingComplexity(1);
+    AddVertex(node_1,g);
+    Node node_2 = NodeFactory().GetTest(0);
+    node_2.GetConcept().SetRatingComplexity(2);
+    AddVertex(node_2,g);
+    BOOST_CHECK_EQUAL(
+      CalculateComplexityExperimental(g),
+      75
+    );
+  }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateComplexityExperimental_abuse)
+{
+  {
+    //Cannot calculate complexity of an empty concept map
+    ConceptMap g;
+    BOOST_CHECK_THROW(
+      CalculateComplexityExperimental(g),
+      std::invalid_argument
+    );
+  }
+  {
+    //Cannot calculate complexity of a concept map with only a center node
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    BOOST_CHECK_THROW(
+      CalculateComplexityExperimental(g),
+      std::invalid_argument
+    );
+  }
+}
+
+
 BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateComplexityEstimated_use)
 {
   {

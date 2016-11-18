@@ -114,6 +114,38 @@ make_edge_writer(
 } //~namespace ribi
 } //~namespace cmap
 
+int ribi::cmap::CalculateComplexityExperimental(const ConceptMap& c)
+{
+  if (boost::num_vertices(c) <= 1)
+  {
+    throw std::invalid_argument(
+      "Need at least one non-focal node to calculate experimental complexity"
+    );
+  }
+
+  //Remove the center node to simplify the calculation
+  assert(IsCenterNode(GetFirstNode(c)));
+  const auto g = ribi::cmap::RemoveFirstNode(c);
+  assert(boost::num_vertices(c));
+
+  std::vector<ribi::cmap::Node> nodes = ribi::cmap::GetNodes(g);
+
+  const int sum_rated_complexity //Constant 'k_i'
+    = std::accumulate(nodes.begin(),nodes.end(),0,
+    [](int& init, const ribi::cmap::Node& node)
+    {
+      return init + node.GetConcept().GetRatingComplexity();
+    }
+  );
+  return static_cast<int>(
+    std::round(
+      50.0 * static_cast<double>(sum_rated_complexity)
+       / static_cast<double>(nodes.size())
+    )
+  );
+
+}
+
 int ribi::cmap::CalculateComplexityEstimated(const ConceptMap& c)
 {
   //Remove the center node to simplify the calculation

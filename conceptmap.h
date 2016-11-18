@@ -16,8 +16,11 @@ namespace cmap {
 
 //Concept map definition is in 'conceptmapgraphtypes.h'
 
+///Calculate the complexity of a concept map from human input
+int CalculateComplexityExperimental(const ConceptMap& c);
+
 ///Calculate the complexity of a concept map from the graph only,
-///that is, without the interfernce of humans
+///that is, without the interference of humans
 int CalculateComplexityEstimated(const ConceptMap& c);
 
 ///Calculate the richness of a concept map,
@@ -59,6 +62,7 @@ Node GetFrom(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
 std::pair<Node, Node> GetFromTo(const EdgeDescriptor ed, const ConceptMap& c);
 
 Node GetNode(const VertexDescriptor vd, const ConceptMap& c) noexcept;
+
 Node GetTo(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
 Node GetTo(const Edge& edge, const ConceptMap& c);
 
