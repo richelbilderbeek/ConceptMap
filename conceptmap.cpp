@@ -172,6 +172,60 @@ int ribi::cmap::CalculateComplexityEstimated(const ConceptMap& c)
   );
 }
 
+
+
+int ribi::cmap::CalculateConcretenessEstimated(const ConceptMap& c)
+{
+  if (boost::num_vertices(c) <= 1)
+  {
+    throw std::invalid_argument(
+      "Need at least one non-focal node to calculate estimated concreteness"
+    );
+  }
+  //Remove the center node to simplify the calculation
+  assert(IsCenterNode(GetFirstNode(c)));
+  const auto g = RemoveFirstNode(c);
+
+  //Count the number of examples on the nodes
+  const std::vector<Node> nodes = GetNodes(g);
+  const int n_nodes_examples = std::accumulate(
+    std::begin(nodes), std::end(nodes), 0,
+    [](int& init, const Node& node)
+    {
+      return init + static_cast<int>(node.GetConcept().GetExamples().Get().size());
+    }
+  );
+
+  //Count the number of examples on the edges
+  const std::vector<Edge> edges = GetEdges(c);
+  const int n_edges_examples = std::accumulate(
+    std::begin(edges),std::end(edges), 0,
+    [](int& init, const Edge& edge)
+    {
+      return init + static_cast<int>(edge.GetNode().GetConcept().GetExamples().Get().size());
+    }
+  );
+
+  //n_nodes must exclude focus node
+  const int n_nodes{static_cast<int>(boost::num_vertices(g))};
+  assert(!nodes.empty());
+
+  //n_edges must exclude those edges connected to focus
+  const int n_edges{static_cast<int>(boost::num_edges(g))};
+
+  const int n_examples //Constant 'v'
+    = n_nodes_examples + n_edges_examples;
+
+  assert(n_examples + n_nodes + n_edges != 0);
+
+  return static_cast<int>(
+    std::round(
+      100.0 * static_cast<double>(n_examples)
+      / static_cast<double>(n_examples + n_nodes + n_edges)
+    )
+  );
+}
+
 int ribi::cmap::CalculateRichnessExperimental(const ConceptMap& c)
 {
   assert(!HasUninitializedExamples(c));

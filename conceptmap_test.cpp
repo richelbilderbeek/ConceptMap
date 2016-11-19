@@ -876,6 +876,179 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateComplexityEstimated_abuse)
 
 
 
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateConcretenessEstimated_use)
+{
+  {
+    //Concept map with one center node and one normal unconnected node with zero examples
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    Examples examples; //Empty
+    node.GetConcept().SetExamples(examples);
+    AddVertex(node, g);
+    assert(boost::num_vertices(g) == 2);
+    assert(boost::num_edges(g) == 0);
+    assert(CountCenterNodes(g) == 1);
+    BOOST_CHECK_EQUAL(CalculateConcretenessEstimated(g), 0);
+    BOOST_CHECK_EQUAL(CalculateConcretenessEstimated(g), 100 * 0 / (1 + 1 + 0));
+  }
+  {
+    //Concept map with one center node and one normal unconnected node and one example
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    const Examples examples( { Example("Example 1") } );
+    node.GetConcept().SetExamples(examples);
+    AddVertex(node, g);
+    assert(boost::num_vertices(g) == 2);
+    assert(boost::num_edges(g) == 0);
+    assert(CountCenterNodes(g) == 1);
+    //c_e = n_e / (n_e + n_n + nrntf)
+    BOOST_CHECK_EQUAL(CalculateConcretenessEstimated(g), 50);
+  }
+  {
+    //Concept map with one center node and one normal unconnected node and two examples
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    const Examples examples(
+      {
+        Example("Example 1"),
+        Example("Example 2")
+      }
+    );
+    node.GetConcept().SetExamples(examples);
+    AddVertex(node, g);
+    assert(boost::num_vertices(g) == 2);
+    assert(boost::num_edges(g) == 0);
+    assert(CountCenterNodes(g) == 1);
+    //c_e = n_e / (n_e + n_n + nrntf)
+    BOOST_CHECK_EQUAL(CalculateConcretenessEstimated(g), 67);
+  }
+  {
+    //Concept map with one center node and one normal unconnected node and three examples
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    const Examples examples(
+      {
+        Example("Example 1"),
+        Example("Example 2"),
+        Example("Example 3")
+      }
+    );
+    node.GetConcept().SetExamples(examples);
+    AddVertex(node, g);
+    assert(boost::num_vertices(g) == 2);
+    assert(boost::num_edges(g) == 0);
+    assert(CountCenterNodes(g) == 1);
+    //c_e = n_e / (n_e + n_n + nrntf)
+    BOOST_CHECK_EQUAL(CalculateConcretenessEstimated(g), 75);
+  }
+  {
+    //Concept map with one center node and two normal connected nodes.
+    //The edge has zero examples
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node1 = NodeFactory().GetTest(0);
+    node1.GetConcept().SetExamples( Examples() );
+    Node node2 = NodeFactory().GetTest(0);
+    node2.GetConcept().SetExamples( Examples() );
+    const auto vd_from = AddVertex(node1, g);
+    const auto vd_to = AddVertex(node2, g);
+    Edge edge = EdgeFactory().GetTest(0);
+    const Examples examples; //Empty
+    edge.GetNode().GetConcept().SetExamples(examples);
+    AddEdge(edge, vd_from, vd_to, g);
+    assert(boost::num_vertices(g) == 3);
+    assert(boost::num_edges(g) == 1);
+    assert(CountCenterNodes(g) == 1);
+    //c_e = n_e / (n_e + n_n + nrntf)
+    //c_e =   0 / (  0 +   2 +     1)
+    BOOST_CHECK_EQUAL(CalculateConcretenessEstimated(g), 0);
+  }
+  {
+    //Concept map with one center node and two normal connected nodes.
+    //The edge has one example
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node1 = NodeFactory().GetTest(0);
+    node1.GetConcept().SetExamples( Examples() );
+    Node node2 = NodeFactory().GetTest(0);
+    node2.GetConcept().SetExamples( Examples() );
+    const auto vd_from = AddVertex(node1, g);
+    const auto vd_to = AddVertex(node2, g);
+    Edge edge = EdgeFactory().GetTest(0);
+    const Examples examples(
+      {
+        Example("Example 1")
+      }
+    );
+    edge.GetNode().GetConcept().SetExamples(examples);
+    AddEdge(edge, vd_from, vd_to, g);
+    assert(boost::num_vertices(g) == 3);
+    assert(boost::num_edges(g) == 1);
+    assert(CountCenterNodes(g) == 1);
+    //c_e = n_e / (n_e + n_n + nrntf)
+    //c_e =   1 / (  1 +   2 +     1)
+    BOOST_CHECK_EQUAL(CalculateConcretenessEstimated(g), 25);
+  }
+  {
+    //Concept map with one center node and two normal connected nodes.
+    //The edge has two examples
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node1 = NodeFactory().GetTest(0);
+    node1.GetConcept().SetExamples( Examples() );
+    Node node2 = NodeFactory().GetTest(0);
+    node2.GetConcept().SetExamples( Examples() );
+    const auto vd_from = AddVertex(node1, g);
+    const auto vd_to = AddVertex(node2, g);
+    Edge edge = EdgeFactory().GetTest(0);
+    const Examples examples(
+      {
+        Example("Example 1"),
+        Example("Example 2")
+      }
+    );
+    edge.GetNode().GetConcept().SetExamples(examples);
+    AddEdge(edge, vd_from, vd_to, g);
+    assert(boost::num_vertices(g) == 3);
+    assert(boost::num_edges(g) == 1);
+    assert(CountCenterNodes(g) == 1);
+    //c_e = n_e / (n_e + n_n + nrntf)
+    //c_e =   2 / (  2 +   2 +     1)
+    BOOST_CHECK_EQUAL(CalculateConcretenessEstimated(g), 40);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateConcretenessEstimated_abuse)
+{
+  {
+    //Cannot calculate the complexity of an empty concept map
+    ConceptMap g;
+    BOOST_CHECK_THROW(
+      CalculateConcretenessEstimated(g),
+      std::invalid_argument
+    );
+  }
+  {
+    //Cannot calculate the complexity of a concept map with one center node
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    assert(boost::num_vertices(g) == 1);
+    assert(CountCenterNodes(g) == 1);
+    BOOST_CHECK_THROW(
+      CalculateConcretenessEstimated(g),
+      std::invalid_argument
+    );
+  }
+}
+
+
+
+
+
 
 
 
