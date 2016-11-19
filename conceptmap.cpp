@@ -226,6 +226,38 @@ int ribi::cmap::CalculateConcretenessEstimated(const ConceptMap& c)
   );
 }
 
+
+int ribi::cmap::CalculateConcretenessExperimental(const ConceptMap& c)
+{
+  if (boost::num_vertices(c) <= 1)
+  {
+    throw std::invalid_argument(
+      "Need at least one non-focal node to calculate estimated concreteness"
+    );
+  }
+  //Remove the center node to simplify the calculation
+  assert(IsCenterNode(GetFirstNode(c)));
+  const auto g = RemoveFirstNode(c);
+
+  //The first node removed
+  std::vector<Node> nodes = GetNodes(g);
+  assert(!nodes.empty());
+
+  const int src // sum_rated_concreteness
+    = std::accumulate(std::begin(nodes),std::end(nodes),0,
+    [](int& init, const Node& node)
+    {
+      return init + node.GetConcept().GetRatingConcreteness();
+    }
+  );
+  return static_cast<int>(
+    std::round(
+      50.0 * static_cast<double>(src)
+      / static_cast<double>(nodes.size())
+    )
+  );
+}
+
 int ribi::cmap::CalculateRichnessExperimental(const ConceptMap& c)
 {
   assert(!HasUninitializedExamples(c));

@@ -27,6 +27,9 @@ int CalculateComplexityExperimental(const ConceptMap& c);
 ///that is, without the interference of humans
 int CalculateConcretenessEstimated(const ConceptMap& c);
 
+///Calculate the concreteness of a concept map from human input
+int CalculateConcretenessExperimental(const ConceptMap& c);
+
 ///Calculate the richness of a concept map,
 ///which is determined by a tally of competencies that
 ///are scored by a human
