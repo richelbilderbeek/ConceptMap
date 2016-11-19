@@ -1045,9 +1045,6 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateConcretenessEstimated_abuse)
   }
 }
 
-
-
-
 BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateConcretenessExperimental_use)
 {
   {
@@ -1164,6 +1161,127 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateConcretenessExperimental_abuse)
     AddVertex(CenterNodeFactory().GetTest(0),g);
     BOOST_CHECK_THROW(
       CalculateConcretenessExperimental(g),
+      std::invalid_argument
+    );
+  }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateSpecificityExperimental_use)
+{
+  {
+    //Concept map with a center node and one normal node of specificity zero
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    node.GetConcept().SetRatingSpecificity(0);
+    AddVertex(node,g);
+    BOOST_CHECK_EQUAL(
+      CalculateSpecificityExperimental(g),
+      0
+    );
+  }
+  {
+    //Concept map with a center node and one normal node of specificity one
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    node.GetConcept().SetRatingSpecificity(1);
+    AddVertex(node,g);
+    BOOST_CHECK_EQUAL(
+      CalculateSpecificityExperimental(g),
+      50
+    );
+  }
+  {
+    //Concept map with a center node and one normal node of specificity two
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node = NodeFactory().GetTest(0);
+    node.GetConcept().SetRatingSpecificity(2);
+    AddVertex(node,g);
+    BOOST_CHECK_EQUAL(
+      CalculateSpecificityExperimental(g),
+      100
+    );
+  }
+  {
+    //Concept map with a center node and two normal node of complexities zero and zero
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node_1 = NodeFactory().GetTest(0);
+    node_1.GetConcept().SetRatingSpecificity(0);
+    AddVertex(node_1,g);
+    Node node_2 = NodeFactory().GetTest(0);
+    node_2.GetConcept().SetRatingSpecificity(0);
+    AddVertex(node_2,g);
+    BOOST_CHECK_EQUAL(
+      CalculateSpecificityExperimental(g),
+      0
+    );
+  }
+  {
+    //Concept map with a center node and two normal node of complexities zero and one
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node_1 = NodeFactory().GetTest(0);
+    node_1.GetConcept().SetRatingSpecificity(0);
+    AddVertex(node_1,g);
+    Node node_2 = NodeFactory().GetTest(0);
+    node_2.GetConcept().SetRatingSpecificity(1);
+    AddVertex(node_2,g);
+    BOOST_CHECK_EQUAL(
+      CalculateSpecificityExperimental(g),
+      25
+    );
+  }
+  {
+    //Concept map with a center node and two normal node of complexities zero and two
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node_1 = NodeFactory().GetTest(0);
+    node_1.GetConcept().SetRatingSpecificity(0);
+    AddVertex(node_1,g);
+    Node node_2 = NodeFactory().GetTest(0);
+    node_2.GetConcept().SetRatingSpecificity(2);
+    AddVertex(node_2,g);
+    BOOST_CHECK_EQUAL(
+      CalculateSpecificityExperimental(g),
+      50
+    );
+  }
+  {
+    //Concept map with a center node and two normal node of complexities one and two
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    Node node_1 = NodeFactory().GetTest(0);
+    node_1.GetConcept().SetRatingSpecificity(1);
+    AddVertex(node_1,g);
+    Node node_2 = NodeFactory().GetTest(0);
+    node_2.GetConcept().SetRatingSpecificity(2);
+    AddVertex(node_2,g);
+    BOOST_CHECK_EQUAL(
+      CalculateSpecificityExperimental(g),
+      75
+    );
+  }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateSpecificityExperimental_abuse)
+{
+  {
+    //Cannot calculate specificity of an empty concept map
+    ConceptMap g;
+    BOOST_CHECK_THROW(
+      CalculateSpecificityExperimental(g),
+      std::invalid_argument
+    );
+  }
+  {
+    //Cannot calculate specificity of a concept map with only a center node
+    ConceptMap g;
+    AddVertex(CenterNodeFactory().GetTest(0),g);
+    BOOST_CHECK_THROW(
+      CalculateSpecificityExperimental(g),
       std::invalid_argument
     );
   }

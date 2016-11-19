@@ -314,6 +314,37 @@ int ribi::cmap::CalculateRichnessExperimental(
 
 }
 
+int ribi::cmap::CalculateSpecificityExperimental(const ConceptMap& c)
+{
+  if (boost::num_vertices(c) <= 1)
+  {
+    throw std::invalid_argument(
+      "Need at least one non-focal node to calculate estimated specificity"
+    );
+  }
+
+  //The first node removed, as this is the focal question
+  assert(IsCenterNode(GetFirstNode(c)));
+  const auto g = RemoveFirstNode(c);
+
+  const std::vector<Node> nodes = GetNodes(g);
+
+  assert(!nodes.empty());
+
+  const int srs //sum_rated_specificity
+    = std::accumulate(std::begin(nodes), std::end(nodes),0,
+    [](int& init, const Node& node)
+    {
+      return init + node.GetConcept().GetRatingSpecificity();
+    }
+  );
+  return static_cast<int>(
+    std::round(
+      static_cast<double>(50 * srs)
+      / static_cast<double>(nodes.size())
+    )
+  );
+}
 
 std::vector<ribi::cmap::Competency> ribi::cmap::CollectCompetenies(
   const ConceptMap& g

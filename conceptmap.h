@@ -38,6 +38,9 @@ int CalculateRichnessExperimental(const ConceptMap& c);
 ///Calculate the richness of a concept map, from a tally of competencies
 int CalculateRichnessExperimental(std::map<cmap::Competency,int> m);
 
+///Calculate the specificity of a concept map from human input
+int CalculateSpecificityExperimental(const ConceptMap& c);
+
 ///Collect all competenties of a concept map, with no intended
 ///ordering. Used to tally the competencies by TallyCompetencies
 std::vector<Competency> CollectCompetenies(const ConceptMap& c) noexcept;
