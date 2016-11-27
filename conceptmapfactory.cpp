@@ -239,7 +239,27 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept
   return RepositionNodes(g);
 }
 
-///Completely rated simple readable concept map
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetStarShaped() const noexcept
+{
+  ConceptMap g;
+
+  //Not needed to connect to center node
+  AddVertex(CenterNodeFactory().CreateFromStrings(
+    "A (not truly) star-shaped concept map is ..."), g
+  );
+  const auto vd_1 = AddVertex(NodeFactory().CreateFromStrings("X"), g);
+  const auto vd_2 = AddVertex(NodeFactory().CreateFromStrings("Useful"), g);
+  const auto vd_3 = AddVertex(NodeFactory().CreateFromStrings("In"), g);
+  const auto vd_4 = AddVertex(NodeFactory().CreateFromStrings("Debugging"), g);
+
+  AddEdge(Edge(NodeFactory().CreateFromStrings("2"),false,true), vd_1, vd_2, g);
+  AddEdge(Edge(NodeFactory().CreateFromStrings("3"),false,true), vd_1, vd_3, g);
+  AddEdge(Edge(NodeFactory().CreateFromStrings("4"),false,true), vd_1, vd_4, g);
+
+  return RepositionNodes(g);
+
+}
+
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetWithExamplesWithCompetencies(
   const std::vector<Competency>& competencies
 ) const noexcept
