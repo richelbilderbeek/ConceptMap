@@ -101,10 +101,10 @@ ribi::cmap::Examples ribi::cmap::XmlToExamples(const std::string& s)
     assert(Regex().GetRegexMatches(s,"(<example>)").size()
         == Regex().GetRegexMatches(s,"(</example>)").size());
     const auto v = Regex().GetRegexMatches(s,Regex().GetRegexExample());
-    std::transform(v.begin(),v.end(),std::back_inserter(examples),
-      [](const std::string& s)
+    std::transform(std::begin(v),std::end(v),std::back_inserter(examples),
+      [](const std::string& t)
       {
-        return XmlToExample(s); //ExampleFactory().FromXml(s);
+        return XmlToExample(t); //ExampleFactory().FromXml(s);
       }
     );
   }
