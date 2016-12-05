@@ -10,6 +10,13 @@ install:
   - sudo pip install codecov
   - ./install_oclint.sh
   - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+  # Coverity scan
+  - curl --form token=UMLgP0e7HK-apXY8ZQKgFQ \
+    --form email=richel@richelbilderbeek.nl \
+    --form file=@tarball/file/location \
+    --form version="Version" \
+    --form description="Description" \
+    https://scan.coverity.com/builds?project=richelbilderbeek%2FConceptMap
 
 addons:
   apt:
