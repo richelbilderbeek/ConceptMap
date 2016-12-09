@@ -4,7 +4,7 @@ compiler: gcc
 
 before_install:
   # Coverity Scan
-  - echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
+  #- echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 install:
   - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
@@ -24,14 +24,14 @@ addons:
     - gcc-5
     - g++-5
     - libboost1.55-all-dev
-  coverity_scan:
-    project:
-      name: "richelbilderbeek/ConceptMap"
-      description: "Build submitted via Travis CI"
-    notification_email: richel@richelbilderbeek.nl
-    build_command_prepend: "qmake ConceptMapTest.pro"
-    build_command: "make"
-    branch_pattern: coverity_scan
+  #coverity_scan:
+  #  project:
+  #    name: "richelbilderbeek/ConceptMap"
+  #    description: "Build submitted via Travis CI"
+  #  notification_email: richel@richelbilderbeek.nl
+  #  build_command_prepend: "qmake ConceptMapTest.pro"
+  #  build_command: "make"
+  #  branch_pattern: coverity_scan
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
@@ -51,13 +51,8 @@ script:
 after_success:
   - bash <(curl -s https://codecov.io/bash)
 
-
-
-env:
-  global:
-    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-    #   via the "travis encrypt" command using the project repo's public key
-    - secure: "hMv6HDAv/CQfROYPHIbVI7kUzs5WvC05UGV9C0RIVJo/jhcb5Y7UdsD1G6SSrT23CliTaAB0kLaabnX3lJiCj1FnAJVuZkaDeWIliskUFIv5+u2ki8w2R2OwxMYQ5/8YIDyyddI1jWksRCvdN1om7ZVnS/DU73hNQ87QtytPMwwxxzAXBirThYbvJdXZozjPoPbxnDOpLxU/ZAZeTOTnZ+pr4sTMDm8mWknDPxCTplSaJ+ynfcoZDA5642DRbnDwoSHMP8suZdt16Q7xwO+3X8Tf1c8dV6ffGo294qg2y2yl/79M9hDAYgldYtVvpjzli2Df4H9nsiZe/9Yx0BOsY91fY5rPpStBoZR91qWq8XAgvsjrOI9ylToYymb4mmEAxOOzz8VMpVq9KfJcIPGNwb22OoFk9usIN3RuDuiuf6fw5Cfi+wc3tTi+dFIfw2ifIiXOuExokeJhoDTrLFEeWJHbip57LFjcRXDZMRZyliT6PamEJtp4OOmNeBaN22XVXgmGw/XzBgv763Ok1At9v9ZzameKq+NlbhIUgRvJQUXGk2sSeyiCAIJAJW3UqMsWHxQqPPpUu8iHdHglDBRza1VsSbJHp6fGYM8heO8stbZPV9AiUrlKQcXhwGejEaXbA35FsxgMSEeuhXFudto8wRyecK6arfvbZ4kf0rHYV+A="
-
-
-addons:
+#env:
+#  global:
+#    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
+#    #   via the "travis encrypt" command using the project repo's public key
+#    - secure: "hMv6HDAv/CQfROYPHIbVI7kUzs5WvC05UGV9C0RIVJo/jhcb5Y7UdsD1G6SSrT23CliTaAB0kLaabnX3lJiCj1FnAJVuZkaDeWIliskUFIv5+u2ki8w2R2OwxMYQ5/8YIDyyddI1jWksRCvdN1om7ZVnS/DU73hNQ87QtytPMwwxxzAXBirThYbvJdXZozjPoPbxnDOpLxU/ZAZeTOTnZ+pr4sTMDm8mWknDPxCTplSaJ+ynfcoZDA5642DRbnDwoSHMP8suZdt16Q7xwO+3X8Tf1c8dV6ffGo294qg2y2yl/79M9hDAYgldYtVvpjzli2Df4H9nsiZe/9Yx0BOsY91fY5rPpStBoZR91qWq8XAgvsjrOI9ylToYymb4mmEAxOOzz8VMpVq9KfJcIPGNwb22OoFk9usIN3RuDuiuf6fw5Cfi+wc3tTi+dFIfw2ifIiXOuExokeJhoDTrLFEeWJHbip57LFjcRXDZMRZyliT6PamEJtp4OOmNeBaN22XVXgmGw/XzBgv763Ok1At9v9ZzameKq+NlbhIUgRvJQUXGk2sSeyiCAIJAJW3UqMsWHxQqPPpUu8iHdHglDBRza1VsSbJHp6fGYM8heO8stbZPV9AiUrlKQcXhwGejEaXbA35FsxgMSEeuhXFudto8wRyecK6arfvbZ4kf0rHYV+A="
