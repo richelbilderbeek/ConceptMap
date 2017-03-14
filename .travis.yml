@@ -1,37 +1,36 @@
-sudo: true
 language: cpp
 compiler: gcc
+dist: trusty
+
 
 before_install:
-  # Coverity Scan
-  #- echo -n | openssl s_client -connect scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
-
-install:
-  - sudo add-apt-repository --yes ppa:ubuntu-toolchain-r/test
+  # Qt5, from https://gist.github.com/jreese/6207161#gistcomment-1462109
+  - sudo add-apt-repository --yes ppa:ubuntu-sdk-team/ppa
   - sudo apt-get update -qq
+  # C++14
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get update -qq
+
+install: 
+  # Qt5
+  - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev
+  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+  # C++14
+  - sudo apt-get install -qq g++-5
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+  # GraphViz
   - sudo apt-get install -qq graphviz
-  - sudo apt-get install -qq libstdc++6-4.7-dev  
-  - sudo pip install codecov
-  - ./install_oclint.sh
+  # Codecov
   - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+  - sudo pip install codecov
+  # OCLint
+  - ./install_oclint
+  # Other GitHubs
+  - ./download_other_githubs
 
 addons:
-  apt:
-    sources:
-    - boost-latest
-    - ubuntu-toolchain-r-test
-    packages:
-    - gcc-5
-    - g++-5
-    - libboost1.55-all-dev
-  #coverity_scan:
-  #  project:
-  #    name: "richelbilderbeek/ConceptMap"
-  #    description: "Build submitted via Travis CI"
-  #  notification_email: richel@richelbilderbeek.nl
-  #  build_command_prepend: "qmake ConceptMapTest.pro"
-  #  build_command: "make"
-  #  branch_pattern: coverity_scan
+  apt: 
+    packages: libboost-all-dev
 
 # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
 before_script:
@@ -39,20 +38,16 @@ before_script:
   - "sh -e /etc/init.d/xvfb start"
   - sleep 3 # give xvfb some time to start
 
-
 script: 
-  - ./install_githubs.sh
-  - ./build.sh
+  # Build and run tests
+  - qmake -qt=qt5
+  - make debug
   - ./ConceptMapTest
-  - ./get_code_cov.sh
+  # Codecov
+  - ./get_code_cov
   - codecov
+  # OCLint
   - ./do_oclint.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
-#env:
-#  global:
-#    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-#    #   via the "travis encrypt" command using the project repo's public key
-#    - secure: "hMv6HDAv/CQfROYPHIbVI7kUzs5WvC05UGV9C0RIVJo/jhcb5Y7UdsD1G6SSrT23CliTaAB0kLaabnX3lJiCj1FnAJVuZkaDeWIliskUFIv5+u2ki8w2R2OwxMYQ5/8YIDyyddI1jWksRCvdN1om7ZVnS/DU73hNQ87QtytPMwwxxzAXBirThYbvJdXZozjPoPbxnDOpLxU/ZAZeTOTnZ+pr4sTMDm8mWknDPxCTplSaJ+ynfcoZDA5642DRbnDwoSHMP8suZdt16Q7xwO+3X8Tf1c8dV6ffGo294qg2y2yl/79M9hDAYgldYtVvpjzli2Df4H9nsiZe/9Yx0BOsY91fY5rPpStBoZR91qWq8XAgvsjrOI9ylToYymb4mmEAxOOzz8VMpVq9KfJcIPGNwb22OoFk9usIN3RuDuiuf6fw5Cfi+wc3tTi+dFIfw2ifIiXOuExokeJhoDTrLFEeWJHbip57LFjcRXDZMRZyliT6PamEJtp4OOmNeBaN22XVXgmGw/XzBgv763Ok1At9v9ZzameKq+NlbhIUgRvJQUXGk2sSeyiCAIJAJW3UqMsWHxQqPPpUu8iHdHglDBRza1VsSbJHp6fGYM8heO8stbZPV9AiUrlKQcXhwGejEaXbA35FsxgMSEeuhXFudto8wRyecK6arfvbZ4kf0rHYV+A="
