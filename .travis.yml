@@ -18,6 +18,8 @@ install:
   # C++14
   - sudo apt-get install -qq g++-5
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-5 90
+  # cppcheck
+  - sudo apt-get install -qq cppcheck
   # GraphViz
   - sudo apt-get install -qq graphviz
   # Codecov
@@ -43,6 +45,8 @@ script:
   - qmake -qt=qt5
   - make debug
   - ./ConceptMapTest
+  # cppcheck
+  - cppcheck --quiet --error-exitcode=1 . 
   # Codecov
   - ./get_code_cov
   - codecov
