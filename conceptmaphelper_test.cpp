@@ -158,8 +158,8 @@ BOOST_AUTO_TEST_CASE(test_cmap_wordwrap_and_unwordwrap_must_be_symmetrical)
   {
     for (const std::string& s: v)
     {
-      const std::vector<std::string> v = Wordwrap(s,len);
-      BOOST_CHECK(Unwordwrap(v) == s);
+      const std::vector<std::string> w = Wordwrap(s,len);
+      BOOST_CHECK(Unwordwrap(w) == s);
     }
   }
 }
