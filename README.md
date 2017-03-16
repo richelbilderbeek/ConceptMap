@@ -1,11 +1,8 @@
 # ConceptMap
 
-[![Travis CI logo](TravisCI.png)](https://travis-ci.org)
-![Whitespace](Whitespace.png)
-[![Codecov logo](Codecov.png)](https://www.codecov.io)
+Branch|[![Travis CI logo](TravisCI.png)](https://travis-ci.org)
+---|---
+master|[![Build Status](https://travis-ci.org/richelbilderbeek/ConceptMap.svg?branch=master)](https://travis-ci.org/richelbilderbeek/ConceptMap)
+develop|[![Build Status](https://travis-ci.org/richelbilderbeek/ConceptMap.svg?branch=develop)](https://travis-ci.org/richelbilderbeek/ConceptMap)
 
-[![Build Status](https://travis-ci.org/richelbilderbeek/ConceptMap.svg?branch=master)](https://travis-ci.org/richelbilderbeek/ConceptMap)
-[![codecov.io](https://codecov.io/github/richelbilderbeek/ConceptMap/coverage.svg?branch=master)](https://codecov.io/github/richelbilderbeek/ConceptMap?branch=master)
-
-
-C++11 concept map class
+C++14 concept map class
