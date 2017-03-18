@@ -111,7 +111,7 @@ std::string ribi::cmap::Unwordwrap(const std::vector<std::string>& v) noexcept
 }
 
 std::vector<std::string> ribi::cmap::Wordwrap(
-  std::string s, const std::size_t max_len) noexcept
+  std::string s, const std::size_t max_len)
 {
   if (max_len == 0)
   {
