@@ -116,7 +116,7 @@ std::string Unwordwrap(const std::vector<std::string>& v) noexcept;
 
 ///Wordwrap the text to obtain lines of max_len characters
 ///If the string _must_ be seperable by spaces; a word can have a maximum length of max_len
-std::vector<std::string> Wordwrap(std::string s, const std::size_t max_len) noexcept;
+std::vector<std::string> Wordwrap(std::string s, const std::size_t max_len);
 
 } //~namespace cmap
 } //~namespace ribi
