@@ -99,6 +99,8 @@ double ExtractYfromXml(const std::string& s);
 
 //std::vector<Node>::const_iterator FindCenterNode(const std::vector<Node>& nodes) noexcept;
 
+std::string GetText(const Node& node) noexcept;
+
 ///Similar to operator==, except that GUI elements are not tested for equality
 bool HasSameContent(const Node& lhs, const Node& rhs) noexcept;
 

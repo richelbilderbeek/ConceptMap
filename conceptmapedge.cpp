@@ -42,6 +42,11 @@ ribi::cmap::Edge::~Edge() noexcept
 
 }
 
+std::string ribi::cmap::GetText(const Edge& edge) noexcept
+{
+  return GetText(edge.GetNode());
+}
+
 void ribi::cmap::Edge::SetNode(const Node& node) noexcept
 {
   m_node = node;

@@ -121,6 +121,11 @@ std::vector<ribi::cmap::Node> ribi::cmap::Node::GetTests() noexcept
   return result;
 }
 
+std::string ribi::cmap::GetText(const Node& node) noexcept
+{
+  return node.GetName();
+}
+
 bool ribi::cmap::HasSameContent(const Node& lhs, const Node& rhs) noexcept
 {
   return lhs.GetConcept() == rhs.GetConcept();
