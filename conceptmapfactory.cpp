@@ -326,7 +326,8 @@ ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample() const noexcept
   const auto vd_3 = AddVertex(Node(concept3), g);
   AddEdge(Edge(Node(Concept("prerequisite", examples_1)),true),vd_2,vd_1,g);
   AddEdge(Edge(Node(Concept("strengthen", examples_2)),true,true),vd_2,vd_3,g);
-  return g;
+  return RepositionNodes(g);
+  //return g;
 }
 
 ribi::cmap::ConceptMap
@@ -360,7 +361,7 @@ ribi::cmap::ConceptMapFactory::GetQtRatedConceptDialogExample() const noexcept
   const auto vd_3 = AddVertex(Node(concept3), g);
   AddEdge(Edge(Node(Concept("prerequisite", examples_edge_1)),true),vd_2,vd_1,g);
   AddEdge(Edge(Node(Concept("strengthen", examples_edge_2)),true,true),vd_2,vd_3,g);
-  return g;
+  return RepositionNodes(g);
 }
 
 std::vector<ribi::cmap::ConceptMap >

@@ -34,6 +34,8 @@ private:
   std::vector<Example> m_v;
 };
 
+bool IsEmpty(const Examples& examples) noexcept;
+
 std::string ToXml(const Examples& node) noexcept;
 Examples XmlToExamples(const std::string& s);
 
