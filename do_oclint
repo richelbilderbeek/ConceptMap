@@ -25,6 +25,7 @@ echo $h_files
   -I../RibiClasses/CppRibiRegex \
   -I./CppTestTimer \
   -I../RibiClasses/CppTrace \
+  -I../GSL/include \
   -I./CppUnits \
   -I../RibiClasses/CppXml \
   -I../BoostGraphTutorial/BoostGraphTutorial \
