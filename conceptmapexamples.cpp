@@ -68,9 +68,9 @@ std::string ribi::cmap::ToXml(const Examples& any_examples) noexcept
   s << "</examples>";
 
   const std::string r = s.str();
-  Ensures(r.size() >= 20);
-  Ensures(r.substr(0,10) == "<examples>");
-  Ensures(r.substr(r.size() - 11,11) == "</examples>");
+  Ensures(r.size() >= 20);                              //!OCLINT this is not a double negative
+  Ensures(r.substr(0,10) == "<examples>");              //!OCLINT this is not a double negative
+  Ensures(r.substr(r.size() - 11,11) == "</examples>"); //!OCLINT this is not a double negative
   return r;
 }
 
