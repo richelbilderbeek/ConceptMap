@@ -67,6 +67,7 @@ struct Edge
   static int sm_ids; //!OCLINT Easiest to track instances by static
 };
 
+std::string GetText(const Edge& edge) noexcept;
 std::string ToXml(const Edge& edge) noexcept;
 Edge XmlToEdge(const std::string& s);
 std::ostream& operator<<(std::ostream& os, const Edge& edge) noexcept;

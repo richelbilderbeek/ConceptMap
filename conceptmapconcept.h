@@ -142,6 +142,8 @@ int ExtractRatingConcretenessFromXml(const std::string& s);
 ///Extract a Concept its specificity rating from XML
 int ExtractRatingSpecificityFromXml(const std::string& s);
 
+bool HasExamples(const Concept& concept) noexcept;
+
 std::ostream& operator<<(std::ostream& os, const Concept& concept) noexcept;
 std::istream& operator>>(std::istream& is, Concept& concept);
 

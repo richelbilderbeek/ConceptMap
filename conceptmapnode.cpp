@@ -121,6 +121,16 @@ std::vector<ribi::cmap::Node> ribi::cmap::Node::GetTests() noexcept
   return result;
 }
 
+std::string ribi::cmap::GetText(const Node& node) noexcept
+{
+  return node.GetName();
+}
+
+bool ribi::cmap::HasExamples(const Node& node) noexcept
+{
+  return HasExamples(node.GetConcept());
+}
+
 bool ribi::cmap::HasSameContent(const Node& lhs, const Node& rhs) noexcept
 {
   return lhs.GetConcept() == rhs.GetConcept();
@@ -136,6 +146,11 @@ bool ribi::cmap::HaveSameIds(const Node& lhs, const Node& rhs) noexcept
 bool ribi::cmap::IsCenterNode(const Node& node) noexcept
 {
   return node.IsCenterNode();
+}
+
+bool ribi::cmap::NodeHasExamples(const Node& node) noexcept
+{
+  return HasExamples(node);
 }
 
 void ribi::cmap::Node::SetConcept(const Concept& concept) noexcept

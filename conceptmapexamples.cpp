@@ -8,6 +8,7 @@
 
 #include <boost/bind.hpp>
 #include <boost/lambda/lambda.hpp>
+#include <gsl/gsl_assert>
 #include "conceptmapregex.h"
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"
@@ -33,12 +34,15 @@ void ribi::cmap::Examples::Decode() noexcept
   };
 }
 
+bool ribi::cmap::IsEmpty(const Examples& examples) noexcept
+{
+  return examples.Get().empty();
+}
+
 std::string ribi::cmap::Examples::ToStr() const noexcept
 {
   std::stringstream s;
   s << "{ ";
-
-  //const std::vector<const Example> > examples = c->GetExamples();
   for (const auto& example: Get())
   {
     s << example.ToStr() << " ";
@@ -64,9 +68,9 @@ std::string ribi::cmap::ToXml(const Examples& any_examples) noexcept
   s << "</examples>";
 
   const std::string r = s.str();
-  assert(r.size() >= 20);
-  assert(r.substr(0,10) == "<examples>");
-  assert(r.substr(r.size() - 11,11) == "</examples>");
+  Ensures(r.size() >= 20);
+  Ensures(r.substr(0,10) == "<examples>");
+  Ensures(r.substr(r.size() - 11,11) == "</examples>");
   return r;
 }
 
