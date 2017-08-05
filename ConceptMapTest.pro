@@ -1,5 +1,6 @@
 include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
 include(../RibiClasses/CppContainer/CppContainer.pri)
+include(gsl.pri)
 include(ConceptMap.pri)
 include(ConceptMapTest.pri)
 include(../RibiClasses/CppFuzzy_equal_to/CppFuzzy_equal_to.pri)

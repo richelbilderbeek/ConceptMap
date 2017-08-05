@@ -150,7 +150,7 @@ bool ribi::cmap::IsCenterNode(const Node& node) noexcept
 
 bool ribi::cmap::NodeHasExamples(const Node& node) noexcept
 {
-  return HasExamples(node);
+  return HasExamples(node.GetConcept());
 }
 
 void ribi::cmap::Node::SetConcept(const Concept& concept) noexcept
