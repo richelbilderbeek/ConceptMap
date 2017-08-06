@@ -89,6 +89,9 @@ std::size_t FindLastSpaceBeforeMaxLen(
   const std::size_t max_len
 );
 
+///Detects if this code is run on a Travis CI server
+bool OnTravis() noexcept;
+
 std::vector<std::string> ReplaceAll(
   std::vector<std::string> v,
   const char from,

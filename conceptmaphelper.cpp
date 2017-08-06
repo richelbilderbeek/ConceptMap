@@ -32,6 +32,12 @@ std::size_t ribi::cmap::FindLastSpaceBeforeMaxLen(
   return len;
 }
 
+///Detects if this code is run on a Travis CI server
+bool ribi::cmap::OnTravis() noexcept
+{
+  return std::getenv("TRAVIS");
+}
+
 std::vector<std::string> ribi::cmap::ReplaceAll(
   std::vector<std::string> v,
   const char from,
