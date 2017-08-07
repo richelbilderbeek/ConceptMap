@@ -136,16 +136,15 @@ bool ribi::cmap::HasSameContent(const Node& lhs, const Node& rhs) noexcept
   return lhs.GetConcept() == rhs.GetConcept();
 }
 
-/*
-bool ribi::cmap::HaveSameIds(const Node& lhs, const Node& rhs) noexcept
-{
-  return lhs.m_id == rhs.m_id;
-}
-*/
-
 bool ribi::cmap::IsCenterNode(const Node& node) noexcept
 {
   return node.IsCenterNode();
+}
+
+void ribi::cmap::Move(Node& node, const double dx, const double dy)
+{
+  node.SetX(node.GetX() + dx);
+  node.SetY(node.GetY() + dy);
 }
 
 bool ribi::cmap::NodeHasExamples(const Node& node) noexcept

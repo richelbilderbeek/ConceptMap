@@ -41,10 +41,10 @@ struct Node
   const std::string& GetName() const noexcept { return m_concept.GetName(); }
 
   ///Get the x coordinat
-  double GetX() const noexcept { return m_x; }
+  auto GetX() const noexcept { return m_x; }
 
   ///Get the y coordinat
-  double GetY() const noexcept { return m_y; }
+  auto GetY() const noexcept { return m_y; }
 
   bool IsCenterNode() const noexcept { return m_is_center_node; }
 
@@ -97,9 +97,13 @@ bool ExtractIsCenterNodeFromXml(const std::string& s);
 double ExtractXfromXml(const std::string& s);
 double ExtractYfromXml(const std::string& s);
 
-//std::vector<Node>::const_iterator FindCenterNode(const std::vector<Node>& nodes) noexcept;
-
 std::string GetText(const Node& node) noexcept;
+
+///Get the x coordinat of the center of the Node
+inline auto GetX(const Node& node) noexcept { return node.GetX(); }
+
+///Get the x coordinat of the center of the Node
+inline auto GetY(const Node& node) noexcept { return node.GetY(); }
 
 bool HasExamples(const Node& node) noexcept;
 bool NodeHasExamples(const Node& node) noexcept;
@@ -113,6 +117,9 @@ bool IsCenterNode(const Node& node) noexcept;
 
 ///To uniquely identify all Nodes
 bool HaveSameIds(const Node& lhs, const Node& rhs) noexcept;
+
+///Move a Node relatively
+void Move(Node& node, const double dx, const double dy);
 
 std::string ToXml(const Node& node) noexcept;
 Node XmlToNode(const std::string& s);
