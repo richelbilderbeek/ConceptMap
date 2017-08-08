@@ -68,6 +68,15 @@ struct Edge
 };
 
 std::string GetText(const Edge& edge) noexcept;
+
+///Get the x coordinat of the center of the Edge
+double GetX(const Edge& edge) noexcept;
+///Get the x coordinat of the center of the Edge
+double GetY(const Edge& edge) noexcept;
+
+///Move an Edge relatively
+void Move(Edge& edge, const double dx, const double dy);
+
 std::string ToXml(const Edge& edge) noexcept;
 Edge XmlToEdge(const std::string& s);
 std::ostream& operator<<(std::ostream& os, const Edge& edge) noexcept;

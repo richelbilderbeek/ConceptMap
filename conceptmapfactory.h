@@ -61,6 +61,11 @@ public:
 
   ///Example Used by QtRatedConceptDialog
   ConceptMap GetQtRatedConceptDialogExample() const noexcept;
+
+  /// center --- one --- two
+  ///       first second
+  ConceptMap GetThreeNodeTwoEdge() const noexcept;
+
 };
 
 void AddEdge(

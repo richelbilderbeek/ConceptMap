@@ -47,6 +47,21 @@ std::string ribi::cmap::GetText(const Edge& edge) noexcept
   return GetText(edge.GetNode());
 }
 
+double ribi::cmap::GetX(const Edge& edge) noexcept
+{
+  return GetX(edge.GetNode());
+}
+
+double ribi::cmap::GetY(const Edge& edge) noexcept
+{
+  return GetY(edge.GetNode());
+}
+
+void ribi::cmap::Move(Edge& edge, const double dx, const double dy)
+{
+  Move(edge.GetNode(), dx, dy);
+}
+
 void ribi::cmap::Edge::SetNode(const Node& node) noexcept
 {
   m_node = node;
@@ -54,7 +69,6 @@ void ribi::cmap::Edge::SetNode(const Node& node) noexcept
 
 std::string ribi::cmap::Edge::ToStr() const noexcept
 {
-
   std::stringstream s;
   s << (*this);
   return s.str();
