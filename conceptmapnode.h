@@ -121,6 +121,15 @@ bool HaveSameIds(const Node& lhs, const Node& rhs) noexcept;
 ///Move a Node relatively
 void Move(Node& node, const double dx, const double dy);
 
+///Set the name/text of the Node
+void SetText(Node& node, const std::string& text);
+
+///Set the x coordinat of the center of the Node
+inline void SetX(Node& node, const double x) noexcept { node.SetX(x); }
+
+///Set the x coordinat of the center of the Node
+inline void SetY(Node& node, const double y) noexcept { node.SetY(y); }
+
 std::string ToXml(const Node& node) noexcept;
 Node XmlToNode(const std::string& s);
 

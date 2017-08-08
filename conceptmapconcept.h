@@ -144,6 +144,9 @@ int ExtractRatingSpecificityFromXml(const std::string& s);
 
 bool HasExamples(const Concept& concept) noexcept;
 
+///Set the name/text of a concept
+void SetText(Concept& concept, const std::string& text);
+
 std::ostream& operator<<(std::ostream& os, const Concept& concept) noexcept;
 std::istream& operator>>(std::istream& is, Concept& concept);
 

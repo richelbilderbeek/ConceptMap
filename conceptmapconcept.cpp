@@ -6,7 +6,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <boost/lexical_cast.hpp>
-
+#include <gsl/gsl_assert>
 #include "conceptmapconceptfactory.h"
 #include "conceptmaphelper.h"
 #include "conceptmapcompetency.h"
@@ -34,14 +34,18 @@ ribi::cmap::Concept::Concept(
     m_rating_specificity{rating_specificity}
 
 {
-  #ifndef NDEBUG
-  assert(m_rating_complexity   >= -1);
-  assert(m_rating_complexity   <=  2);
-  assert(m_rating_concreteness >= -1);
-  assert(m_rating_concreteness <=  2);
-  assert(m_rating_specificity  >= -1);
-  assert(m_rating_specificity  <=  2);
-  #endif
+  if (m_rating_complexity < -1 || m_rating_complexity > 2)
+  {
+    throw std::invalid_argument("Rating complexity must be in range [-1, 2]");
+  }
+  if (m_rating_concreteness < -1 || m_rating_concreteness > 2)
+  {
+    throw std::invalid_argument("Rating concreteness must be in range [-1, 2]");
+  }
+  if (m_rating_specificity < -1 || m_rating_specificity > 2)
+  {
+    throw std::invalid_argument("Rating specificity must be in range [-1, 2]");
+  }
 }
 
 void ribi::cmap::Concept::Decode() noexcept
@@ -178,8 +182,8 @@ void ribi::cmap::Concept::SetRatingComplexity(const int rating_complexity)
     );
   }
   m_rating_complexity = rating_complexity;
-  assert(m_rating_complexity >= -1);
-  assert(m_rating_complexity <=  2);
+  Ensures(m_rating_complexity >= -1);
+  Ensures(m_rating_complexity <=  2);
 }
 
 void ribi::cmap::Concept::SetRatingConcreteness(const int rating_concreteness)
@@ -191,8 +195,8 @@ void ribi::cmap::Concept::SetRatingConcreteness(const int rating_concreteness)
     );
   }
   m_rating_concreteness = rating_concreteness;
-  assert(m_rating_concreteness >= -1);
-  assert(m_rating_concreteness <=  2);
+  Ensures(m_rating_concreteness >= -1);
+  Ensures(m_rating_concreteness <=  2);
 }
 
 void ribi::cmap::Concept::SetRatingSpecificity(const int rating_specificity)
@@ -204,8 +208,13 @@ void ribi::cmap::Concept::SetRatingSpecificity(const int rating_specificity)
     );
   }
   m_rating_specificity = rating_specificity;
-  assert(m_rating_specificity >= -1);
-  assert(m_rating_specificity <=  2);
+  Ensures(m_rating_specificity >= -1);
+  Ensures(m_rating_specificity <=  2);
+}
+
+void ribi::cmap::SetText(Concept& concept, const std::string& text)
+{
+  concept.SetName(text);
 }
 
 std::string ribi::cmap::Concept::ToStr() const noexcept
