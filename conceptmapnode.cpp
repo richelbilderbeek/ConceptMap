@@ -227,6 +227,16 @@ ribi::cmap::Node ribi::cmap::XmlToNode(const std::string& s)
 
 bool ribi::cmap::operator==(const Node& lhs, const Node& rhs) noexcept
 {
+  //Each Node has a unique ID
+  if (lhs.GetId() != rhs.GetId())
+  {
+    return false;
+  }
+  assert(lhs.GetConcept() == rhs.GetConcept());
+  assert(lhs.GetName() == rhs.GetName());
+  assert(lhs.GetX() == rhs.GetX());
+  assert(lhs.GetY() == rhs.GetY());
+  /*
   const double e{0.001};
   if (lhs.GetConcept() != rhs.GetConcept())
   {
@@ -240,6 +250,7 @@ bool ribi::cmap::operator==(const Node& lhs, const Node& rhs) noexcept
   {
     return false;
   }
+  */
   return true;
 }
 

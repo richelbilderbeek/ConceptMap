@@ -89,6 +89,12 @@ bool HasUninitializedExamples(const ConceptMap& c) noexcept;
 ///Is the Edge connected to the Node?
 bool IsConnectedTo(const Edge& edge, const Node& node, const ConceptMap& c);
 
+///Is the Edge selected?
+bool IsSelected(const Edge& node, const ConceptMap& c);
+
+///Is the Node selected?
+bool IsSelected(const Node& node, const ConceptMap& c);
+
 ConceptMap LoadFromFile(const std::string& dot_filename);
 ConceptMap RemoveFirstNode(ConceptMap g);
 void SaveToFile(const ConceptMap& g, const std::string& dot_filename);

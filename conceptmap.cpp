@@ -634,6 +634,20 @@ bool ribi::cmap::IsConnectedTo(const Edge& edge, const Node& node, const Concept
   return GetFrom(edge,c) == node || GetTo(edge, c) == node;
 }
 
+bool ribi::cmap::IsSelected(const Edge& edge, const ConceptMap& c)
+{
+  return get_edge_selectedness(
+    find_first_custom_edge_with_my_edge(edge, c),
+    c);
+}
+
+bool ribi::cmap::IsSelected(const Node& node, const ConceptMap& c)
+{
+  return get_vertex_selectedness(
+    find_first_custom_vertex_with_my_vertex(node, c),
+    c);
+}
+
 ribi::cmap::ConceptMap ribi::cmap::LoadFromFile(const std::string& dot_filename)
 {
   auto g = load_undirected_custom_and_selectable_edges_and_vertices_graph_from_dot<
