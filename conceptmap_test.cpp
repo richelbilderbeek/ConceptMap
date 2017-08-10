@@ -362,18 +362,19 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_to)
   using namespace ribi::cmap;
 
   //Valid
+  const ConceptMap m{ConceptMapFactory().Get3()};
   BOOST_CHECK_NO_THROW(
     GetTo(
-      GetFirstEdge(ConceptMapFactory().Get3()),
-      ConceptMapFactory().Get3()
+      GetFirstEdge(m),
+      m
     )
   );
 
   //Empty concept map
   BOOST_CHECK_THROW(
     GetTo(
-      GetFirstEdge(ConceptMapFactory().Get3()),
-      ConceptMapFactory().Get0()
+      GetFirstEdge(m),
+      ConceptMap()
     ),
     std::invalid_argument
   );

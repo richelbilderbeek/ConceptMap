@@ -796,6 +796,7 @@ std::string ribi::cmap::ToDot(const ConceptMap& g) noexcept
   SaveToFile(g, temp_filename);
   std::stringstream s;
   s << FileIo().FileToStr(temp_filename);
+  FileIo().DeleteFile(temp_filename);
   return s.str();
 }
 
