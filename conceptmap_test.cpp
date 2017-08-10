@@ -98,9 +98,14 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_dot_conversion)
   {
     const std::string dot{ToDot(c)};
     ConceptMap d{DotToConceptMap(dot)};
-    BOOST_CHECK(c == d);
+    const double tolerance{0.01};
+    BOOST_CHECK(HasSimilarData(c, d, tolerance));
     const std::string dot2{ToDot(d)};
-    BOOST_CHECK(dot == dot2);
+    BOOST_CHECK_EQUAL(dot, dot2);
+    if (!HasSimilarData(c, d, tolerance))
+    {
+      std::clog << "BREAK";
+    }
   }
 }
 

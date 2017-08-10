@@ -83,6 +83,17 @@ std::vector<Edge> GetSortedEdges(const ConceptMap& c) noexcept;
 std::vector<Node> GetSortedNodes(const ConceptMap& c) noexcept;
 bool HasCenterNode(const ConceptMap& c) noexcept;
 
+///Checks if all Nodes and Edges contain the same data and that
+///the topology matches. Or: checks for everything except Node and Edge IDs
+bool HasSameData(const ConceptMap& lhs, const ConceptMap& rhs) noexcept;
+
+///Checks if all Nodes and Edges contain similar data (the coordinats have
+///some tolerance) and that the topology matches. Or: checks for everything except Node and Edge IDs
+bool HasSimilarData(
+  const ConceptMap& lhs,
+  const ConceptMap& rhs,
+  const double tolerance) noexcept;
+
 ///Are the examples present that are not rated yet?
 bool HasUninitializedExamples(const ConceptMap& c) noexcept;
 

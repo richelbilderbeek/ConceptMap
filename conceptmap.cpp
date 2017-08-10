@@ -61,25 +61,26 @@ public:
     const ribi::cmap::Edge edge = get(m_my_custom_edge_map, ed);
     out << "[label=\""
       << edge //Can be Graphviz unfriendly
-      << "\", "
+      << "\"" //Do not add comma here, as this may be the last item
     ;
 
     if (get(m_is_selected_map, ed))
     {
-      out << "style = \"dashed\", ";
+      out << ", style = \"dashed\""; //Do not add comma here, as this may be the last item
+      //out << "style = \"dashed\", ";
     }
 
     const bool has_head{edge.HasHeadArrow()};
     const bool has_tail{edge.HasTailArrow()};
     if ( has_head &&  has_tail) {
-      out << "dir = \"both\", arrowhead = \"normal\", arrowtail = \"normal\"";
+      out << ", dir = \"both\", arrowhead = \"normal\", arrowtail = \"normal\"";
     }
     if ( has_head && !has_tail) {
-      out << "dir = \"forward\", arrowhead = \"normal\"";
+      out << ", dir = \"forward\", arrowhead = \"normal\"";
     }
     if (!has_head && has_tail)
     {
-      out << "dir = \"back\", arrowtail = \"normal\"";
+      out << ", dir = \"back\", arrowtail = \"normal\"";
     }
     out << "]";
   }
@@ -623,6 +624,29 @@ bool ribi::cmap::HasCenterNode(const ConceptMap& c) noexcept
   return i != std::end(nodes);
 }
 
+bool ribi::cmap::HasSameData(const ConceptMap& lhs, const ConceptMap& rhs) noexcept
+{
+  //Still imperfect
+  return
+    boost::isomorphism(lhs, rhs)
+    && HasSameData(GetSortedNodes(lhs), GetSortedNodes(rhs))
+    && HasSameData(GetSortedEdges(lhs), GetSortedEdges(rhs))
+  ;
+}
+
+bool ribi::cmap::HasSimilarData(
+  const ConceptMap& lhs,
+  const ConceptMap& rhs,
+  const double tolerance) noexcept
+{
+  //Still imperfect
+  return
+    boost::isomorphism(lhs, rhs)
+    && HasSimilarData(GetSortedNodes(lhs), GetSortedNodes(rhs), tolerance)
+    && HasSimilarData(GetSortedEdges(lhs), GetSortedEdges(rhs), tolerance)
+  ;
+}
+
 bool ribi::cmap::HasUninitializedExamples(const ConceptMap& c) noexcept
 {
   const auto m = TallyCompetencies(c);
@@ -895,7 +919,7 @@ bool ribi::cmap::operator==(const ConceptMap& lhs, const ConceptMap& rhs) noexce
 {
   //Still imperfect
   return
-    boost::isomorphism(lhs,rhs)
+    boost::isomorphism(lhs, rhs)
     && GetSortedNodes(lhs) == GetSortedNodes(rhs)
     && GetSortedEdges(lhs) == GetSortedEdges(rhs)
   ;

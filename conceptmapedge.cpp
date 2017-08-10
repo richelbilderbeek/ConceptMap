@@ -57,6 +57,54 @@ double ribi::cmap::GetY(const Edge& edge) noexcept
   return GetY(edge.GetNode());
 }
 
+bool ribi::cmap::HasSameData(const Edge& lhs, const Edge& rhs) noexcept
+{
+  return HasSameData(lhs.GetNode(), rhs.GetNode())
+    && lhs.HasHeadArrow() == rhs.HasHeadArrow()
+    && lhs.HasTailArrow() == rhs.HasTailArrow()
+  ;
+}
+
+bool ribi::cmap::HasSameData(const std::vector<Edge>& lhs, const std::vector<Edge>& rhs)
+{
+  if (lhs.size() != rhs.size())
+  {
+    throw std::invalid_argument("lhs and rhs must have equal number of Edges");
+  }
+  const int sz = lhs.size();
+  for (int i=0; i!=sz; ++i)
+  {
+    if (!HasSameData(lhs[i], rhs[i])) return false;
+  }
+  return true;
+}
+
+bool ribi::cmap::HasSimilarData(const Edge& lhs, const Edge& rhs, const double tolerance) noexcept
+{
+  return HasSimilarData(lhs.GetNode(), rhs.GetNode(), tolerance)
+    && lhs.HasHeadArrow() == rhs.HasHeadArrow()
+    && lhs.HasTailArrow() == rhs.HasTailArrow()
+  ;
+}
+
+bool ribi::cmap::HasSimilarData(
+  const std::vector<Edge>& lhs,
+  const std::vector<Edge>& rhs,
+  const double tolerance)
+{
+  if (lhs.size() != rhs.size())
+  {
+    throw std::invalid_argument("lhs and rhs must have equal number of Edges");
+  }
+  const int sz = lhs.size();
+  for (int i=0; i!=sz; ++i)
+  {
+    if (!HasSimilarData(lhs[i], rhs[i], tolerance)) return false;
+  }
+  return true;
+
+}
+
 void ribi::cmap::Move(Edge& edge, const double dx, const double dy)
 {
   Move(edge.GetNode(), dx, dy);
@@ -83,8 +131,8 @@ std::string ribi::cmap::ToXml(
   s << ToXml(edge.GetNode().GetConcept());
   s << "<has_head>" << edge.HasHeadArrow() << "</has_head>";
   s << "<has_tail>" << edge.HasTailArrow() << "</has_tail>";
-  s << "<x>" << edge.GetNode().GetX() << "</x>";
-  s << "<y>" << edge.GetNode().GetY() << "</y>";
+  s << "<x>" << GetX(edge) << "</x>";
+  s << "<y>" << GetY(edge) << "</y>";
   s << "</edge>";
 
   const std::string r = s.str();
@@ -151,19 +199,21 @@ ribi::cmap::Edge ribi::cmap::XmlToEdge(
 bool ribi::cmap::operator==(const ribi::cmap::Edge& lhs, const ribi::cmap::Edge& rhs)
 {
   if (lhs.GetId() != rhs.GetId()) return false;
-  assert(lhs.GetNode() == rhs.GetNode());
-  assert(lhs.HasHeadArrow() == rhs.HasHeadArrow());
-  assert(lhs.HasTailArrow() == rhs.HasTailArrow());
+  assert(HasSameData(lhs, rhs));
   return true;
 }
 
-bool ribi::cmap::operator!=(const cmap::Edge& lhs, const cmap::Edge& rhs)
+bool ribi::cmap::operator!=(const Edge& lhs, const Edge& rhs)
 {
   return !(lhs == rhs);
 }
 
-bool ribi::cmap::operator<(const cmap::Edge& lhs, const cmap::Edge& rhs)
+bool ribi::cmap::operator<(const Edge& lhs, const Edge& rhs)
 {
+  if (lhs.HasHeadArrow() < rhs.HasHeadArrow()) return true;
+  if (lhs.HasHeadArrow() > rhs.HasHeadArrow()) return false;
+  if (lhs.HasTailArrow() < rhs.HasTailArrow()) return true;
+  if (lhs.HasTailArrow() > rhs.HasTailArrow()) return false;
   return lhs.GetNode() < rhs.GetNode();
 }
 

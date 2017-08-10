@@ -74,6 +74,25 @@ double GetX(const Edge& edge) noexcept;
 ///Get the x coordinat of the center of the Edge
 double GetY(const Edge& edge) noexcept;
 
+///Checks if the nodes and arrows are the same
+bool HasSameData(const Edge& lhs, const Edge& rhs) noexcept;
+
+///Pairwise checks if all Edges at left- and right-hand-side have the same data
+///Throws if the sizes differ
+bool HasSameData(const std::vector<Edge>& lhs, const std::vector<Edge>& rhs);
+
+///Checks if the nodes and arrows are similar
+bool HasSimilarData(const Edge& lhs, const Edge& rhs, const double tolerance) noexcept;
+
+///Pairwise checks if all Edges at left- and right-hand-side have similar data (there
+///is some tolerance in the coordinats)
+///Throws if the sizes differ
+bool HasSimilarData(
+  const std::vector<Edge>& lhs,
+  const std::vector<Edge>& rhs,
+  const double tolerance
+);
+
 ///Move an Edge relatively
 void Move(Edge& edge, const double dx, const double dy);
 

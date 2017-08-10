@@ -108,8 +108,23 @@ inline auto GetY(const Node& node) noexcept { return node.GetY(); }
 bool HasExamples(const Node& node) noexcept;
 bool NodeHasExamples(const Node& node) noexcept;
 
-///Similar to operator==, except that GUI elements are not tested for equality
+///Checks if the Concepts are the same
 bool HasSameContent(const Node& lhs, const Node& rhs) noexcept;
+
+///Checks if the concepts and coordinats are the same
+bool HasSameData(const Node& lhs, const Node& rhs) noexcept;
+
+///Pairwise checks if all Nodes at left- and right-hand-side have the same data
+///Throws if the sizes differ
+bool HasSameData(const std::vector<Node>& lhs, const std::vector<Node>& rhs);
+
+///Checks if the concepts and coordinats are similar (there is some
+///tolerance in the coordinats)
+bool HasSimilarData(const Node& lhs, const Node& rhs, const double tolerance) noexcept;
+
+///Pairwise checks if all Nodes at left- and right-hand-side have similar data
+///Throws if the sizes differ
+bool HasSimilarData(const std::vector<Node>& lhs, const std::vector<Node>& rhs, const double tolerance);
 
 ///Returns true if Node is of derived class type CenterNode
 ///Returns true if Node is Node
@@ -133,7 +148,9 @@ inline void SetY(Node& node, const double y) noexcept { node.SetY(y); }
 std::string ToXml(const Node& node) noexcept;
 Node XmlToNode(const std::string& s);
 
+///Checks if Nodes are identical
 bool operator==(const Node& lhs, const Node& rhs) noexcept;
+
 bool operator!=(const Node& lhs, const Node& rhs) noexcept;
 bool operator<(const Node& lhs, const Node& rhs) noexcept;
 std::ostream& operator<<(std::ostream& os, const Node& node) noexcept;

@@ -91,20 +91,6 @@ double ribi::cmap::ExtractYfromXml(const std::string& s)
   return boost::lexical_cast<double>(ribi::xml::StripXmlTag(v[0]));
 }
 
-/*
-std::vector<ribi::cmap::Node>::const_iterator
-ribi::cmap::FindCenterNode(const std::vector<Node>& nodes) noexcept
-{
-  assert(!"Am I used?");
-  return std::find_if(
-    std::begin(nodes),std::end(nodes),
-    [](const Node& node) {
-      return IsCenterNode(node);
-    }
-  );
-}
-*/
-
 std::vector<ribi::cmap::Node> ribi::cmap::Node::GetTests() noexcept
 {
   const auto test_concepts = ConceptFactory().GetTests();
@@ -135,6 +121,58 @@ bool ribi::cmap::HasSameContent(const Node& lhs, const Node& rhs) noexcept
 {
   return lhs.GetConcept() == rhs.GetConcept();
 }
+
+bool ribi::cmap::HasSameData(const Node& lhs, const Node& rhs) noexcept
+{
+  return HasSameContent(lhs, rhs)
+    && lhs.GetX() == rhs.GetX()
+    && lhs.GetY() == rhs.GetY()
+  ;
+}
+
+bool ribi::cmap::HasSameData(const std::vector<Node>& lhs, const std::vector<Node>& rhs)
+{
+  if (lhs.size() != rhs.size())
+  {
+    throw std::invalid_argument("lhs and rhs must have equal number of Nodes");
+  }
+  const int sz = lhs.size();
+  for (int i=0; i!=sz; ++i)
+  {
+    if (!HasSameData(lhs[i], rhs[i])) return false;
+  }
+  return true;
+}
+
+bool ribi::cmap::HasSimilarData(
+  const Node& lhs,
+  const Node& rhs,
+  const double tolerance) noexcept
+{
+  return HasSameContent(lhs, rhs)
+    && std::abs(lhs.GetX() - rhs.GetX()) < tolerance
+    && std::abs(lhs.GetY() - rhs.GetY()) < tolerance
+  ;
+}
+
+bool ribi::cmap::HasSimilarData(
+  const std::vector<Node>& lhs,
+  const std::vector<Node>& rhs,
+  const double tolerance)
+{
+  if (lhs.size() != rhs.size())
+  {
+    throw std::invalid_argument("lhs and rhs must have equal number of Nodes");
+  }
+  const int sz = lhs.size();
+  for (int i=0; i!=sz; ++i)
+  {
+    if (!HasSimilarData(lhs[i], rhs[i], tolerance)) return false;
+  }
+  return true;
+}
+
+
 
 bool ribi::cmap::IsCenterNode(const Node& node) noexcept
 {
@@ -232,25 +270,7 @@ bool ribi::cmap::operator==(const Node& lhs, const Node& rhs) noexcept
   {
     return false;
   }
-  assert(lhs.GetConcept() == rhs.GetConcept());
-  assert(lhs.GetName() == rhs.GetName());
-  assert(lhs.GetX() == rhs.GetX());
-  assert(lhs.GetY() == rhs.GetY());
-  /*
-  const double e{0.001};
-  if (lhs.GetConcept() != rhs.GetConcept())
-  {
-    return false;
-  }
-  if (std::abs(lhs.GetX() - rhs.GetX()) > e)
-  {
-    return false;
-  }
-  if (std::abs(lhs.GetY() - rhs.GetY()) > e)
-  {
-    return false;
-  }
-  */
+  assert(HasSameData(lhs, rhs));
   return true;
 }
 
