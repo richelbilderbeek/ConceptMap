@@ -49,7 +49,8 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_one)
   s << a;
   Node b;
   s >> b;
-  BOOST_CHECK(a == b);
+  const double tolerance{0.001};
+  BOOST_CHECK(HasSimilarData(a, b, tolerance));
 }
 
 BOOST_AUTO_TEST_CASE(ribi_cmap_node_to_xml_and_node)
@@ -64,7 +65,8 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_to_xml_and_node)
       BOOST_CHECK(node == c);
       const std::string s{ToXml(c)};
       const Node d = XmlToNode(s);
-      BOOST_CHECK(c == d);
+      const double tolerance{0.001};
+      BOOST_CHECK(HasSimilarData(c, d, tolerance));
     }
   );
 }
@@ -79,8 +81,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_has_same_content)
       BOOST_CHECK(c == d);
       const Node a{c};
       const Node b{d};
-      BOOST_CHECK(HasSameContent(a,b));
-      BOOST_CHECK(a == b);
+      BOOST_CHECK(HasSameContent(a, b));
     }
     const int sz = static_cast<int>(ConceptFactory().GetTests().size());
     for (int i=0; i!=sz; ++i)
@@ -115,7 +116,8 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_has_same_content)
       const Node a{c};
       const Node b{d};
       BOOST_CHECK(HasSameContent(a,b));
-      BOOST_CHECK(a == b);
+      const double tolerance{0.001};
+      BOOST_CHECK(HasSimilarData(a, b, tolerance));
     }
     {
       //Cannot shuffle Concept its examples. No need to as well: the order is important
@@ -167,8 +169,10 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_concept_factory_reproductions)
     BOOST_CHECK(c == d);
     const Node a{c};
     const Node b{d};
-    BOOST_CHECK(HasSameContent(a,b));
-    BOOST_CHECK(a == b);
+    const double tolerance{0.001};
+    BOOST_CHECK(HasSameContent(a, b));
+    BOOST_CHECK(HasSimilarData(a, b, tolerance));
+    BOOST_CHECK(a != b); //Different IDs
   }
 }
 
@@ -189,7 +193,9 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_concept_factory_reproductions_too)
         const Node a{c};
         const Node b{d};
         BOOST_CHECK(!HasSameContent(a,b));
-        BOOST_CHECK(a != b);
+        const double tolerance{0.001};
+        BOOST_CHECK(!HasSimilarData(a, b, tolerance));
+        BOOST_CHECK(a != b); //Different IDs
       }
       else
       {
@@ -197,7 +203,9 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_concept_factory_reproductions_too)
         const Node a{c};
         const Node b{d};
         BOOST_CHECK(HasSameContent(a,b));
-        BOOST_CHECK(a == b);
+        const double tolerance{0.001};
+        BOOST_CHECK(HasSimilarData(a, b, tolerance));
+        BOOST_CHECK(a != b); //Different IDs
       }
     }
   }
@@ -213,8 +221,9 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_twice)
   Node g;
   Node h;
   s >> g >> h;
-  BOOST_CHECK_EQUAL(e, g);
-  BOOST_CHECK_EQUAL(f, h);
+  const double tolerance{0.001};
+  BOOST_CHECK(HasSimilarData(e, g, tolerance));
+  BOOST_CHECK(HasSimilarData(f, h, tolerance));
 }
 
 BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_nasty_once)
@@ -227,9 +236,10 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_nasty_once)
     Node f;
     BOOST_CHECK_NE(e, f);
     s >> f;
-    BOOST_CHECK_EQUAL(e, f);
-  }
 
+    const double tolerance{0.001};
+    BOOST_CHECK(HasSimilarData(e, f, tolerance));
+  }
 }
 
 BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_nasty_twice)
@@ -242,8 +252,10 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_stream_nasty_twice)
     Node g;
     Node h;
     s >> g >> h;
-    BOOST_CHECK_EQUAL(e, g);
-    BOOST_CHECK_EQUAL(e, h);
+
+    const double tolerance{0.001};
+    BOOST_CHECK(HasSimilarData(e, g, tolerance));
+    BOOST_CHECK(HasSimilarData(e, h, tolerance));
   }
 }
 
@@ -334,12 +346,3 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_xml_to_node)
     XmlToNode(ToXml(NodeFactory().GetNasty2()))
   );
 }
-
-
-
-
-
-
-
-
-

@@ -98,14 +98,10 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_dot_conversion)
   {
     const std::string dot{ToDot(c)};
     ConceptMap d{DotToConceptMap(dot)};
-    const double tolerance{0.01};
+    const double tolerance{0.001};
     BOOST_CHECK(HasSimilarData(c, d, tolerance));
     const std::string dot2{ToDot(d)};
     BOOST_CHECK_EQUAL(dot, dot2);
-    if (!HasSimilarData(c, d, tolerance))
-    {
-      std::clog << "BREAK";
-    }
   }
 }
 
@@ -115,7 +111,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_conversion)
   {
     const std::string xml{ToXml(c)};
     ConceptMap d{XmlToConceptMap(xml)};
-    BOOST_CHECK(c == d);
+    const double tolerance{0.001};
+    BOOST_CHECK(HasSimilarData(c, d, tolerance));
     const std::string xml2{ToXml(d)};
     BOOST_CHECK(xml == xml2);
   }
@@ -155,7 +152,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_single_object)
   s << a;
   ConceptMap b;
   s >> b;
-  BOOST_CHECK(a == b);
+  const double tolerance{0.001};
+  BOOST_CHECK(HasSimilarData(a, b, tolerance));
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_two_objects)
@@ -168,8 +166,9 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_two_objects)
   ConceptMap g;
   ConceptMap h;
   s >> g >> h;
-  BOOST_CHECK(e == g);
-  BOOST_CHECK(f == h);
+  const double tolerance{0.001};
+  BOOST_CHECK(HasSimilarData(e, g, tolerance));
+  BOOST_CHECK(HasSimilarData(f, h, tolerance));
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_one_nasty_object)
@@ -186,8 +185,9 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_one_nasty_object)
     ConceptMap f;
     BOOST_CHECK(e != f);
     s >> f;
-    BOOST_CHECK(GetSortedEdges(e) == GetSortedEdges(f));
-    BOOST_CHECK(e == f);
+    const double tolerance{0.001};
+    BOOST_CHECK(HasSimilarData(GetSortedEdges(e), GetSortedEdges(f), tolerance));
+    BOOST_CHECK(HasSimilarData(e, f, tolerance));
   }
 }
 
@@ -201,8 +201,10 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_two_nasty_objects)
     ConceptMap g;
     ConceptMap h;
     s >> g >> h;
-    BOOST_CHECK(e == g);
-    BOOST_CHECK(e == h);
+
+    const double tolerance{0.001};
+    BOOST_CHECK(HasSimilarData(e, g, tolerance));
+    BOOST_CHECK(HasSimilarData(e, h, tolerance));
   }
 }
 
@@ -248,7 +250,9 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_and_load_nasty_test)
     SaveToFile(c, filename);
     const ConceptMap d = LoadFromFile(filename);
     ribi::fileio::FileIo().DeleteFile(filename);
-    BOOST_CHECK(c == d);
+
+    const double tolerance{0.001};
+    BOOST_CHECK(HasSimilarData(c, d, tolerance));
   }
 }
 
@@ -526,7 +530,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
   const auto g = ConceptMapFactory().Get3();
   const auto xml = ToXml(g);
   const auto h = XmlToConceptMap(xml);
-  BOOST_CHECK_EQUAL(g, h);
+  const double tolerance{0.001};
+  BOOST_CHECK(HasSimilarData(g, h, tolerance));
 
 }
 
