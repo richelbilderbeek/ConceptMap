@@ -66,6 +66,13 @@ public:
   ///       first second
   ConceptMap GetThreeNodeTwoEdge() const noexcept;
 
+  /// center --- one
+  ///       first
+  ConceptMap GetTwoNodeOneEdge() const noexcept;
+
+  /// one --- two
+  ///    second
+  ConceptMap GetTwoNodeOneEdgeNoCenter() const noexcept;
 };
 
 void AddEdge(

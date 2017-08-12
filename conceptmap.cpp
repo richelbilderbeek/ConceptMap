@@ -67,20 +67,26 @@ public:
     if (get(m_is_selected_map, ed))
     {
       out << ", style = \"dashed\""; //Do not add comma here, as this may be the last item
-      //out << "style = \"dashed\", ";
     }
 
     const bool has_head{edge.HasHeadArrow()};
     const bool has_tail{edge.HasTailArrow()};
-    if ( has_head &&  has_tail) {
+    if ( has_head &&  has_tail)
+    {
       out << ", dir = \"both\", arrowhead = \"normal\", arrowtail = \"normal\"";
     }
-    if ( has_head && !has_tail) {
+    else if ( has_head && !has_tail)
+    {
       out << ", dir = \"forward\", arrowhead = \"normal\"";
     }
-    if (!has_head && has_tail)
+    else if (!has_head && has_tail)
     {
       out << ", dir = \"back\", arrowtail = \"normal\"";
+    }
+    else
+    {
+      assert(!has_head && !has_tail);
+      //No need to add something
     }
     out << "]";
   }

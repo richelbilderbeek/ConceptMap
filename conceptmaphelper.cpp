@@ -15,6 +15,25 @@
 #include "conceptmapregex.h"
 #pragma GCC diagnostic pop
 
+///Send the file its content to std::cout/std::clog/whatever
+template <class Stream>
+void FileToStream(const std::string& filename, Stream& stream)
+{
+  const auto lines = ribi::FileIo().FileToVector(filename);
+  std::copy(std::begin(lines), std::end(lines), std::ostream_iterator<std::string>(stream, "\n"));
+  stream << '\n';
+}
+
+void ribi::cmap::ClogFile(const std::string& filename)
+{
+  FileToStream(filename, std::clog);
+}
+
+void ribi::cmap::CoutFile(const std::string& filename)
+{
+  FileToStream(filename, std::cout);
+}
+
 std::size_t ribi::cmap::FindLastSpaceBeforeMaxLen(
   const std::string& s,
   const std::size_t max_len
@@ -25,7 +44,7 @@ std::size_t ribi::cmap::FindLastSpaceBeforeMaxLen(
   assert(len < s.size());
   while (1)
   {
-    const std::size_t new_len = s.find(' ',len + 1);
+    const std::size_t new_len = s.find(' ', len + 1);
     if (new_len > max_len || new_len == std::string::npos) break;
     len = new_len;
   }

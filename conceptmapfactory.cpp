@@ -272,6 +272,26 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetThreeNodeTwoEdge() cons
   return g;
 }
 
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeOneEdge() const noexcept
+{
+  ConceptMap g;
+  //These coordinats are tested as such
+  const auto vd_1 = AddVertex(Node(Concept("center"), true, 100, 200), g);
+  const auto vd_2 = AddVertex(Node(Concept("one"), false, 300, 250), g);
+  AddEdge(Edge(Node(Concept( "first"), false, 150, 225)), vd_1, vd_2, g);
+  return g;
+}
+
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeOneEdgeNoCenter() const noexcept
+{
+  ConceptMap g;
+  //These coordinats are tested as such
+  const auto vd_2 = AddVertex(Node(Concept("one"), false, 300, 250), g);
+  const auto vd_3 = AddVertex(Node(Concept("two"), false, 500, 350), g);
+  AddEdge(Edge(Node(Concept("second"), false, 350, 275)), vd_2, vd_3, g);
+  return g;
+}
+
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetWithExamplesWithCompetencies(
   const std::vector<Competency>& competencies
 ) const noexcept

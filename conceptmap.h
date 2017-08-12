@@ -11,6 +11,7 @@
 #include "conceptmapnode.h"
 #include "conceptmapedge.h"
 #include "conceptmapgraphtypes.h"
+
 namespace ribi {
 namespace cmap {
 
