@@ -124,7 +124,10 @@ bool HasSimilarData(const Node& lhs, const Node& rhs, const double tolerance) no
 
 ///Pairwise checks if all Nodes at left- and right-hand-side have similar data
 ///Throws if the sizes differ
-bool HasSimilarData(const std::vector<Node>& lhs, const std::vector<Node>& rhs, const double tolerance);
+bool HasSimilarData(
+  const std::vector<Node>& lhs,
+  const std::vector<Node>& rhs,
+  const double tolerance);
 
 ///Returns true if Node is of derived class type CenterNode
 ///Returns true if Node is Node
