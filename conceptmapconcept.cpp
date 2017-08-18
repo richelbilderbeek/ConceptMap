@@ -140,7 +140,7 @@ int ribi::cmap::ExtractRatingConcretenessFromXml(const std::string& s)
 int ribi::cmap::ExtractRatingSpecificityFromXml(const std::string& s)
 {
   const std::vector<std::string> v
-    = Regex().GetRegexMatches(s,Regex().GetRegexSpecificity());
+    = Regex().GetRegexMatches(s, Regex().GetRegexSpecificity());
 
   if (v.size() != 1)
   {
