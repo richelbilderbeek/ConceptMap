@@ -91,7 +91,12 @@ double ribi::cmap::ExtractYfromXml(const std::string& s)
   return boost::lexical_cast<double>(ribi::xml::StripXmlTag(v[0]));
 }
 
-ribi::cmap::Examples ribi::cmap::GetExamples(const Node& node) noexcept
+const ribi::cmap::Concept& ribi::cmap::GetConcept(const Node& node) noexcept
+{
+  return node.GetConcept();
+}
+
+const ribi::cmap::Examples& ribi::cmap::GetExamples(const Node& node) noexcept
 {
   return GetExamples(node.GetConcept());
 }

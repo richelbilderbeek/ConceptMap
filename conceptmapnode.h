@@ -97,7 +97,9 @@ bool ExtractIsCenterNodeFromXml(const std::string& s);
 double ExtractXfromXml(const std::string& s);
 double ExtractYfromXml(const std::string& s);
 
-Examples GetExamples(const Node& node) noexcept;
+const Concept& GetConcept(const Node& node) noexcept;
+
+const Examples& GetExamples(const Node& node) noexcept;
 
 std::string GetText(const Node& node) noexcept;
 
