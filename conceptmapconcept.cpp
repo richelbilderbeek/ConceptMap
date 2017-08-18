@@ -152,10 +152,17 @@ int ribi::cmap::ExtractRatingSpecificityFromXml(const std::string& s)
   return boost::lexical_cast<int>(ribi::xml::StripXmlTag(v[0]));
 }
 
+ribi::cmap::Examples ribi::cmap::GetExamples(const Concept& concept) noexcept
+{
+  return concept.GetExamples();
+}
+
 bool ribi::cmap::HasExamples(const Concept& concept) noexcept
 {
   return !IsEmpty(concept.GetExamples());
 }
+
+
 
 void ribi::cmap::Concept::SetExamples(const Examples& examples) noexcept
 {

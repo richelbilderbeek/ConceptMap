@@ -97,6 +97,8 @@ bool ExtractIsCenterNodeFromXml(const std::string& s);
 double ExtractXfromXml(const std::string& s);
 double ExtractYfromXml(const std::string& s);
 
+Examples GetExamples(const Node& node) noexcept;
+
 std::string GetText(const Node& node) noexcept;
 
 ///Get the x coordinat of the center of the Node

@@ -142,6 +142,9 @@ int ExtractRatingConcretenessFromXml(const std::string& s);
 ///Extract a Concept its specificity rating from XML
 int ExtractRatingSpecificityFromXml(const std::string& s);
 
+Examples GetExamples(const Concept& concept) noexcept;
+
+///Does the Concept have at least one example?
 bool HasExamples(const Concept& concept) noexcept;
 
 ///Set the name/text of a concept
