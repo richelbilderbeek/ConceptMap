@@ -67,10 +67,13 @@ struct Edge
   static int sm_ids; //!OCLINT Easiest to track instances by static
 };
 
+const Concept& GetConcept(const Edge& edge) noexcept;
+
 std::string GetText(const Edge& edge) noexcept;
 
 ///Get the x coordinat of the center of the Edge
 double GetX(const Edge& edge) noexcept;
+
 ///Get the x coordinat of the center of the Edge
 double GetY(const Edge& edge) noexcept;
 
@@ -98,6 +101,8 @@ bool HasSimilarData(
 
 ///Move an Edge relatively
 void Move(Edge& edge, const double dx, const double dy);
+
+void SetConcept(Edge& edge, const Concept& concept) noexcept;
 
 std::string ToXml(const Edge& edge) noexcept;
 Edge XmlToEdge(const std::string& s);

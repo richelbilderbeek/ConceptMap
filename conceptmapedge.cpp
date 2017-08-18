@@ -42,6 +42,11 @@ ribi::cmap::Edge::~Edge() noexcept
 
 }
 
+const ribi::cmap::Concept& ribi::cmap::GetConcept(const Edge& edge) noexcept
+{
+  return GetConcept(edge.GetNode());
+}
+
 std::string ribi::cmap::GetText(const Edge& edge) noexcept
 {
   return GetText(edge.GetNode());
@@ -113,6 +118,11 @@ bool ribi::cmap::HasSimilarData(
 void ribi::cmap::Move(Edge& edge, const double dx, const double dy)
 {
   Move(edge.GetNode(), dx, dy);
+}
+
+void ribi::cmap::SetConcept(Edge& edge, const Concept& concept) noexcept
+{
+  SetConcept(edge.GetNode(), concept);
 }
 
 void ribi::cmap::Edge::SetNode(const Node& node) noexcept
