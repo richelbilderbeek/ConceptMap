@@ -141,6 +141,9 @@ bool HaveSameIds(const Node& lhs, const Node& rhs) noexcept;
 ///Move a Node relatively
 void Move(Node& node, const double dx, const double dy);
 
+///Set the Concept of the Node
+void SetConcept(Node& node, const Concept& concept);
+
 ///Set the name/text of the Node
 void SetText(Node& node, const std::string& text);
 

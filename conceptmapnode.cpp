@@ -200,6 +200,11 @@ void ribi::cmap::Node::SetConcept(const Concept& concept) noexcept
   m_concept = concept;
 }
 
+void ribi::cmap::SetConcept(Node& node, const Concept& concept)
+{
+  node.SetConcept(concept);
+}
+
 void ribi::cmap::SetText(Node& node, const std::string& text)
 {
   SetText(node.GetConcept(), text);
