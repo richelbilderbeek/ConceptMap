@@ -57,6 +57,11 @@ double ribi::cmap::GetY(const Edge& edge) noexcept
   return GetY(edge.GetNode());
 }
 
+bool ribi::cmap::HasExamples(const Edge& e) noexcept
+{
+  return HasExamples(e.GetNode());
+}
+
 bool ribi::cmap::HasSameData(const Edge& lhs, const Edge& rhs) noexcept
 {
   return HasSameData(lhs.GetNode(), rhs.GetNode())

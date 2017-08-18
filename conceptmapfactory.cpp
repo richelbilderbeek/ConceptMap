@@ -272,6 +272,21 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetThreeNodeTwoEdge() cons
   return g;
 }
 
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetThreeNodeTwoEdgeNoCenter() const noexcept
+{
+  ConceptMap g;
+  //These coordinats are tested as such
+  const auto vd_1 = AddVertex(Node(Concept("one"), true, 100, 200), g);
+  const auto vd_2 = AddVertex(Node(Concept("two"), false, 300, 250), g);
+  const auto vd_3 = AddVertex(Node(Concept("three"), false, 500, 350), g);
+  AddEdge(Edge(Node(Concept("first",
+    Examples( { Example("erster"), Example("premier") } )), false, 150, 225)), vd_1, vd_2, g);
+  AddEdge(Edge(Node(Concept("second",
+    Examples( { Example("zweite"), Example("deuxieme") } )), false, 350, 275)), vd_2, vd_3, g);
+  return g;
+}
+
+
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeOneEdge() const noexcept
 {
   ConceptMap g;

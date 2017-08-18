@@ -74,6 +74,9 @@ double GetX(const Edge& edge) noexcept;
 ///Get the x coordinat of the center of the Edge
 double GetY(const Edge& edge) noexcept;
 
+///Does the (Node on the) Edge have at least one example?
+bool HasExamples(const Edge& e) noexcept;
+
 ///Checks if the nodes and arrows are the same
 bool HasSameData(const Edge& lhs, const Edge& rhs) noexcept;
 
