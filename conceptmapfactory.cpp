@@ -239,6 +239,15 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept
   return RepositionNodes(g);
 }
 
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLonelyQtCenterNode() const noexcept
+{
+  ConceptMap g;
+  AddVertex(
+    Node(Concept("center"),
+    true, 100, 200), g);
+  return g;
+}
+
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetStarShaped() const noexcept
 {
   ConceptMap g;
