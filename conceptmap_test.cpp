@@ -34,7 +34,7 @@
 #include "set_my_custom_vertex.h"
 #include "is_custom_vertices_isomorphic.h"
 
-#include "make_custom_and_selectable_vertices_writer.h"
+//#include "make_custom_vertices_writer.h"
 #include "my_custom_vertex.h"
 
 #include <boost/test/unit_test.hpp>
@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_load_node)
   const std::string d{ToDot(g)};
   const std::string dot{
     "graph G {\n"
-    "0[label=\"<node><concept><name>A</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept><x>0</x><y>0</y><is_center_node>0</is_center_node></node>\", regular=\"0\"];\n"
+    "0[label=\"<node><concept><name>A</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept><x>0</x><y>0</y><is_center_node>0</is_center_node></node>\"];\n"
     "}"
   };
   if (d != dot)
@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_simple_dot_to_concept_map)
   using namespace ribi::cmap;
   std::string s{
     "graph G {\n"
-    "0[label=\"<node><concept><name>A</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept><x>0</x><y>0</y><is_center_node>0</is_center_node></node>\", regular=\"0\"];\n"
+    "0[label=\"<node><concept><name>A</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept><x>0</x><y>0</y><is_center_node>0</is_center_node></node>\"];\n"
     "}"
   };
   {
@@ -461,59 +461,6 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_file)
   BOOST_CHECK(!f.IsRegularFile(filename));
 }
 
-BOOST_AUTO_TEST_CASE(ribi_concept_map_select_random_node)
-{
-  using namespace ribi::cmap;
-  std::mt19937 rng_engine;
-  auto good_graph = ConceptMapFactory().Get1();
-  auto bad_graph = ConceptMapFactory().Get0();
-
-  BOOST_CHECK_NO_THROW(
-    SelectRandomNode(
-      good_graph,
-      rng_engine
-    )
-  );
-
-  BOOST_CHECK_THROW(
-    SelectRandomNode(
-      bad_graph,
-      rng_engine
-    ),
-    std::invalid_argument
-  );
-
-}
-
-BOOST_AUTO_TEST_CASE(ribi_concept_map_unselect_edges)
-{
-  using namespace ribi::cmap;
-
-  BOOST_CHECK_NO_THROW(
-    UnselectEdges(ConceptMapFactory().Get3())
-  );
-
-  //No edges, sure, no problem
-  BOOST_CHECK_NO_THROW(
-    UnselectEdges(ConceptMapFactory().Get0())
-  );
-
-}
-
-BOOST_AUTO_TEST_CASE(ribi_concept_map_unselect_everything)
-{
-  using namespace ribi::cmap;
-
-  BOOST_CHECK_NO_THROW(
-    UnselectEverything(ConceptMapFactory().Get3())
-  );
-
-  //No edges nor node, sure, no problem
-  BOOST_CHECK_NO_THROW(
-    UnselectEverything(ConceptMapFactory().Get0())
-  );
-}
-
 BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
 {
   using namespace ribi::cmap;
@@ -534,24 +481,6 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
   const double tolerance{0.001};
   BOOST_CHECK(HasSimilarData(g, h, tolerance));
 
-}
-
-BOOST_AUTO_TEST_CASE(ribi_concept_map_count_selected_edges)
-{
-  using namespace ribi::cmap;
-  BOOST_CHECK_EQUAL(
-    CountSelectedEdges(ConceptMapFactory().Get3()),
-    0
-  );
-}
-
-BOOST_AUTO_TEST_CASE(ribi_concept_map_count_selected_nodes)
-{
-  using namespace ribi::cmap;
-  BOOST_CHECK_EQUAL(
-    CountSelectedNodes(ConceptMapFactory().Get3()),
-    0
-  );
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_create_direct_neighbour_concept_maps)

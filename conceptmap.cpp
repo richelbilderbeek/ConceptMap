@@ -18,27 +18,28 @@
 #include "xml.h"
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"
-#include "make_custom_and_selectable_vertices_writer.h"
 #include "find_first_custom_edge_with_my_edge.h"
-#include "custom_and_selectable_vertices_writer.h"
+//#include "custom_vertices_writer.h"
 #include "install_vertex_custom_type.h"
 #include "my_custom_vertex.h"
 #include "graphviz_decode.h"
-#include "create_all_direct_neighbour_custom_and_selectable_edges_and_vertices_subgraphs.h"
-#include "save_custom_and_selectable_edges_and_vertices_graph_to_dot.h"
-#include "load_undirected_custom_and_selectable_edges_and_vertices_graph_from_dot.h"
-#include "load_directed_custom_and_selectable_edges_and_vertices_graph_from_dot.h"
+#include "create_all_direct_neighbour_custom_edges_and_vertices_subgraphs.h"
+#include "save_custom_edges_and_vertices_graph_to_dot.h"
+#include "load_undirected_custom_edges_and_vertices_graph_from_dot.h"
+#include "load_undirected_custom_edges_and_vertices_graph_from_dot.h"
+//#include "load_directed_custom_edges_and_vertices_graph_from_dot.h"
 #include "find_first_custom_edge_with_my_edge.h"
 #include "find_first_custom_vertex_with_my_vertex.h"
 #include "remove_selected_custom_edges_and_vertices.h"
 #include "get_my_custom_edge.h"
 #include "get_my_custom_edges.h"
 #include "select_random_vertex.h"
+#include "save_custom_edges_and_vertices_graph_to_dot.h"
 
 namespace ribi {
 namespace cmap {
 
-//Very similar to custom_and_selectable_vertices_writer
+//Very similar to custom_vertices_writer
 template <
   typename my_custom_edge_map,
   typename is_selected_map
@@ -373,42 +374,11 @@ int ribi::cmap::CountCenterNodes(const ConceptMap& c) noexcept
   return CountCenterNodes(GetNodes(c));
 }
 
-int ribi::cmap::CountSelectedEdges(const ConceptMap& c) noexcept
-{
-  const auto eip = edges(c);
-  return static_cast<int>(
-    std::count_if(eip.first, eip.second,
-      [c](const EdgeDescriptor vd)
-      {
-        const auto is_selected_map
-          = get(boost::edge_is_selected, c);
-        return get(is_selected_map,vd);
-      }
-    )
-  );
-}
-
-int ribi::cmap::CountSelectedNodes(const ConceptMap& c) noexcept
-{
-  const auto vip = vertices(c);
-  return static_cast<int>(
-    std::count_if(vip.first, vip.second,
-      [c](const VertexDescriptor vd)
-      {
-        const auto is_selected_map
-          = get(boost::vertex_is_selected, c);
-        return get(is_selected_map,vd);
-      }
-    )
-  );
-}
-
-
 std::vector<ribi::cmap::ConceptMap>
 ribi::cmap::CreateDirectNeighbourConceptMaps(const ConceptMap& c)
 {
   return
-  create_all_direct_neighbour_custom_and_selectable_edges_and_vertices_subgraphs(c);
+  create_all_direct_neighbour_custom_edges_and_vertices_subgraphs(c);
 }
 
 void ribi::cmap::DecodeConceptMap(ConceptMap& g) noexcept
@@ -664,26 +634,18 @@ bool ribi::cmap::IsConnectedTo(const Edge& edge, const Node& node, const Concept
   return GetFrom(edge,c) == node || GetTo(edge, c) == node;
 }
 
-bool ribi::cmap::IsSelected(const Edge& edge, const ConceptMap& c)
-{
-  return get_edge_selectedness(
-    find_first_custom_edge_with_my_edge(edge, c),
-    c);
-}
-
-bool ribi::cmap::IsSelected(const Node& node, const ConceptMap& c)
-{
-  return get_vertex_selectedness(
-    find_first_custom_vertex_with_my_vertex(node, c),
-    c);
-}
-
 ribi::cmap::ConceptMap ribi::cmap::LoadFromFile(const std::string& dot_filename)
 {
-  auto g = load_undirected_custom_and_selectable_edges_and_vertices_graph_from_dot<
+  auto g = load_undirected_custom_edges_and_vertices_graph_from_dot<
       decltype(ConceptMap())
     >(dot_filename)
   ;
+  /*
+  auto g = load_undirected_custom_edges_and_vertices_graph_from_dot<
+      decltype(ConceptMap())
+    >(dot_filename)
+  ;
+  */
   DecodeConceptMap(g);
   return g;
 }
@@ -701,22 +663,22 @@ ribi::cmap::ConceptMap ribi::cmap::RemoveFirstNode(ConceptMap g)
 
 void ribi::cmap::SaveToFile(const ConceptMap& g, const std::string& dot_filename)
 {
+  save_custom_edges_and_vertices_graph_to_dot<ConceptMap>(g, dot_filename);
   //Cannot use:
-  //save_custom_and_selectable_edges_and_vertices_graph_to_dot(g, dot_filename);
+  //save_custom_edges_and_vertices_graph_to_dot(g, dot_filename);
   //because we have a directed graph in which edegs have zero/one/two arrow heads
-
+  /*
   std::ofstream f(dot_filename);
   boost::write_graphviz(f, g,
-    make_custom_and_selectable_vertices_writer(
-      get(boost::vertex_custom_type,g),
-      get(boost::vertex_is_selected,g)
+    make_custom__vertices_writer(
+      get(boost::vertex_custom_type,g)
     ),
     make_edge_writer(
       get(boost::edge_custom_type,g),
       get(boost::edge_is_selected,g)
     )
   );
-
+  */
 }
 
 void ribi::cmap::SaveToImage(const ConceptMap& g, const std::string& png_filename)
@@ -780,14 +742,6 @@ void ribi::cmap::SaveSummaryToFile(const ConceptMap& g, const std::string& dot_f
   );
 }
 
-void ribi::cmap::SelectRandomNode(
-  ConceptMap& g,
-  std::mt19937& rng_engine
-)
-{
-  select_random_vertex(g, rng_engine);
-}
-
 std::map<ribi::cmap::Competency,int> ribi::cmap::TallyCompetencies(
   const ConceptMap& g
 ) noexcept
@@ -821,37 +775,6 @@ std::string ribi::cmap::ToXml(const ConceptMap& conceptmap) noexcept
   assert(r.substr(0,12) == "<conceptmap>");
   assert(r.substr(r.size() - 13,13) == "</conceptmap>");
   return r;
-}
-
-ribi::cmap::ConceptMap ribi::cmap::UnselectEdges(ConceptMap g) noexcept
-{
-  const auto eip = edges(g);
-  std::for_each(eip.first, eip.second,
-    [&g](const EdgeDescriptor ed)
-    {
-      const auto pmap = get(boost::edge_is_selected, g);
-      put(pmap,ed,false);
-    }
-  );
-  return g;
-}
-
-ribi::cmap::ConceptMap ribi::cmap::UnselectEverything(ConceptMap conceptmap) noexcept
-{
-  return UnselectEdges(UnselectNodes(conceptmap));
-}
-
-ribi::cmap::ConceptMap ribi::cmap::UnselectNodes(ConceptMap g) noexcept
-{
-  const auto vip = vertices(g);
-  std::for_each(vip.first, vip.second,
-    [&g](const VertexDescriptor vd)
-    {
-      const auto pmap = get(boost::vertex_is_selected, g);
-      put(pmap,vd,false);
-    }
-  );
-  return g;
 }
 
 ribi::cmap::ConceptMap ribi::cmap::XmlToConceptMap(const std::string& s)

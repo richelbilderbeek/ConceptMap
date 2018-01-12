@@ -8,14 +8,14 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/math/constants/constants.hpp>
 
-#include "add_custom_and_selectable_edge_between_vertices.h"
+#include "add_custom_edge_between_vertices.h"
 #include "conceptmapcenternodefactory.h"
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
 #include "conceptmap.h"
 #include "conceptmaphelper.h"
 #include "conceptmapexamplefactory.h"
-#include "add_custom_and_selectable_vertex.h"
+#include "add_custom_vertex.h"
 #include "conceptmapedge.h"
 #include "conceptmapedgefactory.h"
 #include "conceptmapnode.h"
@@ -34,7 +34,7 @@ ribi::cmap::VertexDescriptor ribi::cmap::AddVertex(
   const Node& node, ConceptMap& g
 ) noexcept
 {
-  return add_custom_and_selectable_vertex(node, false, g);
+  return add_custom_vertex(node, g);
 }
 
 void ribi::cmap::AddEdge(
@@ -44,7 +44,7 @@ void ribi::cmap::AddEdge(
   ConceptMap& g
 ) noexcept
 {
-  add_custom_and_selectable_edge_between_vertices(edge, false, vd_from, vd_to, g);
+  add_custom_edge_between_vertices(edge, vd_from, vd_to, g);
 }
 
 std::vector<ribi::cmap::ConceptMap>

@@ -46,12 +46,23 @@ int CalculateSpecificityExperimental(const ConceptMap& c);
 ///ordering. Used to tally the competencies by TallyCompetencies
 std::vector<Competency> CollectCompetenies(const ConceptMap& c) noexcept;
 
+///Count the number of center nodes.
+///Brainweaver students work on a concept map with exactly one center node.
+///Brainweaver assessors grade a sub-conceptmap
+/// (created with CreateDirectNeighbourConceptMap),
+/// that may have the center node excluded.
 int CountCenterNodes(const ConceptMap& c) noexcept;
-int CountSelectedEdges(const ConceptMap& c) noexcept;
-int CountSelectedNodes(const ConceptMap& c) noexcept;
 
+///Create a concept map of only the vertex and its direct neighbours itself.
+///Use CreateDirectNeighbourConceptMaps to create all sub-conceptmaps.
 ConceptMap CreateDirectNeighbourConceptMap(const VertexDescriptor vd, const ConceptMap& c);
+
+
+///Create all sub-conceptmaps
+///Use CreateDirectNeighbourConceptMap to create a sub-conceptmaps
+/// with any vertex as its center.
 std::vector<ConceptMap> CreateDirectNeighbourConceptMaps(const ConceptMap& c);
+
 void DecodeConceptMap(ConceptMap& g) noexcept;
 void DecodeEdge(Edge& g) noexcept;
 void DecodeNode(Node& g) noexcept;
@@ -101,27 +112,17 @@ bool HasUninitializedExamples(const ConceptMap& c) noexcept;
 ///Is the Edge connected to the Node?
 bool IsConnectedTo(const Edge& edge, const Node& node, const ConceptMap& c);
 
-///Is the Edge selected?
-bool IsSelected(const Edge& node, const ConceptMap& c);
-
-///Is the Node selected?
-bool IsSelected(const Node& node, const ConceptMap& c);
-
 ConceptMap LoadFromFile(const std::string& dot_filename);
 ConceptMap RemoveFirstNode(ConceptMap g);
 void SaveToFile(const ConceptMap& g, const std::string& dot_filename);
 void SaveToImage(const ConceptMap& g, const std::string& png_filename);
 void SaveSummaryToImage(const ConceptMap& g, const std::string& png_filename);
 void SaveSummaryToFile(const ConceptMap& g, const std::string& dot_filename);
-void SelectRandomNode(ConceptMap& conceptmap, std::mt19937& rng_engine);
 
 std::map<Competency,int> TallyCompetencies(const ConceptMap& g) noexcept;
 
 std::string ToXml(const ConceptMap& conceptmap) noexcept;
 std::string ToDot(const ConceptMap& conceptmap) noexcept;
-ConceptMap UnselectEdges(ConceptMap conceptmap) noexcept;
-ConceptMap UnselectEverything(ConceptMap conceptmap) noexcept;
-ConceptMap UnselectNodes(ConceptMap conceptmap) noexcept;
 ConceptMap XmlToConceptMap(const std::string& s);
 std::ostream& operator<<(std::ostream& os, const ConceptMap& conceptmap) noexcept;
 std::istream& operator>>(std::istream& is, ConceptMap& conceptmap);

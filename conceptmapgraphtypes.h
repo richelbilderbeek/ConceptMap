@@ -19,16 +19,10 @@ using ConceptMap = boost::adjacency_list
   boost::vecS,
   boost::undirectedS,
   boost::property<
-    boost::vertex_custom_type_t, Node,
-    boost::property<
-      boost::vertex_is_selected_t, bool
-    >
+    boost::vertex_custom_type_t, Node
   >,
   boost::property<
-    boost::edge_custom_type_t, Edge,
-    boost::property<
-      boost::edge_is_selected_t, bool
-    >
+    boost::edge_custom_type_t, Edge
   >
 >;
 using VertexDescriptor = boost::graph_traits<ConceptMap>::vertex_descriptor;
