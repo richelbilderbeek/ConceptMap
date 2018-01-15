@@ -144,6 +144,8 @@ int ExtractRatingSpecificityFromXml(const std::string& s);
 
 const Examples& GetExamples(const Concept& concept) noexcept;
 
+const std::string& GetText(const Concept& concept) noexcept;
+
 ///Does the Concept have at least one example?
 bool HasExamples(const Concept& concept) noexcept;
 

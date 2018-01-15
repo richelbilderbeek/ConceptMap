@@ -157,6 +157,11 @@ const ribi::cmap::Examples& ribi::cmap::GetExamples(const Concept& concept) noex
   return concept.GetExamples();
 }
 
+const std::string& ribi::cmap::GetText(const Concept& concept) noexcept
+{
+  return concept.GetName();
+}
+
 bool ribi::cmap::HasExamples(const Concept& concept) noexcept
 {
   return !IsEmpty(concept.GetExamples());
