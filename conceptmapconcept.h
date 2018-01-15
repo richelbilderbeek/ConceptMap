@@ -144,11 +144,17 @@ int ExtractRatingSpecificityFromXml(const std::string& s);
 
 const Examples& GetExamples(const Concept& concept) noexcept;
 
+int GetRatingComplexity(const Concept& concept) noexcept;
+int GetRatingConcreteness(const Concept& concept) noexcept;
+int GetRatingSpecificity(const Concept& concept) noexcept;
+
 const std::string& GetName(const Concept& concept) noexcept;
 const std::string& GetText(const Concept& concept) noexcept;
 
 ///Does the Concept have at least one example?
 bool HasExamples(const Concept& concept) noexcept;
+
+bool IsComplex(const Concept& concept) noexcept;
 
 ///Set the name/text of a concept
 void SetText(Concept& concept, const std::string& text);

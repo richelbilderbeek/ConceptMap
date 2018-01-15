@@ -162,6 +162,21 @@ const std::string& ribi::cmap::GetName(const Concept& concept) noexcept
   return concept.GetName();
 }
 
+int ribi::cmap::GetRatingComplexity(const Concept& concept) noexcept
+{
+  return concept.GetRatingComplexity();
+}
+
+int ribi::cmap::GetRatingConcreteness(const Concept& concept) noexcept
+{
+  return concept.GetRatingConcreteness();
+}
+
+int ribi::cmap::GetRatingSpecificity(const Concept& concept) noexcept
+{
+  return concept.GetRatingSpecificity();
+}
+
 const std::string& ribi::cmap::GetText(const Concept& concept) noexcept
 {
   return GetName(concept);
@@ -172,7 +187,10 @@ bool ribi::cmap::HasExamples(const Concept& concept) noexcept
   return !IsEmpty(concept.GetExamples());
 }
 
-
+bool ribi::cmap::IsComplex(const Concept& concept) noexcept
+{
+  return concept.GetIsComplex();
+}
 
 void ribi::cmap::Concept::SetExamples(const Examples& examples) noexcept
 {
