@@ -101,6 +101,10 @@ const Concept& GetConcept(const Node& node) noexcept;
 
 const Examples& GetExamples(const Node& node) noexcept;
 
+int GetRatingComplexity(const Node& node) noexcept;
+int GetRatingConcreteness(const Node& node) noexcept;
+int GetRatingSpecificity(const Node& node) noexcept;
+
 std::string GetText(const Node& node) noexcept;
 
 ///Get the x coordinat of the center of the Node

@@ -117,6 +117,21 @@ std::vector<ribi::cmap::Node> ribi::cmap::Node::GetTests() noexcept
   return result;
 }
 
+int ribi::cmap::GetRatingComplexity(const Node& node) noexcept
+{
+  return GetRatingComplexity(GetConcept(node));
+}
+
+int ribi::cmap::GetRatingConcreteness(const Node& node) noexcept
+{
+  return GetRatingConcreteness(GetConcept(node));
+}
+
+int ribi::cmap::GetRatingSpecificity(const Node& node) noexcept
+{
+  return GetRatingSpecificity(GetConcept(node));
+}
+
 std::string ribi::cmap::GetText(const Node& node) noexcept
 {
   return node.GetName();
