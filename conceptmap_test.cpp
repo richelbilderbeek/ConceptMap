@@ -26,16 +26,13 @@
 #include "conceptmapisexamplesverticesisomorphic.h"
 #include "conceptmapnodefactory.h"
 #include "conceptmapnode.h"
-#include "custom_vertex_invariant.h"
 #include "fileio.h"
-#include "install_vertex_custom_type.h"
-#include "get_my_custom_edge.h"
-#include "get_my_custom_vertex.h"
-#include "set_my_custom_vertex.h"
-#include "is_custom_vertices_isomorphic.h"
+#include "get_my_bundled_edge.h"
+#include "get_my_bundled_vertex.h"
+#include "set_my_bundled_vertex.h"
 
-//#include "make_custom_vertices_writer.h"
-#include "my_custom_vertex.h"
+//#include "make_bundled_vertices_writer.h"
+#include "my_bundled_vertex.h"
 
 #include <boost/test/unit_test.hpp>
 
@@ -74,7 +71,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_load_node)
   BOOST_CHECK(ToXml(n) == s);
   ConceptMap g;
   const auto vd = boost::add_vertex(g);
-  set_my_custom_vertex(n, vd, g);
+  set_my_bundled_vertex(n, vd, g);
   const std::string d{ToDot(g)};
   const std::string dot{
     "graph G {\n"
@@ -219,9 +216,9 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_and_load_detailed)
   const auto vd1 = boost::vertex(0, d);
   const auto vd2 = boost::vertex(1, d);
   const auto vd3 = boost::vertex(2, d);
-  const Node node1 = get_my_custom_vertex(vd1, d);
-  const Node node2 = get_my_custom_vertex(vd2, d);
-  const Node node3 = get_my_custom_vertex(vd3, d);
+  const Node node1 = get_my_bundled_vertex(vd1, d);
+  const Node node2 = get_my_bundled_vertex(vd2, d);
+  const Node node3 = get_my_bundled_vertex(vd3, d);
   BOOST_CHECK_EQUAL(node1.GetName(), "center");
   BOOST_CHECK_EQUAL(GetX(node1), 100);
   BOOST_CHECK_EQUAL(GetY(node1), 200);
@@ -231,8 +228,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_and_load_detailed)
   BOOST_CHECK_EQUAL(node3.GetName(), "two");
   BOOST_CHECK_EQUAL(node3.GetX(), 500);
   BOOST_CHECK_EQUAL(node3.GetY(), 350);
-  const Edge edge1 = get_my_custom_edge(boost::edge(vd1, vd2, d).first, d);
-  const Edge edge2 = get_my_custom_edge(boost::edge(vd2, vd3, d).first, d);
+  const Edge edge1 = get_my_bundled_edge(boost::edge(vd1, vd2, d).first, d);
+  const Edge edge2 = get_my_bundled_edge(boost::edge(vd2, vd3, d).first, d);
   BOOST_CHECK_EQUAL(GetText(edge1), "first");
   BOOST_CHECK_EQUAL(GetText(edge2), "second");
   BOOST_CHECK_EQUAL(GetX(edge1), 150);

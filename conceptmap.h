@@ -84,7 +84,7 @@ Node GetNode(const VertexDescriptor vd, const ConceptMap& c) noexcept;
 Node GetTo(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
 Node GetTo(const Edge& edge, const ConceptMap& c);
 
-/// Because 'get_my_custom_vertexes(c)' does not work yet
+/// Because 'get_my_bundled_vertexes(c)' does not work yet
 std::vector<Node> GetNodes(const ConceptMap& c) noexcept;
 
 std::vector<Edge> GetSortedEdges(const ConceptMap& c) noexcept;
