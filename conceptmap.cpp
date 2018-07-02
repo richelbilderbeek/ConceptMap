@@ -8,6 +8,7 @@
 #include <boost/graph/graphviz.hpp>
 #include "conceptmapregex.h"
 #include "conceptmapnode.h"
+#include "conceptmapnodewriter.h"
 #include "conceptmapconcept.h"
 #include "conceptmapexamples.h"
 #include "conceptmapexample.h"
@@ -36,92 +37,7 @@
 #include "select_random_vertex.h"
 #include "save_bundled_edges_and_vertices_graph_to_dot.h"
 #include "set_my_bundled_vertex.h"
-
-namespace ribi {
-namespace cmap {
-
-//Very similar to bundled_vertices_writer
-template <
-  typename my_bundled_edge_map,
-  typename is_selected_map
->
-class edge_writer {
-public:
-  edge_writer(
-    my_bundled_edge_map mcem,
-    is_selected_map ism
-  ) : m_my_bundled_edge_map{mcem},
-      m_is_selected_map{ism}
-  {
-
-  }
-  template <class edge_descriptor>
-  void operator()(
-    std::ostream& out,
-    const edge_descriptor& ed
-  ) const noexcept {
-    const ribi::cmap::Edge edge = get(m_my_bundled_edge_map, ed);
-    out << "[label=\""
-      << edge //Can be Graphviz unfriendly
-      << "\"" //Do not add comma here, as this may be the last item
-    ;
-
-    if (get(m_is_selected_map, ed))
-    {
-      out << ", style = \"dashed\""; //Do not add comma here, as this may be the last item
-    }
-
-    const bool has_head{edge.HasHeadArrow()};
-    const bool has_tail{edge.HasTailArrow()};
-    if ( has_head &&  has_tail)
-    {
-      out << ", dir = \"both\", arrowhead = \"normal\", arrowtail = \"normal\"";
-    }
-    else if ( has_head && !has_tail)
-    {
-      out << ", dir = \"forward\", arrowhead = \"normal\"";
-    }
-    else if (!has_head && has_tail)
-    {
-      out << ", dir = \"back\", arrowtail = \"normal\"";
-    }
-    else
-    {
-      assert(!has_head && !has_tail);
-      //No need to add something
-    }
-    out << "]";
-  }
-private:
-  my_bundled_edge_map m_my_bundled_edge_map;
-  is_selected_map m_is_selected_map;
-};
-
-template <
-  typename my_bundled_vertex_map,
-  typename is_selected_map
->
-inline edge_writer<
-  my_bundled_vertex_map,
-  is_selected_map
->
-make_edge_writer(
-  const my_bundled_vertex_map& mcvm, //my_bundled_vertex_map
-  const is_selected_map& ism //any_is_selected_map
-)
-{
-  return edge_writer<
-    my_bundled_vertex_map,
-    is_selected_map
-  >(
-    mcvm,
-    ism
-  );
-}
-
-
-} //~namespace ribi
-} //~namespace cmap
+#include "conceptmapedgewriter.h"
 
 int ribi::cmap::CalculateComplexityExperimental(const ConceptMap& c)
 {
@@ -674,11 +590,11 @@ void ribi::cmap::SaveToFile(const ConceptMap& g, const std::string& dot_filename
   //save_bundled_edges_and_vertices_graph_to_dot(g, dot_filename);
   //because we have a directed graph in which edegs have zero/one/two arrow heads
   std::ofstream f(dot_filename);
-  boost::write_graphviz(f, g);
-  //boost::write_graphviz(f, g,
-  //  make_bundled_vertices_writer(g),
-  //  make_bundled_edges_writer(g)
-  //);
+  //boost::write_graphviz(f, g);
+  boost::write_graphviz(f, g,
+    ::ribi::cmap::make_node_writer(g),
+    ::ribi::cmap::make_edge_writer(g)
+  );
 }
 
 void ribi::cmap::SaveToImage(const ConceptMap& g, const std::string& png_filename)

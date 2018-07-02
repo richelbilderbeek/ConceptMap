@@ -23,7 +23,9 @@ HEADERS += \
     $$PWD/conceptmapexamplevertexinvariant.h \
     $$PWD/conceptmapexamplesvertexinvariant.h \
     $$PWD/conceptmapisexampleverticesisomorphic.h \
-    $$PWD/conceptmapisexamplesverticesisomorphic.h
+    $$PWD/conceptmapisexamplesverticesisomorphic.h \
+    $$PWD/conceptmapedgewriter.h \
+    $$PWD/conceptmapnodewriter.h
 
 SOURCES += \
     $$PWD/conceptmapcenternodefactory.cpp \
@@ -42,4 +44,6 @@ SOURCES += \
     $$PWD/conceptmaphelper.cpp \
     $$PWD/conceptmapnode.cpp \
     $$PWD/conceptmapnodefactory.cpp \
-    $$PWD/conceptmapregex.cpp
+    $$PWD/conceptmapregex.cpp \
+    $$PWD/conceptmapedgewriter.cpp \
+    $$PWD/conceptmapnodewriter.cpp

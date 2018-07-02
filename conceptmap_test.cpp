@@ -80,8 +80,9 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_load_node)
   };
   if (d != dot)
   {
-    std::cerr << dot << '\n';
-    std::cerr << d << '\n';
+    std::cerr << "expected:\n" << dot << '\n';
+    std::cerr << "created:\n" << d << '\n';
+    std::cerr << "~created\n";
   }
   BOOST_CHECK(d == dot); //
   ConceptMap c{DotToConceptMap(dot)};
