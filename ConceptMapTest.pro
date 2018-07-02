@@ -1,4 +1,4 @@
-include(../BoostGraphTutorial/BoostGraphTutorial/boost_graph_tutorial.pri)
+include(../boost_graph_cookbook_1/boost_graph_cookbook_1/boost_graph_cookbook_1.pri)
 include(../RibiClasses/CppContainer/CppContainer.pri)
 include(gsl.pri)
 include(ConceptMap.pri)
