@@ -8,20 +8,20 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/math/constants/constants.hpp>
 
-#include "add_custom_edge_between_vertices.h"
+#include "add_bundled_edge_between_vertices.h"
 #include "conceptmapcenternodefactory.h"
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
 #include "conceptmap.h"
 #include "conceptmaphelper.h"
 #include "conceptmapexamplefactory.h"
-#include "add_custom_vertex.h"
+#include "add_bundled_vertex.h"
 #include "conceptmapedge.h"
 #include "conceptmapedgefactory.h"
 #include "conceptmapnode.h"
 #include "conceptmapnodefactory.h"
 #include "conceptmapregex.h"
-#include "set_my_custom_vertexes.h"
+#include "set_my_bundled_vertexes.h"
 
 #pragma GCC diagnostic pop
 
@@ -34,7 +34,7 @@ ribi::cmap::VertexDescriptor ribi::cmap::AddVertex(
   const Node& node, ConceptMap& g
 ) noexcept
 {
-  return add_custom_vertex(node, g);
+  return add_bundled_vertex(node, g);
 }
 
 void ribi::cmap::AddEdge(
@@ -44,7 +44,7 @@ void ribi::cmap::AddEdge(
   ConceptMap& g
 ) noexcept
 {
-  add_custom_edge_between_vertices(edge, vd_from, vd_to, g);
+  add_bundled_edge_between_vertices(edge, vd_from, vd_to, g);
 }
 
 std::vector<ribi::cmap::ConceptMap>
@@ -490,6 +490,6 @@ ribi::cmap::ConceptMap ribi::cmap::RepositionNodes(ConceptMap& g)
     }
   }
 
-  ::set_my_custom_vertexes(g, nodes);
+  ::set_my_bundled_vertexes(g, nodes);
   return g;
 }

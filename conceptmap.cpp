@@ -18,38 +18,39 @@
 #include "xml.h"
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"
-#include "find_first_custom_edge_with_my_edge.h"
-//#include "custom_vertices_writer.h"
-#include "install_vertex_custom_type.h"
-#include "my_custom_vertex.h"
+#include "find_first_bundled_edge_with_my_edge.h"
+#include "bundled_edges_writer.h"
+#include "bundled_vertices_writer.h"
+#include "my_bundled_vertex.h"
 #include "graphviz_decode.h"
-#include "create_all_direct_neighbour_custom_edges_and_vertices_subgraphs.h"
-#include "save_custom_edges_and_vertices_graph_to_dot.h"
-#include "load_undirected_custom_edges_and_vertices_graph_from_dot.h"
-#include "load_undirected_custom_edges_and_vertices_graph_from_dot.h"
-//#include "load_directed_custom_edges_and_vertices_graph_from_dot.h"
-#include "find_first_custom_edge_with_my_edge.h"
-#include "find_first_custom_vertex_with_my_vertex.h"
-#include "remove_selected_custom_edges_and_vertices.h"
-#include "get_my_custom_edge.h"
-#include "get_my_custom_edges.h"
+#include "create_all_direct_neighbour_bundled_edges_and_vertices_subgraphs.h"
+#include "save_bundled_edges_and_vertices_graph_to_dot.h"
+#include "load_undirected_bundled_edges_and_vertices_graph_from_dot.h"
+#include "load_undirected_bundled_edges_and_vertices_graph_from_dot.h"
+#include "load_directed_bundled_edges_and_vertices_graph_from_dot.h"
+#include "find_first_bundled_edge_with_my_edge.h"
+#include "find_first_bundled_vertex_with_my_vertex.h"
+//#include "remove_bundled_edges_and_vertices.h"
+#include "get_my_bundled_edge.h"
+#include "get_my_bundled_edges.h"
 #include "select_random_vertex.h"
-#include "save_custom_edges_and_vertices_graph_to_dot.h"
+#include "save_bundled_edges_and_vertices_graph_to_dot.h"
+#include "set_my_bundled_vertex.h"
 
 namespace ribi {
 namespace cmap {
 
-//Very similar to custom_vertices_writer
+//Very similar to bundled_vertices_writer
 template <
-  typename my_custom_edge_map,
+  typename my_bundled_edge_map,
   typename is_selected_map
 >
 class edge_writer {
 public:
   edge_writer(
-    my_custom_edge_map mcem,
+    my_bundled_edge_map mcem,
     is_selected_map ism
-  ) : m_my_custom_edge_map{mcem},
+  ) : m_my_bundled_edge_map{mcem},
       m_is_selected_map{ism}
   {
 
@@ -59,7 +60,7 @@ public:
     std::ostream& out,
     const edge_descriptor& ed
   ) const noexcept {
-    const ribi::cmap::Edge edge = get(m_my_custom_edge_map, ed);
+    const ribi::cmap::Edge edge = get(m_my_bundled_edge_map, ed);
     out << "[label=\""
       << edge //Can be Graphviz unfriendly
       << "\"" //Do not add comma here, as this may be the last item
@@ -92,25 +93,25 @@ public:
     out << "]";
   }
 private:
-  my_custom_edge_map m_my_custom_edge_map;
+  my_bundled_edge_map m_my_bundled_edge_map;
   is_selected_map m_is_selected_map;
 };
 
 template <
-  typename my_custom_vertex_map,
+  typename my_bundled_vertex_map,
   typename is_selected_map
 >
 inline edge_writer<
-  my_custom_vertex_map,
+  my_bundled_vertex_map,
   is_selected_map
 >
 make_edge_writer(
-  const my_custom_vertex_map& mcvm, //my_custom_vertex_map
+  const my_bundled_vertex_map& mcvm, //my_bundled_vertex_map
   const is_selected_map& ism //any_is_selected_map
 )
 {
   return edge_writer<
-    my_custom_vertex_map,
+    my_bundled_vertex_map,
     is_selected_map
   >(
     mcvm,
@@ -378,7 +379,7 @@ std::vector<ribi::cmap::ConceptMap>
 ribi::cmap::CreateDirectNeighbourConceptMaps(const ConceptMap& c)
 {
   return
-  create_all_direct_neighbour_custom_edges_and_vertices_subgraphs(c);
+  create_all_direct_neighbour_bundled_edges_and_vertices_subgraphs(c);
 }
 
 void ribi::cmap::DecodeConceptMap(ConceptMap& g) noexcept
@@ -387,10 +388,9 @@ void ribi::cmap::DecodeConceptMap(ConceptMap& g) noexcept
   std::for_each(vip.first, vip.second,
     [&g](const VertexDescriptor vd)
     {
-      auto vertex_map = get(boost::vertex_custom_type, g);
-      Node node = get(vertex_map, vd);
+      Node node = get_my_bundled_vertex(vd, g);
       node.Decode();
-      put(vertex_map, vd, node);
+      set_my_bundled_vertex(node, vd, g);
     }
   );
 
@@ -398,10 +398,9 @@ void ribi::cmap::DecodeConceptMap(ConceptMap& g) noexcept
   std::for_each(eip.first, eip.second,
     [&g](const EdgeDescriptor ed)
     {
-      auto edge_map = get(boost::edge_custom_type, g);
-      Edge edge = get(edge_map, ed);
+      Edge edge = get_my_bundled_edge(ed, g);
       edge.Decode();
-      put(edge_map, ed, edge);
+      set_my_bundled_edge(edge, ed, g);
     }
   );
 }
@@ -434,8 +433,9 @@ ribi::cmap::VertexDescriptor ribi::cmap::FindCenterNode(const ConceptMap& g)
   const auto i = std::find_if(
     vip.first, vip.second,
     [g](const vd d) {
-      const auto my_vertex_map = get(boost::vertex_custom_type, g);
-      return IsCenterNode(get(my_vertex_map, d));
+      //const auto my_vertex_map = get(boost::vertex_bundled_type, g);
+      //return IsCenterNode(get(my_vertex_map, d));
+      return IsCenterNode(get_my_bundled_vertex(d, g));
     }
   );
   assert(i != vip.second);
@@ -459,19 +459,20 @@ ribi::cmap::Node ribi::cmap::GetCenterNode(const ConceptMap& c)
 ribi::cmap::Edge ribi::cmap::GetEdge(
   const ribi::cmap::EdgeDescriptor ed, const ribi::cmap::ConceptMap& g) noexcept
 {
-  return get_my_custom_edge(ed, g);
+  return get_my_bundled_edge(ed, g);
 }
 
 std::vector<ribi::cmap::Edge> ribi::cmap::GetEdges(const ConceptMap& c) noexcept
 {
-  //return get_my_custom_edges(c);
+  //return get_my_bundled_edges(c);
   const auto eip = edges(c);
   std::vector<Edge> v(boost::num_edges(c));
   std::transform(eip.first,eip.second,std::begin(v),
     [c](const EdgeDescriptor& d)
     {
-      const auto edge_map = get(boost::edge_custom_type, c);
-      return get(edge_map, d);
+      //const auto edge_map = get(boost::edge_bundled_type, c);
+      //return get(edge_map, d);
+      return get_my_bundled_edge(d, c);
     }
   );
   return v;
@@ -520,7 +521,7 @@ std::string ribi::cmap::GetFocusName(
 
 ribi::cmap::Node ribi::cmap::GetFrom(const Edge& edge, const ConceptMap& c)
 {
-  return GetFrom(::find_first_custom_edge_with_my_edge(edge, c), c);
+  return GetFrom(::find_first_bundled_edge_with_my_edge(edge, c), c);
 }
 
 ribi::cmap::Node ribi::cmap::GetFrom(const EdgeDescriptor ed, const ConceptMap& c) noexcept
@@ -537,18 +538,20 @@ ribi::cmap::GetFromTo(
   const VertexDescriptor vd_from = boost::source(ed, conceptmap);
   const VertexDescriptor vd_to = boost::target(ed, conceptmap);
   assert(vd_from != vd_to);
-  const auto vertex_map = get(boost::vertex_custom_type, conceptmap);
-  const Node from = get(vertex_map, vd_from);
-  const Node to = get(vertex_map, vd_to);
+  //const auto vertex_map = get(boost::vertex_bundled_type, conceptmap);
+  //const Node from = get(vertex_map, vd_from);
+  //const Node to = get(vertex_map, vd_to);
+  const Node from = get_my_bundled_vertex(vd_from, conceptmap);
+  const Node to = get_my_bundled_vertex(vd_to, conceptmap);
   assert(from.GetId() != to.GetId());
-  return std::make_pair(from ,to);
+  return std::make_pair(from, to);
 }
 
 ribi::cmap::Node ribi::cmap::GetNode(
   const ribi::cmap::VertexDescriptor vd, const ribi::cmap::ConceptMap& g
 ) noexcept
 {
-  return get_my_custom_vertex(vd, g);
+  return get_my_bundled_vertex(vd, g);
 }
 
 std::vector<ribi::cmap::Node> ribi::cmap::GetNodes(const ConceptMap& c) noexcept
@@ -558,7 +561,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::GetNodes(const ConceptMap& c) noexcept
   std::transform(vip.first,vip.second,std::begin(v),
     [c](const VertexDescriptor& d)
     {
-      return get_my_custom_vertex(d, c);
+      return get_my_bundled_vertex(d, c);
     }
   );
   return v;
@@ -580,7 +583,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::GetSortedNodes(const ConceptMap& c) no
 
 ribi::cmap::Node ribi::cmap::GetTo(const Edge& edge, const ConceptMap& c)
 {
-  return GetTo(::find_first_custom_edge_with_my_edge(edge, c), c);
+  return GetTo(::find_first_bundled_edge_with_my_edge(edge, c), c);
 }
 
 ribi::cmap::Node ribi::cmap::GetTo(const EdgeDescriptor ed, const ConceptMap& c) noexcept
@@ -636,16 +639,19 @@ bool ribi::cmap::IsConnectedTo(const Edge& edge, const Node& node, const Concept
 
 ribi::cmap::ConceptMap ribi::cmap::LoadFromFile(const std::string& dot_filename)
 {
-  auto g = load_undirected_custom_edges_and_vertices_graph_from_dot<
-      decltype(ConceptMap())
-    >(dot_filename)
-  ;
-  /*
-  auto g = load_undirected_custom_edges_and_vertices_graph_from_dot<
-      decltype(ConceptMap())
-    >(dot_filename)
-  ;
-  */
+  //auto g = load_undirected_bundled_edges_and_vertices_graph_from_dot<
+  //    decltype(ConceptMap())
+  //  >(dot_filename)
+  //;
+  std::ifstream f(dot_filename);
+  ConceptMap g;
+  boost::dynamic_properties dp(boost::ignore_other_properties);
+  //This probably must be added:
+  //dp.property("node_id",     boost::get(&DotVertex::name,        graphviz));
+  //dp.property("label",       boost::get(&DotVertex::label,       graphviz));
+  //dp.property("peripheries", boost::get(&DotVertex::peripheries, graphviz));
+  //dp.property("label",       boost::get(&DotEdge::label,         graphviz));
+  boost::read_graphviz(f, g, dp);
   DecodeConceptMap(g);
   return g;
 }
@@ -663,22 +669,16 @@ ribi::cmap::ConceptMap ribi::cmap::RemoveFirstNode(ConceptMap g)
 
 void ribi::cmap::SaveToFile(const ConceptMap& g, const std::string& dot_filename)
 {
-  save_custom_edges_and_vertices_graph_to_dot<ConceptMap>(g, dot_filename);
+  //save_bundled_edges_and_vertices_graph_to_dot(g, dot_filename);
   //Cannot use:
-  //save_custom_edges_and_vertices_graph_to_dot(g, dot_filename);
+  //save_bundled_edges_and_vertices_graph_to_dot(g, dot_filename);
   //because we have a directed graph in which edegs have zero/one/two arrow heads
-  /*
   std::ofstream f(dot_filename);
-  boost::write_graphviz(f, g,
-    make_custom__vertices_writer(
-      get(boost::vertex_custom_type,g)
-    ),
-    make_edge_writer(
-      get(boost::edge_custom_type,g),
-      get(boost::edge_is_selected,g)
-    )
-  );
-  */
+  boost::write_graphviz(f, g);
+  //boost::write_graphviz(f, g,
+  //  make_bundled_vertices_writer(g),
+  //  make_bundled_edges_writer(g)
+  //);
 }
 
 void ribi::cmap::SaveToImage(const ConceptMap& g, const std::string& png_filename)
@@ -709,15 +709,13 @@ void ribi::cmap::SaveSummaryToFile(const ConceptMap& g, const std::string& dot_f
 
   boost::write_graphviz(f, g,
     [g](std::ostream& out, const VertexDescriptor& vd) {
-      const auto pmap = get(boost::vertex_custom_type, g);
       out << "[label=\""
-        << get(pmap, vd).GetConcept().GetName()
+        << get_my_bundled_vertex(vd, g).GetConcept().GetName()
         << "\"]"
       ;
     },
     [g](std::ostream& out, const EdgeDescriptor& ed) {
-      const auto edge_map = get(boost::edge_custom_type, g);
-      const auto edge = get(edge_map, ed);
+      const auto edge = get_my_bundled_edge(ed, g);
       out << "[label=\""
         << edge.GetNode().GetConcept().GetName()
         << "\", "

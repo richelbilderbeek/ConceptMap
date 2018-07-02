@@ -5,10 +5,6 @@
 #include <boost/graph/graph_traits.hpp>
 #include "conceptmapnode.h"
 #include "conceptmapedge.h"
-#include "install_edge_custom_type.h"
-#include "install_edge_is_selected.h"
-#include "install_vertex_custom_type.h"
-#include "install_vertex_is_selected.h"
 
 namespace ribi {
 namespace cmap {
@@ -18,12 +14,8 @@ using ConceptMap = boost::adjacency_list
   boost::vecS,
   boost::vecS,
   boost::undirectedS,
-  boost::property<
-    boost::vertex_custom_type_t, Node
-  >,
-  boost::property<
-    boost::edge_custom_type_t, Edge
-  >
+  Node,
+  Edge
 >;
 using VertexDescriptor = boost::graph_traits<ConceptMap>::vertex_descriptor;
 static_assert(sizeof(VertexDescriptor) == sizeof(VertexDescriptor&),"On university computer");
