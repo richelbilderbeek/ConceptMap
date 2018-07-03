@@ -24,9 +24,8 @@ public:
     const Node& node = m_g[vd];
     out << "[label=\""
       << node //Can be Graphviz unfriendly
-      << "\"" //Do not add comma here, as this may be the last item
+      << "\"]"
     ;
-    out << "]";
   }
 private:
   ConceptMap m_g;
