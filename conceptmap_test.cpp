@@ -78,16 +78,21 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_load_node)
     "0[label=\"<node><concept><name>A</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept><x>0</x><y>0</y><is_center_node>0</is_center_node></node>\"];\n"
     "}"
   };
-  if (d != dot)
-  {
-    std::cerr << "expected:\n" << dot << '\n';
-    std::cerr << "created:\n" << d << '\n';
-    std::cerr << "~created\n";
-  }
-  BOOST_CHECK(d == dot); //
+  BOOST_CHECK(d == dot);
   ConceptMap c{DotToConceptMap(dot)};
   BOOST_CHECK(boost::num_edges(c) == 0);
   BOOST_CHECK(boost::num_vertices(c) == 1);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_dot_conversion_1)
+{
+  const ConceptMap c{ConceptMapFactory().Get1()};
+  const std::string dot{ToDot(c)};
+  ConceptMap d{DotToConceptMap(dot)};
+  const double tolerance{0.001};
+  BOOST_CHECK(HasSimilarData(c, d, tolerance));
+  const std::string dot2{ToDot(d)};
+  BOOST_CHECK_EQUAL(dot, dot2);
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_dot_conversion)

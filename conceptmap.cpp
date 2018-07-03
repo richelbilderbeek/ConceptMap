@@ -559,15 +559,23 @@ ribi::cmap::ConceptMap ribi::cmap::LoadFromFile(const std::string& dot_filename)
   //    decltype(ConceptMap())
   //  >(dot_filename)
   //;
+  if (!is_regular_file(dot_filename))
+  {
+    std::stringstream msg;
+    msg << __func__ << ": file '"
+      << dot_filename << "' not found"
+    ;
+    throw std::invalid_argument(msg.str());
+  }
   std::ifstream f(dot_filename);
+  //auto g = create_empty_undirected_bundled_edges_and_vertices_graph();
   ConceptMap g;
   boost::dynamic_properties dp(boost::ignore_other_properties);
-  //This probably must be added:
-  //dp.property("node_id",     boost::get(&DotVertex::name,        graphviz));
-  //dp.property("label",       boost::get(&DotVertex::label,       graphviz));
-  //dp.property("peripheries", boost::get(&DotVertex::peripheries, graphviz));
-  //dp.property("label",       boost::get(&DotEdge::label,         graphviz));
+  dp.property("label", get(boost::vertex_bundle, g));
+  dp.property("label", get(boost::edge_bundle, g));
   boost::read_graphviz(f, g, dp);
+
+
   DecodeConceptMap(g);
   return g;
 }
