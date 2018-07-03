@@ -28,7 +28,7 @@ echo $h_files
   -I../GSL/include \
   -I./CppUnits \
   -I../RibiClasses/CppXml \
-  -I../BoostGraphTutorial/BoostGraphTutorial \
+  -I../boost_graph_cookbook_1/boost_graph_cookbook_1 \
   -I/usr/include/c++/5 \
   -I/usr/include/x86_64-linux-gnu/c++/5 \
   -I/usr/include/qt4 \
