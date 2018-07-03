@@ -6,38 +6,27 @@
 #include <boost/graph/graph_traits.hpp>
 #include <boost/graph/properties.hpp>
 #include <boost/graph/graphviz.hpp>
-#include "conceptmapregex.h"
+#include "conceptmapconcept.h"
+#include "conceptmapedgewriter.h"
+#include "conceptmapexample.h"
+#include "conceptmapexamples.h"
+#include "conceptmaphelper.h"
 #include "conceptmapnode.h"
 #include "conceptmapnodewriter.h"
-#include "conceptmapconcept.h"
-#include "conceptmapexamples.h"
-#include "conceptmapexample.h"
-#include "conceptmaphelper.h"
+#include "conceptmapregex.h"
 #include "convert_dot_to_svg.h"
 #include "convert_svg_to_png.h"
-#include "fileio.h"
-#include "xml.h"
-#include "graphviz_decode.h"
-#include "graphviz_encode.h"
-#include "find_first_bundled_edge_with_my_edge.h"
-#include "bundled_edges_writer.h"
-#include "bundled_vertices_writer.h"
-#include "my_bundled_vertex.h"
-#include "graphviz_decode.h"
 #include "create_all_direct_neighbour_bundled_edges_and_vertices_subgraphs.h"
-#include "save_bundled_edges_and_vertices_graph_to_dot.h"
-#include "load_undirected_bundled_edges_and_vertices_graph_from_dot.h"
-#include "load_undirected_bundled_edges_and_vertices_graph_from_dot.h"
-#include "load_directed_bundled_edges_and_vertices_graph_from_dot.h"
+#include "fileio.h"
 #include "find_first_bundled_edge_with_my_edge.h"
 #include "find_first_bundled_vertex_with_my_vertex.h"
-//#include "remove_bundled_edges_and_vertices.h"
 #include "get_my_bundled_edge.h"
-#include "get_my_bundled_edges.h"
-#include "select_random_vertex.h"
+#include "graphviz_decode.h"
+#include "load_directed_bundled_edges_and_vertices_graph_from_dot.h"
+#include "load_undirected_bundled_edges_and_vertices_graph_from_dot.h"
 #include "save_bundled_edges_and_vertices_graph_to_dot.h"
-#include "set_my_bundled_vertex.h"
-#include "conceptmapedgewriter.h"
+#include "select_random_vertex.h"
+#include "xml.h"
 
 int ribi::cmap::CalculateComplexityExperimental(const ConceptMap& c)
 {
@@ -304,9 +293,9 @@ void ribi::cmap::DecodeConceptMap(ConceptMap& g) noexcept
   std::for_each(vip.first, vip.second,
     [&g](const VertexDescriptor vd)
     {
-      Node node = get_my_bundled_vertex(vd, g);
+      Node& node = g[vd];
       node.Decode();
-      set_my_bundled_vertex(node, vd, g);
+      g[vd] = node;
     }
   );
 
@@ -314,9 +303,9 @@ void ribi::cmap::DecodeConceptMap(ConceptMap& g) noexcept
   std::for_each(eip.first, eip.second,
     [&g](const EdgeDescriptor ed)
     {
-      Edge edge = get_my_bundled_edge(ed, g);
+      Edge& edge = g[ed];
       edge.Decode();
-      set_my_bundled_edge(edge, ed, g);
+      g[ed] = edge;
     }
   );
 }
@@ -349,9 +338,7 @@ ribi::cmap::VertexDescriptor ribi::cmap::FindCenterNode(const ConceptMap& g)
   const auto i = std::find_if(
     vip.first, vip.second,
     [g](const vd d) {
-      //const auto my_vertex_map = get(boost::vertex_bundled_type, g);
-      //return IsCenterNode(get(my_vertex_map, d));
-      return IsCenterNode(get_my_bundled_vertex(d, g));
+      return IsCenterNode(g[d]);
     }
   );
   assert(i != vip.second);
@@ -386,9 +373,7 @@ std::vector<ribi::cmap::Edge> ribi::cmap::GetEdges(const ConceptMap& c) noexcept
   std::transform(eip.first,eip.second,std::begin(v),
     [c](const EdgeDescriptor& d)
     {
-      //const auto edge_map = get(boost::edge_bundled_type, c);
-      //return get(edge_map, d);
-      return get_my_bundled_edge(d, c);
+      return c[d];
     }
   );
   return v;
@@ -445,7 +430,7 @@ ribi::cmap::Node ribi::cmap::GetFrom(const EdgeDescriptor ed, const ConceptMap& 
   return GetNode(boost::source(ed, c), c);
 }
 
-std::pair<ribi::cmap::Node, ribi::cmap::Node>
+std::pair<const ribi::cmap::Node&, const ribi::cmap::Node&>
 ribi::cmap::GetFromTo(
   const EdgeDescriptor ed, const ConceptMap& conceptmap
 )
@@ -454,20 +439,17 @@ ribi::cmap::GetFromTo(
   const VertexDescriptor vd_from = boost::source(ed, conceptmap);
   const VertexDescriptor vd_to = boost::target(ed, conceptmap);
   assert(vd_from != vd_to);
-  //const auto vertex_map = get(boost::vertex_bundled_type, conceptmap);
-  //const Node from = get(vertex_map, vd_from);
-  //const Node to = get(vertex_map, vd_to);
-  const Node from = get_my_bundled_vertex(vd_from, conceptmap);
-  const Node to = get_my_bundled_vertex(vd_to, conceptmap);
+  const Node& from = conceptmap[vd_from];
+  const Node& to = conceptmap[vd_to];
   assert(from.GetId() != to.GetId());
-  return std::make_pair(from, to);
+  return { from, to };
 }
 
-ribi::cmap::Node ribi::cmap::GetNode(
+const ribi::cmap::Node& ribi::cmap::GetNode(
   const ribi::cmap::VertexDescriptor vd, const ribi::cmap::ConceptMap& g
 ) noexcept
 {
-  return get_my_bundled_vertex(vd, g);
+  return g[vd];
 }
 
 std::vector<ribi::cmap::Node> ribi::cmap::GetNodes(const ConceptMap& c) noexcept
@@ -475,9 +457,9 @@ std::vector<ribi::cmap::Node> ribi::cmap::GetNodes(const ConceptMap& c) noexcept
   const auto vip = vertices(c);
   std::vector<Node> v(boost::num_vertices(c));
   std::transform(vip.first,vip.second,std::begin(v),
-    [c](const VertexDescriptor& d)
+    [&c](const VertexDescriptor& d)
     {
-      return get_my_bundled_vertex(d, c);
+      return c[d];
     }
   );
   return v;
@@ -568,7 +550,6 @@ ribi::cmap::ConceptMap ribi::cmap::LoadFromFile(const std::string& dot_filename)
     throw std::invalid_argument(msg.str());
   }
   std::ifstream f(dot_filename);
-  //auto g = create_empty_undirected_bundled_edges_and_vertices_graph();
   ConceptMap g;
   boost::dynamic_properties dp(boost::ignore_other_properties);
   dp.property("label", get(boost::vertex_bundle, g));
@@ -634,12 +615,12 @@ void ribi::cmap::SaveSummaryToFile(const ConceptMap& g, const std::string& dot_f
   boost::write_graphviz(f, g,
     [g](std::ostream& out, const VertexDescriptor& vd) {
       out << "[label=\""
-        << get_my_bundled_vertex(vd, g).GetConcept().GetName()
+        << GetName(g[vd].GetConcept())
         << "\"]"
       ;
     },
     [g](std::ostream& out, const EdgeDescriptor& ed) {
-      const auto edge = get_my_bundled_edge(ed, g);
+      const auto& edge = g[ed];
       out << "[label=\""
         << edge.GetNode().GetConcept().GetName()
         << "\", "

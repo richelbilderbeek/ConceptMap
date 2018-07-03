@@ -77,9 +77,9 @@ Node GetFrom(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
 
 ///Obtain the source/from and target/to of an edge
 ///Checks if from != to
-std::pair<Node, Node> GetFromTo(const EdgeDescriptor ed, const ConceptMap& c);
+std::pair<const Node&, const Node&> GetFromTo(const EdgeDescriptor ed, const ConceptMap& c);
 
-Node GetNode(const VertexDescriptor vd, const ConceptMap& c) noexcept;
+const Node& GetNode(const VertexDescriptor vd, const ConceptMap& c) noexcept;
 
 Node GetTo(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
 Node GetTo(const Edge& edge, const ConceptMap& c);
