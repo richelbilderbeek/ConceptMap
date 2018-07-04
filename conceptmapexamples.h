@@ -15,7 +15,6 @@ namespace cmap {
 
 ///Container of Example instances
 ///Examples is displayed by
-/// - ?QtExamplesItem: a QGraphicsItem, to be used in a QGraphicsView
 /// - QtExamplesDialog: a QDialog
 struct Examples
 {
