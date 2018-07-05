@@ -13,13 +13,15 @@ ribi::cmap::NodeType ribi::cmap::ToNodeType(const std::string& s)
 
 std::string ribi::cmap::ToStr(const NodeType t) noexcept
 {
-  switch (t)
+  if (t == NodeType::center)
   {
-    case NodeType::center: return "center";
-    case NodeType::normal: return "normal";
+    return "center";
   }
-  assert(!"Should not get here"); //!OCLINT accepted idiom
-  return "";
+  else
+  {
+    assert(t == NodeType::normal);
+    return "normal";
+  }
 }
 
 std::ostream& ribi::cmap::operator<<(std::ostream& os, const NodeType t) noexcept
