@@ -17,11 +17,8 @@ std::string ribi::cmap::ToStr(const NodeType t) noexcept
   {
     return "center";
   }
-  else
-  {
-    assert(t == NodeType::normal);
-    return "normal";
-  }
+  assert(t == NodeType::normal);
+  return "normal";
 }
 
 std::ostream& ribi::cmap::operator<<(std::ostream& os, const NodeType t) noexcept
