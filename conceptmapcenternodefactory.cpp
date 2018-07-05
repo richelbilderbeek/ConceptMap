@@ -46,7 +46,7 @@ ribi::cmap::Node ribi::cmap::CenterNodeFactory::Create(
   assert(concept == node.GetConcept());
   assert(node.GetX() == x);
   assert(node.GetY() == y);
-  assert(node.GetType());
+  assert(node.GetType() == NodeType::center);
   assert(node.GetConcept().GetExamples().Get().empty());
   return node;
 }
@@ -66,7 +66,7 @@ ribi::cmap::Node ribi::cmap::CenterNodeFactory::CreateFromStrings(
   );
   assert(node.GetX() == x);
   assert(node.GetY() == y);
-  assert(node.GetType());
+  assert(node.GetType() == NodeType::center);
   assert(node.GetConcept().GetExamples().Get().empty());
   return node;
 }
