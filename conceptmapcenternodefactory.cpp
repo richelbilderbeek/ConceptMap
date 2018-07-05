@@ -23,7 +23,7 @@ ribi::cmap::Node ribi::cmap::CenterNodeFactory::Create() const noexcept
 {
   Node node(
     ConceptFactory().Create(),
-    true, //is_center_node
+    NodeType::center,
     0.0, //x
     0.0  //y
   );
@@ -39,14 +39,14 @@ ribi::cmap::Node ribi::cmap::CenterNodeFactory::Create(
 {
   Node node(
     concept,
-    true, //is_center_node
+    NodeType::center,
     x,
     y
   );
   assert(concept == node.GetConcept());
   assert(node.GetX() == x);
   assert(node.GetY() == y);
-  assert(node.IsCenterNode());
+  assert(node.GetType());
   assert(node.GetConcept().GetExamples().Get().empty());
   return node;
 }
@@ -60,13 +60,13 @@ ribi::cmap::Node ribi::cmap::CenterNodeFactory::CreateFromStrings(
 {
   Node node(
     ConceptFactory().Create(name,examples),
-    true,
+    NodeType::center,
     x,
     y
   );
   assert(node.GetX() == x);
   assert(node.GetY() == y);
-  assert(node.IsCenterNode());
+  assert(node.GetType());
   assert(node.GetConcept().GetExamples().Get().empty());
   return node;
 }
@@ -74,7 +74,7 @@ ribi::cmap::Node ribi::cmap::CenterNodeFactory::CreateFromStrings(
 ribi::cmap::Node ribi::cmap::CenterNodeFactory::GetNasty0() const noexcept
 {
   auto node = NodeFactory().GetNasty0();
-  node.SetIsCenterNode(true);
+  node.SetType(NodeType::center);
   assert(node.GetConcept().GetExamples().Get().empty());
   return node;
 }
@@ -94,7 +94,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::CenterNodeFactory::GetTests() const no
   auto v = NodeFactory().GetTests();
   for (Node& node: v)
   {
-    node.SetIsCenterNode(true);
+    node.SetType(NodeType::center);
     //A center node does not have examples
     node.GetConcept().GetExamples().Get().clear();
   }
@@ -106,7 +106,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::CenterNodeFactory::GetNastyTests() con
   auto v = NodeFactory().GetNastyTests();
   for (Node& node: v)
   {
-    node.SetIsCenterNode(true);
+    node.SetType(NodeType::center);
 
     //A center node does not have examples
     node.GetConcept().GetExamples().Get().clear();
@@ -117,7 +117,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::CenterNodeFactory::GetNastyTests() con
 ribi::cmap::Node ribi::cmap::CenterNodeFactory::GetTest(const int test_index) const noexcept
 {
   auto node = NodeFactory().GetTest(test_index);
-  node.SetIsCenterNode(true);
+  node.SetType(NodeType::center);
 
   //A center node does not have examples
   node.GetConcept().GetExamples().Get().clear();
@@ -128,7 +128,7 @@ ribi::cmap::Node ribi::cmap::CenterNodeFactory::GetTest(const int test_index) co
 ribi::cmap::Node ribi::cmap::CenterNodeFactory::GetNastyTest(const int test_index) const noexcept
 {
   auto node = NodeFactory().GetNastyTest(test_index);
-  node.SetIsCenterNode(true);
+  node.SetType(NodeType::center);
 
   //A center node does not have examples
   node.GetConcept().GetExamples().Get().clear();

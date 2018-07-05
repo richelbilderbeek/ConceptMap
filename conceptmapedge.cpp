@@ -199,9 +199,10 @@ ribi::cmap::Edge ribi::cmap::XmlToEdge(
     assert(v.size() == 1);
     y = boost::lexical_cast<double>(StripXmlTag(v[0]));
   }
+  //Node at middle of edge is never a center immutable node
   Node node(
     ExtractConceptFromXml(s),
-    false, //is_center_node
+    NodeType::normal,
     x,
     y
   );

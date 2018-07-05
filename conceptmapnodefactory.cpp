@@ -26,10 +26,9 @@ ribi::cmap::Node ribi::cmap::NodeFactory::CreateFromStrings(
   const double y
 ) const noexcept
 {
-  const bool is_center_node{false};
   Node node(
     ConceptFactory().Create(name,examples),
-    is_center_node,
+    NodeType::normal,
     x,
     y
   );
@@ -58,7 +57,7 @@ ribi::cmap::Node ribi::cmap::NodeFactory::GetNasty0() const noexcept
 {
   return Node(
     ConceptFactory().GetNasty0(),
-    false,
+    NodeType::normal,
     1.2,
     3.4
   );
@@ -68,7 +67,7 @@ ribi::cmap::Node ribi::cmap::NodeFactory::GetNasty1() const noexcept
 {
   return Node(
     ConceptFactory().GetNasty1(),
-    false,
+    NodeType::normal,
     -1.2,
     3.4
   );
@@ -78,7 +77,7 @@ ribi::cmap::Node ribi::cmap::NodeFactory::GetNasty2() const noexcept
 {
   return Node(
     ConceptFactory().GetNasty2(),
-    false,
+    NodeType::normal,
     -1.2,
     -3.4
   );
@@ -101,7 +100,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::NodeFactory::GetNastyTests() const noe
     {
       const double x{1.2};
       const double y{3.4};
-      const Node p{c,false,x,y};
+      const Node p{c, NodeType::normal, x, y};
       return p;
     }
   );
@@ -110,14 +109,17 @@ std::vector<ribi::cmap::Node> ribi::cmap::NodeFactory::GetNastyTests() const noe
 
 std::vector<ribi::cmap::Node> ribi::cmap::NodeFactory::GetTests() const noexcept
 {
-  std::vector<Node> nodes;
   const auto v = ConceptFactory().GetTests();
-  std::transform(v.begin(),v.end(),std::back_inserter(nodes),
+  std::vector<Node> nodes;
+  std::transform(
+    std::begin(v),
+    std::end(v),
+    std::back_inserter(nodes),
     [](const Concept& c)
     {
       const double x{1.2};
       const double y{3.4};
-      const Node p{c,false,x,y};
+      const Node p{c, NodeType::normal, x, y};
       return p;
     }
   );

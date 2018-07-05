@@ -28,13 +28,13 @@ int ribi::cmap::Node::sm_ids = 0; //!OCLINT use static to track instances
 
 ribi::cmap::Node::Node(
   const Concept& concept,
-  const bool is_center_node,
+  const NodeType type,
   const double x,
   const double y
 ) noexcept
   : m_concept{concept},
     m_id{sm_ids++},
-    m_is_center_node{is_center_node},
+    m_type{type},
     m_x(x),
     m_y(y)
 {
@@ -52,7 +52,7 @@ int ribi::cmap::CountCenterNodes(const std::vector<Node>& nodes) noexcept
   );
 }
 
-bool ribi::cmap::ExtractIsCenterNodeFromXml(const std::string& s)
+ribi::cmap::NodeType ribi::cmap::ExtractIsCenterNodeFromXml(const std::string& s)
 {
   const std::vector<std::string> v
     = Regex().GetRegexMatches(s,Regex().GetRegexIsCenterNode());
@@ -62,7 +62,8 @@ bool ribi::cmap::ExtractIsCenterNodeFromXml(const std::string& s)
     msg << __func__ << ": must have one center node tag in XML";
     throw std::invalid_argument(msg.str());
   }
-  return boost::lexical_cast<bool>(ribi::xml::StripXmlTag(v[0]));
+  //return boost::lexical_cast<bool>(ribi::xml::StripXmlTag(v[0]));
+  return ToNodeType(ribi::xml::StripXmlTag(v[0]));
 }
 
 double ribi::cmap::ExtractXfromXml(const std::string& s)
@@ -110,7 +111,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::Node::GetTests() noexcept
     {
       const int x = (std::rand() % 256) - 128;
       const int y = (std::rand() % 256) - 128;
-      Node node(concept,x,y);
+      Node node(concept, NodeType::normal, x, y);
       result.push_back(node);
     }
   );
@@ -201,7 +202,7 @@ bool ribi::cmap::HasSimilarData(
 
 bool ribi::cmap::IsCenterNode(const Node& node) noexcept
 {
-  return node.IsCenterNode();
+  return node.GetType() == NodeType::center;
 }
 
 void ribi::cmap::Move(Node& node, const double dx, const double dy)
@@ -255,7 +256,7 @@ std::string ribi::cmap::ToXml(const Node& node) noexcept
   s << ToXml(node.GetConcept());
   s << "<x>" << node.GetX() << "</x>";
   s << "<y>" << node.GetY() << "</y>";
-  s << "<is_center_node>" << node.IsCenterNode() << "</is_center_node>";
+  s << "<is_center_node>" << node.GetType() << "</is_center_node>";
   s << "</node>";
   const std::string r = s.str();
   assert(r.size() >= 13);

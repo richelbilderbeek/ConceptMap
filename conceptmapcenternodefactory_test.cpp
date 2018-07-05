@@ -7,7 +7,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_center_node_factory_must_construct_center_
 {
   using namespace ribi::cmap;
   const auto node = CenterNodeFactory().Create();
-  BOOST_CHECK(node.IsCenterNode());
+  BOOST_CHECK(IsCenterNode(node));
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_center_node_factory_must_construct_center_nodes_from_concept)
@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_center_node_factory_must_construct_center_
   const double x{0.1};
   const double y{2.3};
   const auto node = CenterNodeFactory().Create(concept,x,y);
-  BOOST_CHECK(node.IsCenterNode());
+  BOOST_CHECK(IsCenterNode(node));
   BOOST_CHECK(concept == node.GetConcept());
   BOOST_CHECK(node.GetX() == x);
   BOOST_CHECK(node.GetY() == y);
@@ -33,10 +33,9 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_center_node_factory_must_construct_center_
     "<examples></examples><concept_is_complex>0</concept_is_complex>"
     "<complexity>0</complexity><concreteness>1</concreteness>"
     "<specificity>2</specificity></concept><x>0.1</x><y>2.3</y>"
-    "<is_center_node>1</is_center_node></node>"
+    "<is_center_node>center</is_center_node></node>"
   ;
   const auto node = XmlToNode(xml);
-  BOOST_CHECK(node.IsCenterNode());
   BOOST_CHECK(IsCenterNode(node));
 }
 

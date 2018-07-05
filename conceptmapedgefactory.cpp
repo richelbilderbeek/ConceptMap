@@ -33,10 +33,9 @@ ribi::cmap::Edge ribi::cmap::EdgeFactory::Create(
   const double x{(from.GetX() + to.GetX()) / 2.0};
   const double y{(from.GetY() + to.GetY()) / 2.0};
   const auto concept = ConceptFactory().Create();
-  const Node node(concept,x,y);
-  Edge p(
-    node
-  );
+  //Node at the middle of an edge is a normal node
+  const Node node(concept, NodeType::normal, x, y);
+  Edge p(node);
   return p;
 }
 

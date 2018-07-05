@@ -244,7 +244,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLonelyQtCenterNode() co
   ConceptMap g;
   AddVertex(
     Node(Concept("center"),
-    true, 100, 200), g);
+    NodeType::center, 100, 200), g);
   return g;
 }
 
@@ -273,16 +273,16 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetThreeNodeTwoEdge() cons
 {
   ConceptMap g;
   //These coordinats are tested as such
-  const auto vd_1 = AddVertex(Node(Concept("center"), true, 100, 200), g);
-  const auto vd_2 = AddVertex(Node(Concept("one"), false, 300, 250), g);
-  const auto vd_3 = AddVertex(Node(Concept("two"), false, 500, 350), g);
+  const auto vd_1 = AddVertex(Node(Concept("center"), NodeType::center, 100, 200), g);
+  const auto vd_2 = AddVertex(Node(Concept("one"), NodeType::normal, 300, 250), g);
+  const auto vd_3 = AddVertex(Node(Concept("two"), NodeType::normal, 500, 350), g);
 
   AddEdge(Edge(Node(Concept("first",
     Examples( { Example("erster"), Example("premier") } )),
-    false, 150, 225)), vd_1, vd_2, g);
+    NodeType::normal, 150, 225)), vd_1, vd_2, g);
   AddEdge(Edge(Node(Concept("second",
     Examples( { Example("zweite"), Example("deuxieme") } )),
-    false, 350, 275)), vd_2, vd_3, g);
+    NodeType::normal, 350, 275)), vd_2, vd_3, g);
 
   return g;
 }
@@ -293,19 +293,19 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetThreeNodeTwoEdgeNoCente
   //These coordinats are tested as such
   const auto vd_1 = AddVertex(
     Node(Concept("one", Examples( { Example("unos"), Example("een") } )),
-    false, 100, 200), g);
+    NodeType::normal, 100, 200), g);
   const auto vd_2 = AddVertex(
     Node(Concept("two", Examples( { Example("Zwei"), Example("twee") } )),
-    false, 300, 250), g);
+    NodeType::normal, 300, 250), g);
   const auto vd_3 = AddVertex(
     Node(Concept("three", Examples( { Example("drie"), Example("Drei") } )),
-    false, 500, 350), g);
+    NodeType::normal, 500, 350), g);
   AddEdge(Edge(Node(Concept("first",
     Examples( { Example("erster"), Example("premier") } )),
-    false, 150, 225)), vd_1, vd_2, g);
+    NodeType::normal, 150, 225)), vd_1, vd_2, g);
   AddEdge(Edge(Node(Concept("second",
     Examples( { Example("zweite"), Example("deuxieme") } )),
-    false, 350, 275)), vd_2, vd_3, g);
+    NodeType::normal, 350, 275)), vd_2, vd_3, g);
   return g;
 }
 
@@ -316,11 +316,11 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeOneEdge() const 
   //These coordinats are tested as such
   const auto vd_1 = AddVertex(
     Node(Concept("center"),
-    true, 100, 200), g);
+    NodeType::center, 100, 200), g);
   const auto vd_2 = AddVertex(
     Node(Concept("one", Examples( { Example("unos"), Example("een") } )),
-    false, 300, 250), g);
-  AddEdge(Edge(Node(Concept( "first"), false, 150, 225)), vd_1, vd_2, g);
+    NodeType::center, 300, 250), g);
+  AddEdge(Edge(Node(Concept( "first"), NodeType::normal, 150, 225)), vd_1, vd_2, g);
   return g;
 }
 
@@ -330,12 +330,13 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeOneEdgeNoCenter(
   //These coordinats are tested as such
   const auto vd_2 = AddVertex(
     Node(Concept("one", Examples( { Example("unos"), Example("een") } )),
-    false, 300, 250), g);
+    NodeType::normal, 300, 250), g);
   const auto vd_3 = AddVertex(
     Node(Concept("two", Examples( { Example("Zwei"), Example("twee") } )),
-    false, 500, 350), g);
+    NodeType::normal, 500, 350), g);
   AddEdge(Edge(Node(Concept("second",
-    Examples( { Example("zweite"), Example("deuxieme") } )), false, 350, 275)), vd_2, vd_3, g);
+    Examples( { Example("zweite"), Example("deuxieme") } )),
+    NodeType::normal, 350, 275)), vd_2, vd_3, g);
   return g;
 }
 

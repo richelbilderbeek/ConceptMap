@@ -7,6 +7,7 @@
 #pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include "conceptmapfwd.h"
 #include "conceptmapconcept.h"
+#include "conceptmapnodetype.h"
 #pragma GCC diagnostic pop
 
 namespace ribi {
@@ -20,7 +21,7 @@ struct Node
 {
   explicit Node(
     const Concept& concept = Concept(),
-    const bool is_center_node = false,
+    const NodeType node_type = NodeType::normal,
     const double x = 0.0,
     const double y = 0.0
   ) noexcept;
@@ -46,12 +47,12 @@ struct Node
   ///Get the y coordinat
   auto GetY() const noexcept { return m_y; }
 
-  bool IsCenterNode() const noexcept { return m_is_center_node; }
+  NodeType GetType() const noexcept { return m_type; }
 
   ///Set the concept
   void SetConcept(const Concept& concept) noexcept;
 
-  void SetIsCenterNode(const bool is_center_node) noexcept { m_is_center_node = is_center_node; }
+  void SetType(const NodeType type) noexcept { m_type = type; }
 
   ///Set the position
   void SetPos(const double x, const double y) noexcept { SetX(x); SetY(y); }
@@ -76,7 +77,7 @@ struct Node
 
   int m_id; // Unique ID
 
-  bool m_is_center_node;
+  NodeType m_type;
 
   ///The x-coordinat
   double m_x;
@@ -93,7 +94,7 @@ struct Node
 int CountCenterNodes(const std::vector<Node>& nodes) noexcept;
 
 
-bool ExtractIsCenterNodeFromXml(const std::string& s);
+NodeType ExtractIsCenterNodeFromXml(const std::string& s);
 double ExtractXfromXml(const std::string& s);
 double ExtractYfromXml(const std::string& s);
 
