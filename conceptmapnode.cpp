@@ -256,7 +256,7 @@ std::string ribi::cmap::ToXml(const Node& node) noexcept
   s << ToXml(node.GetConcept());
   s << "<x>" << node.GetX() << "</x>";
   s << "<y>" << node.GetY() << "</y>";
-  s << "<is_center_node>" << node.GetType() << "</is_center_node>";
+  s << "<type>" << node.GetType() << "</type>";
   s << "</node>";
   const std::string r = s.str();
   assert(r.size() >= 13);

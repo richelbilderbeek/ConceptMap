@@ -33,7 +33,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_center_node_factory_must_construct_center_
     "<examples></examples><concept_is_complex>0</concept_is_complex>"
     "<complexity>0</complexity><concreteness>1</concreteness>"
     "<specificity>2</specificity></concept><x>0.1</x><y>2.3</y>"
-    "<is_center_node>center</is_center_node></node>"
+    "<type>center</type></node>"
   ;
   const auto node = XmlToNode(xml);
   BOOST_CHECK(IsCenterNode(node));

@@ -61,7 +61,7 @@ std::string ribi::cmap::Regex::GetRegexHasTail() const noexcept
 
 std::string ribi::cmap::Regex::GetRegexIsCenterNode() const noexcept
 {
-  return "(<is_center_node>.*?</is_center_node>)";
+  return "(<type>.*?</type>)";
 }
 
 std::string ribi::cmap::Regex::GetRegexIsComplex() const noexcept
