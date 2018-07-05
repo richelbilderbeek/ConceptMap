@@ -315,11 +315,10 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeOneEdge() const 
   ConceptMap g;
   //These coordinats are tested as such
   const auto vd_1 = AddVertex(
-    Node(Concept("center"),
-    NodeType::center, 100, 200), g);
+    Node(Concept("center"), NodeType::center, 100, 200), g);
   const auto vd_2 = AddVertex(
     Node(Concept("one", Examples( { Example("unos"), Example("een") } )),
-    NodeType::center, 300, 250), g);
+    NodeType::normal, 300, 250), g);
   AddEdge(Edge(Node(Concept( "first"), NodeType::normal, 150, 225)), vd_1, vd_2, g);
   return g;
 }
