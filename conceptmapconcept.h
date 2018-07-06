@@ -156,6 +156,18 @@ bool HasExamples(const Concept& concept) noexcept;
 
 bool IsComplex(const Concept& concept) noexcept;
 
+///Set the rating of this Concept for complexity
+///-1: not rated, 0: lowest, 2: highest
+void SetRatingComplexity(Concept& concept, const int rating_complexity);
+
+///Set the rating of this Concept for concreteness
+///-1: not rated, 0: lowest, 2: highest
+void SetRatingConcreteness(Concept& concept, const int rating_concreteness);
+
+///Set the rating of this Concept for specificity
+///-1: not rated, 0: lowest, 2: highest
+void SetRatingSpecificity(Concept& concept, const int rating_specificity);
+
 ///Set the name/text of a concept
 void SetText(Concept& concept, const std::string& text);
 

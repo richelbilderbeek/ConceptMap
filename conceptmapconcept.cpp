@@ -221,6 +221,14 @@ void ribi::cmap::Concept::SetRatingComplexity(const int rating_complexity)
   Ensures(m_rating_complexity <=  2); //!OCLINT not a double negative in practice
 }
 
+void ribi::cmap::SetRatingComplexity(
+  Concept& concept,
+  const int rating_complexity
+)
+{
+  concept.SetRatingComplexity(rating_complexity);
+}
+
 void ribi::cmap::Concept::SetRatingConcreteness(const int rating_concreteness)
 {
   if (rating_concreteness < -1 || rating_concreteness > 2)
@@ -234,6 +242,14 @@ void ribi::cmap::Concept::SetRatingConcreteness(const int rating_concreteness)
   Ensures(m_rating_concreteness <=  2); //!OCLINT not a double negative in practice
 }
 
+void ribi::cmap::SetRatingConcreteness(
+  Concept& concept,
+  const int rating_concreteness
+)
+{
+  concept.SetRatingConcreteness(rating_concreteness);
+}
+
 void ribi::cmap::Concept::SetRatingSpecificity(const int rating_specificity)
 {
   if (rating_specificity < -1 || rating_specificity > 2)
@@ -245,6 +261,14 @@ void ribi::cmap::Concept::SetRatingSpecificity(const int rating_specificity)
   m_rating_specificity = rating_specificity;
   Ensures(m_rating_specificity >= -1); //!OCLINT not a double negative in practice
   Ensures(m_rating_specificity <=  2); //!OCLINT not a double negative in practice
+}
+
+void ribi::cmap::SetRatingSpecificity(
+  Concept& concept,
+  const int rating_specificity
+)
+{
+  concept.SetRatingSpecificity(rating_specificity);
 }
 
 void ribi::cmap::SetText(Concept& concept, const std::string& text)

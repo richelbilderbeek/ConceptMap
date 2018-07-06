@@ -226,6 +226,30 @@ void ribi::cmap::SetConcept(Node& node, const Concept& concept)
   node.SetConcept(concept);
 }
 
+void ribi::cmap::SetRatingComplexity(
+  Node& node,
+  const int rating_complexity
+)
+{
+  SetRatingComplexity(node.GetConcept(), rating_complexity);
+}
+
+void ribi::cmap::SetRatingConcreteness(
+  Node& node,
+  const int rating_concreteness
+)
+{
+  SetRatingConcreteness(node.GetConcept(), rating_concreteness);
+}
+
+void ribi::cmap::SetRatingSpecificity(
+  Node& node,
+  const int rating_specificity
+)
+{
+  SetRatingSpecificity(node.GetConcept(), rating_specificity);
+}
+
 void ribi::cmap::SetText(Node& node, const std::string& text)
 {
   SetText(node.GetConcept(), text);

@@ -115,7 +115,6 @@ inline auto GetX(const Node& node) noexcept { return node.GetX(); }
 inline auto GetY(const Node& node) noexcept { return node.GetY(); }
 
 bool HasExamples(const Node& node) noexcept;
-bool NodeHasExamples(const Node& node) noexcept;
 
 ///Checks if the Concepts are the same
 bool HasSameContent(const Node& lhs, const Node& rhs) noexcept;
@@ -148,8 +147,22 @@ bool HaveSameIds(const Node& lhs, const Node& rhs) noexcept;
 ///Move a Node relatively
 void Move(Node& node, const double dx, const double dy);
 
+bool NodeHasExamples(const Node& node) noexcept;
+
 ///Set the Concept of the Node
 void SetConcept(Node& node, const Concept& concept);
+
+///Set the rating of this Node for complexity
+///-1: not rated, 0: lowest, 2: highest
+void SetRatingComplexity(Node& node, const int rating_complexity);
+
+///Set the rating of this Node for concreteness
+///-1: not rated, 0: lowest, 2: highest
+void SetRatingConcreteness(Node& node, const int rating_concreteness);
+
+///Set the rating of this Node for specificity
+///-1: not rated, 0: lowest, 2: highest
+void SetRatingSpecificity(Node& node, const int rating_specificity);
 
 ///Set the name/text of the Node
 void SetText(Node& node, const std::string& text);
