@@ -33,6 +33,9 @@ private:
   std::vector<Example> m_v;
 };
 
+/// Count the number of examples
+int CountExamples(const Examples& examples) noexcept;
+
 bool IsEmpty(const Examples& examples) noexcept;
 
 std::string ToXml(const Examples& node) noexcept;
