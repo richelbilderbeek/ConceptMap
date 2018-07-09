@@ -112,6 +112,9 @@ struct Concept
   int m_rating_specificity;
 };
 
+///Collect the texts of all examples
+std::vector<std::string> CollectExamplesTexts(const Concept& concept) noexcept;
+
 ///Count the number of examples
 int CountExamples(const Concept& concept) noexcept;
 

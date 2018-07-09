@@ -33,6 +33,9 @@ private:
   std::vector<Example> m_v;
 };
 
+///Collect the texts of all examples
+std::vector<std::string> CollectTexts(const Examples& examples) noexcept;
+
 /// Count the number of examples
 int CountExamples(const Examples& examples) noexcept;
 

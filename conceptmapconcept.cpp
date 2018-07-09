@@ -44,6 +44,11 @@ ribi::cmap::Concept::Concept(
   }
 }
 
+std::vector<std::string> ribi::cmap::CollectExamplesTexts(const Concept& concept) noexcept
+{
+  return CollectTexts(GetExamples(concept));
+}
+
 int ribi::cmap::CountExamples(const Concept& concept) noexcept
 {
   return CountExamples(concept.GetExamples());

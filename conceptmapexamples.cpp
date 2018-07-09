@@ -26,6 +26,16 @@ ribi::cmap::Examples::Examples(
 
 }
 
+std::vector<std::string> ribi::cmap::CollectTexts(const Examples& examples) noexcept
+{
+  std::vector<std::string> texts;
+  for (const auto& example: examples.Get())
+  {
+    texts.push_back(example.GetText());
+  }
+  return texts;
+}
+
 int ribi::cmap::CountExamples(const Examples& examples) noexcept
 {
   return examples.Get().size();
