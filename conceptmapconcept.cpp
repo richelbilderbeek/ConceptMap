@@ -1,6 +1,3 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #include "conceptmapconcept.h"
 
 #include <sstream>
@@ -17,7 +14,6 @@
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"
 #include "xml.h"
-#pragma GCC diagnostic pop
 
 ribi::cmap::Concept::Concept(
   const std::string& name,
