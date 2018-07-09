@@ -48,6 +48,11 @@ ribi::cmap::Concept::Concept(
   }
 }
 
+int ribi::cmap::CountExamples(const Concept& concept) noexcept
+{
+  return CountExamples(concept.GetExamples());
+}
+
 void ribi::cmap::Concept::Decode() noexcept
 {
   m_name = graphviz_decode(m_name);

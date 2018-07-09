@@ -42,6 +42,11 @@ ribi::cmap::Edge::~Edge() noexcept
 
 }
 
+int ribi::cmap::CountExamples(const Edge& edge) noexcept
+{
+  return CountExamples(edge.GetNode());
+}
+
 const ribi::cmap::Concept& ribi::cmap::GetConcept(const Edge& edge) noexcept
 {
   return GetConcept(edge.GetNode());

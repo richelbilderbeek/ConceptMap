@@ -93,6 +93,8 @@ struct Node
 ///Count the number of CenterNodes
 int CountCenterNodes(const std::vector<Node>& nodes) noexcept;
 
+/// Count the number of examples
+int CountExamples(const Node& node) noexcept;
 
 NodeType ExtractIsCenterNodeFromXml(const std::string& s);
 double ExtractXfromXml(const std::string& s);

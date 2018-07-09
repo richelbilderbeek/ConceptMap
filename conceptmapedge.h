@@ -67,6 +67,9 @@ struct Edge
   static int sm_ids; //!OCLINT Easiest to track instances by static
 };
 
+/// Count the number of examples on the edge's concept
+int CountExamples(const Edge& edge) noexcept;
+
 const Concept& GetConcept(const Edge& edge) noexcept;
 
 std::string GetText(const Edge& edge) noexcept;

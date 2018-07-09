@@ -52,6 +52,11 @@ int ribi::cmap::CountCenterNodes(const std::vector<Node>& nodes) noexcept
   );
 }
 
+int ribi::cmap::CountExamples(const Node& node) noexcept
+{
+  return CountExamples(node.GetConcept());
+}
+
 ribi::cmap::NodeType ribi::cmap::ExtractIsCenterNodeFromXml(const std::string& s)
 {
   const std::vector<std::string> v

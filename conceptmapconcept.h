@@ -117,10 +117,9 @@ struct Concept
   int m_rating_specificity;
 };
 
-std::string ToXml(const Concept& concept) noexcept;
+///Count the number of examples
+int CountExamples(const Concept& concept) noexcept;
 
-///Strict version of ExtractConceptFromXml
-Concept XmlToConcept(const std::string& s);
 ///Loose version of XmlToConcept
 Concept ExtractConceptFromXml(const std::string& s);
 
@@ -170,6 +169,11 @@ void SetRatingSpecificity(Concept& concept, const int rating_specificity);
 
 ///Set the name/text of a concept
 void SetText(Concept& concept, const std::string& text);
+
+std::string ToXml(const Concept& concept) noexcept;
+
+///Strict version of ExtractConceptFromXml
+Concept XmlToConcept(const std::string& s);
 
 std::ostream& operator<<(std::ostream& os, const Concept& concept) noexcept;
 std::istream& operator>>(std::istream& is, Concept& concept);

@@ -106,7 +106,7 @@ int ribi::cmap::CalculateConcretenessEstimated(const ConceptMap& c)
     std::begin(nodes), std::end(nodes), 0,
     [](int& init, const Node& node)
     {
-      return init + CountExamples(node.GetConcept().GetExamples());
+      return init + CountExamples(node);
     }
   );
 
@@ -116,7 +116,7 @@ int ribi::cmap::CalculateConcretenessEstimated(const ConceptMap& c)
     std::begin(edges),std::end(edges), 0,
     [](int& init, const Edge& edge)
     {
-      return init + CountExamples(edge.GetNode().GetConcept().GetExamples());
+      return init + CountExamples(edge);
     }
   );
 
