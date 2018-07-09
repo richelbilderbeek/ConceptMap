@@ -4,13 +4,8 @@
 #include <string>
 #include <vector>
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
 #include <boost/bimap.hpp>
 #include "conceptmapcompetency.h"
-#pragma GCC diagnostic pop
 
 namespace ribi {
 namespace cmap {
