@@ -280,6 +280,20 @@ int ribi::cmap::CountCenterNodes(const ConceptMap& c) noexcept
   return CountCenterNodes(GetNodes(c));
 }
 
+int ribi::cmap::CountExamples(const ConceptMap& c) noexcept
+{
+  int n_examples = 0;
+  for (const auto& n: GetNodes(c))
+  {
+    n_examples += CountExamples(n);
+  }
+  for (const auto& e: GetEdges(c))
+  {
+    n_examples += CountExamples(e);
+  }
+  return n_examples;
+}
+
 std::vector<ribi::cmap::ConceptMap>
 ribi::cmap::CreateDirectNeighbourConceptMaps(const ConceptMap& c)
 {

@@ -49,6 +49,9 @@ std::vector<Competency> CollectCompetenies(const ConceptMap& c) noexcept;
 /// that may have the center node excluded.
 int CountCenterNodes(const ConceptMap& c) noexcept;
 
+///Count the total number of examples, on both Edges and Nodes
+int CountExamples(const ConceptMap& c) noexcept;
+
 ///Create a concept map of only the vertex and its direct neighbours itself.
 ///Use CreateDirectNeighbourConceptMaps to create all sub-conceptmaps.
 ConceptMap CreateDirectNeighbourConceptMap(const VertexDescriptor vd, const ConceptMap& c);
