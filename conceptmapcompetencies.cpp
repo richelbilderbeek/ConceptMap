@@ -41,7 +41,7 @@ ribi::cmap::CreateMapDutch() noexcept
 {
   boost::bimap<Competency,std::string> m;
   m.insert(boost::bimap<Competency,std::string>::value_type(
-    Competency::uninitialized,"[Ongeinitialiseerd]"));
+    Competency::uninitialized,"Ongeinitialiseerd"));
   m.insert(boost::bimap<Competency,std::string>::value_type(
     Competency::profession,"Kennis van het beroepsdomein"));
   m.insert(boost::bimap<Competency,std::string>::value_type(
