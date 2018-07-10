@@ -6,6 +6,11 @@ std::string ribi::cmap::CompetencyToStr(const Competency competency) noexcept
   return Competencies().ToStr(competency);
 }
 
+std::string ribi::cmap::CompetencyToStrDutch(const Competency competency) noexcept
+{
+  return Competencies().ToStrDutch(competency);
+}
+
 ribi::cmap::Competency ribi::cmap::StrToCompetency(const std::string s)
 {
   return Competencies().ToType(s);

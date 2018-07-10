@@ -20,6 +20,7 @@ enum class Competency
 };
 
 std::string CompetencyToStr(const Competency competency) noexcept;
+std::string CompetencyToStrDutch(const Competency competency) noexcept;
 Competency StrToCompetency(const std::string s);
 std::ostream& operator<<(std::ostream& os, const Competency competency);
 
