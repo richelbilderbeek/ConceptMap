@@ -42,6 +42,12 @@ ribi::cmap::Edge::~Edge() noexcept
 
 }
 
+std::vector<std::string> ribi::cmap::CollectExamplesTexts(const Edge& edge) noexcept
+{
+  return CollectExamplesTexts(edge.GetNode());
+}
+
+
 int ribi::cmap::CountExamples(const Edge& edge) noexcept
 {
   return CountExamples(edge.GetNode());

@@ -90,6 +90,9 @@ struct Node
   //friend bool HaveSameIds(const Node& lhs, const Node& rhs) noexcept;
 };
 
+///Collect the texts of all examples
+std::vector<std::string> CollectExamplesTexts(const Node& node) noexcept;
+
 ///Count the number of CenterNodes
 int CountCenterNodes(const std::vector<Node>& nodes) noexcept;
 

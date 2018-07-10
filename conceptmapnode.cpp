@@ -42,6 +42,11 @@ ribi::cmap::Node::Node(
   assert(m_concept == concept);
 }
 
+std::vector<std::string> ribi::cmap::CollectExamplesTexts(const Node& node) noexcept
+{
+  return CollectExamplesTexts(node.GetConcept());
+}
+
 int ribi::cmap::CountCenterNodes(const std::vector<Node>& nodes) noexcept
 {
   return container().CountIf(nodes,
