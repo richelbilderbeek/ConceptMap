@@ -131,24 +131,30 @@ ribi::cmap::Concept ribi::cmap::ConceptFactory::GetNasty2() const noexcept
     {
       {
         "Example I/IV,spanning (n > 1) lines  (that is, having at least "
-        "eighty characters) and is rated as cmap::Competency::misc ",
+        "eighty characters) and is rated as cmap::Competency::misc "
+        "and is even long than that, as it needs to span even more lines",
         cmap::Competency::misc
       },
       { " Example II/IV,spanning (n >= (256 >> 9) lines (that is, "
         "having at least eighty characters) and is rated as "
-        "cmap::Competency::uninitialized",
+        "cmap::Competency::uninitialized"
+        "and is even long than that, as it needs to span even more lines",
          cmap::Competency::uninitialized
       },
       {
         "Example III/IV, spanning <<<multiple>>> lines (that is, "
         "having at least eight characters) and is rated as "
-        "cmap::Competency::profession ",
+        "cmap::Competency::profession "
+        "and is even long than that, as it needs to span even more lines",
         cmap::Competency::profession
       },
       {
         " Example III/IV, spanning multiple lines (n >= (1 << 1)) (that is, "
         "having at least eight characters) and is rated as "
-        "cmap::Competency::social_surroundings",
+        "cmap::Competency::social_surroundings"
+        "and is even long than that, as it needs to span even more lines"
+        "and is even long than that, as it needs to span even more lines"
+        "and is even long than that, as it needs to span even more lines",
         cmap::Competency::social_surroundings
       }
     },
