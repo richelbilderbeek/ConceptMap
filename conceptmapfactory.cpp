@@ -23,7 +23,7 @@
 #include "conceptmapregex.h"
 #include "set_my_bundled_vertexes.h"
 
-#pragma GCC diagnostic pop
+
 
 ribi::cmap::ConceptMapFactory::ConceptMapFactory() noexcept
 {

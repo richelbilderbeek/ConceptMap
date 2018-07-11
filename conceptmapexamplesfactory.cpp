@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include "conceptmapexamplesfactory.h"
 
 #include <cassert>
@@ -9,7 +9,7 @@
 #include "conceptmapexamples.h"
 #include "conceptmaphelper.h"
 #include "conceptmapregex.h"
-#pragma GCC diagnostic pop
+
 
 ribi::cmap::ExamplesFactory::ExamplesFactory() noexcept
 {

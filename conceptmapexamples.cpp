@@ -1,6 +1,6 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
+
+
+
 #include "conceptmapexamples.h"
 
 #include <cassert>
@@ -16,7 +16,7 @@
 #include "conceptmapexample.h"
 #include "conceptmapexamplefactory.h"
 #include "conceptmapexamplesfactory.h"
-#pragma GCC diagnostic pop
+
 
 
 ribi::cmap::Examples::Examples(

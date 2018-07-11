@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "conceptmapnode.h"
 
 #include <cmath>
@@ -22,7 +22,7 @@
 #include "xml.h"
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"
-#pragma GCC diagnostic pop
+
 
 int ribi::cmap::Node::sm_ids = 0; //!OCLINT use static to track instances
 

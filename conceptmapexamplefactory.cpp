@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "conceptmapexamplefactory.h"
 
 #include <cassert>
@@ -10,7 +10,7 @@
 #include "conceptmaphelper.h"
 #include "conceptmapexample.h"
 #include "conceptmapregex.h"
-#pragma GCC diagnostic pop
+
 
 ribi::cmap::ExampleFactory::ExampleFactory() noexcept
 {

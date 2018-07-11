@@ -1,5 +1,5 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
+
+
 #include "conceptmapnodefactory.h"
 
 
@@ -12,7 +12,7 @@
 #include "container.h"
 
 #include "xml.h"
-#pragma GCC diagnostic pop
+
 
 ribi::cmap::NodeFactory::NodeFactory()
 {

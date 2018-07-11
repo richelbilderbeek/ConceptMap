@@ -1,7 +1,7 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "conceptmaphelper.h"
 
 #include <cassert>
@@ -13,7 +13,7 @@
 
 #include "fileio.h"
 #include "conceptmapregex.h"
-#pragma GCC diagnostic pop
+
 
 ///Send the file its content to std::cout/std::clog/whatever
 template <class Stream>

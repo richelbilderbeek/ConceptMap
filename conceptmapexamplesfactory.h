@@ -2,14 +2,14 @@
 #define CONCEPTMAPEXAMPLESFACTORY_H
 
 #include <vector>
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#pragma GCC diagnostic ignored "-Wunused-but-set-parameter"
+
+
+
+
 #include "conceptmapcompetency.h"
 #include "conceptmapexamples.h"
 #include "conceptmapfwd.h"
-#pragma GCC diagnostic pop
+
 
 namespace ribi {
 
