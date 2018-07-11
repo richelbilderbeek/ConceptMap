@@ -16,6 +16,9 @@ struct Competencies
   Competencies();
   std::vector<Competency> GetAllCompetencies() const noexcept;
   int ToIndex(const Competency competency) const noexcept;
+
+  ///Convert to a Dutch abbreviated string
+  std::string ToStrDutchShort(const Competency competency) const noexcept;
   std::string ToStrDutch(const Competency competency) const noexcept;
   std::string ToStr(const Competency competency) const noexcept;
   Competency ToTypeFromDutch(const std::string& dutch_string) const;
@@ -24,10 +27,12 @@ struct Competencies
   private:
 
   mutable boost::bimap<Competency,std::string> m_map_dutch; //Lazy initialization
+  mutable boost::bimap<Competency,std::string> m_map_dutch_short; //Lazy initialization
   mutable boost::bimap<Competency,std::string> m_map_english; //Lazy initialization
 };
 
 boost::bimap<Competency,std::string> CreateMapDutch() noexcept;
+boost::bimap<Competency,std::string> CreateMapDutchShort() noexcept;
 boost::bimap<Competency,std::string> CreateMapEnglish() noexcept;
 
 } //~namespace cmap

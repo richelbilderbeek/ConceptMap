@@ -60,6 +60,30 @@ ribi::cmap::CreateMapDutch() noexcept
   return m;
 }
 
+boost::bimap<ribi::cmap::Competency,std::string>
+ribi::cmap::CreateMapDutchShort() noexcept
+{
+  boost::bimap<Competency,std::string> m;
+  m.insert(boost::bimap<Competency,std::string>::value_type(
+    Competency::uninitialized,"??"));
+  m.insert(boost::bimap<Competency,std::string>::value_type(
+    Competency::profession,"KB"));
+  m.insert(boost::bimap<Competency,std::string>::value_type(
+    Competency::organisations,"KO"));
+  m.insert(boost::bimap<Competency,std::string>::value_type(
+    Competency::social_surroundings,"KS"));
+  m.insert(boost::bimap<Competency,std::string>::value_type(
+    Competency::target_audience,"KD"));
+  m.insert(boost::bimap<Competency,std::string>::value_type(
+    Competency::ti_knowledge,"TI"));
+  m.insert(boost::bimap<Competency,std::string>::value_type(
+    Competency::prof_growth,"KE"));
+  m.insert(boost::bimap<Competency,std::string>::value_type(
+    Competency::misc,"OV"));
+  assert(m.left.size() == static_cast<int>(Competency::n_competencies));
+  return m;
+}
+
 std::vector<ribi::cmap::Competency> ribi::cmap::Competencies::GetAllCompetencies() const noexcept
 {
   const std::vector<Competency> v {
@@ -98,6 +122,15 @@ std::string ribi::cmap::Competencies::ToStrDutch(const Competency type) const no
   assert(!m_map_dutch.left.empty());
   assert(m_map_dutch.left.count(type) == 1);
   const std::string s = m_map_dutch.left.find(type)->second;
+  return s;
+}
+
+std::string ribi::cmap::Competencies::ToStrDutchShort(const Competency type) const noexcept
+{
+  if (m_map_dutch_short.left.empty()) m_map_dutch_short = CreateMapDutchShort();
+  assert(!m_map_dutch_short.left.empty());
+  assert(m_map_dutch_short.left.count(type) == 1);
+  const std::string s = m_map_dutch_short.left.find(type)->second;
   return s;
 }
 

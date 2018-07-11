@@ -11,6 +11,11 @@ std::string ribi::cmap::CompetencyToStrDutch(const Competency competency) noexce
   return Competencies().ToStrDutch(competency);
 }
 
+std::string ribi::cmap::CompetencyToStrDutchShort(const Competency competency) noexcept
+{
+  return Competencies().ToStrDutchShort(competency);
+}
+
 ribi::cmap::Competency ribi::cmap::StrToCompetency(const std::string s)
 {
   return Competencies().ToType(s);
