@@ -1,6 +1,3 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #include "conceptmapedge.h"
 
 #include <sstream>
@@ -20,7 +17,6 @@
 #include "graphviz_encode.h"
 #include "is_graphviz_friendly.h"
 #include "xml.h"
-#pragma GCC diagnostic pop
 
 int ribi::cmap::Edge::sm_ids = 0; //!OCLINT must use static to track count
 

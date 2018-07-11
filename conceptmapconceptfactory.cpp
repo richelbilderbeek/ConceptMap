@@ -1,6 +1,3 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #include "conceptmapconceptfactory.h"
 
 #include "conceptmapcompetency.h"
@@ -11,7 +8,6 @@
 #include "conceptmapexamplesfactory.h"
 #include "conceptmaphelper.h"
 #include "conceptmapregex.h"
-#pragma GCC diagnostic push
 
 ribi::cmap::ConceptFactory::ConceptFactory() noexcept
 {
