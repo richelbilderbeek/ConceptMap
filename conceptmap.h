@@ -13,16 +13,8 @@ namespace cmap {
 
 //Concept map definition is in 'conceptmapgraphtypes.h'
 
-///Calculate the complexity of a concept map from the graph only,
-///that is, without the interference of humans
-int CalculateComplexityEstimated(const ConceptMap& c);
-
 ///Calculate the complexity of a concept map from human input
 int CalculateComplexityExperimental(const ConceptMap& c);
-
-///Calculate the concreteness of a concept map from the graph only,
-///that is, without the interference of humans
-int CalculateConcretenessEstimated(const ConceptMap& c);
 
 ///Calculate the concreteness of a concept map from human input
 int CalculateConcretenessExperimental(const ConceptMap& c);
