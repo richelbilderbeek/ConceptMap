@@ -70,6 +70,8 @@ int CountExamples(const Edge& edge) noexcept;
 
 const Concept& GetConcept(const Edge& edge) noexcept;
 
+const Examples& GetExamples(const Edge& edge) noexcept;
+
 std::string GetText(const Edge& edge) noexcept;
 
 ///Get the x coordinat of the center of the Edge

@@ -54,6 +54,11 @@ const ribi::cmap::Concept& ribi::cmap::GetConcept(const Edge& edge) noexcept
   return GetConcept(edge.GetNode());
 }
 
+const ribi::cmap::Examples& ribi::cmap::GetExamples(const Edge& edge) noexcept
+{
+  return GetExamples(edge.GetNode());
+}
+
 std::string ribi::cmap::GetText(const Edge& edge) noexcept
 {
   return GetText(edge.GetNode());
