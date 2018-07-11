@@ -1,6 +1,3 @@
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Weffc++"
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #include "conceptmapedgefactory.h"
 
 #include <cassert>
@@ -14,7 +11,6 @@
 #include "conceptmapnode.h"
 #include "conceptmapnodefactory.h"
 #include "conceptmapregex.h"
-#pragma GCC diagnostic pop
 
 ribi::cmap::EdgeFactory::EdgeFactory() noexcept
 {
