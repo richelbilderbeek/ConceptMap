@@ -72,6 +72,11 @@ const Concept& GetConcept(const Edge& edge) noexcept;
 
 const Examples& GetExamples(const Edge& edge) noexcept;
 
+///The concept on an Edge (only) being complex,
+///as rated by an assessor.
+///This is different than an example being complex.
+bool GetIsComplex(const Edge& edge) noexcept;
+
 std::string GetText(const Edge& edge) noexcept;
 
 ///Get the x coordinat of the center of the Edge

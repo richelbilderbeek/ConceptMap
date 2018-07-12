@@ -37,10 +37,9 @@ struct Concept
   const Examples& GetExamples() const noexcept { return m_examples; }
         Examples& GetExamples()       noexcept { return m_examples; }
 
-  ///Has an assessor rated the name of this concept as being an addition to the complexity?
-  ///This is something different than m_rating_complexity:
-  ///m_is_complex can be used to help the assessor determine a m_rating_complexity,
-  ///but m_rating_complexity is the final and complete rating
+  ///The concept on an Edge (only) being complex,
+  ///as rated by an assessor.
+  ///This is different than an example being complex.
   bool GetIsComplex() const noexcept { return m_is_complex; }
 
   ///Get the name of the concept, e.g. 'Philosphy'
@@ -140,6 +139,11 @@ int ExtractRatingConcretenessFromXml(const std::string& s);
 int ExtractRatingSpecificityFromXml(const std::string& s);
 
 const Examples& GetExamples(const Concept& concept) noexcept;
+
+///The concept on an Edge (only) being complex,
+///as rated by an assessor.
+///This is different than an example being complex.
+bool GetIsComplex(const Concept& concept) noexcept;
 
 int GetRatingComplexity(const Concept& concept) noexcept;
 int GetRatingConcreteness(const Concept& concept) noexcept;

@@ -121,11 +121,16 @@ std::vector<ribi::cmap::Node> ribi::cmap::Node::GetTests() noexcept
     {
       const int x = (std::rand() % 256) - 128;
       const int y = (std::rand() % 256) - 128;
-      Node node(concept, NodeType::normal, x, y);
+      const Node node(concept, NodeType::normal, x, y);
       result.push_back(node);
     }
   );
   return result;
+}
+
+bool ribi::cmap::GetIsComplex(const Node& node) noexcept
+{
+  return GetIsComplex(node.GetConcept());
 }
 
 int ribi::cmap::GetRatingComplexity(const Node& node) noexcept

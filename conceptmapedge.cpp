@@ -59,6 +59,11 @@ const ribi::cmap::Examples& ribi::cmap::GetExamples(const Edge& edge) noexcept
   return GetExamples(edge.GetNode());
 }
 
+bool ribi::cmap::GetIsComplex(const Edge& edge) noexcept
+{
+  return GetIsComplex(edge.GetNode());
+}
+
 std::string ribi::cmap::GetText(const Edge& edge) noexcept
 {
   return GetText(edge.GetNode());

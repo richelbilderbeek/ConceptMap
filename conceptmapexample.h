@@ -26,7 +26,9 @@ struct Example
   ///Get the competency, as might be judged by an assessor
   Competency GetCompetency() const noexcept { return m_competency; }
 
-  ///Has an assessor rated this example as being an addition to the complexity?
+  ///The Example being complex,
+  ///as rated by an assessor
+  ///This is different than an edge being complex.
   bool GetIsComplex() const noexcept { return m_is_complex; }
 
   ///Has an assessor rated this example as being an addition to the concreteness?

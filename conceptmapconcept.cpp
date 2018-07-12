@@ -163,6 +163,11 @@ const ribi::cmap::Examples& ribi::cmap::GetExamples(const Concept& concept) noex
   return concept.GetExamples();
 }
 
+bool ribi::cmap::GetIsComplex(const Concept& concept) noexcept
+{
+  return concept.GetIsComplex();
+}
+
 const std::string& ribi::cmap::GetName(const Concept& concept) noexcept
 {
   return concept.GetName();
