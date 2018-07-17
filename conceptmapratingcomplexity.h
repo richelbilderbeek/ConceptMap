@@ -19,6 +19,12 @@ class RatingComplexity
 
   ///Calculate a suggested complexity
   int SuggestComplexity(
+    const int n_edges,
+    const int n_examples
+  ) const noexcept;
+
+  ///Calculate a suggested complexity
+  int SuggestComplexity(
     const ConceptMap& sub_conceptmap,
     const VertexDescriptor& vd
   ) const noexcept;
@@ -28,7 +34,7 @@ class RatingComplexity
   std::map<std::pair<int, int>, int> m_rating;
 
   ///Calculate a suggested complexity in the default way
-  static int SuggestComplexity(const int n_edges, const int n_examples);
+  static int SuggestComplexityDefault(const int n_edges, const int n_examples);
 
   friend bool operator==(const RatingComplexity& lhs, const RatingComplexity& rhs) noexcept;
   friend std::string ToXml(const RatingComplexity& rating);

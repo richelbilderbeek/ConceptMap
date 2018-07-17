@@ -22,6 +22,12 @@ struct Rating
 
   ///Calculate a suggested complexity
   int SuggestComplexity(
+    const int n_edges,
+    const int n_examples
+  ) const noexcept;
+
+  ///Calculate a suggested complexity
+  int SuggestComplexity(
     const ConceptMap& sub_conceptmap,
     const VertexDescriptor& vd
   ) const noexcept;
@@ -32,10 +38,20 @@ struct Rating
     const VertexDescriptor& vd
   ) const noexcept;
 
+  ///Calculate a suggested concreteness
+  int SuggestConcreteness(
+    int n_examples
+  ) const noexcept;
+
   ///Calculate a suggested specificity
   int SuggestSpecificity(
     const ConceptMap& sub_conceptmap,
     const VertexDescriptor& vd
+  ) const noexcept;
+
+  ///Calculate a suggested specificity
+  int SuggestSpecificity(
+    int n_examples
   ) const noexcept;
 
   private:

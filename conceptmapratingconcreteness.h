@@ -22,11 +22,16 @@ class RatingConcreteness
     const VertexDescriptor& vd
   ) const noexcept;
 
+  ///Calculate a suggested complexity
+  int SuggestConcreteness(
+    int n_examples
+  ) const noexcept;
+
   private:
   std::map<int, int> m_rating;
 
   ///Calculate a suggested concreteness
-  static int SuggestConcreteness(const int n_examples);
+  static int SuggestConcretenessDefault(const int n_examples);
 
   friend bool operator==(const RatingConcreteness& lhs, const RatingConcreteness& rhs) noexcept;
   friend std::string ToXml(const RatingConcreteness& rating);

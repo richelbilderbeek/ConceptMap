@@ -22,11 +22,16 @@ class RatingSpecificity
     const VertexDescriptor& vd
   ) const noexcept;
 
+  ///Calculate a suggested complexity
+  int SuggestSpecificity(
+    int n_examples
+  ) const noexcept;
+
   private:
   std::map<int, int> m_rating;
 
   ///Calculate a suggested specificity
-  static int SuggestSpecificity(const int n_examples);
+  static int SuggestSpecificityDefault(const int n_examples);
 
   friend bool operator==(const RatingSpecificity& lhs, const RatingSpecificity& rhs) noexcept;
   friend std::string ToXml(const RatingSpecificity& rating);
@@ -34,7 +39,6 @@ class RatingSpecificity
 
 RatingSpecificity CreateDefaultRatingSpecificity() noexcept;
 RatingSpecificity CreateTestRatingSpecificity() noexcept;
-
 
 std::string ToXml(const RatingSpecificity& rating);
 

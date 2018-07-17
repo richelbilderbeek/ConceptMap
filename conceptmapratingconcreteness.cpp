@@ -39,7 +39,7 @@ ribi::cmap::RatingConcreteness ribi::cmap::CreateTestRatingConcreteness() noexce
   );
 }
 
-int ribi::cmap::RatingConcreteness::SuggestConcreteness(const int n_examples)
+int ribi::cmap::RatingConcreteness::SuggestConcretenessDefault(const int n_examples)
 {
   assert(n_examples >= 0);
   return n_examples < 2
