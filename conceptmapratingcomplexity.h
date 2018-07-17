@@ -35,6 +35,8 @@ RatingComplexity CreateTestRatingComplexity() noexcept;
 ///Calculate a suggested complexity
 int SuggestComplexity(const int n_edges, const int n_examples) noexcept;
 
+std::string ToXml(const RatingComplexity& rating);
+
 bool operator==(const RatingComplexity& lhs, const RatingComplexity& rhs) noexcept;
 bool operator!=(const RatingComplexity& lhs, const RatingComplexity& rhs) noexcept;
 std::ostream& operator<<(std::ostream& os, const RatingComplexity& r) noexcept;

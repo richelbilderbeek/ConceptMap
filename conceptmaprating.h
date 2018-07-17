@@ -4,16 +4,11 @@
 #include "conceptmapgraphtypes.h"
 #include "conceptmapfwd.h"
 #include "conceptmapratingcomplexity.h"
+#include "conceptmapratingconcreteness.h"
+#include "conceptmapratingspecificity.h"
 
 namespace ribi {
 namespace cmap {
-
-
-std::map<int, int> CreateDefaultRatingConcreteness() noexcept;
-std::map<int, int> CreateTestRatingConcreteness() noexcept;
-
-std::map<int, int> CreateDefaultRatingSpecificity() noexcept;
-std::map<int, int> CreateTestRatingSpecificity() noexcept;
 
 ///Functions to help with rating
 struct Rating
@@ -21,8 +16,8 @@ struct Rating
   ///Use CreateDefaultRating for a default-constructed Rating
   Rating(
     const RatingComplexity& rating_complexity,
-    const std::map<int, int>& rating_concreteness,
-    const std::map<int, int>& rating_specificity
+    const RatingConcreteness& rating_concreteness,
+    const RatingSpecificity& rating_specificity
   );
 
   ///Calculate a suggested complexity
@@ -45,11 +40,12 @@ struct Rating
 
   private:
   RatingComplexity m_rating_complexity;
-  std::map<int, int> m_rating_concreteness;
-  std::map<int, int> m_rating_specificity;
+  RatingConcreteness m_rating_concreteness;
+  RatingSpecificity m_rating_specificity;
 
   friend bool operator==(const Rating& lhs, const Rating& rhs) noexcept;
   friend std::ostream& operator<<(std::ostream& os, const Rating& r) noexcept;
+  friend std::string ToXml(const Rating& r);
 };
 
 ///Create a default-constructed Rating
@@ -59,11 +55,10 @@ Rating CreateDefaultRating() noexcept;
 Rating CreateTestRating() noexcept;
 
 
-///Calculate a suggested concreteness
-int SuggestConcreteness(const int n_examples) noexcept;
 
-///Calculate a suggested specificity
-int SuggestSpecificity(const int n_examples) noexcept;
+
+///Convert a Rating to an XML string
+std::string ToXml(const Rating& r);
 
 bool operator==(const Rating& lhs, const Rating& rhs) noexcept;
 bool operator!=(const Rating& lhs, const Rating& rhs) noexcept;

@@ -93,6 +93,20 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
   return iter->second;
 }
 
+std::string ribi::cmap::ToXml(const RatingComplexity& /* rating */)
+{
+  std::stringstream s;
+  s << "<rating_complexity>"
+    << "TODO"
+    << "</rating_complexity>"
+  ;
+  const std::string r = s.str();
+  assert(r.size() >= 39);
+  assert(r.substr(0, 19) == "<rating_complexity>");
+  assert(r.substr(r.size() - 20, 20) == "</rating_complexity>");
+  return r;
+}
+
 bool ribi::cmap::operator==(const RatingComplexity& lhs, const RatingComplexity& rhs) noexcept
 {
   return lhs.m_rating_complexity == rhs.m_rating_complexity;
