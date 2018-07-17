@@ -27,11 +27,12 @@ class RatingConcreteness
     int n_examples
   ) const;
 
+  ///Calculate a suggested concreteness in the default way
+  static int SuggestConcretenessDefault(const int n_examples); //!OCLINT static because it needs no member variables
+
   private:
   std::map<int, int> m_rating;
 
-  ///Calculate a suggested concreteness
-  static int SuggestConcretenessDefault(const int n_examples); //!OCLINT static because it needs no member variables
 
   friend bool operator==(const RatingConcreteness& lhs, const RatingConcreteness& rhs) noexcept;
   friend std::string ToXml(const RatingConcreteness& rating);

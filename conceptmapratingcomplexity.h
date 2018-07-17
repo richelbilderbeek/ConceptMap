@@ -23,6 +23,9 @@ class RatingComplexity
     const int n_examples
   ) const;
 
+  ///Calculate a suggested complexity in the default way
+  static int SuggestComplexityDefault(const int n_edges, const int n_examples); //!OCLINT static because it needs no member variables
+
   ///Calculate a suggested complexity
   int SuggestComplexity(
     const ConceptMap& sub_conceptmap,
@@ -32,9 +35,6 @@ class RatingComplexity
   private:
   // { {number of edges, number of examples}, score }
   std::map<std::pair<int, int>, int> m_rating;
-
-  ///Calculate a suggested complexity in the default way
-  static int SuggestComplexityDefault(const int n_edges, const int n_examples); //!OCLINT static because it needs no member variables
 
   friend bool operator==(const RatingComplexity& lhs, const RatingComplexity& rhs) noexcept;
   friend std::string ToXml(const RatingComplexity& rating);

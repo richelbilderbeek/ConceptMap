@@ -27,11 +27,11 @@ class RatingSpecificity
     int n_examples
   ) const;
 
+  ///Calculate a suggested specificity in the default way
+  static int SuggestSpecificityDefault(const int n_examples); //!OCLINT static because it needs no member variables
+
   private:
   std::map<int, int> m_rating;
-
-  ///Calculate a suggested specificity
-  static int SuggestSpecificityDefault(const int n_examples); //!OCLINT static because it needs no member variables
 
   friend bool operator==(const RatingSpecificity& lhs, const RatingSpecificity& rhs) noexcept;
   friend std::string ToXml(const RatingSpecificity& rating);
