@@ -57,7 +57,13 @@ int ribi::cmap::RatingConcreteness::SuggestConcreteness(
 {
   assert(boost::num_vertices(sub_conceptmap) > 0);
   const int n_examples = CountExamples(sub_conceptmap[vd]);
+  return SuggestConcreteness(n_examples);
+}
 
+int ribi::cmap::RatingConcreteness::SuggestConcreteness(
+  const int n_examples
+) const noexcept
+{
   const auto iter = m_rating.find(n_examples);
   assert(iter != std::end(m_rating));
   return iter->second;
