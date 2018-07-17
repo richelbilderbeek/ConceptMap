@@ -54,8 +54,8 @@ Rating CreateDefaultRating() noexcept;
 ///Create a test (and completely bogus) Rating
 Rating CreateTestRating() noexcept;
 
-
-
+///Exract a Rating from an XML string
+Rating XmlToRating(const std::string& s);
 
 ///Convert a Rating to an XML string
 std::string ToXml(const Rating& r);

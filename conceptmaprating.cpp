@@ -7,6 +7,7 @@
 #include "conceptmapnode.h"
 #include "conceptmapconcept.h"
 #include "conceptmapexamples.h"
+#include "brainweaverregex.h"
 
 ribi::cmap::Rating::Rating(
   const RatingComplexity& rating_complexity,
@@ -63,6 +64,16 @@ std::string ribi::cmap::ToXml(const Rating& rating)
   return r;
 }
 
+ribi::cmap::Rating ribi::cmap::XmlToRating(const std::string& s)
+{
+  return Rating(
+    XmlToRatingComplexity(s),
+    XmlToRatingConcreteness(s),
+    XmlToRatingSpecificity(s)
+  );
+}
+
+
 bool ribi::cmap::operator==(const Rating& lhs, const Rating& rhs) noexcept
 {
   return lhs.m_rating_complexity == rhs.m_rating_complexity
@@ -76,8 +87,8 @@ bool ribi::cmap::operator!=(const Rating& lhs, const Rating& rhs) noexcept
   return !(lhs == rhs);
 }
 
-std::ostream& ribi::cmap::operator<<(std::ostream& os, const Rating& /* r */) noexcept
+std::ostream& ribi::cmap::operator<<(std::ostream& os, const Rating& r) noexcept
 {
-  os << "TODO";
+  os << ToXml(r);
   return os;
 }

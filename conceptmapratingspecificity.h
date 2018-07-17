@@ -26,6 +26,7 @@ class RatingSpecificity
   std::map<int, int> m_rating;
 
   friend bool operator==(const RatingSpecificity& lhs, const RatingSpecificity& rhs) noexcept;
+  friend std::string ToXml(const RatingSpecificity& rating);
 };
 
 RatingSpecificity CreateDefaultRatingSpecificity() noexcept;
@@ -35,6 +36,9 @@ RatingSpecificity CreateTestRatingSpecificity() noexcept;
 int SuggestSpecificity(const int n_examples) noexcept;
 
 std::string ToXml(const RatingSpecificity& rating);
+
+///Extract a RatingSpecificity from an XML string
+RatingSpecificity XmlToRatingSpecificity(const std::string& s);
 
 bool operator==(const RatingSpecificity& lhs, const RatingSpecificity& rhs) noexcept;
 bool operator!=(const RatingSpecificity& lhs, const RatingSpecificity& rhs) noexcept;

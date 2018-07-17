@@ -26,10 +26,14 @@ class RatingConcreteness
   std::map<int, int> m_rating;
 
   friend bool operator==(const RatingConcreteness& lhs, const RatingConcreteness& rhs) noexcept;
+  friend std::string ToXml(const RatingConcreteness& rating);
 };
 
 RatingConcreteness CreateDefaultRatingConcreteness() noexcept;
 RatingConcreteness CreateTestRatingConcreteness() noexcept;
+
+///Extract a RatingConcreteness from an XML string
+RatingConcreteness XmlToRatingConcreteness(const std::string& s);
 
 ///Calculate a suggested concreteness
 int SuggestConcreteness(const int n_examples) noexcept;

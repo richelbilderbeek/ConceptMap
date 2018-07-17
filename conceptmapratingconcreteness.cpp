@@ -1,4 +1,6 @@
 #include "conceptmapratingconcreteness.h"
+#include "ribi_regex.h"
+#include "xml.h"
 
 ribi::cmap::RatingConcreteness::RatingConcreteness(
   const std::map<int, int>& rating
@@ -61,18 +63,50 @@ int ribi::cmap::RatingConcreteness::SuggestConcreteness(
   return iter->second;
 }
 
-std::string ribi::cmap::ToXml(const RatingConcreteness& /* rating */)
+std::string ribi::cmap::ToXml(const RatingConcreteness& rating)
 {
   std::stringstream s;
-  s << "<rating_concreteness>"
-    << "TODO"
-    << "</rating_concreteness>"
-  ;
+  s << "<rating_concreteness>";
+  for (const auto& p: rating.m_rating)
+  {
+    assert(p.first  >= 0);
+    assert(p.second >= 0);
+    assert(p.first  <= 9);
+    assert(p.second <= 9);
+    s << p.first << p.second;
+  }
+  s << "</rating_concreteness>";
   const std::string r = s.str();
   assert(r.size() >= 43);
   assert(r.substr(0, 21) == "<rating_concreteness>");
   assert(r.substr(r.size() - 22, 22) == "</rating_concreteness>");
   return r;
+}
+
+ribi::cmap::RatingConcreteness ribi::cmap::XmlToRatingConcreteness(
+  const std::string& s)
+{
+  const std::string regex_str = "(<rating_concreteness>.*?</rating_concreteness>)";
+  const std::vector<std::string> v
+    = Regex().GetRegexMatches(s, regex_str);
+  assert(v.size() == 1);
+
+  const std::string t = ribi::xml::StripXmlTag(v[0]);
+  assert(t.size() % 2 == 0);
+  const int size = t.size();
+
+  std::map<int, int> m;
+  for (int i = 0; i != size; i += 2)
+  {
+    const int first = boost::lexical_cast<int>(t[i]);
+    const int second = boost::lexical_cast<int>(t[i + 1]);
+    assert(first >= 0);
+    assert(second >= 0);
+    assert(first <= 9);
+    assert(second <= 9);
+    m.insert( { first, second } );
+  }
+  return RatingConcreteness(m);
 }
 
 bool ribi::cmap::operator==(const RatingConcreteness& lhs, const RatingConcreteness& rhs) noexcept
@@ -85,8 +119,8 @@ bool ribi::cmap::operator!=(const RatingConcreteness& lhs, const RatingConcreten
   return !(lhs == rhs);
 }
 
-std::ostream& ribi::cmap::operator<<(std::ostream& os, const RatingConcreteness& /* r */) noexcept
+std::ostream& ribi::cmap::operator<<(std::ostream& os, const RatingConcreteness& r) noexcept
 {
-  os << "TODO";
+  os << ToXml(r);
   return os;
 }
