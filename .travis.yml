@@ -49,7 +49,7 @@ before_script:
 script: 
   # Build and run tests
   - qmake -qt=qt5
-  - make debug
+  - make -s debug
   - ./ConceptMapTest
   # cppcheck
   - cppcheck --quiet --error-exitcode=1 . 
