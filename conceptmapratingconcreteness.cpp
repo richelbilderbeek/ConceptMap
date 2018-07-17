@@ -39,7 +39,7 @@ ribi::cmap::RatingConcreteness ribi::cmap::CreateTestRatingConcreteness() noexce
   );
 }
 
-int ribi::cmap::RatingConcreteness::SuggestConcretenessDefault(const int n_examples)
+int ribi::cmap::RatingConcreteness::SuggestConcretenessDefault(const int n_examples) //!OCLINT static because it needs no member variables
 {
   assert(n_examples >= 0);
   return n_examples < 2

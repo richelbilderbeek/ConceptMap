@@ -68,7 +68,7 @@ ribi::cmap::RatingComplexity ribi::cmap::CreateTestRatingComplexity() noexcept
   );
 }
 
-int ribi::cmap::RatingComplexity::SuggestComplexityDefault(
+int ribi::cmap::RatingComplexity::SuggestComplexityDefault( //!OCLINT static because it needs no member variables
   const int n_edges,
   const int n_examples
 )

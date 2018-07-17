@@ -39,7 +39,7 @@ ribi::cmap::RatingSpecificity ribi::cmap::CreateTestRatingSpecificity() noexcept
   );
 }
 
-int ribi::cmap::RatingSpecificity::SuggestSpecificityDefault(const int n_examples)
+int ribi::cmap::RatingSpecificity::SuggestSpecificityDefault(const int n_examples) //!OCLINT static because it needs no member variables
 {
   assert(n_examples >= 0);
   return n_examples < 2
