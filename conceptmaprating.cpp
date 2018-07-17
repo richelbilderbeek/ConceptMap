@@ -47,6 +47,22 @@ int ribi::cmap::Rating::SuggestComplexity(
   return m_rating_complexity.SuggestComplexity(sub_conceptmap, vd);
 }
 
+int ribi::cmap::Rating::SuggestConcreteness(
+  const ConceptMap& sub_conceptmap,
+  const VertexDescriptor& vd
+) const noexcept
+{
+  return m_rating_concreteness.SuggestConcreteness(sub_conceptmap, vd);
+}
+
+int ribi::cmap::Rating::SuggestSpecificity(
+  const ConceptMap& sub_conceptmap,
+  const VertexDescriptor& vd
+) const noexcept
+{
+  return m_rating_specificity.SuggestSpecificity(sub_conceptmap, vd);
+}
+
 std::string ribi::cmap::ToXml(const Rating& rating)
 {
   std::stringstream s;
