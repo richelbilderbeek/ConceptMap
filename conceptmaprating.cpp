@@ -7,7 +7,6 @@
 #include "conceptmapnode.h"
 #include "conceptmapconcept.h"
 #include "conceptmapexamples.h"
-#include "brainweaverregex.h"
 
 ribi::cmap::Rating::Rating(
   const RatingComplexity& rating_complexity,
