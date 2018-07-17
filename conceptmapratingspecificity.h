@@ -20,18 +20,18 @@ class RatingSpecificity
   int SuggestSpecificity(
     const ConceptMap& sub_conceptmap,
     const VertexDescriptor& vd
-  ) const noexcept;
+  ) const;
 
   ///Calculate a suggested complexity
   int SuggestSpecificity(
     int n_examples
-  ) const noexcept;
+  ) const;
 
   private:
   std::map<int, int> m_rating;
 
   ///Calculate a suggested specificity
-  static int SuggestSpecificityDefault(const int n_examples);
+  static int SuggestSpecificityDefault(const int n_examples); //!OCLINT static because it needs no member variables
 
   friend bool operator==(const RatingSpecificity& lhs, const RatingSpecificity& rhs) noexcept;
   friend std::string ToXml(const RatingSpecificity& rating);

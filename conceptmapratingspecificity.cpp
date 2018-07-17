@@ -53,7 +53,7 @@ int ribi::cmap::RatingSpecificity::SuggestSpecificityDefault(const int n_example
 int ribi::cmap::RatingSpecificity::SuggestSpecificity(
   const ConceptMap& sub_conceptmap,
   const VertexDescriptor& vd
-) const noexcept
+) const
 {
   assert(boost::num_vertices(sub_conceptmap) > 0);
   const int n_examples = CountExamples(sub_conceptmap[vd]);
@@ -62,7 +62,7 @@ int ribi::cmap::RatingSpecificity::SuggestSpecificity(
 
 int ribi::cmap::RatingSpecificity::SuggestSpecificity(
   const int n_examples
-) const noexcept
+) const
 {
   const auto iter = m_rating.find(n_examples);
   assert(iter != std::end(m_rating));

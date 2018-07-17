@@ -86,7 +86,7 @@ int ribi::cmap::RatingComplexity::SuggestComplexityDefault(
 int ribi::cmap::RatingComplexity::SuggestComplexity(
   const int n_edges,
   const int n_examples
-) const noexcept
+) const
 {
   const auto iter = m_rating.find( { n_edges, n_examples} );
   assert(iter != std::end(m_rating));
@@ -96,7 +96,7 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
 int ribi::cmap::RatingComplexity::SuggestComplexity(
   const ConceptMap& sub_conceptmap,
   const VertexDescriptor& vd
-) const noexcept
+) const
 {
   const int n_edges = std::min(3, static_cast<int>(boost::num_edges(sub_conceptmap)));
   assert(boost::num_vertices(sub_conceptmap) > 0);

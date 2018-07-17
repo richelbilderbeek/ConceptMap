@@ -20,18 +20,18 @@ class RatingConcreteness
   int SuggestConcreteness(
     const ConceptMap& sub_conceptmap,
     const VertexDescriptor& vd
-  ) const noexcept;
+  ) const;
 
   ///Calculate a suggested complexity
   int SuggestConcreteness(
     int n_examples
-  ) const noexcept;
+  ) const;
 
   private:
   std::map<int, int> m_rating;
 
   ///Calculate a suggested concreteness
-  static int SuggestConcretenessDefault(const int n_examples);
+  static int SuggestConcretenessDefault(const int n_examples); //!OCLINT static because it needs no member variables
 
   friend bool operator==(const RatingConcreteness& lhs, const RatingConcreteness& rhs) noexcept;
   friend std::string ToXml(const RatingConcreteness& rating);
