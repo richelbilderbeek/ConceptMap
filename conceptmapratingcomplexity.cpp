@@ -68,11 +68,13 @@ ribi::cmap::RatingComplexity ribi::cmap::CreateTestRatingComplexity() noexcept
   );
 }
 
-int ribi::cmap::SuggestComplexity(
+int ribi::cmap::RatingComplexity::SuggestComplexity(
   const int n_edges,
   const int n_examples
-) noexcept
+)
 {
+  assert(n_edges >= 0);
+  assert(n_examples >= 0);
   return n_edges == 0  || (n_edges == 1 && n_examples == 0)
     ? 0
     : (n_edges == 1 && n_examples > 0) || (n_edges == 2 && n_examples == 0)
@@ -91,7 +93,6 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
   const int n_examples = std::min(4, CountExamples(sub_conceptmap[vd]));
   const auto iter = m_rating.find( { n_edges, n_examples} );
   assert(iter != std::end(m_rating));
-  assert(iter->second == ::ribi::cmap::SuggestComplexity(n_edges, n_examples));
   return iter->second;
 }
 

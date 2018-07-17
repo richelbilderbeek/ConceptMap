@@ -39,9 +39,16 @@ ribi::cmap::RatingSpecificity ribi::cmap::CreateTestRatingSpecificity() noexcept
   );
 }
 
-int ribi::cmap::SuggestSpecificity(const int n_examples) noexcept
+int ribi::cmap::RatingSpecificity::SuggestSpecificity(const int n_examples)
 {
-  return ::ribi::cmap::SuggestConcreteness(n_examples);
+  //return ::ribi::cmap::RatingConcreteness::SuggestConcreteness(n_examples);
+  assert(n_examples >= 0);
+  return n_examples < 2
+    ? 0
+    : n_examples > 1 && n_examples < 4
+      ? 1
+      : 2
+  ;
 }
 
 int ribi::cmap::RatingSpecificity::SuggestSpecificity(
@@ -53,7 +60,6 @@ int ribi::cmap::RatingSpecificity::SuggestSpecificity(
   const int n_examples = CountExamples(sub_conceptmap[vd]);
   const auto iter = m_rating.find(n_examples);
   assert(iter != std::end(m_rating));
-  assert(iter->second == ::ribi::cmap::SuggestSpecificity(n_examples));
   return iter->second;
 }
 

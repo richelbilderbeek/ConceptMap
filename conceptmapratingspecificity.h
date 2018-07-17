@@ -25,6 +25,9 @@ class RatingSpecificity
   private:
   std::map<int, int> m_rating;
 
+  ///Calculate a suggested specificity
+  static int SuggestSpecificity(const int n_examples);
+
   friend bool operator==(const RatingSpecificity& lhs, const RatingSpecificity& rhs) noexcept;
   friend std::string ToXml(const RatingSpecificity& rating);
 };
@@ -32,8 +35,6 @@ class RatingSpecificity
 RatingSpecificity CreateDefaultRatingSpecificity() noexcept;
 RatingSpecificity CreateTestRatingSpecificity() noexcept;
 
-///Calculate a suggested specificity
-int SuggestSpecificity(const int n_examples) noexcept;
 
 std::string ToXml(const RatingSpecificity& rating);
 
