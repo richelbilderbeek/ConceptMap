@@ -91,7 +91,8 @@ void AddEdge(
 
 VertexDescriptor AddVertex(const Node& node, ConceptMap& g) noexcept;
 
-ConceptMap RepositionNodes(ConceptMap& g);
+///Reposition the nodes and edges to nice default locations
+ConceptMap Reposition(ConceptMap& g);
 
 
 } //~namespace cmap

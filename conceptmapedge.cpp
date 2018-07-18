@@ -142,6 +142,16 @@ void ribi::cmap::SetConcept(Edge& edge, const Concept& concept) noexcept
   SetConcept(edge.GetNode(), concept);
 }
 
+void ribi::cmap::SetX(Edge& edge, const double x) noexcept
+{
+  SetX(edge.GetNode(), x);
+}
+
+void ribi::cmap::SetY(Edge& edge, const double y) noexcept
+{
+  SetY(edge.GetNode(), y);
+}
+
 void ribi::cmap::Edge::SetNode(const Node& node) noexcept
 {
   m_node = node;

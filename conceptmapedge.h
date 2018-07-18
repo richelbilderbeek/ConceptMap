@@ -112,6 +112,12 @@ void Move(Edge& edge, const double dx, const double dy);
 
 void SetConcept(Edge& edge, const Concept& concept) noexcept;
 
+///Set the x coordinat of the center of the Node on this Edge
+void SetX(Edge& edge, const double x) noexcept;
+
+///Set the x coordinat of the center of the Node on this Edge
+void SetY(Edge& edge, const double y) noexcept;
+
 std::string ToXml(const Edge& edge) noexcept;
 Edge XmlToEdge(const std::string& s);
 std::ostream& operator<<(std::ostream& os, const Edge& edge) noexcept;

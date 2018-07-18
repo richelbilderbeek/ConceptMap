@@ -74,7 +74,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get2() const noexcept
   AddVertex(CenterNodeFactory().GetTest(1),g);
   AddVertex(NodeFactory().GetTest(0), g);
   AddVertex(NodeFactory().GetTest(1), g);
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get3() const noexcept
@@ -86,7 +86,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get3() const noexcept
   AddEdge(
     EdgeFactory().GetTest(1),vd_1,vd_2,g
   );
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get4() const noexcept
@@ -103,7 +103,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get4() const noexcept
     EdgeFactory().GetTest(2),
     vd_2,vd_3,g
   );
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get5() const noexcept
@@ -115,7 +115,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get5() const noexcept
   AddEdge(EdgeFactory().GetNastyTest(0),vd_1,vd_2,g);
   AddEdge(EdgeFactory().GetNastyTest(1),vd_2,vd_3,g);
   AddEdge(EdgeFactory().GetNastyTest(2),vd_3,vd_1,g);
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get6() const noexcept
@@ -130,7 +130,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get6() const noexcept
   AddEdge(EdgeFactory().GetNastyTest(1),vd_3,vd_1,g);
   AddEdge(EdgeFactory().GetNastyTest(2),vd_4,vd_1,g);
   assert(CountCenterNodes(g) == 1);
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get7() const noexcept
@@ -149,7 +149,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get7() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty2(),false,true), vd_2, vd_5, g);
   AddEdge(Edge(NodeFactory().GetNasty1(),false,true), vd_1, vd_2, g);
 
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get8() const noexcept
@@ -168,7 +168,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get8() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty2(),false,true), vd_2, vd_5, g);
   AddEdge(Edge(NodeFactory().GetNasty0(),false,true), vd_1, vd_2, g);
 
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get9() const noexcept
@@ -186,7 +186,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get9() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty0(),false,true), vd_2, vd_5, g);
   AddEdge(Edge(NodeFactory().GetNasty1(),false,true), vd_1, vd_2, g);
 
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get10() const noexcept
@@ -214,7 +214,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get10() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty1(),false,true), vd_2, vd_5, g);
   AddEdge(Edge(NodeFactory().GetNasty2(),false,true), vd_1, vd_2, g);
 
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept
@@ -236,7 +236,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept
   AddEdge(Edge(NodeFactory().GetNasty0(),false,true), vd_1, vd_4, g);
   AddEdge(Edge(NodeFactory().GetNasty1(),false,true), vd_1, vd_5, g);
 
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLonelyQtCenterNode() const noexcept
@@ -265,7 +265,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetStarShaped() const noex
   AddEdge(Edge(NodeFactory().CreateFromStrings("3"),false,true), vd_1, vd_3, g);
   AddEdge(Edge(NodeFactory().CreateFromStrings("4"),false,true), vd_1, vd_4, g);
 
-  return RepositionNodes(g);
+  return Reposition(g);
 
 }
 
@@ -364,7 +364,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetWithExamplesWithCompete
 
   AddEdge(Edge(NodeFactory().GetTest(0),false,false), vd_1, vd_2, g);
 
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetNasty0() const noexcept
@@ -405,7 +405,7 @@ ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample() const noexcept
   const auto vd_3 = AddVertex(Node(concept3), g);
   AddEdge(Edge(Node(Concept("prerequisite", examples_1)),true),vd_2,vd_1,g);
   AddEdge(Edge(Node(Concept("strengthen", examples_2)),true,true),vd_2,vd_3,g);
-  return RepositionNodes(g);
+  return Reposition(g);
   //return g;
 }
 
@@ -440,7 +440,7 @@ ribi::cmap::ConceptMapFactory::GetQtRatedConceptDialogExample() const noexcept
   const auto vd_3 = AddVertex(Node(concept3), g);
   AddEdge(Edge(Node(Concept("prerequisite", examples_edge_1)),true),vd_2,vd_1,g);
   AddEdge(Edge(Node(Concept("strengthen", examples_edge_2)),true,true),vd_2,vd_3,g);
-  return RepositionNodes(g);
+  return Reposition(g);
 }
 
 std::vector<ribi::cmap::ConceptMap >
@@ -463,33 +463,48 @@ ribi::cmap::ConceptMapFactory::GetAllTests() const noexcept
   return v;
 }
 
-ribi::cmap::ConceptMap ribi::cmap::RepositionNodes(ConceptMap& g)
+ribi::cmap::ConceptMap ribi::cmap::Reposition(ConceptMap& g)
 {
-  auto nodes = GetNodes(g);
-  const int n_center{CountCenterNodes(nodes)};
-  const int n_normal{static_cast<int>(nodes.size()) - n_center};
-
-
-  double delta_angle{
-    boost::math::constants::pi<double>() / static_cast<double>(n_normal)
-  };
-  double angle{0.0};
-  for (Node& node: nodes)
+  //Reposition the nodes
   {
-    if (IsCenterNode(node))
+    auto nodes = GetNodes(g);
+    const int n_center{CountCenterNodes(nodes)};
+    const int n_normal{static_cast<int>(nodes.size()) - n_center};
+    double delta_angle{
+      boost::math::constants::pi<double>() / static_cast<double>(n_normal)
+    };
+    double angle{0.0};
+    for (Node& node: nodes)
     {
-      node.SetPos(0.0, 0.0);
+      if (IsCenterNode(node))
+      {
+        node.SetPos(0.0, 0.0);
+      }
+      else
+      {
+        const double r{200.0}; //ray, half of diameter
+        const double x{ std::sin(angle) * r};
+        const double y{-std::cos(angle) * r};
+        node.SetPos(x, y);
+        angle += delta_angle;
+      }
     }
-    else
+
+    ::set_my_bundled_vertexes(g, nodes);
+  }
+  //Reposition edges
+  {
+    const auto eip = boost::edges(g);
+    const auto ei_end = eip.second;
+    for (auto ei = eip.first; ei != ei_end; ++ei)
     {
-      const double r{200.0}; //ray, half of diameter
-      const double x{ std::sin(angle) * r};
-      const double y{-std::cos(angle) * r};
-      node.SetPos(x, y);
-      angle += delta_angle;
+      const EdgeDescriptor ed = *ei;
+      const Node& from = g[boost::source(ed, g)];
+      const Node& to = g[boost::target(ed, g)];
+      Edge& edge = g[ed];
+      SetX(edge, 0.5 * (from.GetX() + to.GetX()));
+      SetY(edge, 0.5 * (from.GetY() + to.GetY()));
     }
   }
-
-  ::set_my_bundled_vertexes(g, nodes);
   return g;
 }
