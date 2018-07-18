@@ -129,7 +129,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get6() const noexcept
   AddEdge(EdgeFactory().GetNastyTest(0),vd_2,vd_3,g);
   AddEdge(EdgeFactory().GetNastyTest(1),vd_3,vd_1,g);
   AddEdge(EdgeFactory().GetNastyTest(2),vd_4,vd_1,g);
-
+  assert(CountCenterNodes(g) == 1);
   return RepositionNodes(g);
 }
 
