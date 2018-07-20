@@ -112,6 +112,8 @@ void Move(Edge& edge, const double dx, const double dy);
 
 void SetConcept(Edge& edge, const Concept& concept) noexcept;
 
+void SetExamples(Edge& edge, const Examples& examples) noexcept;
+
 ///Set the x coordinat of the center of the Node on this Edge
 void SetX(Edge& edge, const double x) noexcept;
 

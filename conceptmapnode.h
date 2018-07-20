@@ -166,6 +166,8 @@ bool NodeHasExamples(const Node& node) noexcept;
 ///Set the Concept of the Node
 void SetConcept(Node& node, const Concept& concept);
 
+void SetExamples(Node& node, const Examples& examples) noexcept;
+
 ///Set the rating of this Node for complexity
 ///-1: not rated, 0: lowest, 2: highest
 void SetRatingComplexity(Node& node, const int rating_complexity);

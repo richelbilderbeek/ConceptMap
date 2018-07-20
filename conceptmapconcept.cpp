@@ -232,6 +232,11 @@ void ribi::cmap::Concept::SetRatingComplexity(const int rating_complexity)
   Ensures(m_rating_complexity <=  2); //!OCLINT not a double negative in practice
 }
 
+void ribi::cmap::SetExamples(Concept& concept, const Examples& examples) noexcept
+{
+  concept.SetExamples(examples);
+}
+
 void ribi::cmap::SetRatingComplexity(
   Concept& concept,
   const int rating_complexity

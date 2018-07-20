@@ -157,6 +157,8 @@ bool HasExamples(const Concept& concept) noexcept;
 
 bool IsComplex(const Concept& concept) noexcept;
 
+void SetExamples(Concept& concept, const Examples& examples) noexcept;
+
 ///Set the rating of this Concept for complexity
 ///-1: not rated, 0: lowest, 2: highest
 void SetRatingComplexity(Concept& concept, const int rating_complexity);

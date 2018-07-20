@@ -21,7 +21,7 @@ ribi::cmap::Node::Node(
   const int id
 ) noexcept
   : m_concept{concept},
-    m_id{id < 0 ? sm_ids++ : id},
+    m_id{id < 0 ? (sm_ids++) : id},
     m_type{type},
     m_x(x),
     m_y(y)
