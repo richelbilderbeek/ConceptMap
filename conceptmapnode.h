@@ -19,11 +19,15 @@ struct NodeFactory;
 ///A Node is the GUI independent part of a node. It is displayed as:
 struct Node
 {
+  /// @param id the ID. If -1, it will be assigned to a positive number.
+  ///   Else, the id will be passed
+  ///
   explicit Node(
     const Concept& concept = Concept(),
     const NodeType node_type = NodeType::normal,
     const double x = 0.0,
-    const double y = 0.0
+    const double y = 0.0,
+    const int id = -1
   ) noexcept;
 
   ///When all text is GraphViz-friendly encoded, Decode will get the normal text back

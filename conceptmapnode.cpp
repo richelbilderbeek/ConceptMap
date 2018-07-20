@@ -1,28 +1,15 @@
-
-
-
-
 #include "conceptmapnode.h"
 
-#include <cmath>
-#include <iostream>
-#include <boost/lambda/lambda.hpp>
-#include <boost/lexical_cast.hpp>
+#include <cassert>
+#include <sstream>
 
-#include "container.h"
-#include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
-#include "conceptmapnodefactory.h"
-#include "is_graphviz_friendly.h"
-#include "conceptmapcenternodefactory.h"
-#include "conceptmapexamplefactory.h"
-#include "conceptmaphelper.h"
 #include "conceptmapregex.h"
-
-#include "xml.h"
+#include "container.h"
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"
-
+#include "is_graphviz_friendly.h"
+#include "xml.h"
 
 int ribi::cmap::Node::sm_ids = 0; //!OCLINT use static to track instances
 
@@ -30,10 +17,11 @@ ribi::cmap::Node::Node(
   const Concept& concept,
   const NodeType type,
   const double x,
-  const double y
+  const double y,
+  const int id
 ) noexcept
   : m_concept{concept},
-    m_id{sm_ids++},
+    m_id{id < 0 ? sm_ids++ : id},
     m_type{type},
     m_x(x),
     m_y(y)
