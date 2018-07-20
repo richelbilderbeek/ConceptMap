@@ -30,7 +30,7 @@ ribi::cmap::Node::Node(
   assert(m_concept == concept);
 }
 
-int ribi::cmap::Node::AssignId(const int id)
+int ribi::cmap::Node::AssignId(const int id) //!OCLINT
 {
   if (id < 0)
   {
@@ -38,10 +38,7 @@ int ribi::cmap::Node::AssignId(const int id)
     ++sm_ids;
     return new_id;
   }
-  else
-  {
-    return id;
-  }
+  return id;
 }
 
 std::vector<std::string> ribi::cmap::CollectExamplesTexts(const Node& node) noexcept

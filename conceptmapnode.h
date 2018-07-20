@@ -93,7 +93,7 @@ struct Node
 
   ///If id is positive, copy it
   ///If id is negative, create a new ID and return it
-  static int AssignId(const int id);
+  static int AssignId(const int id); //!OCLINT
 
   //friend bool HaveSameIds(const Node& lhs, const Node& rhs) noexcept;
 };
