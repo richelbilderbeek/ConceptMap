@@ -21,13 +21,27 @@ ribi::cmap::Node::Node(
   const int id
 ) noexcept
   : m_concept{concept},
-    m_id{id < 0 ? (sm_ids++) : id},
+    m_id{AssignId(id)},
     m_type{type},
     m_x(x),
     m_y(y)
 {
   SetConcept(concept);
   assert(m_concept == concept);
+}
+
+int ribi::cmap::Node::AssignId(const int id)
+{
+  if (id < 0)
+  {
+    const int new_id{sm_ids};
+    ++sm_ids;
+    return new_id;
+  }
+  else
+  {
+    return id;
+  }
 }
 
 std::vector<std::string> ribi::cmap::CollectExamplesTexts(const Node& node) noexcept
