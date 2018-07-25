@@ -22,10 +22,11 @@ struct NodeFactory
 
   Node CreateFromStrings(
     const std::string& name,
-    const std::vector<std::pair<std::string,Competency> >& examples = {},
+    const std::vector<std::string>& examples = {},
     const double x = 0.0,
     const double y = 0.0
   ) const noexcept;
+
 
   int GetNumberOfTests() const noexcept;
   std::vector<Node> GetTests() const noexcept;
@@ -37,6 +38,14 @@ struct NodeFactory
   Node GetNasty1() const noexcept;
   Node GetNasty2() const noexcept;
   Node GetNastyTest(const int test) const noexcept;
+
+  private:
+  Node CreateFromStringsOld(
+    const std::string& name,
+    const std::vector<std::pair<std::string,Competency> >& examples = {},
+    const double x = 0.0,
+    const double y = 0.0
+  ) const noexcept;
 };
 
 } //~namespace cmap

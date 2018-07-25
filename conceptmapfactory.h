@@ -80,6 +80,9 @@ public:
   /// one --- two
   ///    second
   ConceptMap GetTwoNodeOneEdgeNoCenter() const noexcept;
+
+  ///Unrated and human-friendly concept map
+  ConceptMap GetUnrated() const noexcept;
 };
 
 void AddEdge(

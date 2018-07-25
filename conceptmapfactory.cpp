@@ -463,6 +463,34 @@ ribi::cmap::ConceptMapFactory::GetAllTests() const noexcept
   return v;
 }
 
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetUnrated() const noexcept
+{
+  ConceptMap g;
+
+  const auto vd_1 = AddVertex(CenterNodeFactory().CreateFromStrings(
+    "As a student teacher of English as a foreign language, "
+    "I have knowledge of ..."),
+    g
+  );
+  const auto vd_3 = AddVertex(NodeFactory().CreateFromStrings(
+    "My own professional development", { "Some example" }), g);
+  const auto vd_4 = AddVertex(NodeFactory().CreateFromStrings("Myself as a teacher"), g);
+  const auto vd_2 = AddVertex(
+    NodeFactory().CreateFromStrings(
+      "Profession in general",
+      { "An example" }
+    ), g);
+  const auto vd_5 = AddVertex(NodeFactory().CreateFromStrings("Pupils"), g);
+  const auto vd_6 = AddVertex(NodeFactory().CreateFromStrings("Connecting with children"), g);
+  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("")), vd_1, vd_2, g);
+  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("")), vd_1, vd_3, g);
+  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("")), vd_1, vd_5, g);
+  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("")), vd_1, vd_6, g);
+  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("Affects")), vd_2, vd_4, g);
+  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("Is connected with")), vd_3, vd_4, g);
+  return Reposition(g);
+}
+
 ribi::cmap::ConceptMap ribi::cmap::Reposition(ConceptMap& g)
 {
   //Reposition the nodes
@@ -471,7 +499,7 @@ ribi::cmap::ConceptMap ribi::cmap::Reposition(ConceptMap& g)
     const int n_center{CountCenterNodes(nodes)};
     const int n_normal{static_cast<int>(nodes.size()) - n_center};
     double delta_angle{
-      boost::math::constants::pi<double>() / static_cast<double>(n_normal)
+      2.0 * boost::math::constants::pi<double>() / static_cast<double>(n_normal)
     };
     double angle{0.0};
     for (Node& node: nodes)
@@ -482,7 +510,7 @@ ribi::cmap::ConceptMap ribi::cmap::Reposition(ConceptMap& g)
       }
       else
       {
-        const double r{200.0}; //ray, half of diameter
+        const double r{250.0}; //ray, half of diameter
         const double x{ std::sin(angle) * r};
         const double y{-std::cos(angle) * r};
         node.SetPos(x, y);

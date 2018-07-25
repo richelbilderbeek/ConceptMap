@@ -21,13 +21,29 @@ ribi::cmap::NodeFactory::NodeFactory()
 
 ribi::cmap::Node ribi::cmap::NodeFactory::CreateFromStrings(
   const std::string& name,
+  const std::vector<std::string>& examples,
+  const double x,
+  const double y
+) const noexcept
+{
+  std::vector<std::pair<std::string, Competency>> v;
+  v.reserve(examples.size());
+  for (const auto& example: examples)
+  {
+    v.push_back(std::make_pair(example, Competency::uninitialized));
+  }
+  return CreateFromStringsOld(name, v, x, y);
+}
+
+ribi::cmap::Node ribi::cmap::NodeFactory::CreateFromStringsOld(
+  const std::string& name,
   const std::vector<std::pair<std::string,Competency> >& examples,
   const double x,
   const double y
 ) const noexcept
 {
   Node node(
-    ConceptFactory().Create(name,examples),
+    ConceptFactory().Create(name, examples),
     NodeType::normal,
     x,
     y
