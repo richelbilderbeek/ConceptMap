@@ -140,18 +140,6 @@ std::istream& ribi::cmap::operator>>(std::istream& is, Examples& examples)
 {
   std::string s;
   is >> s;
-  /*
-  //eat until '</example>'
-  is >> std::noskipws;
-  std::string s;
-  while (1)
-  {
-    char c;
-    is >> c;
-    s += c;
-    if(s.size() > 11 && s.substr(s.size() - 11,11) == "</examples>") break;
-  }
-  */
   assert(s != "0");
   examples = XmlToExamples(graphviz_decode(s));
   return is;

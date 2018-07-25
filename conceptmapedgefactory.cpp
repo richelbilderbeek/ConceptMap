@@ -96,28 +96,6 @@ std::vector<ribi::cmap::Edge> ribi::cmap::EdgeFactory::GetTests() const noexcept
       edge.SetHeadArrow(true);
       result.emplace_back(edge);
     }
-    /*
-    {
-      const EdgePtr edge(new Edge(concept,0,2,true));
-      result.push_back(edge);
-    }
-    {
-      const EdgePtr edge(new Edge(concept,0,3,true));
-      result.push_back(edge);
-    }
-    {
-      const EdgePtr edge(new Edge(concept,1,2,false));
-      result.push_back(edge);
-    }
-    {
-      const EdgePtr edge(new Edge(concept,1,3,false));
-      result.push_back(edge);
-    }
-    {
-      const EdgePtr edge(new Edge(concept,2,3,false));
-      result.push_back(edge);
-    }
-    */
   }
   assert(GetNumberOfTests() == static_cast<int>(result.size()));
   return result;
