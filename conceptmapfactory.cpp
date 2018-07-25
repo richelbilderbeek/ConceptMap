@@ -507,7 +507,7 @@ ribi::cmap::ConceptMap ribi::cmap::Reposition(ConceptMap& g)
     double delta_angle{
       2.0 * boost::math::constants::pi<double>() / static_cast<double>(n_normal)
     };
-    double angle{0.0};
+    double angle{-delta_angle / 3.0}; //Gives a nice twist to a
     for (Node& node: nodes)
     {
       if (IsCenterNode(node))
