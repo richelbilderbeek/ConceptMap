@@ -473,7 +473,11 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetUnrated() const noexcep
     g
   );
   const auto vd_3 = AddVertex(NodeFactory().CreateFromStrings(
-    "My own professional development", { "Some example" }), g);
+    "My own professional development",
+    {
+      "Keep your portfolio posted up",
+      "Reflection"
+    }), g);
   const auto vd_4 = AddVertex(NodeFactory().CreateFromStrings("Myself as a teacher"), g);
   const auto vd_2 = AddVertex(
     NodeFactory().CreateFromStrings(
@@ -481,13 +485,14 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetUnrated() const noexcep
       { "An example" }
     ), g);
   const auto vd_5 = AddVertex(NodeFactory().CreateFromStrings("Pupils"), g);
-  const auto vd_6 = AddVertex(NodeFactory().CreateFromStrings("Connecting with children"), g);
+  const auto vd_6 = AddVertex(NodeFactory().CreateFromStrings("Myself as a person"), g);
   AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("")), vd_1, vd_2, g);
   AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("")), vd_1, vd_3, g);
   AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("")), vd_1, vd_5, g);
   AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("")), vd_1, vd_6, g);
-  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("Affects")), vd_2, vd_4, g);
-  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("Is connected with")), vd_3, vd_4, g);
+  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("affects")), vd_2, vd_4, g);
+  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("is connected with")), vd_3, vd_4, g);
+  AddEdge(EdgeFactory().Create(NodeFactory().CreateFromStrings("is connected with")), vd_3, vd_6, g);
   return Reposition(g);
 }
 
