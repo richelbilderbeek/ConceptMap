@@ -80,6 +80,8 @@ private:
   void SetCompetencyAsStr(const std::string& s) const;
 };
 
+///Returns true if the example's competency is set by the assessor
+bool IsRated(const Example& example) noexcept;
 
 std::string ToXml(const Example& example) noexcept;
 Example XmlToExample(const std::string& s);

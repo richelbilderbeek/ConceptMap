@@ -125,6 +125,11 @@ std::string ribi::cmap::Example::ToStr() const noexcept
 
 }
 
+bool ribi::cmap::IsRated(const Example& example) noexcept
+{
+  return example.GetCompetency() != Competency::uninitialized;
+}
+
 std::string ribi::cmap::ToXml(const Example& example) noexcept
 {
   std::stringstream s;

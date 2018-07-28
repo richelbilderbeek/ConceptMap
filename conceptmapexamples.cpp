@@ -41,6 +41,19 @@ int ribi::cmap::CountExamples(const Examples& examples) noexcept
   return examples.Get().size();
 }
 
+int ribi::cmap::CountExamplesRated(const Examples& examples) noexcept
+{
+  const auto& exs = examples.Get();
+  return std::count_if(
+    std::begin(exs),
+    std::end(exs),
+    [](const Example& example)
+    {
+      return IsRated(example);
+    }
+  );
+}
+
 void ribi::cmap::Examples::Decode() noexcept
 {
   for (auto& example: Get())
