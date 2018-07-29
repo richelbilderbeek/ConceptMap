@@ -92,7 +92,7 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
 {
   const int n_edges = std::min(3, static_cast<int>(boost::num_edges(sub_conceptmap)));
   assert(boost::num_vertices(sub_conceptmap) > 0);
-  const int n_examples = std::min(4, CountExamples(sub_conceptmap[vd]));
+  const int n_examples = std::min(3, CountExamples(sub_conceptmap[vd]));
   return SuggestComplexity(n_edges, n_examples);
 }
 
