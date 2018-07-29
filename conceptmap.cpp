@@ -465,7 +465,29 @@ bool ribi::cmap::HasUninitializedExamples(const ConceptMap& c) noexcept
 
 bool ribi::cmap::IsConnectedTo(const Edge& edge, const Node& node, const ConceptMap& c)
 {
-  return GetFrom(edge,c) == node || GetTo(edge, c) == node;
+  return GetFrom(edge, c) == node || GetTo(edge, c) == node;
+}
+
+bool ribi::cmap::IsPrimaryConcept(const VertexDescriptor vd, const ConceptMap& c)
+{
+  if (IsCenterNode(c[vd])) return false;
+
+  // For undirected graphs holds:
+  //   boost::in_edges(vd, c) == boost::out_edges(vd, c)
+  const auto eip = boost::in_edges(vd, c);
+  for (auto ei = eip.first; ei != eip.second; ++ei)
+  {
+    const EdgeDescriptor ed = *ei;
+    if (IsCenterNode(c[boost::source(ed, c)])) return true;
+    if (IsCenterNode(c[boost::target(ed, c)])) return true;
+  }
+  return false;
+}
+
+bool ribi::cmap::IsSecondaryConcept(const VertexDescriptor vd, const ConceptMap& c)
+{
+  if (IsCenterNode(c[vd])) return false;
+  return !IsPrimaryConcept(vd, c);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::LoadFromFile(const std::string& dot_filename)

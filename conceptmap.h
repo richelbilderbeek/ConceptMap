@@ -103,6 +103,13 @@ bool HasUninitializedExamples(const ConceptMap& c) noexcept;
 ///Is the Edge connected to the Node?
 bool IsConnectedTo(const Edge& edge, const Node& node, const ConceptMap& c);
 
+///Is the vertex connected to the center node?
+bool IsPrimaryConcept(const VertexDescriptor vd, const ConceptMap& c);
+
+///Is the vertex unconnected to the center node (or: only to primary and
+///secondary vertices)?
+bool IsSecondaryConcept(const VertexDescriptor vd, const ConceptMap& c);
+
 ConceptMap LoadFromFile(const std::string& dot_filename);
 ConceptMap RemoveFirstNode(ConceptMap g);
 void SaveToFile(const ConceptMap& g, const std::string& dot_filename);
