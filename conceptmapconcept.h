@@ -14,17 +14,14 @@ struct ConceptFactory;
 ///A Concept is a class that has a name and examples
 ///A Concept is a Node without coordinats
 ///A Concept is an Edge without coordinats, source and target
-///A Concept is the GUI independent part of a concept. It is displayed as:
-/// - QtConceptDialog (as a QDialog, to be used in a QDialog)
-/// - (as part of QtNode)
-/// - (as part of QtEdge)
 struct Concept
 {
-  ///Let only ConceptFactory construct Concepts
+  // A relation is complex by default, as requested by employer:
+  // https://github.com/richelbilderbeek/Brainweaver/issues/221
   explicit Concept(
     const std::string& name = "...",
     const Examples& examples = Examples(),
-    const bool is_complex = false,
+    const bool is_complex = true,
     const int rating_complexity = -1,
     const int rating_concreteness = -1,
     const int rating_specificity = -1
@@ -158,6 +155,9 @@ bool HasExamples(const Concept& concept) noexcept;
 bool IsComplex(const Concept& concept) noexcept;
 
 void SetExamples(Concept& concept, const Examples& examples) noexcept;
+
+///Set the tallied complexity
+void SetIsComplex(Concept& concept, const bool is_complex = true);
 
 ///Set the rating of this Concept for complexity
 ///-1: not rated, 0: lowest, 2: highest

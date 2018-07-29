@@ -237,6 +237,11 @@ void ribi::cmap::SetExamples(Concept& concept, const Examples& examples) noexcep
   concept.SetExamples(examples);
 }
 
+void ribi::cmap::SetIsComplex(Concept& concept, const bool is_complex)
+{
+  concept.SetIsComplex(is_complex);
+}
+
 void ribi::cmap::SetRatingComplexity(
   Concept& concept,
   const int rating_complexity

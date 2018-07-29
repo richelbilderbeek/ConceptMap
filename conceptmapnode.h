@@ -172,6 +172,9 @@ void SetConcept(Node& node, const Concept& concept);
 
 void SetExamples(Node& node, const Examples& examples) noexcept;
 
+///Set the tallied complexity
+void SetIsComplex(Node& node, const bool is_complex = true);
+
 ///Set the rating of this Node for complexity
 ///-1: not rated, 0: lowest, 2: highest
 void SetRatingComplexity(Node& node, const int rating_complexity);

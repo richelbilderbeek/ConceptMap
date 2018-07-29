@@ -12,6 +12,9 @@ namespace cmap {
 /// - QtExampleDialog
 struct Example
 {
+  // An example's tallied XCS scores are complex by default,
+  // as requested by employer:
+  // https://github.com/richelbilderbeek/Brainweaver/issues/221
   explicit Example(
     const std::string& text = "",
     const cmap::Competency competency = Competency::uninitialized,

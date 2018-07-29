@@ -240,6 +240,11 @@ void ribi::cmap::SetConcept(Node& node, const Concept& concept)
   node.SetConcept(concept);
 }
 
+void ribi::cmap::SetIsComplex(Node& node, const bool is_complex)
+{
+  SetIsComplex(node.GetConcept(), is_complex);
+}
+
 void ribi::cmap::SetRatingComplexity(
   Node& node,
   const int rating_complexity

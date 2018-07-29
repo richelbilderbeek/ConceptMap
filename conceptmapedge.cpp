@@ -30,7 +30,6 @@ ribi::cmap::Edge::Edge(
     m_id{sm_ids++},
     m_node{node}
 {
-
 }
 
 ribi::cmap::Edge::~Edge() noexcept
