@@ -6,8 +6,8 @@ ribi::cmap::RatingComplexity::RatingComplexity(
   const std::map<std::pair<int, int>, int> &rating_complexity
 ) : m_rating{rating_complexity}
 {
-  // [0, 3] number of nodes, [0, 4] number of examples
-  assert(m_rating.size() == 20);
+  // [0, 3] number of nodes, [0, 3] number of examples
+  assert(m_rating.size() == 16);
 }
 
 ribi::cmap::RatingComplexity ribi::cmap::CreateDefaultRatingComplexity() noexcept
@@ -19,22 +19,18 @@ ribi::cmap::RatingComplexity ribi::cmap::CreateDefaultRatingComplexity() noexcep
       { {0, 1}, 0 },
       { {0, 2}, 0 },
       { {0, 3}, 0 },
-      { {0, 4}, 0 },
       { {1, 0}, 0 },
       { {1, 1}, 1 },
       { {1, 2}, 1 },
       { {1, 3}, 1 },
-      { {1, 4}, 1 },
       { {2, 0}, 1 },
       { {2, 1}, 2 },
       { {2, 2}, 2 },
       { {2, 3}, 2 },
-      { {2, 4}, 2 },
       { {3, 0}, 2 },
       { {3, 1}, 2 },
       { {3, 2}, 2 },
-      { {3, 3}, 2 },
-      { {3, 4}, 2 }
+      { {3, 3}, 2 }
     }
   );
 }
@@ -48,22 +44,18 @@ ribi::cmap::RatingComplexity ribi::cmap::CreateTestRatingComplexity() noexcept
       { {0, 1}, 1 },
       { {0, 2}, 1 },
       { {0, 3}, 1 },
-      { {0, 4}, 1 },
       { {1, 0}, 1 },
       { {1, 1}, 2 },
       { {1, 2}, 2 },
       { {1, 3}, 2 },
-      { {1, 4}, 2 },
       { {2, 0}, 2 },
       { {2, 1}, 0 },
       { {2, 2}, 0 },
       { {2, 3}, 0 },
-      { {2, 4}, 0 },
       { {3, 0}, 0 },
       { {3, 1}, 0 },
       { {3, 2}, 0 },
-      { {3, 3}, 0 },
-      { {3, 4}, 0 }
+      { {3, 3}, 0 }
     }
   );
 }

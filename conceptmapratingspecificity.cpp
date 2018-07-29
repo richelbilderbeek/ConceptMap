@@ -34,7 +34,7 @@ ribi::cmap::RatingSpecificity ribi::cmap::CreateTestRatingSpecificity() noexcept
       {1, 1},
       {2, 2},
       {3, 2},
-      {4, 0}
+      {4, 2}
     }
   );
 }
