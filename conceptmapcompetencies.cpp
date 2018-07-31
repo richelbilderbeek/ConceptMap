@@ -67,17 +67,17 @@ ribi::cmap::CreateMapDutchShort() noexcept
   m.insert(boost::bimap<Competency,std::string>::value_type(
     Competency::uninitialized,"??"));
   m.insert(boost::bimap<Competency,std::string>::value_type(
-    Competency::profession,"KB"));
+    Competency::profession,"BD"));
   m.insert(boost::bimap<Competency,std::string>::value_type(
-    Competency::organisations,"KO"));
+    Competency::organisations,"OR"));
   m.insert(boost::bimap<Competency,std::string>::value_type(
-    Competency::social_surroundings,"KS"));
+    Competency::social_surroundings,"SO"));
   m.insert(boost::bimap<Competency,std::string>::value_type(
-    Competency::target_audience,"KD"));
+    Competency::target_audience,"DG"));
   m.insert(boost::bimap<Competency,std::string>::value_type(
     Competency::ti_knowledge,"TI"));
   m.insert(boost::bimap<Competency,std::string>::value_type(
-    Competency::prof_growth,"KE"));
+    Competency::prof_growth,"EP"));
   m.insert(boost::bimap<Competency,std::string>::value_type(
     Competency::misc,"OV"));
   assert(m.left.size() == static_cast<int>(Competency::n_competencies));
