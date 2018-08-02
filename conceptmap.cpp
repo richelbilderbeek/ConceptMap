@@ -344,8 +344,8 @@ std::string ribi::cmap::GetFocusName(
   if (boost::num_vertices(sub_conceptmap) == 0)
   {
     std::stringstream msg;
-    msg << __func__ << ": cannot get the name of a focal node, "
-      << "when there are zero nodes"
+    msg << "cannot get the name of a focal node, "
+        << "when there are zero nodes"
     ;
     throw std::invalid_argument(msg.str());
   }
