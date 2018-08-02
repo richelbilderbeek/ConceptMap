@@ -106,7 +106,30 @@ const ribi::cmap::Concept& ribi::cmap::GetConcept(const Node& node) noexcept
   return node.GetConcept();
 }
 
+const ribi::cmap::Example& ribi::cmap::GetExample(
+  const Node& node,
+  const int i)
+{
+  assert(i >= 0);
+  assert(i < CountExamples(node));
+  return GetExamples(node).Get()[i];
+}
+
+ribi::cmap::Example& ribi::cmap::GetExample(
+  Node& node,
+  const int i)
+{
+  assert(i >= 0);
+  assert(i < CountExamples(node));
+  return GetExamples(node).Get()[i];
+}
+
 const ribi::cmap::Examples& ribi::cmap::GetExamples(const Node& node) noexcept
+{
+  return GetExamples(node.GetConcept());
+}
+
+ribi::cmap::Examples& ribi::cmap::GetExamples(Node& node) noexcept
 {
   return GetExamples(node.GetConcept());
 }

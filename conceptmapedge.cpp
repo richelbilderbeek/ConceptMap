@@ -42,10 +42,27 @@ std::vector<std::string> ribi::cmap::CollectExamplesTexts(const Edge& edge) noex
   return CollectExamplesTexts(edge.GetNode());
 }
 
-
 int ribi::cmap::CountExamples(const Edge& edge) noexcept
 {
   return CountExamples(edge.GetNode());
+}
+
+const ribi::cmap::Example& ribi::cmap::GetExample(
+  const Edge& edge,
+  const int i)
+{
+  assert(i >= 0);
+  assert(i < CountExamples(edge));
+  return GetExamples(edge).Get()[i];
+}
+
+ribi::cmap::Example& ribi::cmap::GetExample(
+  Edge& edge,
+  const int i)
+{
+  assert(i >= 0);
+  assert(i < CountExamples(edge));
+  return GetExamples(edge).Get()[i];
 }
 
 const ribi::cmap::Concept& ribi::cmap::GetConcept(const Edge& edge) noexcept
@@ -54,6 +71,11 @@ const ribi::cmap::Concept& ribi::cmap::GetConcept(const Edge& edge) noexcept
 }
 
 const ribi::cmap::Examples& ribi::cmap::GetExamples(const Edge& edge) noexcept
+{
+  return GetExamples(edge.GetNode());
+}
+
+ribi::cmap::Examples& ribi::cmap::GetExamples(Edge& edge) noexcept
 {
   return GetExamples(edge.GetNode());
 }
@@ -139,6 +161,11 @@ void ribi::cmap::Move(Edge& edge, const double dx, const double dy)
 void ribi::cmap::SetConcept(Edge& edge, const Concept& concept) noexcept
 {
   SetConcept(edge.GetNode(), concept);
+}
+
+void ribi::cmap::SetIsComplex(Edge& edge, const bool is_complex)
+{
+  SetIsComplex(edge.GetNode(), is_complex);
 }
 
 void ribi::cmap::SetX(Edge& edge, const double x) noexcept

@@ -70,7 +70,13 @@ int CountExamples(const Edge& edge) noexcept;
 
 const Concept& GetConcept(const Edge& edge) noexcept;
 
+///Get the example at index i.
+///Assumes i is a valid index
+const Example& GetExample(const Edge& concept, const int i);
+      Example& GetExample(      Edge& concept, const int i);
+
 const Examples& GetExamples(const Edge& edge) noexcept;
+      Examples& GetExamples(      Edge& edge) noexcept;
 
 ///The concept on an Edge (only) being complex,
 ///as rated by an assessor.
@@ -113,6 +119,9 @@ void Move(Edge& edge, const double dx, const double dy);
 void SetConcept(Edge& edge, const Concept& concept) noexcept;
 
 void SetExamples(Edge& edge, const Examples& examples) noexcept;
+
+///Set the tallied complexity
+void SetIsComplex(Edge& edge, const bool is_complex = true);
 
 ///Set the x coordinat of the center of the Node on this Edge
 void SetX(Edge& edge, const double x) noexcept;

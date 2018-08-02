@@ -113,7 +113,13 @@ double ExtractYfromXml(const std::string& s);
 
 const Concept& GetConcept(const Node& node) noexcept;
 
+///Get the example at index i.
+///Assumes i is a valid index
+const Example& GetExample(const Node& node, const int i);
+      Example& GetExample(      Node& node, const int i);
+
 const Examples& GetExamples(const Node& node) noexcept;
+      Examples& GetExamples(      Node& node) noexcept;
 
 ///The concept on an Edge (only) being complex,
 ///as rated by an assessor.

@@ -14,14 +14,15 @@ namespace ribi {
 namespace cmap {
 
 ///Container of Example instances
-///Examples is displayed by
-/// - QtExamplesDialog: a QDialog
 struct Examples
 {
   explicit Examples(const std::vector<Example>& v = {});
 
   ///When all text is GraphViz-friendly encoded, Decode will get the normal text back
   void Decode() noexcept;
+
+  const Example& operator[](const int i) const { return m_v[i]; }
+  Example& operator[](const int i) { return m_v[i]; }
 
   const std::vector<Example>& Get() const noexcept { return m_v; }
         std::vector<Example>& Get()       noexcept { return m_v; }

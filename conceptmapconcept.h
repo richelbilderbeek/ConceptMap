@@ -135,7 +135,14 @@ int ExtractRatingConcretenessFromXml(const std::string& s);
 ///Extract a Concept its specificity rating from XML
 int ExtractRatingSpecificityFromXml(const std::string& s);
 
+///Get the example at index i.
+///Assumes i is a valid index
+const Example& GetExample(const Concept& concept, const int i);
+      Example& GetExample(      Concept& concept, const int i);
+
 const Examples& GetExamples(const Concept& concept) noexcept;
+      Examples& GetExamples(      Concept& concept) noexcept;
+
 
 ///The concept on an Edge (only) being complex,
 ///as rated by an assessor.
