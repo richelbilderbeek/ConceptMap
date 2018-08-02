@@ -53,7 +53,7 @@ const ribi::cmap::Example& ribi::cmap::GetExample(
 {
   assert(i >= 0);
   assert(i < CountExamples(edge));
-  return GetExamples(edge).Get()[i];
+  return GetExamples(edge)[i];
 }
 
 ribi::cmap::Example& ribi::cmap::GetExample(
@@ -62,7 +62,7 @@ ribi::cmap::Example& ribi::cmap::GetExample(
 {
   assert(i >= 0);
   assert(i < CountExamples(edge));
-  return GetExamples(edge).Get()[i];
+  return GetExamples(edge)[i];
 }
 
 const ribi::cmap::Concept& ribi::cmap::GetConcept(const Edge& edge) noexcept
