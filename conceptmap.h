@@ -35,8 +35,8 @@ int CalculateSpecificityExperimental(const ConceptMap& c);
 std::vector<Competency> CollectCompetenies(const ConceptMap& c) noexcept;
 
 ///Count the number of center nodes.
-///Brainweaver students work on a concept map with exactly one center node.
-///Brainweaver assessors grade a sub-conceptmap
+///BrainWeaver students work on a concept map with exactly one center node.
+///BrainWeaver assessors grade a sub-conceptmap
 /// (created with CreateDirectNeighbourConceptMap),
 /// that may have the center node excluded.
 int CountCenterNodes(const ConceptMap& c) noexcept;

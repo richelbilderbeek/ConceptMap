@@ -17,7 +17,7 @@ struct ConceptFactory;
 struct Concept
 {
   // A relation is complex by default, as requested by employer:
-  // https://github.com/richelbilderbeek/Brainweaver/issues/221
+  // https://github.com/richelbilderbeek/BrainWeaver/issues/221
   explicit Concept(
     const std::string& name = "...",
     const Examples& examples = Examples(),
