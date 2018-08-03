@@ -21,7 +21,8 @@ struct Edge
   explicit Edge(
     const Node& node = Node(),
     const bool has_head_arrow = false,
-    const bool has_tail_arrow = false
+    const bool has_tail_arrow = false,
+    const int id = -1
   );
 
   ~Edge() noexcept;
@@ -60,6 +61,7 @@ struct Edge
 
   //ID to assign
   static int sm_ids; //!OCLINT Easiest to track instances by static
+  static int AssignId(const int id); //!OCLINT
 };
 
 ///Collect the texts of all examples

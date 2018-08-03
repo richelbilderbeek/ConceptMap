@@ -23,11 +23,12 @@ int ribi::cmap::Edge::sm_ids = 0; //!OCLINT must use static to track count
 ribi::cmap::Edge::Edge(
   const Node& node,
   const bool has_head_arrow,
-  const bool has_tail_arrow
+  const bool has_tail_arrow,
+  const int id
 ) :
     m_has_head_arrow{has_head_arrow},
     m_has_tail_arrow{has_tail_arrow},
-    m_id{sm_ids++},
+    m_id{AssignId(id)},
     m_node{node}
 {
 }
@@ -35,6 +36,17 @@ ribi::cmap::Edge::Edge(
 ribi::cmap::Edge::~Edge() noexcept
 {
 
+}
+
+int ribi::cmap::Edge::AssignId(const int id) //!OCLINT
+{
+  if (id < 0)
+  {
+    const int new_id{sm_ids};
+    ++sm_ids;
+    return new_id;
+  }
+  return id;
 }
 
 std::vector<std::string> ribi::cmap::CollectExamplesTexts(const Edge& edge) noexcept
