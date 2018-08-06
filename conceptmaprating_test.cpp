@@ -17,17 +17,6 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_test_default_rating)
         RatingComplexity::SuggestComplexityDefault(n_edges, n_examples)
       );
     }
-    if (
-      r.SuggestConcreteness(n_examples) !=
-      RatingConcreteness::SuggestConcretenessDefault(n_examples)
-    )
-    {
-      std::clog
-        << "n_examples: " << n_examples << ' '
-        << r.SuggestConcreteness(n_examples) << " "
-        << RatingConcreteness::SuggestConcretenessDefault(n_examples) << '\n'
-      ;
-    }
     BOOST_CHECK_EQUAL(
       r.SuggestConcreteness(n_examples),
       RatingConcreteness::SuggestConcretenessDefault(n_examples)
