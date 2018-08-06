@@ -5,7 +5,6 @@
 
 #include <cassert>
 #include <stdexcept>
-#include <boost/lexical_cast.hpp>
 #include <boost/math/constants/constants.hpp>
 
 #include "add_bundled_edge_between_vertices.h"

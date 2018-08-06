@@ -1,4 +1,7 @@
 #include "conceptmapratingspecificity.h"
+
+#include <boost/lexical_cast.hpp>
+
 #include "conceptmapratingconcreteness.h"
 #include "ribi_regex.h"
 #include "xml.h"

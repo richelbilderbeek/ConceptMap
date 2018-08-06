@@ -3,8 +3,6 @@
 #include <cassert>
 #include <sstream>
 #include <stdexcept>
-#include <boost/lexical_cast.hpp>
-
 
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"

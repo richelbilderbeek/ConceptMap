@@ -71,7 +71,6 @@ ribi::cmap::NodeType ribi::cmap::ExtractIsCenterNodeFromXml(const std::string& s
     msg << __func__ << ": must have one center node tag in XML";
     throw std::invalid_argument(msg.str());
   }
-  //return boost::lexical_cast<bool>(ribi::xml::StripXmlTag(v[0]));
   return ToNodeType(ribi::xml::StripXmlTag(v[0]));
 }
 

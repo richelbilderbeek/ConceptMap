@@ -1,7 +1,6 @@
 #include "conceptmapedgefactory.h"
 
 #include <cassert>
-#include <boost/lexical_cast.hpp>
 
 #include "conceptmapconcept.h"
 #include "conceptmapconceptfactory.h"
