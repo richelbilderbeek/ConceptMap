@@ -82,12 +82,12 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
 {
   assert(n_edges >= 0);
   assert(n_examples >= 0);
-  if (n_examples == 0 && n_edges == 0) return 0;
   const auto iter = m_rating.find( { n_edges, n_examples} );
   if (iter == std::end(m_rating))
   {
     if (n_examples >= n_edges)
     {
+      if (n_examples == 0 && n_edges == 0) return 0;
       return SuggestComplexity(n_edges, n_examples - 1);
     }
     else

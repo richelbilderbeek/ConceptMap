@@ -65,7 +65,11 @@ int ribi::cmap::RatingSpecificity::SuggestSpecificity(
 ) const
 {
   const auto iter = m_rating.find(n_examples);
-  assert(iter != std::end(m_rating));
+  if (iter == std::end(m_rating))
+  {
+    if (n_examples == 0) return 0;
+    return SuggestSpecificity(n_examples - 1);
+  }
   return iter->second;
 }
 
