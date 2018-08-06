@@ -90,10 +90,7 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
       if (n_examples == 0 && n_edges == 0) return 0;
       return SuggestComplexity(n_edges, n_examples - 1);
     }
-    else
-    {
-      return SuggestComplexity(n_edges - 1, n_examples);
-    }
+    return SuggestComplexity(n_edges - 1, n_examples);
   }
   return iter->second;
 }
