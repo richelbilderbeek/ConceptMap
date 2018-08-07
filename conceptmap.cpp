@@ -77,7 +77,7 @@ int ribi::cmap::CalculateConcretenessExperimental(const ConceptMap& c)
   assert(!nodes.empty());
 
   const int src // sum_rated_concreteness
-    = std::accumulate(std::begin(nodes),std::end(nodes),0,
+    = std::accumulate(std::begin(nodes), std::end(nodes),0,
     [](int& init, const Node& node)
     {
       return init + node.GetConcept().GetRatingConcreteness();
@@ -303,7 +303,7 @@ std::vector<ribi::cmap::Edge> ribi::cmap::GetEdges(const ConceptMap& c) noexcept
   //return get_my_bundled_edges(c);
   const auto eip = edges(c);
   std::vector<Edge> v(boost::num_edges(c));
-  std::transform(eip.first,eip.second,std::begin(v),
+  std::transform(eip.first, eip.second, std::begin(v),
     [c](const EdgeDescriptor& d)
     {
       return c[d];
@@ -389,7 +389,7 @@ std::vector<ribi::cmap::Node> ribi::cmap::GetNodes(const ConceptMap& c) noexcept
 {
   const auto vip = vertices(c);
   std::vector<Node> v(boost::num_vertices(c));
-  std::transform(vip.first,vip.second,std::begin(v),
+  std::transform(vip.first,vip.second, std::begin(v),
     [&c](const VertexDescriptor& d)
     {
       return c[d];
@@ -398,17 +398,68 @@ std::vector<ribi::cmap::Node> ribi::cmap::GetNodes(const ConceptMap& c) noexcept
   return v;
 }
 
+std::vector<ribi::cmap::Node> ribi::cmap::GetNodesSortedByLevel(const ConceptMap& c) noexcept
+{
+  if (boost::num_vertices(c) == 0) return {};
+
+  ///Collect vertex descriptors
+  const VertexDescriptor vd_center{*boost::vertices(c).first};
+  const std::set<VertexDescriptor> vd_primary =
+    [&c, &vd_center]()
+    {
+      std::set<VertexDescriptor> vds;
+      const auto eip = boost::out_edges(vd_center, c);
+      for (auto ei = eip.first; ei != eip.second; ++ei)
+      {
+        vds.insert(boost::source(*ei, c));
+        vds.insert(boost::target(*ei, c));
+      }
+      vds.erase(*boost::vertices(c).first);
+      return vds;
+    }();
+  assert(vd_primary.count(vd_center) == 0);
+  const std::set<VertexDescriptor> vd_non_primary =
+    [&c, vd_primary]()
+    {
+      std::set<VertexDescriptor> vds;
+      const auto vip = boost::vertices(c);
+      auto vi = vip.first;
+      ++vi; //Skip center node
+      for (; vi != vip.second; ++vi)
+      {
+        const VertexDescriptor vd{*vi};
+        if (vd_primary.count(vd) == 0)
+        {
+          vds.insert(vd);
+        }
+      }
+      return vds;
+    }();
+  assert(vd_non_primary.count(vd_center) == 0);
+  assert(boost::num_vertices(c) == vd_primary.size() + vd_non_primary.size() + 1);
+
+  ///Collect the nodes
+  std::vector<Node> nodes;
+
+  nodes.push_back(c[vd_center]);
+  for (const auto vd: vd_primary) { nodes.push_back(c[vd]); }
+  for (const auto vd: vd_non_primary) { nodes.push_back(c[vd]); }
+
+  assert(boost::num_vertices(c) == nodes.size());
+  return nodes;
+}
+
 std::vector<ribi::cmap::Edge> ribi::cmap::GetSortedEdges(const ConceptMap& c) noexcept
 {
   auto v = GetEdges(c);
-  std::sort(std::begin(v),std::end(v));
+  std::sort(std::begin(v), std::end(v));
   return v;
 }
 
 std::vector<ribi::cmap::Node> ribi::cmap::GetSortedNodes(const ConceptMap& c) noexcept
 {
   auto v = GetNodes(c);
-  std::sort(std::begin(v),std::end(v));
+  std::sort(std::begin(v), std::end(v));
   return v;
 }
 
@@ -426,7 +477,7 @@ bool ribi::cmap::HasCenterNode(const ConceptMap& c) noexcept
 {
   const auto nodes = GetNodes(c);
   const auto i = std::find_if(
-    std::begin(nodes),std::end(nodes),
+    std::begin(nodes), std::end(nodes),
     [](const Node& node) {
       return IsCenterNode(node);
     }

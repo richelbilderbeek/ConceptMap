@@ -82,8 +82,14 @@ Node GetTo(const Edge& edge, const ConceptMap& c);
 /// Because 'get_my_bundled_vertexes(c)' does not work yet
 std::vector<Node> GetNodes(const ConceptMap& c) noexcept;
 
+///Sort the Nodes on their level
+std::vector<Node> GetNodesSortedByLevel(const ConceptMap& c) noexcept;
+
 std::vector<Edge> GetSortedEdges(const ConceptMap& c) noexcept;
+
+///@seealso GetNodesSortedByLevel
 std::vector<Node> GetSortedNodes(const ConceptMap& c) noexcept;
+
 bool HasCenterNode(const ConceptMap& c) noexcept;
 
 ///Checks if all Nodes and Edges contain the same data and that
