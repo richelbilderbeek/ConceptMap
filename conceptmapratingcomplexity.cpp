@@ -21,20 +21,20 @@ ribi::cmap::RatingComplexity ribi::cmap::CreateDefaultRatingComplexity() noexcep
     {
       { {0, 0}, 0 },
       { {0, 1}, 0 },
-      { {0, 2}, 0 },
-      { {0, 3}, 0 },
-      { {0, 4}, 0 },
+      { {0, 2}, 1 },
+      { {0, 3}, 1 },
+      { {0, 4}, 2 },
       { {1, 0}, 0 },
       { {1, 1}, 1 },
       { {1, 2}, 1 },
-      { {1, 3}, 1 },
-      { {1, 4}, 1 },
+      { {1, 3}, 2 },
+      { {1, 4}, 2 },
       { {2, 0}, 1 },
-      { {2, 1}, 2 },
+      { {2, 1}, 1 },
       { {2, 2}, 2 },
       { {2, 3}, 2 },
       { {2, 4}, 2 },
-      { {3, 0}, 2 },
+      { {3, 0}, 1 },
       { {3, 1}, 2 },
       { {3, 2}, 2 },
       { {3, 3}, 2 },
@@ -79,12 +79,38 @@ int ribi::cmap::RatingComplexity::SuggestComplexityDefault( //!OCLINT static bec
 {
   assert(n_edges >= 0);
   assert(n_examples >= 0);
-  return n_edges == 0  || (n_edges == 1 && n_examples == 0)
-    ? 0
-    : (n_edges == 1 && n_examples > 0) || (n_edges == 2 && n_examples == 0)
-      ? 1
-      : 2
-  ;
+  if (n_edges == 0)
+  {
+    if (n_examples == 0) return 0;
+    if (n_examples == 1) return 0;
+    if (n_examples == 2) return 1;
+    if (n_examples == 3) return 1;
+    assert(n_examples  > 3);
+    return 2;
+  }
+  if (n_edges == 1)
+  {
+    if (n_examples == 0) return 0;
+    if (n_examples == 1) return 1;
+    if (n_examples == 2) return 1;
+    assert(n_examples  >= 3);
+    return 2;
+  }
+  if (n_edges == 2)
+  {
+    if (n_examples == 0) return 1;
+    if (n_examples == 1) return 1;
+    assert(n_examples >= 2);
+    return 2;
+  }
+  if (n_edges == 3)
+  {
+    if (n_examples == 0) return 1;
+    assert(n_examples >= 1);
+    return 2;
+  }
+  assert(n_edges > 3);
+  return 2;
 }
 
 int ribi::cmap::RatingComplexity::SuggestComplexity(
@@ -97,12 +123,7 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
   const auto iter = m_rating.find( { n_edges, n_examples} );
   if (iter == std::end(m_rating))
   {
-    if (n_examples >= n_edges)
-    {
-      if (n_examples == 0 && n_edges == 0) return 0;
-      return SuggestComplexity(n_edges, n_examples - 1);
-    }
-    return SuggestComplexity(n_edges - 1, n_examples);
+    return 2;
   }
   return iter->second;
 }
