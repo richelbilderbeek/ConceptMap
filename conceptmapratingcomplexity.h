@@ -49,16 +49,21 @@ RatingComplexity XmlToRatingComplexity(const std::string& s);
 
 ///To be used as a tooltip
 ///@param rating a Rating
-///@param n_examples_emphasized the number of complex examples that will
-///   be displayed in italics for emphasis. No column will be highlighted
+///@param n_examples_emph the number of complex examples that will
+///   be emphasized. No column will be highlighted
 ///   as such for invalid values
-///@param n_relations_emphasized the number of relations that will
-///   be displayed in italics for emphasis. No row will be highlighted
+///@param n_relations_emph the number of relations that will
+///   be emphasized. No row will be highlighted
 ///   as such for invalid values
 std::string ToHtml(
   const RatingComplexity& rating,
-  const int n_examples_emphasized = -1,
-  const int n_relations_emphasized = 1
+  const int n_examples_emph = -1,
+  const int n_relations_emph = 1
+);
+
+///Only create the header of ToHtml
+std::string ToHtmlHeader(
+  const int n_examples_emph
 );
 
 std::string ToXml(const RatingComplexity& rating);

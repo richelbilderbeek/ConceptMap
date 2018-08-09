@@ -133,8 +133,8 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
   const VertexDescriptor& vd
 ) const
 {
-  //TODO
-  const int n_edges = std::min(3, static_cast<int>(boost::num_edges(sub_conceptmap)));
+  //BUG
+  const int n_edges = boost::num_edges(sub_conceptmap);
   assert(boost::num_vertices(sub_conceptmap) > 0);
   const int n_examples = std::min(3, CountExamples(sub_conceptmap[vd]));
   return SuggestComplexity(n_edges, n_examples);
@@ -142,64 +142,70 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
 
 std::string ribi::cmap::ToHtml(
   const RatingComplexity& r,
-  const int n_examples_emphasized,
-  const int n_relations_emphasized
+  const int n_examples_emph,
+  const int n_relations_emph
 )
 {
   std::stringstream s;
-  s << "<html>\n"
-    << "<head>\n"
-    << "<style>\n"
-    << "table, th, td {\n"
-    << "    border: 1px solid black;\n"
-    << "    border-collapse: collapse;\n"
-    << "}\n"
-    << "</style>\n"
-    << "</head>\n"
-    << "<body>\n"
-    << "  <table style=\"vertical-align: middle\">\n"
-    << "    <tr>\n"
-    << "      <th> </th><th> </th><th colspan=\"5\">Aantal voorbeelden</th>\n"
-    << "    </tr>\n"
-    << "    <tr>\n"
-    << "      <th> </th><th> </th>"
+  s << "<table style=\"vertical-align: middle\">\n"
+    << ToHtmlHeader(n_examples_emph)
   ;
+  for (int n_relations = 0; n_relations != 4; ++n_relations)
+  {
+    s << "  <tr>\n";
+    if (n_relations == 0)
+    {
+      s << "    <th rowspan=\"4\"><center>Aantal relaties</center></th>\n";
+    }
+    s << "    <th>";
+    if (n_relations == n_relations_emph) { s << "<u>"; }
+    s << n_relations;
+    if (n_relations == n_relations_emph) { s << "</u>"; }
+    s << "</th>\n";
     for (int n_examples = 0; n_examples != 5; ++n_examples)
     {
+      s << "    <td><center>";
+      const bool emphasized{
+        n_relations == n_relations_emph
+        || n_examples == n_examples_emph
+      };
+      if (emphasized) { s << "<u>"; }
+      s << r.SuggestComplexity(n_relations, n_examples);
+      if (emphasized) { s << "</u>"; }
+      s << "</center></td>\n";
+    }
+    s << "  </tr>\n";
+  }
+  s
+    << "</table>"
+  ;
+  return s.str();
+}
+
+std::string ribi::cmap::ToHtmlHeader(
+  const int n_examples_emph
+)
+{
+  std::stringstream s;
+  s << "  <tr>\n"
+    << "    <th> </th><th> </th><th colspan=\"5\">Aantal complexe</th>\n"
+    << "  </tr>\n"
+    << "  <tr>\n"
+    << "    <th> </th><th> </th><th colspan=\"5\">relaties en voorbeelden</th>\n"
+    << "  </tr>\n"
+    << "  <tr>\n"
+    << "    <th> </th><th> </th>"
+  ;
+    for (int n_examples = 0; n_examples != 4; ++n_examples)
+    {
       s << "<th>";
-      if (n_examples == n_examples_emphasized) { s << "<em>"; }
+      if (n_examples == n_examples_emph) { s << "<u>"; }
       s << n_examples;
-      if (n_examples == n_examples_emphasized) { s << "</em>"; }
+      if (n_examples == n_examples_emph) { s << "</u>"; }
       s << "</th>";
     }
   s << "<th>&gt;3</th>\n";
-  for (int n_relations = 0; n_relations != 4; ++n_relations)
-  {
-    s << "    <tr>\n";
-    if (n_relations == 0)
-    {
-      s << "      <th rowspan=\"4\"><center>Aantal relaties</center></th>\n";
-    }
-    s << "      <th>" << n_relations << "</th>\n";
-    for (int n_examples = 0; n_examples != 5; ++n_examples)
-    {
-      s << "      <td><center>";
-      const bool emphasized{
-        n_relations == n_relations_emphasized
-        || n_examples == n_examples_emphasized
-      };
-      if (emphasized) { s << "<em>"; }
-      s << r.SuggestComplexity(n_relations, n_examples);
-      if (emphasized) { s << "</em>"; }
-      s << "</center></td>\n";
-    }
-    s << "    </tr>\n";
-  }
-  s
-    << "<  /table>"
-    << "</body>\n"
-    << "</html>\n"
-  ;
+  s << "  </tr>\n";
   return s.str();
 }
 
