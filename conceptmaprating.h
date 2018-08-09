@@ -21,6 +21,8 @@ struct Rating
   );
 
   const auto& GetRatingComplexity() const noexcept { return m_rating_complexity; }
+  const auto& GetRatingConcreteness() const noexcept { return m_rating_concreteness; }
+  const auto& GetRatingSpecificity() const noexcept { return m_rating_specificity; }
 
   ///Calculate a suggested complexity
   int SuggestComplexity(

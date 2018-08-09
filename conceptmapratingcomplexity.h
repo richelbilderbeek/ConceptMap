@@ -48,7 +48,18 @@ RatingComplexity CreateTestRatingComplexity() noexcept;
 RatingComplexity XmlToRatingComplexity(const std::string& s);
 
 ///To be used as a tooltip
-std::string ToHtml(const RatingComplexity& rating);
+///@param rating a Rating
+///@param n_examples_emphasized the number of complex examples that will
+///   be displayed in italics for emphasis. No column will be highlighted
+///   as such for invalid values
+///@param n_relations_emphasized the number of relations that will
+///   be displayed in italics for emphasis. No row will be highlighted
+///   as such for invalid values
+std::string ToHtml(
+  const RatingComplexity& rating,
+  const int n_examples_emphasized = -1,
+  const int n_relations_emphasized = 1
+);
 
 std::string ToXml(const RatingComplexity& rating);
 

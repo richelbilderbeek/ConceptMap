@@ -133,13 +133,18 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
   const VertexDescriptor& vd
 ) const
 {
+  //TODO
   const int n_edges = std::min(3, static_cast<int>(boost::num_edges(sub_conceptmap)));
   assert(boost::num_vertices(sub_conceptmap) > 0);
   const int n_examples = std::min(3, CountExamples(sub_conceptmap[vd]));
   return SuggestComplexity(n_edges, n_examples);
 }
 
-std::string ribi::cmap::ToHtml(const RatingComplexity& r)
+std::string ribi::cmap::ToHtml(
+  const RatingComplexity& r,
+  const int n_examples_emphasized,
+  const int n_relations_emphasized
+)
 {
   std::stringstream s;
   s << "<html>\n"
@@ -157,9 +162,17 @@ std::string ribi::cmap::ToHtml(const RatingComplexity& r)
     << "      <th> </th><th> </th><th colspan=\"5\">Aantal voorbeelden</th>\n"
     << "    </tr>\n"
     << "    <tr>\n"
-    << "      <th> </th><th> </th><th>0</th><th>1</th><th>2</th><th>3</th><th>&gt;3</th>\n"
-    << "    </tr>\n"
+    << "      <th> </th><th> </th>"
   ;
+    for (int n_examples = 0; n_examples != 5; ++n_examples)
+    {
+      s << "<th>";
+      if (n_examples == n_examples_emphasized) { s << "<em>"; }
+      s << n_examples;
+      if (n_examples == n_examples_emphasized) { s << "</em>"; }
+      s << "</th>";
+    }
+  s << "<th>&gt;3</th>\n";
   for (int n_relations = 0; n_relations != 4; ++n_relations)
   {
     s << "    <tr>\n";
@@ -170,11 +183,15 @@ std::string ribi::cmap::ToHtml(const RatingComplexity& r)
     s << "      <th>" << n_relations << "</th>\n";
     for (int n_examples = 0; n_examples != 5; ++n_examples)
     {
-      s
-        << "      <td><center>"
-        << r.SuggestComplexity(n_relations, n_examples)
-        << "</center></td>\n"
-      ;
+      s << "      <td><center>";
+      const bool emphasized{
+        n_relations == n_relations_emphasized
+        || n_examples == n_examples_emphasized
+      };
+      if (emphasized) { s << "<em>"; }
+      s << r.SuggestComplexity(n_relations, n_examples);
+      if (emphasized) { s << "</em>"; }
+      s << "</center></td>\n";
     }
     s << "    </tr>\n";
   }
