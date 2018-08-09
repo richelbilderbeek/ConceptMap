@@ -61,8 +61,8 @@ std::string ToHtml(
   const int n_relations_emph = 1
 );
 
-///Only create the header of ToHtml
-std::string ToHtmlHeader(
+///Only create the header of ToHtml for rating compleXity
+std::string ToHtmlHeaderX(
   const int n_examples_emph
 );
 

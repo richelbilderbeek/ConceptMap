@@ -76,6 +76,49 @@ int ribi::cmap::RatingConcreteness::SuggestConcreteness(
   return iter->second;
 }
 
+std::string ribi::cmap::ToHtml(
+  const RatingConcreteness& r,
+  const int n_examples_emph
+)
+{
+  std::stringstream s;
+  s << "<table style=\"vertical-align: middle\">\n"
+    << "  <tr>\n"
+    << "    <th> </th><th> </th><th colspan=\"5\">Aantal concrete</th>\n"
+    << "  </tr>\n"
+    << "  <tr>\n"
+    << "    <th> </th><th> </th><th colspan=\"5\">voorbeelden</th>\n"
+    << "  </tr>\n"
+    << "  <tr>\n"
+    << "    <th> </th><th> </th>"
+  ;
+  for (int n_examples = 0; n_examples != 4; ++n_examples)
+  {
+    s << "<th>";
+    if (n_examples == n_examples_emph) { s << "<u>"; }
+    s << n_examples;
+    if (n_examples == n_examples_emph) { s << "</u>"; }
+    s << "</th>";
+  }
+  s << "<th>&gt;3</th>\n";
+  s << "  </tr>\n";
+  s << "  <tr>\n";
+  for (int n_examples = 0; n_examples != 5; ++n_examples)
+  {
+    s << "    <td><center>";
+    const bool emphasized{
+      n_examples == n_examples_emph
+    };
+    if (emphasized) { s << "<u>"; }
+    s << r.SuggestConcreteness(n_examples);
+    if (emphasized) { s << "</u>"; }
+    s << "</center></td>\n";
+  }
+  s << "  </tr>\n";
+  s << "</table>";
+  return s.str();
+}
+
 std::string ribi::cmap::ToXml(const RatingConcreteness& rating)
 {
   std::stringstream s;

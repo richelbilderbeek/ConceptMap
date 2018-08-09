@@ -40,6 +40,16 @@ class RatingSpecificity
 RatingSpecificity CreateDefaultRatingSpecificity() noexcept;
 RatingSpecificity CreateTestRatingSpecificity() noexcept;
 
+///To be used as a tooltip
+///@param rating a RatingSpecificity
+///@param n_examples_emph the number of complex examples that will
+///   be emphasized. No column will be highlighted
+///   as such for invalid values
+std::string ToHtml(
+  const RatingSpecificity& rating,
+  const int n_examples_emph = -1
+);
+
 std::string ToXml(const RatingSpecificity& rating);
 
 ///Extract a RatingSpecificity from an XML string

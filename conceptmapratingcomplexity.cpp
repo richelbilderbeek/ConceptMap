@@ -148,7 +148,7 @@ std::string ribi::cmap::ToHtml(
 {
   std::stringstream s;
   s << "<table style=\"vertical-align: middle\">\n"
-    << ToHtmlHeader(n_examples_emph)
+    << ToHtmlHeaderX(n_examples_emph)
   ;
   for (int n_relations = 0; n_relations != 4; ++n_relations)
   {
@@ -182,7 +182,7 @@ std::string ribi::cmap::ToHtml(
   return s.str();
 }
 
-std::string ribi::cmap::ToHtmlHeader(
+std::string ribi::cmap::ToHtmlHeaderX(
   const int n_examples_emph
 )
 {
