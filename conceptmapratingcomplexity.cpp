@@ -118,6 +118,66 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
   return SuggestComplexity(n_edges, n_examples);
 }
 
+std::string ribi::cmap::ToHtml(const RatingComplexity& r)
+{
+  std::stringstream s;
+  s << "<html>\n"
+    << "<head>\n"
+    << "<style>\n"
+    << "table, th, td {\n"
+    << "    border: 1px solid black;\n"
+    << "    border-collapse: collapse;\n"
+    << "}\n"
+    << "</style>\n"
+    << "</head>\n"
+    << "<body>\n"
+    << "  <table style=\"vertical-align: middle\">\n"
+    << "    <tr>\n"
+    << "      <th> </th><th> </th><th colspan=\"5\">Aantal voorbeelden</th>\n"
+    << "    </tr>\n"
+    << "    <tr>\n"
+    << "      <th> </th><th> </th><th>0</th><th>1</th><th>2</th><th>3</th><th>&gt;3</th>\n"
+    << "    </tr>\n"
+    << "    <tr>\n"
+    << "      <th rowspan=\"4\"><center>Aantal relaties</center></th>\n"
+    << "      <th>0</th>"
+    << "      <td><center>" << r.SuggestComplexity(0, 0) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(0, 1) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(0, 2) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(0, 3) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(0, 4) << "</center></td>"
+    << "    </tr>\n"
+    << "    <tr>\n"
+    << "      <th>1</th>"
+    << "      <td><center>" << r.SuggestComplexity(1, 0) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(1, 1) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(1, 2) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(1, 3) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(1, 4) << "</center></td>"
+    << "    </tr>\n"
+    << "    <tr>\n"
+    << "      <th>2</th>"
+    << "      <td><center>" << r.SuggestComplexity(2, 0) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(2, 1) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(2, 2) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(2, 3) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(2, 4) << "</center></td>"
+    << "    </tr>\n"
+    << "    <tr>\n"
+    << "      <th>&gt;2</th>"
+    << "      <td><center>" << r.SuggestComplexity(3, 0) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(3, 1) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(3, 2) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(3, 3) << "</center></td>"
+    << "      <td><center>" << r.SuggestComplexity(3, 4) << "</center></td>"
+    << "    </tr>\n"
+    << "<  /table>"
+    << "</body>\n"
+    << "</html>\n"
+  ;
+  return s.str();
+}
+
 std::string ribi::cmap::ToXml(const RatingComplexity& rating)
 {
   std::stringstream s;

@@ -47,6 +47,9 @@ RatingComplexity CreateTestRatingComplexity() noexcept;
 ///Exract a RatingComplexity from an XML string
 RatingComplexity XmlToRatingComplexity(const std::string& s);
 
+///To be used as a tooltip
+std::string ToHtml(const RatingComplexity& rating);
+
 std::string ToXml(const RatingComplexity& rating);
 
 bool operator==(const RatingComplexity& lhs, const RatingComplexity& rhs) noexcept;

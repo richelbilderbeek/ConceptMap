@@ -20,6 +20,8 @@ struct Rating
     const RatingSpecificity& rating_specificity
   );
 
+  const auto& GetRatingComplexity() const noexcept { return m_rating_complexity; }
+
   ///Calculate a suggested complexity
   int SuggestComplexity(
     const int n_edges,
