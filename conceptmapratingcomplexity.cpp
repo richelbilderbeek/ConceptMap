@@ -138,39 +138,26 @@ std::string ribi::cmap::ToHtml(const RatingComplexity& r)
     << "    <tr>\n"
     << "      <th> </th><th> </th><th>0</th><th>1</th><th>2</th><th>3</th><th>&gt;3</th>\n"
     << "    </tr>\n"
-    << "    <tr>\n"
-    << "      <th rowspan=\"4\"><center>Aantal relaties</center></th>\n"
-    << "      <th>0</th>"
-    << "      <td><center>" << r.SuggestComplexity(0, 0) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(0, 1) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(0, 2) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(0, 3) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(0, 4) << "</center></td>"
-    << "    </tr>\n"
-    << "    <tr>\n"
-    << "      <th>1</th>"
-    << "      <td><center>" << r.SuggestComplexity(1, 0) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(1, 1) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(1, 2) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(1, 3) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(1, 4) << "</center></td>"
-    << "    </tr>\n"
-    << "    <tr>\n"
-    << "      <th>2</th>"
-    << "      <td><center>" << r.SuggestComplexity(2, 0) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(2, 1) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(2, 2) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(2, 3) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(2, 4) << "</center></td>"
-    << "    </tr>\n"
-    << "    <tr>\n"
-    << "      <th>&gt;2</th>"
-    << "      <td><center>" << r.SuggestComplexity(3, 0) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(3, 1) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(3, 2) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(3, 3) << "</center></td>"
-    << "      <td><center>" << r.SuggestComplexity(3, 4) << "</center></td>"
-    << "    </tr>\n"
+  ;
+  for (int n_relations = 0; n_relations != 4; ++n_relations)
+  {
+    s << "    <tr>\n";
+    if (n_relations == 0)
+    {
+      s << "      <th rowspan=\"4\"><center>Aantal relaties</center></th>\n";
+    }
+    s << "      <th>" << n_relations << "</th>\n";
+    for (int n_examples = 0; n_examples != 5; ++n_examples)
+    {
+      s
+        << "      <td><center>"
+        << r.SuggestComplexity(n_relations, n_examples)
+        << "</center></td>\n"
+      ;
+    }
+    s << "    </tr>\n";
+  }
+  s
     << "<  /table>"
     << "</body>\n"
     << "</html>\n"
