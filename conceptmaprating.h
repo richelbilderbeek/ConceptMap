@@ -31,12 +31,14 @@ struct Rating
   ) const noexcept;
 
   ///Calculate a suggested complexity
+  [[deprecated]]
   int SuggestComplexity(
     const ConceptMap& sub_conceptmap,
     const VertexDescriptor& vd
   ) const noexcept;
 
   ///Calculate a suggested concreteness
+  [[deprecated]]
   int SuggestConcreteness(
     const ConceptMap& sub_conceptmap,
     const VertexDescriptor& vd
@@ -48,6 +50,7 @@ struct Rating
   ) const noexcept;
 
   ///Calculate a suggested specificity
+  [[deprecated]]
   int SuggestSpecificity(
     const ConceptMap& sub_conceptmap,
     const VertexDescriptor& vd
