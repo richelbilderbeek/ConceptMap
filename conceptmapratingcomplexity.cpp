@@ -188,10 +188,10 @@ std::string ribi::cmap::ToHtmlHeaderX(
 {
   std::stringstream s;
   s << "  <tr>\n"
-    << "    <th> </th><th> </th><th colspan=\"5\">Aantal complexe</th>\n"
+    << "    <th>Voorgestelde</th><th> </th><th colspan=\"5\">Aantal complexe</th>\n"
     << "  </tr>\n"
     << "  <tr>\n"
-    << "    <th> </th><th> </th><th colspan=\"5\">relaties en voorbeelden</th>\n"
+    << "    <th>complexiteit</th><th> </th><th colspan=\"5\">relaties en voorbeelden</th>\n"
     << "  </tr>\n"
     << "  <tr>\n"
     << "    <th> </th><th> </th>"

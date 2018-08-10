@@ -84,13 +84,13 @@ std::string ribi::cmap::ToHtml(
   std::stringstream s;
   s << "<table style=\"vertical-align: middle\">\n"
     << "  <tr>\n"
-    << "    <th> </th><th> </th><th colspan=\"5\">Aantal concrete</th>\n"
+    << "    <th> </th><th colspan=\"5\">Aantal concrete</th>\n"
     << "  </tr>\n"
     << "  <tr>\n"
-    << "    <th> </th><th> </th><th colspan=\"5\">voorbeelden</th>\n"
+    << "    <th> </th><th colspan=\"5\">voorbeelden</th>\n"
     << "  </tr>\n"
     << "  <tr>\n"
-    << "    <th> </th><th> </th>"
+    << "    <th> </th>"
   ;
   for (int n_examples = 0; n_examples != 4; ++n_examples)
   {
@@ -103,6 +103,7 @@ std::string ribi::cmap::ToHtml(
   s << "<th>&gt;3</th>\n";
   s << "  </tr>\n";
   s << "  <tr>\n";
+  s << "    <th><nobr>Voorgestelde concreetheid</nobr></th>\n";
   for (int n_examples = 0; n_examples != 5; ++n_examples)
   {
     s << "    <td><center>";
