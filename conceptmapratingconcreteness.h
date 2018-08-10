@@ -17,12 +17,6 @@ class RatingConcreteness
 
   ///Calculate a suggested complexity
   int SuggestConcreteness(
-    const ConceptMap& sub_conceptmap,
-    const VertexDescriptor& vd
-  ) const;
-
-  ///Calculate a suggested complexity
-  int SuggestConcreteness(
     int n_examples
   ) const;
 
