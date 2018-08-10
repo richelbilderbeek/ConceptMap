@@ -1,7 +1,6 @@
 #ifndef CONCEPTMAPRATING_H
 #define CONCEPTMAPRATING_H
 
-#include "conceptmapgraphtypes.h"
 #include "conceptmapfwd.h"
 #include "conceptmapratingcomplexity.h"
 #include "conceptmapratingconcreteness.h"
@@ -30,30 +29,9 @@ struct Rating
     const int n_examples
   ) const noexcept;
 
-  ///Calculate a suggested complexity
-  [[deprecated]]
-  int SuggestComplexity(
-    const ConceptMap& sub_conceptmap,
-    const VertexDescriptor& vd
-  ) const noexcept;
-
-  ///Calculate a suggested concreteness
-  [[deprecated]]
-  int SuggestConcreteness(
-    const ConceptMap& sub_conceptmap,
-    const VertexDescriptor& vd
-  ) const noexcept;
-
   ///Calculate a suggested concreteness
   int SuggestConcreteness(
     int n_examples
-  ) const noexcept;
-
-  ///Calculate a suggested specificity
-  [[deprecated]]
-  int SuggestSpecificity(
-    const ConceptMap& sub_conceptmap,
-    const VertexDescriptor& vd
   ) const noexcept;
 
   ///Calculate a suggested specificity

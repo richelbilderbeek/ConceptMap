@@ -128,18 +128,6 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
   return iter->second;
 }
 
-int ribi::cmap::RatingComplexity::SuggestComplexity(
-  const ConceptMap& sub_conceptmap,
-  const VertexDescriptor& vd
-) const
-{
-  //BUG
-  const int n_edges = boost::num_edges(sub_conceptmap);
-  assert(boost::num_vertices(sub_conceptmap) > 0);
-  const int n_examples = std::min(3, CountExamples(sub_conceptmap[vd]));
-  return SuggestComplexity(n_edges, n_examples);
-}
-
 std::string ribi::cmap::ToHtml(
   const RatingComplexity& r,
   const int n_examples_emph,

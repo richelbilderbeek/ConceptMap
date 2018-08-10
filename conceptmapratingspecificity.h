@@ -3,7 +3,6 @@
 
 #include <map>
 #include "conceptmapfwd.h"
-#include "conceptmapgraphtypes.h"
 
 namespace ribi {
 namespace cmap {
@@ -15,12 +14,6 @@ class RatingSpecificity
   RatingSpecificity(
     const std::map<int, int>& rating
   );
-
-  ///Calculate a suggested complexity
-  int SuggestSpecificity(
-    const ConceptMap& sub_conceptmap,
-    const VertexDescriptor& vd
-  ) const;
 
   ///Calculate a suggested complexity
   int SuggestSpecificity(

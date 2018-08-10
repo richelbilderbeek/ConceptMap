@@ -46,35 +46,12 @@ int ribi::cmap::Rating::SuggestComplexity(
 }
 
 
-int ribi::cmap::Rating::SuggestComplexity(
-  const ConceptMap& sub_conceptmap,
-  const VertexDescriptor& vd
-) const noexcept
-{
-  return m_rating_complexity.SuggestComplexity(sub_conceptmap, vd);
-}
-
-int ribi::cmap::Rating::SuggestConcreteness(
-  const ConceptMap& sub_conceptmap,
-  const VertexDescriptor& vd
-) const noexcept
-{
-  return m_rating_concreteness.SuggestConcreteness(sub_conceptmap, vd);
-}
 
 int ribi::cmap::Rating::SuggestConcreteness(
   const int n_examples
 ) const noexcept
 {
   return m_rating_concreteness.SuggestConcreteness(n_examples);
-}
-
-int ribi::cmap::Rating::SuggestSpecificity(
-  const ConceptMap& sub_conceptmap,
-  const VertexDescriptor& vd
-) const noexcept
-{
-  return m_rating_specificity.SuggestSpecificity(sub_conceptmap, vd);
 }
 
 int ribi::cmap::Rating::SuggestSpecificity(

@@ -3,7 +3,6 @@
 
 #include <map>
 #include "conceptmapfwd.h"
-#include "conceptmapgraphtypes.h"
 
 namespace ribi {
 namespace cmap {
@@ -25,12 +24,6 @@ class RatingComplexity
 
   ///Calculate a suggested complexity in the default way
   static int SuggestComplexityDefault(const int n_edges, const int n_examples); //!OCLINT static because it needs no member variables
-
-  ///Calculate a suggested complexity
-  int SuggestComplexity(
-    const ConceptMap& sub_conceptmap,
-    const VertexDescriptor& vd
-  ) const;
 
   private:
   // { {number of edges, number of examples}, score }

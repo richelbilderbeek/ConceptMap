@@ -3,7 +3,6 @@
 
 #include <map>
 #include "conceptmapfwd.h"
-#include "conceptmapgraphtypes.h"
 
 namespace ribi {
 namespace cmap {

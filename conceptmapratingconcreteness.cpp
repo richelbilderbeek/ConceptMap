@@ -54,16 +54,6 @@ int ribi::cmap::RatingConcreteness::SuggestConcretenessDefault(const int n_examp
 }
 
 int ribi::cmap::RatingConcreteness::SuggestConcreteness(
-  const ConceptMap& sub_conceptmap,
-  const VertexDescriptor& vd
-) const
-{
-  assert(boost::num_vertices(sub_conceptmap) > 0);
-  const int n_examples = CountExamples(sub_conceptmap[vd]);
-  return SuggestConcreteness(n_examples);
-}
-
-int ribi::cmap::RatingConcreteness::SuggestConcreteness(
   const int n_examples
 ) const
 {
