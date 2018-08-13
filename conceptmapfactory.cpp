@@ -318,7 +318,16 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeOneEdge() const 
   const auto vd_2 = AddVertex(
     Node(Concept("one", Examples( { Example("unos"), Example("een") } )),
     NodeType::normal, 300, 250), g);
-  AddEdge(Edge(Node(Concept( "first"), NodeType::normal, 150, 225)), vd_1, vd_2, g);
+  AddEdge(
+    Edge(
+      Node(
+        Concept( "first"),
+        NodeType::normal,
+        150, 225
+      ),
+      true, //Head arrow
+      false
+    ), vd_1, vd_2, g);
   return g;
 }
 
