@@ -427,13 +427,29 @@ ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample283() const noexc
     }
   );
 
-  const Concept concept1("Start");
+  const Concept concept1{
+    "Start",
+    Examples(),
+    true //is complex
+  };
   const Concept concept2("End");
   const auto vd_1 = AddVertex(Node(concept1), g);
   const auto vd_2 = AddVertex(Node(concept2), g);
   AddEdge(
     Edge(
-      Node(Concept("goes to", examples_1)), true),vd_2,vd_1,g);
+      Node(
+        Concept(
+          "goes to",
+          examples_1,
+          false // is not complex
+        )
+      ),
+      true
+    ),
+    vd_2,
+    vd_1,
+    g
+  );
   return Reposition(g);
 }
 
