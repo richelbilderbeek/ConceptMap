@@ -164,6 +164,15 @@ BOOST_AUTO_TEST_CASE(test_cmap_wordwrap_and_unwordwrap_must_be_symmetrical)
   }
 }
 
+BOOST_AUTO_TEST_CASE(test_cmap_cannot_wordwrap_on_negative_lengths)
+{
+  const std::string text{"irrelevant"};
+  BOOST_CHECK_THROW(
+    Wordwrap(text, 0),
+    std::invalid_argument
+  );
+}
+
 BOOST_AUTO_TEST_CASE(test_cmap_create_tally)
 {
   {
@@ -204,4 +213,14 @@ BOOST_AUTO_TEST_CASE(test_cmap_create_tally)
   }
 }
 
-
+BOOST_AUTO_TEST_CASE(test_cmap_is_on_travis)
+{
+  if (OnTravis())
+  {
+    BOOST_CHECK_EQUAL(OnTravis(), true);
+  }
+  else
+  {
+    BOOST_CHECK_EQUAL(OnTravis(), false);
+  }
+}

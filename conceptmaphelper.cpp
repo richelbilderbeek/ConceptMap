@@ -140,7 +140,7 @@ std::vector<std::string> ribi::cmap::Wordwrap(
 {
   if (max_len == 0)
   {
-    throw std::logic_error("Cannot wordwrap for a max_len of zero");
+    throw std::invalid_argument("Cannot wordwrap for a max_len of zero");
   }
 
   ///Replace multiple spaces with '\b ', where x is a char not in the string
