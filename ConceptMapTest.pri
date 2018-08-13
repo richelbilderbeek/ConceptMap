@@ -16,5 +16,7 @@ SOURCES += \
     $$PWD/conceptmapnodefactory_test.cpp \
     $$PWD/conceptmaprating_test.cpp \
     $$PWD/conceptmapratingconcreteness_test.cpp \
+    $$PWD/conceptmapratingcomplexity_test.cpp \
+    $$PWD/conceptmapratingspecificity_test.cpp \
     $$PWD/conceptmapregex_test.cpp \
     $$PWD/conceptmapcompetency_test.cpp
