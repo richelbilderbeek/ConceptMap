@@ -85,6 +85,9 @@ const Examples& GetExamples(const Edge& edge) noexcept;
 ///This is different than an example being complex.
 bool GetIsComplex(const Edge& edge) noexcept;
 
+const Node& GetNode(const Edge& edge) noexcept;
+Node& GetNode(Edge& edge) noexcept;
+
 std::string GetText(const Edge& edge) noexcept;
 
 ///Get the x coordinat of the center of the Edge
@@ -95,6 +98,12 @@ double GetY(const Edge& edge) noexcept;
 
 ///Does the (Node on the) Edge have at least one example?
 bool HasExamples(const Edge& e) noexcept;
+
+///Does the Edge have an arrow head at its head?
+bool HasHeadArrow(const Edge& edge) noexcept;
+
+///Does the Edge have an arrow head at its tail?
+bool HasTailArrow(const Edge& edge) noexcept;
 
 ///Checks if the nodes and arrows are the same
 bool HasSameData(const Edge& lhs, const Edge& rhs) noexcept;
