@@ -62,6 +62,9 @@ public:
   ///Example Used by QtRateConceptTallyDialog
   ConceptMap GetRateConceptTallyDialogExample() const noexcept;
 
+  ///Example Used by QtRateConceptTallyDialog to resolve #283
+  ConceptMap GetRateConceptTallyDialogExample283() const noexcept;
+
   ///Example Used by QtRatedConceptDialog
   ConceptMap GetQtRatedConceptDialogExample() const noexcept;
 
