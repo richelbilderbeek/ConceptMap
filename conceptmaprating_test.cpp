@@ -37,3 +37,12 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_rating_comparison)
   BOOST_CHECK_NE(r, s);
   BOOST_CHECK_NE(s, r);
 }
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_rating_to_xml)
+{
+  const auto r = CreateDefaultRating();
+  const auto s = CreateTestRating();
+  const auto xml_1 = ToXml(r);
+  const auto xml_2 = ToXml(s);
+  BOOST_CHECK_NE(xml_1, xml_2);
+}
