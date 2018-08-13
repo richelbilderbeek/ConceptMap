@@ -1,6 +1,7 @@
 #include "conceptmapfactory.h"
 
 #include "conceptmap.h"
+#include "conceptmaphelper.h"
 
 #include <boost/test/unit_test.hpp>
 
@@ -34,4 +35,38 @@ BOOST_AUTO_TEST_CASE(both_edges_of_GetThreeNodeTwoEdgeNoCenter_have_examples)
   assert(edges.size() == 2);
   BOOST_CHECK(HasExamples(edges[0]));
   BOOST_CHECK(HasExamples(edges[1]));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_lonely_center_node)
+{
+  const auto concept_map = ConceptMapFactory().GetLonelyQtCenterNode();
+  BOOST_CHECK_EQUAL(1, CountCenterNodes(concept_map));
+  BOOST_CHECK_EQUAL(1, boost::num_vertices(concept_map));
+  BOOST_CHECK_EQUAL(0, boost::num_edges(concept_map));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_star_shaped)
+{
+  const auto concept_map = ConceptMapFactory().GetStarShaped();
+  BOOST_CHECK_EQUAL(1, CountCenterNodes(concept_map));
+  BOOST_CHECK_EQUAL(5, boost::num_vertices(concept_map));
+  BOOST_CHECK_EQUAL(3, boost::num_edges(concept_map));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_two_node_one_edge)
+{
+  const auto concept_map = ConceptMapFactory().GetTwoNodeOneEdge();
+  BOOST_CHECK_EQUAL(1, CountCenterNodes(concept_map));
+  BOOST_CHECK_EQUAL(2, boost::num_vertices(concept_map));
+  BOOST_CHECK_EQUAL(1, boost::num_edges(concept_map));
+}
+
+BOOST_AUTO_TEST_CASE(
+  ribi_concept_map_concept_factory_two_node_one_edge_no_center
+)
+{
+  const auto concept_map = ConceptMapFactory().GetTwoNodeOneEdgeNoCenter();
+  BOOST_CHECK_EQUAL(0, CountCenterNodes(concept_map));
+  BOOST_CHECK_EQUAL(2, boost::num_vertices(concept_map));
+  BOOST_CHECK_EQUAL(1, boost::num_edges(concept_map));
 }

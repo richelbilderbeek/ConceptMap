@@ -4,7 +4,7 @@
 #include "conceptmapconcept.h"
 #include "trace.h"
 
-BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_test)
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_number_of_tests)
 {
   BOOST_CHECK_EQUAL(
     ribi::cmap::ConceptFactory().GetTests().size(),
@@ -18,5 +18,5 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_concept_to_xml_to_concept)
   const auto xml = ribi::cmap::ToXml(concept);
   const auto new_concept = ribi::cmap::XmlToConcept(xml);
   const auto new_xml = ribi::cmap::ToXml(new_concept);
-  BOOST_CHECK(xml == new_xml);
+  BOOST_CHECK_EQUAL(xml, new_xml);
 }
