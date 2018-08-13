@@ -224,3 +224,22 @@ BOOST_AUTO_TEST_CASE(test_cmap_is_on_travis)
     BOOST_CHECK_EQUAL(OnTravis(), false);
   }
 }
+
+/* WIP
+BOOST_AUTO_TEST_CASE(test_cmap_save_file_to_vector_on_empty_file)
+{
+  //
+  BOOST_CHECK_THROW(
+    SafeFileToVector("abs.ent"),
+    std::invalid_argument
+  );
+}
+*/
+
+BOOST_AUTO_TEST_CASE(test_cmap_save_file_to_vector_throws_on_absent_files)
+{
+  BOOST_CHECK_THROW(
+    SafeFileToVector("abs.ent"),
+    std::invalid_argument
+  );
+}

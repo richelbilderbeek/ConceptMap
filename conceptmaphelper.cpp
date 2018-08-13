@@ -14,7 +14,7 @@
 #include "fileio.h"
 #include "conceptmapregex.h"
 
-
+#ifdef REALLY_KEEP_THIS_20180813
 ///Send the file its content to std::cout/std::clog/whatever
 template <class Stream>
 void FileToStream(const std::string& filename, Stream& stream)
@@ -33,6 +33,7 @@ void ribi::cmap::CoutFile(const std::string& filename)
 {
   FileToStream(filename, std::cout);
 }
+#endif // REALLY_KEEP_THIS_20180813
 
 std::size_t ribi::cmap::FindLastSpaceBeforeMaxLen(
   const std::string& s,
