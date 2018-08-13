@@ -27,3 +27,13 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_test_default_rating)
     );
   }
 }
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_rating_comparison)
+{
+  const auto r = CreateDefaultRating();
+  const auto s = CreateTestRating();
+  BOOST_CHECK_EQUAL(r, r);
+  BOOST_CHECK_EQUAL(s, s);
+  BOOST_CHECK_NE(r, s);
+  BOOST_CHECK_NE(s, r);
+}

@@ -51,7 +51,7 @@ RatingComplexity XmlToRatingComplexity(const std::string& s);
 std::string ToHtml(
   const RatingComplexity& rating,
   const int n_examples_emph = -1,
-  const int n_relations_emph = 1
+  const int n_relations_emph = -1
 );
 
 ///Only create the header of ToHtml for rating compleXity
