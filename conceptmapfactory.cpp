@@ -537,7 +537,7 @@ ribi::cmap::ConceptMapFactory::GetAllTests() const noexcept
   return v;
 }
 
-ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetRated() const noexcept
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetRated() const noexcept //!OCLINT Indeed a long function, as the concept map is complex
 {
   ConceptMap g;
   const EdgeFactory ef;
