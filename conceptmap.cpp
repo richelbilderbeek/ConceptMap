@@ -91,13 +91,13 @@ int ribi::cmap::CalculateConcretenessExperimental(const ConceptMap& c)
   );
 }
 
-int ribi::cmap::CalculateRichnessExperimental(const ConceptMap& c)
+int ribi::cmap::CalculateRichness(const ConceptMap& c)
 {
   assert(!HasUninitializedExamples(c));
-  return CalculateRichnessExperimental(TallyCompetencies(c));
+  return CalculateRichness(TallyCompetencies(c));
 }
 
-int ribi::cmap::CalculateRichnessExperimental(
+int ribi::cmap::CalculateRichness(
   std::map<cmap::Competency,int> m
 )
 {

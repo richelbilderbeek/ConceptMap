@@ -43,6 +43,13 @@ public:
   /// Complex rated concept map with all nodes connected
   ConceptMap Get11() const noexcept;
 
+  ///Create a concept map in which the concept's name is its level
+  /// 3 <- 2 <- 1 <- 0 -> 1 -> 2
+  ///      |         |    |
+  ///      v         v    v
+  ///      3         1    2
+  ConceptMap GetLevel() const noexcept;
+
   /// Just one center node with text 'center'
   ConceptMap GetLonelyQtCenterNode() const noexcept;
 
@@ -68,6 +75,9 @@ public:
   ///Example Used by QtRatedConceptDialog
   ConceptMap GetQtRatedConceptDialogExample() const noexcept;
 
+  ///Rated and human-friendly concept map
+  ConceptMap GetRated() const noexcept;
+
   /// center --- one --- two
   ///       first second
   ConceptMap GetThreeNodeTwoEdge() const noexcept;
@@ -86,6 +96,7 @@ public:
 
   ///Unrated and human-friendly concept map
   ConceptMap GetUnrated() const noexcept;
+
 };
 
 void AddEdge(

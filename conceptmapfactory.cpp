@@ -22,8 +22,6 @@
 #include "conceptmapregex.h"
 #include "set_my_bundled_vertexes.h"
 
-
-
 ribi::cmap::ConceptMapFactory::ConceptMapFactory() noexcept
 {
 
@@ -83,7 +81,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get3() const noexcept
   const auto vd_2 = AddVertex(NodeFactory().GetTest(2), g);
 
   AddEdge(
-    EdgeFactory().GetTest(1),vd_1,vd_2,g
+    EdgeFactory().GetTest(1), vd_1, vd_2,g
   );
   return Reposition(g);
 }
@@ -96,11 +94,11 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get4() const noexcept
   const auto vd_3 = AddVertex(NodeFactory().GetNastyTest(1), g);
   AddEdge(
     EdgeFactory().GetTest(2),
-    vd_1,vd_2,g
+    vd_1, vd_2,g
   );
   AddEdge(
     EdgeFactory().GetTest(2),
-    vd_2,vd_3,g
+    vd_2, vd_3,g
   );
   return Reposition(g);
 }
@@ -111,9 +109,9 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get5() const noexcept
   const auto vd_1 = AddVertex(CenterNodeFactory().GetNastyTest(1), g);
   const auto vd_2 = AddVertex(NodeFactory().GetNastyTest(0), g);
   const auto vd_3 = AddVertex(NodeFactory().GetNastyTest(2), g);
-  AddEdge(EdgeFactory().GetNastyTest(0),vd_1,vd_2,g);
-  AddEdge(EdgeFactory().GetNastyTest(1),vd_2,vd_3,g);
-  AddEdge(EdgeFactory().GetNastyTest(2),vd_3,vd_1,g);
+  AddEdge(EdgeFactory().GetNastyTest(0), vd_1, vd_2,g);
+  AddEdge(EdgeFactory().GetNastyTest(1), vd_2, vd_3,g);
+  AddEdge(EdgeFactory().GetNastyTest(2), vd_3, vd_1,g);
   return Reposition(g);
 }
 
@@ -124,10 +122,10 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get6() const noexcept
   const auto vd_2 = AddVertex(NodeFactory().GetNastyTest(0), g);
   const auto vd_3 = AddVertex(NodeFactory().GetNastyTest(1), g);
   const auto vd_4 = AddVertex(NodeFactory().GetNastyTest(2), g);
-  AddEdge(EdgeFactory().GetTest(2),vd_1,vd_2,g);
-  AddEdge(EdgeFactory().GetNastyTest(0),vd_2,vd_3,g);
-  AddEdge(EdgeFactory().GetNastyTest(1),vd_3,vd_1,g);
-  AddEdge(EdgeFactory().GetNastyTest(2),vd_4,vd_1,g);
+  AddEdge(EdgeFactory().GetTest(2), vd_1, vd_2,g);
+  AddEdge(EdgeFactory().GetNastyTest(0), vd_2, vd_3,g);
+  AddEdge(EdgeFactory().GetNastyTest(1), vd_3, vd_1,g);
+  AddEdge(EdgeFactory().GetNastyTest(2), vd_4, vd_1,g);
   assert(CountCenterNodes(g) == 1);
   return Reposition(g);
 }
@@ -142,11 +140,11 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get7() const noexcept
   const auto vd_4 = AddVertex(NodeFactory().GetNasty0(), g);
   const auto vd_5 = AddVertex(NodeFactory().GetNasty1(), g);
 
-  AddEdge(Edge(NodeFactory().GetNasty2(),false, true), vd_3, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(),false, true), vd_4, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_5, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(),false, true), vd_2, vd_5, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_1, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_3, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_4, vd_3, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_5, vd_4, g);
+  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_2, vd_5, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_1, vd_2, g);
 
   return Reposition(g);
 }
@@ -161,11 +159,11 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get8() const noexcept
   const auto vd_4 = AddVertex(NodeFactory().GetNasty1(), g);
   const auto vd_5 = AddVertex(NodeFactory().GetNasty0(), g);
 
-  AddEdge(Edge(NodeFactory().GetNasty2(),false, true), vd_3, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(),false, true), vd_4, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_5, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(),false, true), vd_2, vd_5, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(),false, true), vd_1, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_3, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_4, vd_3, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_5, vd_4, g);
+  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_2, vd_5, g);
+  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_1, vd_2, g);
 
   return Reposition(g);
 }
@@ -179,11 +177,11 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get9() const noexcept
   const auto vd_3 = AddVertex(NodeFactory().GetNasty0(), g);
   const auto vd_4 = AddVertex(NodeFactory().GetNasty1(), g);
   const auto vd_5 = AddVertex(NodeFactory().GetNasty2(), g);
-  AddEdge(Edge(NodeFactory().GetNasty0(),false, true), vd_3, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_4, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(),false, true), vd_5, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(),false, true), vd_2, vd_5, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_1, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_3, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_4, vd_3, g);
+  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_5, vd_4, g);
+  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_2, vd_5, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_1, vd_2, g);
 
   return Reposition(g);
 }
@@ -207,11 +205,11 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get10() const noexcept
   const auto vd_4 = AddVertex(NodeFactory().GetNasty1(), g);
   const auto vd_5 = AddVertex(NodeFactory().GetNasty2(), g);
 
-  AddEdge(Edge(NodeFactory().GetNasty2(),false, true), vd_3, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_4, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(),false, true), vd_5, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_2, vd_5, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(),false, true), vd_1, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_3, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_4, vd_3, g);
+  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_5, vd_4, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_2, vd_5, g);
+  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_1, vd_2, g);
 
   return Reposition(g);
 }
@@ -226,15 +224,47 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept
   const auto vd_4 = AddVertex(NodeFactory().GetNasty1(), g);
   const auto vd_5 = AddVertex(NodeFactory().GetNasty2(), g);
 
-  AddEdge(Edge(NodeFactory().GetNasty0(),false, true), vd_3, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_4, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(),false, true), vd_5, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(),false, true), vd_2, vd_5, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_1, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(),false, true), vd_1, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(),false, true), vd_1, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(),false, true), vd_1, vd_5, g);
+  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_3, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_4, vd_3, g);
+  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_5, vd_4, g);
+  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_2, vd_5, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_1, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_1, vd_3, g);
+  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_1, vd_4, g);
+  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_1, vd_5, g);
 
+  return Reposition(g);
+}
+
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLevel() const noexcept
+{
+  ConceptMap g;
+  // Level:
+  //      2 <- 1 <- 0 -> 1 -> 2
+  //                |    |
+  //                v    v
+  //                1    2
+  // Vertex:
+  //      3 <- 2 <- 1 -> 5 -> 6
+  //                |    |
+  //                v    v
+  //                8    9
+
+  const auto vd_1 = boost::add_vertex(Node(Concept("0"), NodeType::center), g);
+  //Messed up order a bit on purpose: this concept map is used to demonstrate
+  //GetNodesSortedByLevel
+  const auto vd_2 = boost::add_vertex(Node(Concept("1"), NodeType::center), g);
+  const auto vd_3 = boost::add_vertex(Node(Concept("2"), NodeType::center), g);
+  const auto vd_5 = boost::add_vertex(Node(Concept("1"), NodeType::center), g);
+  const auto vd_6 = boost::add_vertex(Node(Concept("2"), NodeType::center), g);
+  const auto vd_8 = boost::add_vertex(Node(Concept("1"), NodeType::center), g);
+  const auto vd_9 = boost::add_vertex(Node(Concept("2"), NodeType::center), g);
+  boost::add_edge(vd_1, vd_2, Edge(), g);
+  boost::add_edge(vd_2, vd_3, Edge(), g);
+  boost::add_edge(vd_1, vd_5, Edge(), g);
+  boost::add_edge(vd_5, vd_6, Edge(), g);
+  boost::add_edge(vd_1, vd_8, Edge(), g);
+  boost::add_edge(vd_5, vd_9, Edge(), g);
   return Reposition(g);
 }
 
@@ -260,9 +290,9 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetStarShaped() const noex
   const auto vd_3 = AddVertex(NodeFactory().CreateFromStrings("In"), g);
   const auto vd_4 = AddVertex(NodeFactory().CreateFromStrings("Debugging"), g);
 
-  AddEdge(Edge(NodeFactory().CreateFromStrings("2"),false, true), vd_1, vd_2, g);
-  AddEdge(Edge(NodeFactory().CreateFromStrings("3"),false, true), vd_1, vd_3, g);
-  AddEdge(Edge(NodeFactory().CreateFromStrings("4"),false, true), vd_1, vd_4, g);
+  AddEdge(Edge(NodeFactory().CreateFromStrings("2"), false, true), vd_1, vd_2, g);
+  AddEdge(Edge(NodeFactory().CreateFromStrings("3"), false, true), vd_1, vd_3, g);
+  AddEdge(Edge(NodeFactory().CreateFromStrings("4"), false, true), vd_1, vd_4, g);
 
   return Reposition(g);
 
@@ -370,7 +400,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetWithExamplesWithCompete
   n.GetConcept().SetExamples(Examples(examples));
   const auto vd_2 = AddVertex(n, g);
 
-  AddEdge(Edge(NodeFactory().GetTest(0),false,false), vd_1, vd_2, g);
+  AddEdge(Edge(NodeFactory().GetTest(0), false, false), vd_1, vd_2, g);
 
   return Reposition(g);
 }
@@ -382,10 +412,10 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetNasty0() const noexcept
   const auto vd_2 = AddVertex(NodeFactory().GetNastyTest(0), g);
   const auto vd_3 = AddVertex(NodeFactory().GetNastyTest(1), g);
   const auto vd_4 = AddVertex(NodeFactory().GetNastyTest(2), g);
-  AddEdge(EdgeFactory().GetNastyTest(0),vd_1,vd_2,g);
-  AddEdge(EdgeFactory().GetNastyTest(1),vd_2,vd_3,g);
-  AddEdge(EdgeFactory().GetNastyTest(2),vd_3,vd_1,g);
-  AddEdge(EdgeFactory().GetNastyTest(0),vd_4,vd_1,g);
+  AddEdge(EdgeFactory().GetNastyTest(0), vd_1, vd_2,g);
+  AddEdge(EdgeFactory().GetNastyTest(1), vd_2, vd_3,g);
+  AddEdge(EdgeFactory().GetNastyTest(2), vd_3, vd_1,g);
+  AddEdge(EdgeFactory().GetNastyTest(0), vd_4, vd_1,g);
   return g;
 }
 
@@ -411,10 +441,9 @@ ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample() const noexcept
   const auto vd_1 = AddVertex(Node(concept1), g);
   const auto vd_2 = AddVertex(Node(concept2), g);
   const auto vd_3 = AddVertex(Node(concept3), g);
-  AddEdge(Edge(Node(Concept("prerequisite", examples_1)), true),vd_2,vd_1,g);
-  AddEdge(Edge(Node(Concept("strengthen", examples_2)), true, true),vd_2,vd_3,g);
+  AddEdge(Edge(Node(Concept("prerequisite", examples_1)), true), vd_2, vd_1,g);
+  AddEdge(Edge(Node(Concept("strengthen", examples_2)), true, true), vd_2, vd_3,g);
   return Reposition(g);
-  //return g;
 }
 
 ribi::cmap::ConceptMap
@@ -483,8 +512,8 @@ ribi::cmap::ConceptMapFactory::GetQtRatedConceptDialogExample() const noexcept
   const auto vd_1 = AddVertex(Node(concept1), g);
   const auto vd_2 = AddVertex(Node(concept2), g);
   const auto vd_3 = AddVertex(Node(concept3), g);
-  AddEdge(Edge(Node(Concept("prerequisite", examples_edge_1)), true),vd_2,vd_1,g);
-  AddEdge(Edge(Node(Concept("strengthen", examples_edge_2)), true, true),vd_2,vd_3,g);
+  AddEdge(Edge(Node(Concept("prerequisite", examples_edge_1)), true), vd_2, vd_1,g);
+  AddEdge(Edge(Node(Concept("strengthen", examples_edge_2)), true, true), vd_2, vd_3,g);
   return Reposition(g);
 }
 
@@ -506,6 +535,100 @@ ribi::cmap::ConceptMapFactory::GetAllTests() const noexcept
     Get11()
   };
   return v;
+}
+
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetRated() const noexcept
+{
+  ConceptMap g;
+  const EdgeFactory ef;
+
+  const auto vd_1 = AddVertex(CenterNodeFactory().Create(
+    Concept(
+      "As a student teacher of English as a foreign language, "
+      "I have knowledge of ...")
+    ),
+    g
+  );
+  const auto vd_3 = AddVertex(
+    Node(
+      Concept(
+        "My own professional development",
+        Examples (
+          {
+            Example("Keep your portfolio posted up", Competency::ti_knowledge, false, true, true),
+            Example("Reflection", Competency::ti_knowledge, true, true, true)
+          }
+        ),
+        true,
+        1,
+        1,
+        1
+      )
+    ),
+    g
+  );
+  const auto vd_4 = AddVertex(
+    Node(
+      Concept(
+        "Myself as a teacher",
+        Examples(),
+        false,
+        0,
+        0,
+        0
+      )
+    ),
+    g
+  );
+
+  const auto vd_2 = AddVertex(
+    Node(
+      Concept(
+        "Profession in general",
+        Examples(),
+        false,
+        0,
+        0,
+        0
+      )
+    ),
+    g
+  );
+  const auto vd_5 = AddVertex(
+    Node(
+      Concept(
+        "Pupils",
+        Examples(),
+        false,
+        0,
+        0,
+        0
+      )
+    ),
+    g
+  );
+  const auto vd_6 = AddVertex(
+    Node(
+      Concept(
+        "Myself as a person",
+        Examples(),
+        false,
+        0,
+        0,
+        0
+      )
+    ),
+    g
+  );
+  //Connected to center node
+  AddEdge(Edge(Node(Concept(""))), vd_1, vd_2, g);
+  AddEdge(ef.Create(Node(Concept(""))), vd_1, vd_3, g);
+  AddEdge(ef.Create(Node(Concept(""))), vd_1, vd_5, g);
+  AddEdge(ef.Create(Node(Concept(""))), vd_1, vd_6, g);
+  AddEdge(ef.Create(Node(Concept("affects"))), vd_2, vd_4, g);
+  AddEdge(ef.Create(Node(Concept("is connected with"))), vd_3, vd_4, g);
+  AddEdge(ef.Create(Node(Concept("is connected with"))), vd_3, vd_6, g);
+  return Reposition(g);
 }
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetUnrated() const noexcept

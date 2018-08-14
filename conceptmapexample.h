@@ -17,7 +17,7 @@ struct Example
   // https://github.com/richelbilderbeek/BrainWeaver/issues/221
   explicit Example(
     const std::string& text = "",
-    const cmap::Competency competency = Competency::uninitialized,
+    const Competency competency = Competency::uninitialized,
     const bool is_complex = true,
     const bool is_concrete = true,
     const bool is_specific = true

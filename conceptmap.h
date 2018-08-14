@@ -22,10 +22,10 @@ int CalculateConcretenessExperimental(const ConceptMap& c);
 ///Calculate the richness of a concept map,
 ///which is determined by a tally of competencies that
 ///are scored by a human
-int CalculateRichnessExperimental(const ConceptMap& c);
+int CalculateRichness(const ConceptMap& c);
 
 ///Calculate the richness of a concept map, from a tally of competencies
-int CalculateRichnessExperimental(std::map<cmap::Competency,int> m);
+int CalculateRichness(std::map<cmap::Competency,int> m);
 
 ///Calculate the specificity of a concept map from human input
 int CalculateSpecificityExperimental(const ConceptMap& c);
@@ -83,6 +83,11 @@ Node GetTo(const Edge& edge, const ConceptMap& c);
 std::vector<Node> GetNodes(const ConceptMap& c) noexcept;
 
 ///Sort the Nodes on their level
+///This is an incomplete implementation,
+///as nodes are put in three levels:
+/// * primary node
+/// * connected to primary node
+/// * all others
 std::vector<Node> GetNodesSortedByLevel(const ConceptMap& c) noexcept;
 
 std::vector<Edge> GetSortedEdges(const ConceptMap& c) noexcept;

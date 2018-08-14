@@ -495,16 +495,29 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_create_direct_neighbour_concept_maps)
   );
 }
 
-
-BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichness_on_concept_map)
 {
-  using ribi::cmap::CalculateRichnessExperimental;
+  //An empty map has no richness
+  BOOST_CHECK_EQUAL(
+    CalculateRichness(ConceptMap()),
+    0
+  );
+
+  //An empty map has no richness
+  BOOST_CHECK_NO_THROW(
+    CalculateRichness(ConceptMapFactory().GetRated())
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichness_on_tallies)
+{
+  using ribi::cmap::CalculateRichness;
   using ribi::cmap::Competency;
   {
     //An empty map has no richness
     const std::map<Competency, int> empty_map;
     BOOST_CHECK_EQUAL(
-      CalculateRichnessExperimental(empty_map),
+      CalculateRichness(empty_map),
       0
     );
   }
@@ -520,7 +533,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
       { ribi::cmap::Competency::ti_knowledge, 1 }
     };
     BOOST_CHECK_EQUAL(
-      CalculateRichnessExperimental(m), 100
+      CalculateRichness(m), 100
     );
   }
   {
@@ -535,7 +548,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
       { ribi::cmap::Competency::ti_knowledge, 10 }
     };
     BOOST_CHECK_EQUAL(
-      CalculateRichnessExperimental(m), 100
+      CalculateRichness(m), 100
     );
   }
   {
@@ -549,7 +562,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
     // b: 1
     // r: 100 * (a + b) / 12
     BOOST_CHECK_EQUAL(
-      CalculateRichnessExperimental(m), 25
+      CalculateRichness(m), 25
     );
   }
   {
@@ -567,7 +580,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
     // b: 5 (all but one are between 12%-25%)
     // r: 100 * (a + b) / 12 = 92
     BOOST_CHECK_EQUAL(
-      CalculateRichnessExperimental(m), 92
+      CalculateRichness(m), 92
     );
   }
   {
@@ -583,7 +596,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
       { ribi::cmap::Competency::misc, 100 }
     };
     BOOST_CHECK_EQUAL(
-      CalculateRichnessExperimental(m), 100
+      CalculateRichness(m), 100
     );
   }
 
@@ -594,7 +607,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
       { ribi::cmap::Competency::uninitialized, 1 }
     };
     BOOST_CHECK_THROW(
-      CalculateRichnessExperimental(m),
+      CalculateRichness(m),
       std::invalid_argument
     );
   }
@@ -605,7 +618,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateRichnessExperimental)
       { ribi::cmap::Competency::n_competencies, 1 }
     };
     BOOST_CHECK_THROW(
-      CalculateRichnessExperimental(m),
+      CalculateRichness(m),
       std::invalid_argument
     );
   }
@@ -973,4 +986,46 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_CalculateSpecificityExperimental_abuse)
       std::invalid_argument
     );
   }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_CollectCompetencies)
+{
+  BOOST_CHECK(!CollectCompetenies(ConceptMapFactory().GetRated()).empty());
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_CountExamples)
+{
+  BOOST_CHECK(CountExamples(ConceptMapFactory().GetRated()) > 0);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_GetFirstNode_on_empty_concept_map)
+{
+  BOOST_CHECK_THROW(
+    GetFirstNode(ConceptMap()),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_GetFromTo)
+{
+  const auto conceptmap = ConceptMapFactory().GetTwoNodeOneEdgeNoCenter();
+  const auto nodes = GetFromTo(*boost::edges(conceptmap).first, conceptmap);
+  BOOST_CHECK_NE(nodes.first, nodes.second);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_GetNodesSortedByLevel)
+{
+  //      2 <- 1 <- 0 -> 1 -> 2
+  //                |    |
+  //                v    v
+  //                1    2
+  const auto conceptmap = ConceptMapFactory().GetLevel();
+  const auto nodes = GetNodesSortedByLevel(conceptmap);
+  BOOST_CHECK_EQUAL(nodes[0].GetName(), std::to_string(0));
+  BOOST_CHECK_EQUAL(nodes[1].GetName(), std::to_string(1));
+  BOOST_CHECK_EQUAL(nodes[2].GetName(), std::to_string(1));
+  BOOST_CHECK_EQUAL(nodes[3].GetName(), std::to_string(1));
+  BOOST_CHECK_EQUAL(nodes[4].GetName(), std::to_string(2));
+  BOOST_CHECK_EQUAL(nodes[5].GetName(), std::to_string(2));
+  BOOST_CHECK_EQUAL(nodes[6].GetName(), std::to_string(2));
 }
