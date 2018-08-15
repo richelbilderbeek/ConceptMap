@@ -13,6 +13,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_rating_specificity_comparison)
   BOOST_CHECK_EQUAL(s, s);
   BOOST_CHECK_NE(r, s);
   BOOST_CHECK_NE(s, r);
+  assert(r != s);
 }
 
 BOOST_AUTO_TEST_CASE(ribi_cmap_rating_specificity_to_html)
@@ -27,6 +28,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_rating_specificity_to_html_differs)
 {
   const auto r = CreateDefaultRatingSpecificity();
   const auto s = CreateTestRatingSpecificity();
+  assert(r != s);
   const auto html_1 = ToHtml(r);
   const auto html_2 = ToHtml(s);
   BOOST_CHECK_NE(r, s);
@@ -46,7 +48,24 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_rating_specificity_to_xml)
 {
   const auto r = CreateDefaultRatingSpecificity();
   const auto s = CreateTestRatingSpecificity();
+  assert(r != s);
   const auto xml_1 = ToXml(r);
   const auto xml_2 = ToXml(s);
   BOOST_CHECK_NE(xml_1, xml_2);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_rating_specificity_to_xml_and_back)
+{
+  const auto r = CreateDefaultRatingSpecificity();
+  const auto xml = ToXml(r);
+  const auto s = XmlToRatingSpecificity(xml);
+  BOOST_CHECK_EQUAL(r, s);
+}
+
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_rating_specificity_to_stream)
+{
+  std::stringstream s;
+  s << CreateDefaultRatingSpecificity();
+  BOOST_CHECK(!s.str().empty());
 }

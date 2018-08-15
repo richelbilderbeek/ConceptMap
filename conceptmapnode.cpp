@@ -111,7 +111,7 @@ const ribi::cmap::Example& ribi::cmap::GetExample(
 {
   assert(i >= 0);
   assert(i < CountExamples(node));
-  return GetExamples(node).Get()[i];
+  return GetExamples(node)[i];
 }
 
 ribi::cmap::Example& ribi::cmap::GetExample(
@@ -120,7 +120,7 @@ ribi::cmap::Example& ribi::cmap::GetExample(
 {
   assert(i >= 0);
   assert(i < CountExamples(node));
-  return GetExamples(node).Get()[i];
+  return GetExamples(node)[i];
 }
 
 const ribi::cmap::Examples& ribi::cmap::GetExamples(const Node& node) noexcept

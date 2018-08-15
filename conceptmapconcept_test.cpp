@@ -1,23 +1,3 @@
-//---------------------------------------------------------------------------
-/*
-ConceptMap, concept map classes
-Copyright (C) 2013-2016 Richel Bilderbeek
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program. If not, see <http://www.gnu.org/licenses/>.
-*/
-//---------------------------------------------------------------------------
-//From http://www.richelbilderbeek.nl/CppConceptMap.htm
-//---------------------------------------------------------------------------
 #include "conceptmapconcept.h"
 
 #include <boost/test/unit_test.hpp>
@@ -26,19 +6,19 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #include "conceptmapconceptfactory.h"
 #include "conceptmapexamplesfactory.h"
 
+using namespace ribi::cmap;
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_copy_constructor)
 {
-  using namespace ribi::cmap;
-  const Concept c = ConceptFactory().Create();
+  const Concept c;
   Concept d(c);
   BOOST_CHECK(d == c);
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_assignment_operator)
 {
-  using namespace ribi::cmap;
-  const Concept c = ConceptFactory().GetTest(1);
-  const Concept d = ConceptFactory().GetTest(2);
+  const Concept c("A");
+  const Concept d("B");
   BOOST_CHECK(c != d);
   Concept e(c);
   BOOST_CHECK(e == c);
@@ -51,8 +31,6 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_assignment_operator)
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_operator_equals_and_not)
 {
   // Test operator== and operator!=
-  using namespace ribi::cmap;
-
   const int sz = static_cast<int>(ConceptFactory().GetTests().size());
   BOOST_CHECK(sz > 0);
   for (int i=0; i!=sz; ++i)
@@ -95,7 +73,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_operator_equals_and_not)
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_operator_less)
 {
   //Test operator<
-  using namespace ribi::cmap;
+
   {
     // operator< must order by name
     {
@@ -138,7 +116,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_operator_less)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_xml_to_concept)
 {
-  using namespace ribi::cmap;
+
   const std::string xml = "<concept><name>TEST</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept>"; //!OCLINT
   const auto concept = XmlToConcept(xml);
   BOOST_CHECK(concept.GetName() == "TEST");
@@ -146,7 +124,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_xml_to_concept)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_stream_once)
 {
-  using namespace ribi::cmap;
+
   const Concept e = ConceptFactory().GetTest(1);
   const Concept f = ConceptFactory().GetTest(2);
   std::stringstream s;
@@ -160,7 +138,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_stream_once)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_nasty_stream_once)
 {
-  using namespace ribi::cmap;
+
   for (const Concept e: ConceptFactory().GetNastyTests())
   {
     std::stringstream s;
@@ -174,7 +152,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_nasty_stream_once)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_examples_from_xml)
 {
-  using namespace ribi::cmap;
+
   BOOST_CHECK_THROW(
     ExtractExamplesFromXml("No examples here"),
     std::invalid_argument
@@ -189,7 +167,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_examples_from_xml)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_is_complex_from_xml)
 {
-  using namespace ribi::cmap;
+
   BOOST_CHECK_THROW(
     ExtractIsComplexFromXml("No is_complex here"),
     std::invalid_argument
@@ -204,7 +182,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_is_complex_from_xml)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_name_from_xml)
 {
-  using namespace ribi::cmap;
+
   BOOST_CHECK_THROW(
     ExtractNameFromXml("No name here"),
     std::invalid_argument
@@ -219,7 +197,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_name_from_xml)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_rating_complexity_from_xml)
 {
-  using namespace ribi::cmap;
+
   BOOST_CHECK_THROW(
     ExtractRatingComplexityFromXml("No rating_complexity here"),
     std::invalid_argument
@@ -234,7 +212,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_rating_complexity_from_xml
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_rating_concreteness_from_xml)
 {
-  using namespace ribi::cmap;
+
   BOOST_CHECK_THROW(
     ExtractRatingConcretenessFromXml("No rating_concreteness here"),
     std::invalid_argument
@@ -249,7 +227,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_rating_concreteness_from_x
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_rating_specificity_from_xml)
 {
-  using namespace ribi::cmap;
+
   BOOST_CHECK_THROW(
     ExtractRatingSpecificityFromXml("No rating_specificity here"),
     std::invalid_argument
@@ -264,7 +242,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_rating_specificity_from_xm
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_examples)
 {
-  using namespace ribi::cmap;
+
   const auto examples = ExamplesFactory().Get0();
   Concept concept = ConceptFactory().GetNasty2();
   assert(concept.GetExamples() != examples);
@@ -272,19 +250,27 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_examples)
   BOOST_CHECK_EQUAL(examples, concept.GetExamples());
 }
 
-BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_is_complex)
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_is_complex_member_functions)
 {
-  using namespace ribi::cmap;
-  Concept concept = ConceptFactory().GetNasty2();
+  Concept concept;
   concept.SetIsComplex(true);
   BOOST_CHECK(concept.GetIsComplex());
   concept.SetIsComplex(false);
   BOOST_CHECK(!concept.GetIsComplex());
 }
 
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_is_complex_free_functions)
+{
+  Concept concept;
+  SetIsComplex(concept, true);
+  BOOST_CHECK(GetIsComplex(concept));
+  SetIsComplex(concept, false);
+  BOOST_CHECK(!GetIsComplex(concept));
+}
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_name)
 {
-  using namespace ribi::cmap;
+
   Concept concept = ConceptFactory().GetNasty2();
   const std::string name{"ribi_concept_map_concept_set_name"};
   concept.SetName(name);
@@ -293,7 +279,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_name)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_complexity)
 {
-  using namespace ribi::cmap;
+
   Concept concept = ConceptFactory().GetNasty2();
 
   //Use
@@ -310,7 +296,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_complexity)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_concreteness)
 {
-  using namespace ribi::cmap;
+
   Concept concept = ConceptFactory().GetNasty2();
 
   //Use
@@ -327,7 +313,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_concreteness)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_specificity)
 {
-  using namespace ribi::cmap;
+
   Concept concept = ConceptFactory().GetNasty2();
 
   //Use
@@ -344,7 +330,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_specificity)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_to_str)
 {
-  using namespace ribi::cmap;
+
   BOOST_CHECK(
     !ConceptFactory().GetNasty2().ToStr().empty()
   );

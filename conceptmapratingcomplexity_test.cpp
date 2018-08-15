@@ -1,6 +1,7 @@
 #include "conceptmapratingcomplexity.h"
 
 #include <iostream>
+#include <sstream>
 #include <boost/test/unit_test.hpp>
 
 using namespace ribi::cmap;
@@ -27,6 +28,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_rating_complexity_to_html_differs)
 {
   const auto r = CreateDefaultRatingComplexity();
   const auto s = CreateTestRatingComplexity();
+  assert(r != s);
   const auto html_1 = ToHtml(r);
   const auto html_2 = ToHtml(s);
   BOOST_CHECK_NE(r, s);
@@ -58,4 +60,19 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_rating_complexity_to_xml)
   const auto xml_1 = ToXml(r);
   const auto xml_2 = ToXml(s);
   BOOST_CHECK_NE(xml_1, xml_2);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_rating_complexity_to_xml_and_back)
+{
+  const auto r = CreateDefaultRatingComplexity();
+  const auto xml = ToXml(r);
+  const auto s = XmlToRatingComplexity(xml);
+  BOOST_CHECK_EQUAL(r, s);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_rating_complexity_to_stream)
+{
+  std::stringstream s;
+  s << CreateDefaultRatingComplexity();
+  BOOST_CHECK(!s.str().empty());
 }

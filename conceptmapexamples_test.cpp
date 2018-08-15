@@ -49,8 +49,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_examples_const_index_operator)
 {
   using namespace ribi::cmap;
   const Examples examples( { Example("A"), Example("B") } );
-  BOOST_CHECK_EQUAL(examples[0], examples.Get()[0]);
-  BOOST_CHECK_EQUAL(examples[1], examples.Get()[1]);
+  BOOST_CHECK_EQUAL(examples[0], examples[0]);
+  BOOST_CHECK_EQUAL(examples[1], examples[1]);
   BOOST_CHECK_NE(examples[0], examples[1]);
 }
 
