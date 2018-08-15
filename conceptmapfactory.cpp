@@ -384,7 +384,7 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetWithExamplesWithCompete
   ConceptMap g;
 
   const auto vd_1 = AddVertex(CenterNodeFactory().CreateFromStrings("A center node is ..."), g);
-  Node n = NodeFactory().CreateFromStrings("not me");
+  Node n(Concept("not me"));
   std::vector<Example> examples;
   {
     int i = 0;
@@ -397,10 +397,11 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetWithExamplesWithCompete
       ++i;
     }
   }
-  n.GetConcept().SetExamples(Examples(examples));
+  SetExamples(n, Examples(examples));
+
   const auto vd_2 = AddVertex(n, g);
 
-  AddEdge(Edge(NodeFactory().GetTest(0), false, false), vd_1, vd_2, g);
+  AddEdge(Edge(), vd_1, vd_2, g);
 
   return Reposition(g);
 }

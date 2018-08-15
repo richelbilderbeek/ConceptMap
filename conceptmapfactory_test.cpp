@@ -70,3 +70,27 @@ BOOST_AUTO_TEST_CASE(
   BOOST_CHECK_EQUAL(2, boost::num_vertices(concept_map));
   BOOST_CHECK_EQUAL(1, boost::num_edges(concept_map));
 }
+
+BOOST_AUTO_TEST_CASE(test_ribi_conceptmapfactory_others
+) {
+  BOOST_CHECK_NO_THROW(
+    ConceptMapFactory().GetWithExamplesWithCompetencies(
+      {
+        ribi::cmap::Competency::organisations,
+        ribi::cmap::Competency::profession
+      }
+    )
+  );
+
+  BOOST_CHECK_NO_THROW(
+    ConceptMapFactory().GetRateConceptTallyDialogExample()
+  );
+
+  BOOST_CHECK_NO_THROW(
+    ConceptMapFactory().GetRateConceptTallyDialogExample283()
+  );
+
+  BOOST_CHECK_NO_THROW(
+    ConceptMapFactory().GetUnrated()
+  );
+}

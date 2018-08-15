@@ -8,6 +8,28 @@
 
 using namespace ribi::cmap;
 
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_constructor)
+{
+  BOOST_CHECK_NO_THROW(Concept());
+  const std::string name{"A"};
+
+  BOOST_CHECK_THROW(
+    Concept(name, Examples(), false, -12345),
+    std::invalid_argument
+  );
+
+  BOOST_CHECK_THROW(
+    Concept(name, Examples(), false, 0, -12345),
+    std::invalid_argument
+  );
+
+  BOOST_CHECK_THROW(
+    Concept(name, Examples(), false, 0, 0, -12345),
+    std::invalid_argument
+  );
+}
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_copy_constructor)
 {
   const Concept c;
@@ -29,6 +51,50 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_assignment_operator)
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_operator_equals_and_not)
+{
+  //Complexity can differ
+  {
+    Concept a;
+    Concept b;
+    assert(a == b);
+    SetIsComplex(a, !GetIsComplex(a));
+    BOOST_CHECK_NE(a, b);
+  }
+  //Name can differ
+  {
+    Concept a;
+    Concept b;
+    assert(a == b);
+    SetText(a, "New name");
+    BOOST_CHECK_NE(a, b);
+  }
+  //Rating XCS can differ
+  {
+    Concept a;
+    Concept b;
+    assert(a == b);
+    SetRatingComplexity(a, (GetRatingComplexity(a) + 1) % 3);
+    BOOST_CHECK_NE(a, b);
+  }
+  {
+    Concept a;
+    Concept b;
+    assert(a == b);
+    SetRatingConcreteness(a, (GetRatingConcreteness(a) + 1) % 3);
+    BOOST_CHECK_NE(a, b);
+  }
+  {
+    Concept a;
+    Concept b;
+    assert(a == b);
+    SetRatingSpecificity(a, (GetRatingSpecificity(a) + 1) % 3);
+    BOOST_CHECK_NE(a, b);
+  }
+}
+
+BOOST_AUTO_TEST_CASE(
+  ribi_concept_map_concept_operator_equals_and_not_brute_force
+)
 {
   // Test operator== and operator!=
   const int sz = static_cast<int>(ConceptFactory().GetTests().size());
@@ -69,6 +135,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_operator_equals_and_not)
     }
   }
 }
+
+
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_operator_less)
 {
@@ -242,12 +310,11 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_extract_rating_specificity_from_xm
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_examples)
 {
-
   const auto examples = ExamplesFactory().Get0();
   Concept concept = ConceptFactory().GetNasty2();
-  assert(concept.GetExamples() != examples);
-  concept.SetExamples(examples);
-  BOOST_CHECK_EQUAL(examples, concept.GetExamples());
+  assert(GetExamples(concept) != examples);
+  SetExamples(concept, examples);
+  BOOST_CHECK_EQUAL(examples, GetExamples(concept));
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_is_complex_member_functions)
@@ -330,8 +397,58 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_rating_specificity)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_to_str)
 {
-
   BOOST_CHECK(
-    !ConceptFactory().GetNasty2().ToStr().empty()
+    !Concept().ToStr().empty()
   );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_ExtractConceptFromXml)
+{
+  const std::string nonsense{"nonsense"};
+  BOOST_CHECK_THROW(
+    ExtractConceptFromXml(nonsense),
+    std::invalid_argument
+  );
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_concept_get_example_const)
+{
+  const std::string text_1{"A"};
+  const std::string text_2{"B"};
+  const Concept concept("", Examples( { Example(text_1), Example(text_2) } ));
+  BOOST_CHECK_EQUAL(GetExample(concept, 0).GetText(), text_1);
+  BOOST_CHECK_EQUAL(GetExample(concept, 1).GetText(), text_2);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_concept_get_example_non_const)
+{
+  const std::string text_1{"A"};
+  const std::string text_2{"B"};
+  Concept concept("", Examples( { Example(text_1), Example(text_2) } ));
+  const std::string text_3{"New"};
+  GetExample(concept, 0) = Example(text_3);
+  BOOST_CHECK_EQUAL(GetExample(concept, 0).GetText(), text_3);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_concept_get_name)
+{
+  const std::string name{"name"};
+  const Concept concept(name);
+  BOOST_CHECK_EQUAL(GetName(concept), name);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_concept_get_text)
+{
+  const std::string text{"text"};
+  const Concept concept(text);
+  BOOST_CHECK_EQUAL(GetText(concept), text);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_is_complex)
+{
+  Concept concept;
+  SetIsComplex(concept, true);
+  BOOST_CHECK(GetIsComplex(concept));
+  SetIsComplex(concept, false);
+  BOOST_CHECK(!GetIsComplex(concept));
 }

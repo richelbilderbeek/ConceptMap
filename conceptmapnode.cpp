@@ -262,6 +262,11 @@ void ribi::cmap::SetConcept(Node& node, const Concept& concept)
   node.SetConcept(concept);
 }
 
+void ribi::cmap::SetExamples(Node& node, const Examples& examples) noexcept
+{
+  SetExamples(node.GetConcept(), examples);
+}
+
 void ribi::cmap::SetIsComplex(Node& node, const bool is_complex)
 {
   SetIsComplex(node.GetConcept(), is_complex);

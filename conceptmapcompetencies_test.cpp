@@ -1,9 +1,10 @@
 #include "conceptmapcompetencies.h"
 #include <boost/test/unit_test.hpp>
 
+using namespace ribi::cmap;
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_competencies_test)
 {
-  using namespace ribi::cmap;
   static_assert(static_cast<int>(Competency::uninitialized) == 0,
     "Start the uninitialized value at zero, "
     "so that GetAllCompetencies can check against n_competencies"
@@ -35,4 +36,17 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_competencies_test)
   {
     BOOST_CHECK(c.ToIndex(Competency::uninitialized) == 0);
   }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_competencies_invalid_input)
+{
+  BOOST_CHECK_THROW(
+    Competencies().ToType("nonsense"),
+    std::logic_error
+  );
+
+  BOOST_CHECK_THROW(
+    Competencies().ToTypeFromDutch("nonsense"),
+    std::logic_error
+  );
 }

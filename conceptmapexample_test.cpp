@@ -5,10 +5,10 @@
 #include "conceptmapexamplefactory.h"
 #include "trace.h"
 
+using namespace ribi::cmap;
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_example_test)
 {
-  using namespace ribi::cmap;
-  //using ExampleFactory = ::ribi::cmap::ExampleFactory;
   const bool verbose{false};
 
   // Set and get must be symmetric
@@ -104,17 +104,50 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_example_test)
     assert(b == a); assert(b == b); assert(b != c);
     assert(c != a); assert(c != b); assert(c == c);
   }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_example_basic)
+{
   //Conversion between std::string and competency
   //Checked by Competencies
   {
-    const std::string xml = "<example><text>TEST</text>"
+    const std::string text{"text"};
+    const std::string xml = std::string("<example><text>") + text + "</text>"
       "<competency>uninitialized</competency>"
       "<is_complex>1</is_complex><is_concrete>1</is_concrete>"
       "<is_specific>1</is_specific></example>"
     ;
     const auto example = XmlToExample(xml);
-    assert(example.GetText() == "TEST");
+    BOOST_CHECK_EQUAL(example.GetText(), text);
   }
+  //Too short
+  {
+    const std::string xml = "too short";
+    BOOST_CHECK_THROW(
+      XmlToExample(xml),
+      std::logic_error
+    );
+  }
+  //No opening tag
+  {
+    const std::string xml = "long enough to check for an absent opening tag";
+    BOOST_CHECK_THROW(
+      XmlToExample(xml),
+      std::logic_error
+    );
+  }
+  //No closing tag
+  {
+    const std::string xml = "<example>no closing tag here";
+    BOOST_CHECK_THROW(
+      XmlToExample(xml),
+      std::logic_error
+    );
+  }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_example)
+{
   // Conversion from class->XML->class must result in
   // something equal to the class
   {
@@ -166,6 +199,10 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_example_test)
       }
     }
   }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_example_to_stream)
+{
   //Single stream
   {
     const Example e = ExampleFactory().GetTest(1);
@@ -216,4 +253,12 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_example_test)
     assert(e == h);
   }
 
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_example_is_rated)
+{
+  Example e;
+  assert(!IsRated(e));
+  e.SetCompetency(Competency::organisations);
+  BOOST_CHECK(IsRated(e));
 }
