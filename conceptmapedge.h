@@ -110,6 +110,7 @@ bool HasSameData(const Edge& lhs, const Edge& rhs) noexcept;
 
 ///Pairwise checks if all Edges at left- and right-hand-side have the same data
 ///Throws if the sizes differ
+[[deprecated]]
 bool HasSameData(const std::vector<Edge>& lhs, const std::vector<Edge>& rhs);
 
 ///Checks if the nodes and arrows are similar

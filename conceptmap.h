@@ -99,6 +99,7 @@ bool HasCenterNode(const ConceptMap& c) noexcept;
 
 ///Checks if all Nodes and Edges contain the same data and that
 ///the topology matches. Or: checks for everything except Node and Edge IDs
+[[deprecated]]
 bool HasSameData(const ConceptMap& lhs, const ConceptMap& rhs) noexcept;
 
 ///Checks if all Nodes and Edges contain similar data (the coordinats have

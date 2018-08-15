@@ -8,11 +8,11 @@ using namespace ribi::cmap;
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_copy_constructor)
 {
-  const auto edge1 = EdgeFactory().GetTest(1);
+  const auto edge1(Node(Concept("A")));
   const auto edge2(edge1);
   BOOST_CHECK_EQUAL(edge1, edge2);
-  BOOST_CHECK_EQUAL(edge1.GetNode().GetX(), edge2.GetNode().GetX());
-  BOOST_CHECK_EQUAL(edge1.GetNode().GetX(), edge2.GetNode().GetX());
+  BOOST_CHECK_EQUAL(GetX(edge1), GetX(edge2));
+  BOOST_CHECK_EQUAL(GetY(edge1), GetY(edge2));
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_assignment_operator)
@@ -259,4 +259,78 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_edge_get_concept_const)
   const Concept c("A");
   const Edge edge(Node(c, NodeType::normal));
   BOOST_CHECK_EQUAL(c, ::ribi::cmap::GetConcept(edge));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_set_is_complex)
+{
+  Edge edge;
+  SetIsComplex(edge, true);
+  BOOST_CHECK(GetIsComplex(edge));
+  SetIsComplex(edge, false);
+  BOOST_CHECK(!GetIsComplex(edge));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_get_const_node)
+{
+  const Node node{Concept("A")};
+  const Edge edge(node);
+  BOOST_CHECK_EQUAL(edge.GetNode(), ::ribi::cmap::GetNode(edge));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_get_non_const_node)
+{
+  const Node node_1{Concept("A")};
+  Edge edge(node_1);
+  const Node node_2{Concept("B")};
+  edge.GetNode() = node_2;
+  BOOST_CHECK_EQUAL(GetNode(edge), node_2);
+  BOOST_CHECK_NE(GetNode(edge), node_1);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_has_head_arrow)
+{
+  Edge edge;
+  edge.SetHeadArrow(true);
+  BOOST_CHECK(HasHeadArrow(edge));
+  edge.SetHeadArrow(false);
+  BOOST_CHECK(!HasHeadArrow(edge));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_has_tail_arrow)
+{
+  Edge edge;
+  edge.SetTailArrow(true);
+  BOOST_CHECK(HasTailArrow(edge));
+  edge.SetTailArrow(false);
+  BOOST_CHECK(!HasTailArrow(edge));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_move)
+{
+  Edge edge;
+  assert(GetX(edge) == 0.0);
+  assert(GetY(edge) == 0.0);
+  const double dx{12.34};
+  const double dy{23.45};
+  Move(edge, dx, dy);
+  BOOST_CHECK_EQUAL(GetX(edge), dx);
+  BOOST_CHECK_EQUAL(GetY(edge), dy);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_set_concept)
+{
+  Edge edge;
+  const Concept concept("A");
+  BOOST_CHECK(GetConcept(edge) != concept);
+  SetConcept(edge, concept);
+  BOOST_CHECK(GetConcept(edge) == concept);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_set_node)
+{
+  Edge edge;
+  const Node node(Concept("A"));
+  BOOST_CHECK(node != GetNode(edge));
+  edge.SetNode(node);
+  BOOST_CHECK(node == GetNode(edge));
 }

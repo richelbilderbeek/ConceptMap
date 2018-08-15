@@ -490,8 +490,10 @@ bool ribi::cmap::HasSameData(const ConceptMap& lhs, const ConceptMap& rhs) noexc
   //Still imperfect
   return
     boost::isomorphism(lhs, rhs)
+    #ifdef REALLY_NEED_THIS_20180815
     && HasSameData(GetSortedNodes(lhs), GetSortedNodes(rhs))
     && HasSameData(GetSortedEdges(lhs), GetSortedEdges(rhs))
+    #endif // REALLY_NEED_THIS_20180815
   ;
 }
 

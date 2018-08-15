@@ -318,22 +318,26 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_extract_y_from_xml)
   );
 }
 
-BOOST_AUTO_TEST_CASE(ribi_cmap_node_set_concept)
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_set_concept_member_function)
 {
-
-
-  auto node = NodeFactory().GetNasty0();
-  const auto concept = ConceptFactory().Get2();
+  Node node;
+  const Concept concept("A");
   assert(node.GetConcept() != concept);
   node.SetConcept(concept);
-
   BOOST_CHECK_EQUAL(node.GetConcept(), concept);
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_set_concept_free_function)
+{
+  Node node;
+  const Concept concept("A");
+  assert(GetConcept(node) != concept);
+  SetConcept(node, concept);
+  BOOST_CHECK_EQUAL(GetConcept(node), concept);
 }
 
 BOOST_AUTO_TEST_CASE(ribi_cmap_node_to_str)
 {
-
-
   BOOST_CHECK(
     !NodeFactory().GetNasty0().ToStr().empty()
   );
@@ -341,8 +345,6 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_to_str)
 
 BOOST_AUTO_TEST_CASE(ribi_cmap_node_xml_to_node)
 {
-
-
   BOOST_CHECK_THROW(
     XmlToNode("too short"),
     std::invalid_argument
@@ -419,4 +421,16 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_node_get_rating_specificity)
     SetRatingSpecificity(node, s);
     BOOST_CHECK_EQUAL(GetRatingSpecificity(node), s);
   }
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_node_move)
+{
+  Node node;
+  assert(node.GetX() == 0.0);
+  assert(node.GetY() == 0.0);
+  const double dx{12.34};
+  const double dy{23.45};
+  Move(node, dx, dy);
+  BOOST_CHECK_EQUAL(node.GetX(), dx);
+  BOOST_CHECK_EQUAL(node.GetY(), dy);
 }
