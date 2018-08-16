@@ -376,22 +376,22 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_set_node)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_to_str)
 {
-  BOOST_CHECK(!ToStr(Edge()).empty());
+  BOOST_CHECK(!Edge().ToStr().empty());
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_comparison)
 {
-  //If left hand side has a head arrow, and right not, sorted!
-  BOOST_CHECK(Edge(Node(), true, false) < Edge(Node(), false, false));
-
   //If right hand side has a head arrow, and left not, unsorted!
-  BOOST_CHECK(!(Edge(Node(), false, false) < Edge(Node(), true, false)));
+  BOOST_CHECK(Edge(Node(), false, false) < Edge(Node(), true, false));
 
-  //If left hand side has a tail arrow, and right not, sorted!
-  BOOST_CHECK(Edge(Node(), false, true) < Edge(Node(), false, false));
+  //If left hand side has a head arrow, and right not, sorted!
+  BOOST_CHECK(!(Edge(Node(), true, false) < Edge(Node(), false, false)));
 
   //If right hand side has a tail arrow, and left not, unsorted!
-  BOOST_CHECK(!(Edge(Node(), false, false) < Edge(Node(), false, true)));
+  BOOST_CHECK(Edge(Node(), false, false) < Edge(Node(), false, true));
+
+  //If left hand side has a tail arrow, and right not, sorted!
+  BOOST_CHECK(!(Edge(Node(), false, true) < Edge(Node(), false, false)));
 
   //Equal edges
   BOOST_CHECK(!(Edge() < Edge()));

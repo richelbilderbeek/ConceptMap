@@ -265,7 +265,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_example_is_rated)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_example_to_str)
 {
-  BOOST_CHECK(!ToStr(Example()).empty());
+  BOOST_CHECK(!Example().ToStr().empty());
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_example_operator_less_than)
