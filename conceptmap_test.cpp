@@ -133,7 +133,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_streaming_empty_graph)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_simple_dot_to_concept_map)
 {
-  using namespace ribi::cmap;
+
   std::string s{
     "graph G {\n"
     "0[label=\"<node><concept><name>A</name><examples></examples><concept_is_complex>1</concept_is_complex><complexity>-1</complexity><concreteness>-1</concreteness><specificity>-1</specificity></concept><x>0</x><y>0</y><type>normal</type></node>\"];\n"
@@ -149,7 +149,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_simple_dot_to_concept_map)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_single_object)
 {
-  using namespace ribi::cmap;
+
   ConceptMap a{ConceptMapFactory().Get1()};
   std::stringstream s;
   s << a;
@@ -161,7 +161,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_single_object)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_two_objects)
 {
-  using namespace ribi::cmap;
+
   const ConceptMap e = ConceptMapFactory().Get1();
   const ConceptMap f = ConceptMapFactory().Get2();
   std::stringstream s;
@@ -176,7 +176,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_two_objects)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_one_nasty_object)
 {
-  using namespace ribi::cmap;
+
   for (const ConceptMap e: ConceptMapFactory().GetNastyTests())
   {
     {
@@ -196,7 +196,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_one_nasty_object)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_stream_two_nasty_objects)
 {
-  using namespace ribi::cmap;
+
   for (const ConceptMap e: ConceptMapFactory().GetNastyTests())
   {
     std::stringstream s;
@@ -246,7 +246,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_and_load_detailed)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_save_and_load_nasty_test)
 {
-  using namespace ribi::cmap;
+
   for (const ConceptMap c: ConceptMapFactory().GetNastyTests())
   {
     const auto filename = ribi::fileio::FileIo().GetTempFileName();
@@ -259,20 +259,45 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_and_load_nasty_test)
   }
 }
 
+BOOST_AUTO_TEST_CASE(ribi_concept_map_has_center_node)
+{
+  BOOST_CHECK_EQUAL(
+    false,
+    HasCenterNode(
+      ConceptMapFactory().GetThreeNodeTwoEdgeNoCenter()
+    )
+  );
+
+  BOOST_CHECK_EQUAL(
+    true,
+    HasCenterNode(
+      ConceptMapFactory().GetThreeNodeTwoEdge()
+    )
+  );
+}
+
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_count_center_nodes)
 {
-  using namespace ribi::cmap;
-  for (const ConceptMap& map: ConceptMapFactory().GetAllTests())
-  {
-    BOOST_CHECK(CountCenterNodes(map) == 0 || CountCenterNodes(map) == 1);
-  }
+  BOOST_CHECK_EQUAL(
+    0,
+    CountCenterNodes(
+      ConceptMapFactory().GetThreeNodeTwoEdgeNoCenter()
+    )
+  );
+
+  BOOST_CHECK_EQUAL(
+    1,
+    CountCenterNodes(
+      ConceptMapFactory().GetThreeNodeTwoEdge()
+    )
+  );
 }
 
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_find_center_node)
 {
-  using namespace ribi::cmap;
+
 
   //Valid concept map
   BOOST_CHECK_NO_THROW(
@@ -289,7 +314,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_find_center_node)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_get_center_node)
 {
-  using namespace ribi::cmap;
+
 
   //Valid concept map
   BOOST_CHECK_NO_THROW(
@@ -306,7 +331,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_center_node)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_get_first_edge)
 {
-  using namespace ribi::cmap;
+
 
   //Valid concept map
   BOOST_CHECK_NO_THROW(
@@ -323,7 +348,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_first_edge)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_get_focus_name)
 {
-  using namespace ribi::cmap;
+
 
   //Valid concept map
   BOOST_CHECK_NO_THROW(
@@ -340,7 +365,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_focus_name)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_get_from)
 {
-  using namespace ribi::cmap;
+
 
   const auto g = ConceptMapFactory().Get3();
   const auto edge = GetFirstEdge(g);
@@ -362,7 +387,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_from)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_get_to)
 {
-  using namespace ribi::cmap;
+
 
   //Valid
   const ConceptMap m{ConceptMapFactory().Get3()};
@@ -385,7 +410,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_to)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_remove_first_node)
 {
-  using namespace ribi::cmap;
+
   auto g = ConceptMapFactory().Get3();
   assert(boost::num_vertices(g) == 2);
 
@@ -411,7 +436,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_to_image)
   // unknown location(0): fatal error: in "ribi_concept_map_save_to_image": std::runtime_error: convert_svg_to_png: command 'convert SaveToImage.svg ribi_concept_map_save_to_image.png' resulting in error 256
   // ../ConceptMap/conceptmap_test.cpp(381): last checkpoint: if error 'child has exited' then install GraphViz
 
-  using namespace ribi::cmap;
+
   const ribi::FileIo f;
   const std::string filename{"ribi_concept_map_save_to_image.png"};
 
@@ -430,7 +455,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_to_image)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_image)
 {
-  using namespace ribi::cmap;
+
   const ribi::FileIo f;
   const std::string filename{"ribi_concept_map_save_summary_to_image.png"};
 
@@ -448,7 +473,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_image)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_file)
 {
-  using namespace ribi::cmap;
+
   const ribi::FileIo f;
   const std::string filename{"ribi_concept_map_save_summary_to_image.dot"};
 
@@ -466,7 +491,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_file)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
 {
-  using namespace ribi::cmap;
+
 
   BOOST_CHECK_THROW(
     XmlToConceptMap("too short"),
@@ -488,7 +513,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_create_direct_neighbour_concept_maps)
 {
-  using namespace ribi::cmap;
+
   BOOST_CHECK_EQUAL(
     CreateDirectNeighbourConceptMaps(ConceptMapFactory().Get3()).size(),
     2

@@ -485,18 +485,6 @@ bool ribi::cmap::HasCenterNode(const ConceptMap& c) noexcept
   return i != std::end(nodes);
 }
 
-bool ribi::cmap::HasSameData(const ConceptMap& lhs, const ConceptMap& rhs) noexcept
-{
-  //Still imperfect
-  return
-    boost::isomorphism(lhs, rhs)
-    #ifdef REALLY_NEED_THIS_20180815
-    && HasSameData(GetSortedNodes(lhs), GetSortedNodes(rhs))
-    && HasSameData(GetSortedEdges(lhs), GetSortedEdges(rhs))
-    #endif // REALLY_NEED_THIS_20180815
-  ;
-}
-
 bool ribi::cmap::HasSimilarData(
   const ConceptMap& lhs,
   const ConceptMap& rhs,

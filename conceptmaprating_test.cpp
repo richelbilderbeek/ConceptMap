@@ -36,6 +36,7 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_rating_comparison)
   BOOST_CHECK_EQUAL(s, s);
   BOOST_CHECK_NE(r, s);
   BOOST_CHECK_NE(s, r);
+  BOOST_CHECK(r != s);
 }
 
 BOOST_AUTO_TEST_CASE(ribi_cmap_rating_to_xml)
@@ -54,3 +55,11 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_rating_to_xml_and_back)
   const auto s = XmlToRating(xml);
   BOOST_CHECK_EQUAL(r, s);
 }
+BOOST_AUTO_TEST_CASE(ribi_cmap_rating_to_stream)
+{
+  const auto r = CreateDefaultRating();
+  std::stringstream s;
+  s << r;
+  BOOST_CHECK(!s.str().empty());
+}
+
