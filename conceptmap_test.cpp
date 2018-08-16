@@ -259,6 +259,14 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_and_load_nasty_test)
   }
 }
 
+BOOST_AUTO_TEST_CASE(ribi_concept_map_LoadFromFile_on_absent_file)
+{
+  BOOST_CHECK_THROW(
+    LoadFromFile("abs.ent"),
+    std::invalid_argument
+  );
+}
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_has_center_node)
 {
   BOOST_CHECK_EQUAL(
@@ -428,7 +436,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_remove_first_node)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_save_to_image)
 {
-  #ifdef FIX_ISSUE
+  //#define FIX_ISSUE_SAVE_TO_IMAGE
+  #ifdef FIX_ISSUE_SAVE_TO_IMAGE
   // convert-im6.q16: Image width exceeds user limit in IHDR `/tmp/magick-3313bMj-FAXpwdMC' @ warning/png.c/MagickPNGWarningHandler/1654.
   // convert-im6.q16: Invalid IHDR data `/tmp/magick-3313bMj-FAXpwdMC' @ error/png.c/MagickPNGErrorHandler/1628.
   // convert-im6.q16: corrupt image `/tmp/magick-3313bMj-FAXpwdMC' @ error/png.c/ReadPNGImage/3963.
@@ -450,6 +459,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_to_image)
   BOOST_CHECK(f.IsRegularFile(filename));
   f.DeleteFile(filename);
   BOOST_CHECK(!f.IsRegularFile(filename));
+  assert(!"FIXED");
   #endif // FIX_ISSUE
 }
 
@@ -1053,4 +1063,61 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_GetNodesSortedByLevel)
   BOOST_CHECK_EQUAL(nodes[4].GetName(), std::to_string(2));
   BOOST_CHECK_EQUAL(nodes[5].GetName(), std::to_string(2));
   BOOST_CHECK_EQUAL(nodes[6].GetName(), std::to_string(2));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_IsConnectedTo)
+{
+  const auto conceptmap = ConceptMapFactory().GetThreeNodeTwoEdge();
+  auto vi = boost::vertices(conceptmap).first;
+  const auto& first_node = conceptmap[*vi];
+  ++vi;
+  const auto& second_node = conceptmap[*vi];
+  ++vi;
+  const auto& third_node = conceptmap[*vi];
+  auto ei = boost::edges(conceptmap).first;
+  const auto& first_edge = conceptmap[*ei];
+  ++ei;
+  const auto& second_edge = conceptmap[*ei];
+  BOOST_CHECK( IsConnectedTo(first_edge, first_node, conceptmap));
+  BOOST_CHECK( IsConnectedTo(first_edge, second_node, conceptmap));
+  BOOST_CHECK(!IsConnectedTo(first_edge, third_node, conceptmap));
+  BOOST_CHECK(!IsConnectedTo(second_edge, first_node, conceptmap));
+  BOOST_CHECK( IsConnectedTo(second_edge, second_node, conceptmap));
+  BOOST_CHECK( IsConnectedTo(second_edge, third_node, conceptmap));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_IsCenterNode)
+{
+  const auto conceptmap = ConceptMapFactory().GetThreeNodeTwoEdge();
+  auto vi = boost::vertices(conceptmap).first;
+  const auto& first_node = conceptmap[*vi];
+  ++vi;
+  const auto& second_node = conceptmap[*vi];
+  ++vi;
+  const auto& third_node = conceptmap[*vi];
+  BOOST_CHECK( IsCenterNode(first_node));
+  BOOST_CHECK(!IsCenterNode(second_node));
+  BOOST_CHECK(!IsCenterNode(third_node));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_IsPrimaryConcept)
+{
+  const auto conceptmap = ConceptMapFactory().GetThreeNodeTwoEdge();
+  auto vi = boost::vertices(conceptmap).first;
+  BOOST_CHECK(!IsPrimaryConcept(*vi, conceptmap));
+  ++vi;
+  BOOST_CHECK(IsPrimaryConcept(*vi, conceptmap));
+  ++vi;
+  BOOST_CHECK(!IsPrimaryConcept(*vi, conceptmap));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_IsSecondaryConcept)
+{
+  const auto conceptmap = ConceptMapFactory().GetThreeNodeTwoEdge();
+  auto vi = boost::vertices(conceptmap).first;
+  BOOST_CHECK(!IsSecondaryConcept(*vi, conceptmap));
+  ++vi;
+  BOOST_CHECK(!IsSecondaryConcept(*vi, conceptmap));
+  ++vi;
+  BOOST_CHECK(IsSecondaryConcept(*vi, conceptmap));
 }

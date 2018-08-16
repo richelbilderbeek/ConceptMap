@@ -533,16 +533,10 @@ bool ribi::cmap::IsSecondaryConcept(const VertexDescriptor vd, const ConceptMap&
 
 ribi::cmap::ConceptMap ribi::cmap::LoadFromFile(const std::string& dot_filename)
 {
-  //auto g = load_undirected_bundled_edges_and_vertices_graph_from_dot<
-  //    decltype(ConceptMap())
-  //  >(dot_filename)
-  //;
   if (!is_regular_file(dot_filename))
   {
     std::stringstream msg;
-    msg << __func__ << ": file '"
-      << dot_filename << "' not found"
-    ;
+    msg  << "file '" << dot_filename << "' not found";
     throw std::invalid_argument(msg.str());
   }
   std::ifstream f(dot_filename);
@@ -551,8 +545,6 @@ ribi::cmap::ConceptMap ribi::cmap::LoadFromFile(const std::string& dot_filename)
   dp.property("label", get(boost::vertex_bundle, g));
   dp.property("label", get(boost::edge_bundle, g));
   boost::read_graphviz(f, g, dp);
-
-
   DecodeConceptMap(g);
   return g;
 }
