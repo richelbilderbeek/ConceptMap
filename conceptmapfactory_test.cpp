@@ -87,7 +87,7 @@ BOOST_AUTO_TEST_CASE(test_ribi_conceptmapfactory_others
   );
 
   BOOST_CHECK_NO_THROW(
-    ConceptMapFactory().GetRateConceptTallyDialogExample283()
+    ConceptMapFactory().GetRateConceptTallyDialogExample293()
   );
 
   BOOST_CHECK_NO_THROW(

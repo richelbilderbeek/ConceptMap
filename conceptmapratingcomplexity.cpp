@@ -9,9 +9,9 @@ ribi::cmap::RatingComplexity::RatingComplexity(
   const std::map<std::pair<int, int>, int> &rating_complexity
 ) : m_rating{rating_complexity}
 {
-  // [0, 3] (that is 4) number of relations,
+  // [0, 4] (that is 5) number of relations,
   // [0, 4] (that is 5) number of examples
-  assert(m_rating.size() == 20);
+  assert(m_rating.size() == 25);
 }
 
 ribi::cmap::RatingComplexity ribi::cmap::CreateDefaultRatingComplexity() noexcept
@@ -38,7 +38,12 @@ ribi::cmap::RatingComplexity ribi::cmap::CreateDefaultRatingComplexity() noexcep
       { {3, 1}, 2 },
       { {3, 2}, 2 },
       { {3, 3}, 2 },
-      { {3, 4}, 2 }
+      { {3, 4}, 2 },
+      { {4, 0}, 2 },
+      { {4, 1}, 2 },
+      { {4, 2}, 2 },
+      { {4, 3}, 2 },
+      { {4, 4}, 2 }
     }
   );
 }
@@ -67,7 +72,12 @@ ribi::cmap::RatingComplexity ribi::cmap::CreateTestRatingComplexity() noexcept
       { {3, 1}, 0 },
       { {3, 2}, 0 },
       { {3, 3}, 0 },
-      { {3, 4}, 0 }
+      { {3, 4}, 0 },
+      { {4, 0}, 0 },
+      { {4, 1}, 0 },
+      { {4, 2}, 0 },
+      { {4, 3}, 0 },
+      { {4, 4}, 0 }
     }
   );
 }
@@ -138,16 +148,23 @@ std::string ribi::cmap::ToHtml(
   s << "<table style=\"vertical-align: middle\">\n"
     << ToHtmlHeaderX(n_examples_emph)
   ;
-  for (int n_relations = 0; n_relations != 4; ++n_relations)
+  for (int n_relations = 0; n_relations != 5; ++n_relations)
   {
     s << "  <tr>\n";
     if (n_relations == 0)
     {
-      s << "    <th rowspan=\"4\"><center>Aantal relaties</center></th>\n";
+      s << "    <th rowspan=\"5\"><center>Aantal complexe relaties</center></th>\n";
     }
     s << "    <th>";
     if (n_relations == n_relations_emph) { s << "<u>"; }
-    s << n_relations;
+    if (n_relations < 4)
+    {
+      s << n_relations;
+    }
+    else
+    {
+      s << ">3";
+    }
     if (n_relations == n_relations_emph) { s << "</u>"; }
     s << "</th>\n";
     for (int n_examples = 0; n_examples != 5; ++n_examples)
@@ -179,7 +196,7 @@ std::string ribi::cmap::ToHtmlHeaderX(
     << "    <th>Voorgestelde</th><th> </th><th colspan=\"5\">Aantal complexe</th>\n"
     << "  </tr>\n"
     << "  <tr>\n"
-    << "    <th>complexiteit</th><th> </th><th colspan=\"5\">relaties en voorbeelden</th>\n"
+    << "    <th>complexiteit</th><th> </th><th colspan=\"5\">voorbeelden</th>\n"
     << "  </tr>\n"
     << "  <tr>\n"
     << "    <th> </th><th> </th>"

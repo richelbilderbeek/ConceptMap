@@ -460,36 +460,51 @@ ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample() const noexcept
 }
 
 ribi::cmap::ConceptMap
-ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample283() const noexcept
+ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample293() const noexcept
 {
   ConceptMap g;
-  const Examples examples_1(
-    {
-      Example("Begin")
-    }
+  const auto vd_1 = AddVertex(
+    Node(
+      Concept(
+        "My focal concept",
+        Examples( { Example("My focal concept's example") } ),
+        true //is complex
+      )
+    ),
+    g
   );
-
-  const Concept concept1{
-    "Start",
-    Examples(),
-    true //is complex
-  };
-  const Concept concept2("End");
-  const auto vd_1 = AddVertex(Node(concept1), g);
-  const auto vd_2 = AddVertex(Node(concept2), g);
+  const auto vd_2 = AddVertex(
+    Node(Concept("My first other concept")),
+    g
+  );
+  const auto vd_3 = AddVertex(
+    Node(Concept("My second other concept")),
+    g
+  );
   AddEdge(
     Edge(
       Node(
         Concept(
-          "goes to",
-          examples_1,
-          false // is not complex
+          "my first relation",
+          Examples( { Example("my first relation's example") } )
         )
-      ),
-      true
+      )
     ),
-    vd_2,
     vd_1,
+    vd_2,
+    g
+  );
+  AddEdge(
+    Edge(
+      Node(
+        Concept(
+          "my second relation",
+          Examples( { Example("my second relation's example") } )
+        )
+      )
+    ),
+    vd_1,
+    vd_3,
     g
   );
   return Reposition(g);
