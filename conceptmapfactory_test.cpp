@@ -94,3 +94,13 @@ BOOST_AUTO_TEST_CASE(test_ribi_conceptmapfactory_others
     ConceptMapFactory().GetUnrated()
   );
 }
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_conceptmapfactory_GetQtRatedConceptDialogExample)
+{
+  BOOST_CHECK(
+    boost::num_vertices(
+      ConceptMapFactory().GetQtRatedConceptDialogExample()
+    ) > 0
+  );
+}
+

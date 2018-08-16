@@ -438,13 +438,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_image)
 {
   const ribi::FileIo f;
   const std::string filename{"ribi_concept_map_save_summary_to_image.png"};
-
-  if (f.IsRegularFile(filename))
-  {
-    f.DeleteFile(filename);
-  }
   assert(!f.IsRegularFile(filename));
-
   SaveSummaryToImage(ConceptMapFactory().Get3(), filename);
   BOOST_CHECK(f.IsRegularFile(filename));
   f.DeleteFile(filename);
@@ -456,13 +450,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_file)
 
   const ribi::FileIo f;
   const std::string filename{"ribi_concept_map_save_summary_to_image.dot"};
-
-  if (f.IsRegularFile(filename))
-  {
-    f.DeleteFile(filename);
-  }
   assert(!f.IsRegularFile(filename));
-
   SaveSummaryToFile(ConceptMapFactory().GetAllArrowTypes(), filename);
   BOOST_CHECK(f.IsRegularFile(filename));
   f.DeleteFile(filename);
@@ -482,7 +470,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
   );
 
   BOOST_CHECK_THROW(
-    XmlToConceptMap("<concept_map>no closing tag"),
+    XmlToConceptMap("<conceptmap>no closing tag"),
     std::invalid_argument
   );
 

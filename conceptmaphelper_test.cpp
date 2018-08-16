@@ -1,5 +1,6 @@
 #include "conceptmaphelper.h"
 
+#include <fstream>
 #include <vector>
 #include <boost/test/unit_test.hpp>
 
@@ -217,24 +218,62 @@ BOOST_AUTO_TEST_CASE(test_cmap_is_on_travis)
 {
   if (OnTravis())
   {
-    BOOST_CHECK_EQUAL(OnTravis(), true);
-  }
-  else
-  {
-    BOOST_CHECK_EQUAL(OnTravis(), false);
+    BOOST_CHECK_EQUAL(OnTravis());
   }
 }
 
-/* WIP
-BOOST_AUTO_TEST_CASE(test_cmap_save_file_to_vector_on_empty_file)
+BOOST_AUTO_TEST_CASE(test_cmap_save_file_to_vector_on_absent_file)
 {
-  //
   BOOST_CHECK_THROW(
     SafeFileToVector("abs.ent"),
     std::invalid_argument
   );
 }
-*/
+
+BOOST_AUTO_TEST_CASE(test_cmap_save_file_to_vector_on_empty_file)
+{
+  std::string filename{"tmp"};
+  //Create empty file
+  {
+    std::ofstream f(filename);
+    f.close();
+  }
+  BOOST_CHECK(
+    SafeFileToVector(filename).empty()
+  );
+  std::remove(filename.c_str());
+}
+
+BOOST_AUTO_TEST_CASE(test_cmap_save_file_to_vector_on_file_with_one_line)
+{
+  std::string filename{"tmp"};
+  //Create empty file
+  {
+    std::ofstream f(filename);
+    f << "first and only line";
+    f.close();
+  }
+  BOOST_CHECK_EQUAL(
+    1, SafeFileToVector(filename).size()
+  );
+  std::remove(filename.c_str());
+}
+
+BOOST_AUTO_TEST_CASE(test_cmap_save_file_to_vector_on_file_with_two_lines)
+{
+  std::string filename{"tmp"};
+  //Create empty file
+  {
+    std::ofstream f(filename);
+    f << "first line\n";
+    f << "second and last line";
+    f.close();
+  }
+  BOOST_CHECK_EQUAL(
+    2, SafeFileToVector(filename).size()
+  );
+  std::remove(filename.c_str());
+}
 
 BOOST_AUTO_TEST_CASE(test_cmap_save_file_to_vector_throws_on_absent_files)
 {

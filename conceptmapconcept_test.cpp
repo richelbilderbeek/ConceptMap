@@ -331,8 +331,10 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_is_complex_free_functions)
   Concept concept;
   SetIsComplex(concept, true);
   BOOST_CHECK(GetIsComplex(concept));
+  BOOST_CHECK(IsComplex(concept));
   SetIsComplex(concept, false);
   BOOST_CHECK(!GetIsComplex(concept));
+  BOOST_CHECK(!IsComplex(concept));
 }
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_set_name)
