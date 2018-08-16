@@ -146,11 +146,6 @@ bool HasSameContent(const Node& lhs, const Node& rhs) noexcept;
 ///Checks if the concepts and coordinats are the same
 bool HasSameData(const Node& lhs, const Node& rhs) noexcept;
 
-///Pairwise checks if all Nodes at left- and right-hand-side have the same data
-///Throws if the sizes differ
-[[deprecated]]
-bool HasSameData(const std::vector<Node>& lhs, const std::vector<Node>& rhs);
-
 ///Checks if the concepts and coordinats are similar (there is some
 ///tolerance in the coordinats)
 bool HasSimilarData(const Node& lhs, const Node& rhs, const double tolerance) noexcept;

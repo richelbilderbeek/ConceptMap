@@ -434,3 +434,9 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_node_move)
   BOOST_CHECK_EQUAL(node.GetX(), dx);
   BOOST_CHECK_EQUAL(node.GetY(), dy);
 }
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_node_NodeHasExamples)
+{
+  Node node;
+  BOOST_CHECK(!NodeHasExamples(node))
+}

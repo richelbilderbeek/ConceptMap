@@ -192,20 +192,6 @@ bool ribi::cmap::HasSameData(const Node& lhs, const Node& rhs) noexcept
   ;
 }
 
-bool ribi::cmap::HasSameData(const std::vector<Node>& lhs, const std::vector<Node>& rhs)
-{
-  if (lhs.size() != rhs.size())
-  {
-    throw std::invalid_argument("lhs and rhs must have equal number of Nodes");
-  }
-  const int sz = lhs.size();
-  for (int i=0; i!=sz; ++i)
-  {
-    if (!HasSameData(lhs[i], rhs[i])) return false;
-  }
-  return true;
-}
-
 bool ribi::cmap::HasSimilarData(
   const Node& lhs,
   const Node& rhs,
