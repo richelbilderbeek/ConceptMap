@@ -448,3 +448,14 @@ BOOST_AUTO_TEST_CASE(ribi_cmap_node_SetText)
   SetText(a, text);
   BOOST_CHECK_EQUAL(GetText(a), text);
 }
+
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_HasSimilarData_throw)
+{
+  std::vector<Node> v = { Node() };
+  std::vector<Node> w = { Node(), Node() };
+  BOOST_CHECK_THROW(
+    HasSimilarData(v, w, 0.001),
+    std::invalid_argument
+  );
+}
