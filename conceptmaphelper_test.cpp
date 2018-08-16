@@ -218,7 +218,7 @@ BOOST_AUTO_TEST_CASE(test_cmap_is_on_travis)
 {
   if (OnTravis())
   {
-    BOOST_CHECK_EQUAL(OnTravis());
+    BOOST_CHECK(OnTravis());
   }
 }
 
