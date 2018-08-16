@@ -53,11 +53,6 @@ ribi::cmap::ConceptMapFactory::GetNastyTests() const noexcept
   return v;
 }
 
-ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get0() const noexcept
-{
-  return ConceptMap();
-}
-
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get1() const noexcept
 {
   ConceptMap g;
@@ -539,7 +534,7 @@ std::vector<ribi::cmap::ConceptMap >
 ribi::cmap::ConceptMapFactory::GetAllTests() const noexcept
 {
   std::vector<ConceptMap> v{
-    Get0(),
+    ConceptMap(),
     Get1(),
     Get2(),
     Get3(),
@@ -651,20 +646,31 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetRated() const noexcept 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetUnrated() const noexcept
 {
   ConceptMap g;
-  const EdgeFactory ef;
-
-  const auto vd_1 = AddVertex(CenterNodeFactory().CreateFromStrings(
-    "As a student teacher of English as a foreign language, "
-    "I have knowledge of ..."),
+  const auto vd_1 = AddVertex(
+    Node(
+      Concept(
+      "As a student teacher of English as a foreign language, "
+      "I have knowledge of ..."
+      ),
+      NodeType::center
+    ),
     g
   );
-  const auto vd_3 = AddVertex(NodeFactory().CreateFromStrings(
-    "My own professional development",
-    {
-      "Keep your portfolio posted up",
-      "Reflection"
-    }), g);
-  const auto vd_4 = AddVertex(NodeFactory().CreateFromStrings("Myself as a teacher"), g);
+  const auto vd_3 = AddVertex(
+    Node(
+      Concept(
+        "My own professional development",
+        Examples(
+          {
+            Example("Keep your portfolio posted up"),
+            Example("Reflection")
+          }
+        )
+      )
+    ),
+    g
+  );
+  const auto vd_4 = AddVertex(Node(Concept("Myself as a teacher")), g);
   const auto vd_2 = AddVertex(
     NodeFactory().CreateFromStrings(
       "Profession in general",

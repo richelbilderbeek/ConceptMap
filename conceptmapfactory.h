@@ -19,10 +19,8 @@ public:
   ///Get all the other tests as one vector
   ConceptMaps GetAllTests() const noexcept;
   ConceptMaps GetNastyTests() const noexcept;
-  ConceptMap GetEmptyGraph() const noexcept { return Get0(); }
 
   ///Get the documented heteromorphous test concept maps
-  ConceptMap Get0() const noexcept; //Empty graph
   ConceptMap Get1() const noexcept;
   ConceptMap Get2() const noexcept;
   ConceptMap Get3() const noexcept;

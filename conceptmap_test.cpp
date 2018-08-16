@@ -314,7 +314,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_find_center_node)
 
   //Empty concept map
   BOOST_CHECK_THROW(
-    FindCenterNode(ConceptMapFactory().Get0()),
+    FindCenterNode(ConceptMap()),
     std::invalid_argument
   );
 
@@ -331,7 +331,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_center_node)
 
   //Empty concept map
   BOOST_CHECK_THROW(
-    GetCenterNode(ConceptMapFactory().Get0()),
+    GetCenterNode(ConceptMap()),
     std::invalid_argument
   );
 
@@ -348,7 +348,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_first_edge)
 
   //Empty concept map
   BOOST_CHECK_THROW(
-    GetFirstEdge(ConceptMapFactory().Get0()),
+    GetFirstEdge(ConceptMap()),
     std::invalid_argument
   );
 
@@ -365,7 +365,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_focus_name)
 
   //Empty concept map
   BOOST_CHECK_THROW(
-    GetFocusName(ConceptMapFactory().Get0()),
+    GetFocusName(ConceptMap()),
     std::invalid_argument
   );
 
@@ -387,7 +387,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_get_from)
   BOOST_CHECK_THROW(
     GetFrom(
       edge,
-      ConceptMapFactory().Get0()
+      ConceptMap()
     ),
     std::invalid_argument
   );
