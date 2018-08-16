@@ -43,6 +43,9 @@ public:
   /// Complex rated concept map with all nodes connected
   ConceptMap Get11() const noexcept;
 
+  /// center --> A <-> B <-- C --- D
+  ConceptMap GetAllArrowTypes() const noexcept;
+
   ///Create a concept map in which the concept's name is its level
   /// 3 <- 2 <- 1 <- 0 -> 1 -> 2
   ///      |         |    |
@@ -85,6 +88,7 @@ public:
   /// one --- two --- three
   ///    first  second
   ConceptMap GetThreeNodeTwoEdgeNoCenter() const noexcept;
+
 
   /// center ----> one
   ///        first

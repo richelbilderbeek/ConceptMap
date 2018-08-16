@@ -463,7 +463,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_file)
   }
   assert(!f.IsRegularFile(filename));
 
-  SaveSummaryToFile(ConceptMapFactory().Get3(), filename);
+  SaveSummaryToFile(ConceptMapFactory().GetAllArrowTypes(), filename);
   BOOST_CHECK(f.IsRegularFile(filename));
   f.DeleteFile(filename);
   BOOST_CHECK(!f.IsRegularFile(filename));
@@ -471,8 +471,6 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_file)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
 {
-
-
   BOOST_CHECK_THROW(
     XmlToConceptMap("too short"),
     std::invalid_argument
@@ -480,6 +478,11 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_xml_to_concept_map)
 
   BOOST_CHECK_THROW(
     XmlToConceptMap("incorrect starting tag"),
+    std::invalid_argument
+  );
+
+  BOOST_CHECK_THROW(
+    XmlToConceptMap("<concept_map>no closing tag"),
     std::invalid_argument
   );
 

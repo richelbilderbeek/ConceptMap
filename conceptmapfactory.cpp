@@ -236,6 +236,23 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept
   return Reposition(g);
 }
 
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetAllArrowTypes() const noexcept
+{
+  ConceptMap g;
+  // center --> A <-> B <-- C --- D
+  const auto vd_1 = AddVertex(Node(Concept("center"), NodeType::center), g);
+  const auto vd_2 = AddVertex(Node(Concept("A")), g);
+  const auto vd_3 = AddVertex(Node(Concept("B")), g);
+  const auto vd_4 = AddVertex(Node(Concept("C")), g);
+  const auto vd_5 = AddVertex(Node(Concept("D")), g);
+  AddEdge(Edge(Node(Concept("-->")), true , false), vd_1, vd_2, g);
+  AddEdge(Edge(Node(Concept("<->")), true , true ), vd_2, vd_3, g);
+  AddEdge(Edge(Node(Concept("<--")), false, true ), vd_3, vd_4, g);
+  AddEdge(Edge(Node(Concept("---")), false, false), vd_4, vd_5, g);
+  return Reposition(g);
+
+}
+
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLevel() const noexcept
 {
   ConceptMap g;
@@ -541,7 +558,6 @@ ribi::cmap::ConceptMapFactory::GetAllTests() const noexcept
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetRated() const noexcept //!OCLINT Indeed a long function, as the concept map is complex
 {
   ConceptMap g;
-  const EdgeFactory ef;
 
   const auto vd_1 = AddVertex(CenterNodeFactory().Create(
     Concept(
@@ -622,13 +638,13 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetRated() const noexcept 
     g
   );
   //Connected to center node
-  AddEdge(Edge(Node(Concept(""))), vd_1, vd_2, g);
-  AddEdge(ef.Create(Node(Concept(""))), vd_1, vd_3, g);
-  AddEdge(ef.Create(Node(Concept(""))), vd_1, vd_5, g);
-  AddEdge(ef.Create(Node(Concept(""))), vd_1, vd_6, g);
-  AddEdge(ef.Create(Node(Concept("affects"))), vd_2, vd_4, g);
-  AddEdge(ef.Create(Node(Concept("is connected with"))), vd_3, vd_4, g);
-  AddEdge(ef.Create(Node(Concept("is connected with"))), vd_3, vd_6, g);
+  AddEdge(Edge(Node(Concept("")), true, false), vd_1, vd_2, g);
+  AddEdge(Edge(Node(Concept("")), true, false), vd_1, vd_3, g);
+  AddEdge(Edge(Node(Concept("")), true, false), vd_1, vd_5, g);
+  AddEdge(Edge(Node(Concept("")), true, false), vd_1, vd_6, g);
+  AddEdge(Edge(Node(Concept("affects")), true, false), vd_2, vd_4, g);
+  AddEdge(Edge(Node(Concept("is connected with")), true, false), vd_3, vd_4, g);
+  AddEdge(Edge(Node(Concept("is connected with")), true, false), vd_3, vd_6, g);
   return Reposition(g);
 }
 
@@ -656,13 +672,13 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetUnrated() const noexcep
     ), g);
   const auto vd_5 = AddVertex(NodeFactory().CreateFromStrings("Pupils"), g);
   const auto vd_6 = AddVertex(NodeFactory().CreateFromStrings("Myself as a person"), g);
-  AddEdge(ef.Create(NodeFactory().CreateFromStrings("")), vd_1, vd_2, g);
-  AddEdge(ef.Create(NodeFactory().CreateFromStrings("")), vd_1, vd_3, g);
-  AddEdge(ef.Create(NodeFactory().CreateFromStrings("")), vd_1, vd_5, g);
-  AddEdge(ef.Create(NodeFactory().CreateFromStrings("")), vd_1, vd_6, g);
-  AddEdge(ef.Create(NodeFactory().CreateFromStrings("affects")), vd_2, vd_4, g);
-  AddEdge(ef.Create(NodeFactory().CreateFromStrings("is connected with")), vd_3, vd_4, g);
-  AddEdge(ef.Create(NodeFactory().CreateFromStrings("is connected with")), vd_3, vd_6, g);
+  AddEdge(Edge(Node(Concept("")), true, false), vd_1, vd_2, g);
+  AddEdge(Edge(Node(Concept("")), true, false), vd_1, vd_3, g);
+  AddEdge(Edge(Node(Concept("")), true, false), vd_1, vd_5, g);
+  AddEdge(Edge(Node(Concept("")), true, false), vd_1, vd_6, g);
+  AddEdge(Edge(Node(Concept("affects")), true, false), vd_2, vd_4, g);
+  AddEdge(Edge(Node(Concept("is connected with")), true, false), vd_3, vd_4, g);
+  AddEdge(Edge(Node(Concept("is connected with")), true, false), vd_3, vd_6, g);
   return Reposition(g);
 }
 
