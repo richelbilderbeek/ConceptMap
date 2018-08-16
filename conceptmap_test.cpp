@@ -434,38 +434,8 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_remove_first_node)
   );
 }
 
-BOOST_AUTO_TEST_CASE(ribi_concept_map_save_to_image)
-{
-  //#define FIX_ISSUE_SAVE_TO_IMAGE
-  #ifdef FIX_ISSUE_SAVE_TO_IMAGE
-  // convert-im6.q16: Image width exceeds user limit in IHDR `/tmp/magick-3313bMj-FAXpwdMC' @ warning/png.c/MagickPNGWarningHandler/1654.
-  // convert-im6.q16: Invalid IHDR data `/tmp/magick-3313bMj-FAXpwdMC' @ error/png.c/MagickPNGErrorHandler/1628.
-  // convert-im6.q16: corrupt image `/tmp/magick-3313bMj-FAXpwdMC' @ error/png.c/ReadPNGImage/3963.
-  // convert-im6.q16: no images defined `ribi_concept_map_save_to_image.png' @ error/convert.c/ConvertImageCommand/3258.
-  // unknown location(0): fatal error: in "ribi_concept_map_save_to_image": std::runtime_error: convert_svg_to_png: command 'convert SaveToImage.svg ribi_concept_map_save_to_image.png' resulting in error 256
-  // ../ConceptMap/conceptmap_test.cpp(381): last checkpoint: if error 'child has exited' then install GraphViz
-
-
-  const ribi::FileIo f;
-  const std::string filename{"ribi_concept_map_save_to_image.png"};
-
-  if (f.IsRegularFile(filename))
-  {
-    f.DeleteFile(filename);
-  }
-  assert(!f.IsRegularFile(filename));
-  BOOST_TEST_CHECKPOINT("if error 'child has exited' then install GraphViz");
-  SaveToImage(ConceptMapFactory().Get3(), filename);
-  BOOST_CHECK(f.IsRegularFile(filename));
-  f.DeleteFile(filename);
-  BOOST_CHECK(!f.IsRegularFile(filename));
-  assert(!"FIXED");
-  #endif // FIX_ISSUE
-}
-
 BOOST_AUTO_TEST_CASE(ribi_concept_map_save_summary_to_image)
 {
-
   const ribi::FileIo f;
   const std::string filename{"ribi_concept_map_save_summary_to_image.png"};
 

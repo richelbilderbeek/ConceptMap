@@ -121,8 +121,6 @@ ConceptMap LoadFromFile(const std::string& dot_filename);
 ConceptMap RemoveFirstNode(ConceptMap g);
 void SaveToFile(const ConceptMap& g, const std::string& dot_filename);
 
-[[deprecated]]
-void SaveToImage(const ConceptMap& g, const std::string& png_filename);
 void SaveSummaryToImage(const ConceptMap& g, const std::string& png_filename);
 void SaveSummaryToFile(const ConceptMap& g, const std::string& dot_filename);
 
