@@ -440,3 +440,11 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_node_NodeHasExamples)
   Node node;
   BOOST_CHECK(!NodeHasExamples(node))
 }
+
+BOOST_AUTO_TEST_CASE(ribi_cmap_node_SetText)
+{
+  Node a;
+  const std::string text{"new text"};
+  SetText(a, text);
+  BOOST_CHECK_EQUAL(GetText(a), text);
+}
