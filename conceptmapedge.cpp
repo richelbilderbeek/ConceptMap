@@ -145,20 +145,6 @@ bool ribi::cmap::HasSameData(const Edge& lhs, const Edge& rhs) noexcept
   ;
 }
 
-bool ribi::cmap::HasSameData(const std::vector<Edge>& lhs, const std::vector<Edge>& rhs)
-{
-  if (lhs.size() != rhs.size())
-  {
-    throw std::invalid_argument("lhs and rhs must have equal number of Edges");
-  }
-  const int sz = lhs.size();
-  for (int i=0; i!=sz; ++i)
-  {
-    if (!HasSameData(lhs[i], rhs[i])) return false;
-  }
-  return true;
-}
-
 bool ribi::cmap::HasSimilarData(const Edge& lhs, const Edge& rhs, const double tolerance) noexcept
 {
   return HasSimilarData(lhs.GetNode(), rhs.GetNode(), tolerance)

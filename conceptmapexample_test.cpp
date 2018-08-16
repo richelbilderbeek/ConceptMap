@@ -262,3 +262,22 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_example_is_rated)
   e.SetCompetency(Competency::organisations);
   BOOST_CHECK(IsRated(e));
 }
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_example_to_str)
+{
+  BOOST_CHECK(!ToStr(Example()).empty());
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_example_operator_less_than)
+{
+  BOOST_CHECK(Example("A") < Example("B"));
+  BOOST_CHECK(!(Example("B") < Example("A")));
+  BOOST_CHECK(!(Example() < Example()));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_example_operator_greater_than)
+{
+  BOOST_CHECK(Example("B") > Example("A"));
+  BOOST_CHECK(!(Example("A") > Example("B")));
+  BOOST_CHECK(!(Example() > Example()));
+}

@@ -30,6 +30,7 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_operator_is_equal)
     const auto edge1 = EdgeFactory().GetTest(0);
     const auto edge2 = EdgeFactory().GetTest(0);
     BOOST_CHECK_NE(edge1, edge2); //Different IDs
+    BOOST_CHECK(edge1 != edge2);
   }
   {
     const auto edge1 = EdgeFactory().GetTest(1);
@@ -64,8 +65,46 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_operator_is_not_equal)
   const auto edge1 = EdgeFactory().GetTest(0);
   const auto edge2 = EdgeFactory().GetTest(1);
   BOOST_CHECK_NE(edge1, edge2);
+  BOOST_CHECK(edge1 != edge2);
 }
 
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_HasSimilarData_vector)
+{
+  const double tolerance{0.1};
+  {
+    //Different sizes should throw
+    const std::vector<Edge> v = { Edge() };
+    const std::vector<Edge> w = { Edge(), Edge() };
+    BOOST_CHECK_THROW(
+      HasSimilarData(v, w, tolerance),
+      std::invalid_argument
+    );
+  }
+  {
+    //Same
+    const std::vector<Edge> v = { Edge(), Edge() };
+    const std::vector<Edge> w = v;
+    BOOST_CHECK(HasSimilarData(v, w, tolerance));
+  }
+  {
+    //Similar
+    const std::vector<Edge> v = {
+      Edge(Node(Concept(), NodeType::normal, 0.0, 1.0)),
+      Edge(Node(Concept(), NodeType::normal, 2.0, 3.0))
+    };
+    const std::vector<Edge> w = {
+      Edge(Node(Concept(), NodeType::normal, 0.01, 1.01)),
+      Edge(Node(Concept(), NodeType::normal, 2.01, 3.01))
+    };
+    BOOST_CHECK(HasSimilarData(v, w, tolerance));
+  }
+  {
+    //Different
+    const std::vector<Edge> v = { Edge(), Edge(Node(Concept("A"))) };
+    const std::vector<Edge> w = { Edge(), Edge(Node(Concept("B"))) };
+    BOOST_CHECK(!HasSimilarData(v, w, tolerance));
+  }
+}
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_edge_to_xml_to_edge_easy)
 {
@@ -333,4 +372,27 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_set_node)
   BOOST_CHECK(node != GetNode(edge));
   edge.SetNode(node);
   BOOST_CHECK(node == GetNode(edge));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_to_str)
+{
+  BOOST_CHECK(!ToStr(Edge()).empty());
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_edge_comparison)
+{
+  //If left hand side has a head arrow, and right not, sorted!
+  BOOST_CHECK(Edge(Node(), true, false) < Edge(Node(), false, false));
+
+  //If right hand side has a head arrow, and left not, unsorted!
+  BOOST_CHECK(!(Edge(Node(), false, false) < Edge(Node(), true, false)));
+
+  //If left hand side has a tail arrow, and right not, sorted!
+  BOOST_CHECK(Edge(Node(), false, true) < Edge(Node(), false, false));
+
+  //If right hand side has a tail arrow, and left not, unsorted!
+  BOOST_CHECK(!(Edge(Node(), false, false) < Edge(Node(), false, true)));
+
+  //Equal edges
+  BOOST_CHECK(!(Edge() < Edge()));
 }
