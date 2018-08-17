@@ -459,8 +459,9 @@ ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample() const noexcept
   return Reposition(g);
 }
 
-ribi::cmap::ConceptMap
-ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample293() const noexcept
+ribi::cmap::ConceptMap //!OCLINT indeed a long method!
+ribi::cmap::ConceptMapFactory
+  ::GetRateConceptTallyDialogExample293() const noexcept
 {
   // From https://github.com/richelbilderbeek/BrainWeaver/issues/293
   // [...] bij 2 complexe relaties en 0 of 1 complexe voorbeelden
