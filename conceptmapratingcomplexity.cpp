@@ -138,6 +138,25 @@ int ribi::cmap::RatingComplexity::SuggestComplexity(
   return iter->second;
 }
 
+std::string ribi::cmap::RelationsToHtml(
+  const int n_relations,
+  const bool emphasize
+)
+{
+  std::stringstream s;
+  if (emphasize) { s << "<u>"; }
+  if (n_relations < 4)
+  {
+    s << n_relations;
+  }
+  else
+  {
+    s << ">3";
+  }
+  if (emphasize) { s << "</u>"; }
+  return s.str();
+}
+
 std::string ribi::cmap::ToHtml(
   const RatingComplexity& r,
   const int n_examples_emph,
@@ -156,16 +175,7 @@ std::string ribi::cmap::ToHtml(
       s << "    <th rowspan=\"5\"><center>Aantal complexe relaties</center></th>\n";
     }
     s << "    <th>";
-    if (n_relations == n_relations_emph) { s << "<u>"; }
-    if (n_relations < 4)
-    {
-      s << n_relations;
-    }
-    else
-    {
-      s << ">3";
-    }
-    if (n_relations == n_relations_emph) { s << "</u>"; }
+    s << RelationsToHtml(n_relations, n_relations == n_relations_emph);
     s << "</th>\n";
     for (int n_examples = 0; n_examples != 5; ++n_examples)
     {

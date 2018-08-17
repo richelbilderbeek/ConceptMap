@@ -59,6 +59,8 @@ std::string ToHtmlHeaderX(
   const int n_examples_emph
 );
 
+std::string RelationsToHtml(const int n_relations, const bool emphasize);
+
 std::string ToXml(const RatingComplexity& rating);
 
 bool operator==(const RatingComplexity& lhs, const RatingComplexity& rhs) noexcept;
