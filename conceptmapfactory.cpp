@@ -462,31 +462,57 @@ ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample() const noexcept
 ribi::cmap::ConceptMap
 ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample293() const noexcept
 {
+  // From https://github.com/richelbilderbeek/BrainWeaver/issues/293
+  // [...] bij 2 complexe relaties en 0 of 1 complexe voorbeelden
+  // [...] geeft de computer complexiteit 2 en dat moet 1 zijn
+
   ConceptMap g;
   const auto vd_1 = AddVertex(
     Node(
       Concept(
         "My focal concept",
-        Examples( { Example("My focal concept's example") } ),
-        true //is complex
+        Examples(
+          {
+            Example(
+              "My focal concept's single and complex example",
+              Competency::uninitialized,
+              true, //Concept is complex
+              false,
+              false
+            )
+          }
+        )
       )
     ),
     g
   );
   const auto vd_2 = AddVertex(
-    Node(Concept("My first other concept")),
+    Node(
+      Concept("My first other concept", Examples(), false)
+    ),
     g
   );
   const auto vd_3 = AddVertex(
-    Node(Concept("My second other concept")),
+    Node(Concept("My second other concept", Examples(), false)),
     g
   );
   AddEdge(
     Edge(
       Node(
         Concept(
-          "my first relation",
-          Examples( { Example("my first relation's example") } )
+          "my first complex relation",
+          Examples(
+            {
+              Example(
+                "my first relation's example",
+                Competency::uninitialized,
+                false,
+                false,
+                false
+              )
+            }
+          ),
+          true //Relation is complex
         )
       )
     ),
@@ -498,8 +524,19 @@ ribi::cmap::ConceptMapFactory::GetRateConceptTallyDialogExample293() const noexc
     Edge(
       Node(
         Concept(
-          "my second relation",
-          Examples( { Example("my second relation's example") } )
+          "my second complex relation",
+          Examples(
+            {
+              Example(
+                "my second relation's example",
+                Competency::uninitialized,
+                false,
+                false,
+                false
+              )
+            }
+          ),
+          true //Complex
         )
       )
     ),
