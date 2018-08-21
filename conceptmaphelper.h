@@ -10,9 +10,6 @@
 #include <sstream>
 #include <vector>
 
-
-
-
 #include <boost/array.hpp>
 #include <boost/numeric/conversion/cast.hpp>
 
@@ -57,36 +54,6 @@ std::map<T, int> CreateTally(
     else { ++m[i]; }
   }
   return m;
-}
-
-///Obtain all possible selections of a std::vector, preserving the ordering of its elements
-///Examples:
-/// {     } -> { {}                                              }
-/// {1    } -> { {}, {1}                                         }
-/// {1,2  } -> { {}, {1}, {2},      {1,2}                        }
-/// {1,2,3} -> { {}, {1}, {2}, {3}, {1,2}, {1,3}, {2,3}, {1,2,3} }
-//From http://www.richelbilderbeek.nl/GetPermutations.htm
-template <class T>
-const std::vector<std::vector<T>> GetCombinations(const std::vector<T>& v)
-{
-  std::vector<std::vector<T>> result;
-  const int sz = boost::numeric_cast<int>(v.size());
-  const int n_combinations{1 << sz};
-
-  for (int i=0; i!=n_combinations; ++i)
-  {
-    std::vector<T> w;
-    for (int j=0; j!=sz; ++j)
-    {
-      const int is_exponent{(1 << j) & i};
-      if (is_exponent)
-      {
-        w.push_back(v[j]);
-      }
-    }
-    result.push_back(w);
-  }
-  return result;
 }
 
 ///Find the last space before the ith position
