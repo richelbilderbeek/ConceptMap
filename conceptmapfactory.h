@@ -87,6 +87,9 @@ public:
   ///    first  second
   ConceptMap GetThreeNodeTwoEdgeNoCenter() const noexcept;
 
+  /// Two single nodes without an edge
+  /// center       one
+  ConceptMap GetTwoNodes() const noexcept;
 
   /// center ----> one
   ///        first

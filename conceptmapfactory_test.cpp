@@ -53,6 +53,14 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_star_shaped)
   BOOST_CHECK_EQUAL(3, boost::num_edges(concept_map));
 }
 
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_two_nodes)
+{
+  const auto concept_map = ConceptMapFactory().GetTwoNodes();
+  BOOST_CHECK_EQUAL(1, CountCenterNodes(concept_map));
+  BOOST_CHECK_EQUAL(2, boost::num_vertices(concept_map));
+  BOOST_CHECK_EQUAL(0, boost::num_edges(concept_map));
+}
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_two_node_one_edge)
 {
   const auto concept_map = ConceptMapFactory().GetTwoNodeOneEdge();

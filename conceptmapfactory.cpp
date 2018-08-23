@@ -350,6 +350,13 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetThreeNodeTwoEdgeNoCente
   return g;
 }
 
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodes() const noexcept
+{
+  ConceptMap g;
+  AddVertex(Node(Concept("center"), NodeType::center), g);
+  AddVertex(Node(Concept("one")), g);
+  return Reposition(g);
+}
 
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeOneEdge() const noexcept
 {
