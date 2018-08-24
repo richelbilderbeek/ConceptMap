@@ -39,8 +39,16 @@ BOOST_AUTO_TEST_CASE(both_edges_of_GetThreeNodeTwoEdgeNoCenter_have_examples)
 
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_lonely_center_node)
 {
-  const auto concept_map = ConceptMapFactory().GetLonelyQtCenterNode();
+  const auto concept_map = ConceptMapFactory().GetLonelyCenterNode();
   BOOST_CHECK_EQUAL(1, CountCenterNodes(concept_map));
+  BOOST_CHECK_EQUAL(1, boost::num_vertices(concept_map));
+  BOOST_CHECK_EQUAL(0, boost::num_edges(concept_map));
+}
+
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_lonely_node)
+{
+  const auto concept_map = ConceptMapFactory().GetLonelyNode();
+  BOOST_CHECK_EQUAL(0, CountCenterNodes(concept_map));
   BOOST_CHECK_EQUAL(1, boost::num_vertices(concept_map));
   BOOST_CHECK_EQUAL(0, boost::num_edges(concept_map));
 }

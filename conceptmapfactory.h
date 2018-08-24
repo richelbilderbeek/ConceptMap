@@ -52,7 +52,10 @@ public:
   ConceptMap GetLevel() const noexcept;
 
   /// Just one center node with text 'center'
-  ConceptMap GetLonelyQtCenterNode() const noexcept;
+  ConceptMap GetLonelyCenterNode() const noexcept;
+
+  /// Just one normal node with text 'normal'
+  ConceptMap GetLonelyNode() const noexcept;
 
   /// Concept map with one node connected to the focal question
   /// All other nodes are connected to that non-focal node

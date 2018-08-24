@@ -280,12 +280,17 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLevel() const noexcept
   return Reposition(g);
 }
 
-ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLonelyQtCenterNode() const noexcept
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLonelyCenterNode() const noexcept
 {
   ConceptMap g;
-  AddVertex(
-    Node(Concept("center"),
-    NodeType::center, 100, 200), g);
+  AddVertex(Node(Concept("center"), NodeType::center, 100, 200), g);
+  return g;
+}
+
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLonelyNode() const noexcept
+{
+  ConceptMap g;
+  AddVertex(Node(Concept("normal"), NodeType::normal, 100, 200), g);
   return g;
 }
 
