@@ -27,16 +27,6 @@ public:
   ConceptMap Get4() const noexcept;
   ConceptMap Get5() const noexcept;
   ConceptMap Get6() const noexcept;
-  ConceptMap Get7() const noexcept;
-
-  /// Complex rated concept map
-  ConceptMap Get8() const noexcept;
-
-  /// Complex rated concept map with many examples
-  ConceptMap Get9() const noexcept;
-
-  /// Complex rated concept map with many long concept names and examples
-  ConceptMap Get10() const noexcept;
 
   /// Complex rated concept map with all nodes connected
   ConceptMap Get11() const noexcept;

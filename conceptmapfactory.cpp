@@ -125,90 +125,6 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get6() const noexcept
   return Reposition(g);
 }
 
-ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get7() const noexcept
-{
-  ConceptMap g;
-
-  const auto vd_1 = AddVertex(CenterNodeFactory().CreateFromStrings("X"), g);
-  const auto vd_2 = AddVertex(NodeFactory().CreateFromStrings("A"), g);
-  const auto vd_3 = AddVertex(NodeFactory().GetNasty2(), g);
-  const auto vd_4 = AddVertex(NodeFactory().GetNasty0(), g);
-  const auto vd_5 = AddVertex(NodeFactory().GetNasty1(), g);
-
-  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_3, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_4, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_5, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_2, vd_5, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_1, vd_2, g);
-
-  return Reposition(g);
-}
-
-ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get8() const noexcept
-{
-  ConceptMap g;
-
-  const auto vd_1 = AddVertex(CenterNodeFactory().CreateFromStrings("X"), g);
-  const auto vd_2 = AddVertex(NodeFactory().CreateFromStrings("A"), g);
-  const auto vd_3 = AddVertex(NodeFactory().GetNasty2(), g);
-  const auto vd_4 = AddVertex(NodeFactory().GetNasty1(), g);
-  const auto vd_5 = AddVertex(NodeFactory().GetNasty0(), g);
-
-  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_3, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_4, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_5, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_2, vd_5, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_1, vd_2, g);
-
-  return Reposition(g);
-}
-
-ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get9() const noexcept
-{
-  ConceptMap g;
-
-  const auto vd_1 = AddVertex(CenterNodeFactory().CreateFromStrings("X"), g);
-  const auto vd_2 = AddVertex(NodeFactory().CreateFromStrings("A"), g);
-  const auto vd_3 = AddVertex(NodeFactory().GetNasty0(), g);
-  const auto vd_4 = AddVertex(NodeFactory().GetNasty1(), g);
-  const auto vd_5 = AddVertex(NodeFactory().GetNasty2(), g);
-  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_3, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_4, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_5, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_2, vd_5, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_1, vd_2, g);
-
-  return Reposition(g);
-}
-
-ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get10() const noexcept
-{
-  ConceptMap g;
-
-  const auto vd_1 = AddVertex(CenterNodeFactory().CreateFromStrings(
-    "X: This is the center node concept that can have no examples, "
-    "otherwise each of its example name would be multiple lines"),
-    g
-  );
-  const auto vd_2 = AddVertex(NodeFactory().CreateFromStrings(
-    "A: This is a concept that has none of all types of competencies "
-    "as its examples, oterwise each of its example name "
-    "would be multiple lines"),
-    g
-  );
-  const auto vd_3 = AddVertex(NodeFactory().GetNasty0(), g);
-  const auto vd_4 = AddVertex(NodeFactory().GetNasty1(), g);
-  const auto vd_5 = AddVertex(NodeFactory().GetNasty2(), g);
-
-  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_3, vd_2, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_4, vd_3, g);
-  AddEdge(Edge(NodeFactory().GetNasty0(), false, true), vd_5, vd_4, g);
-  AddEdge(Edge(NodeFactory().GetNasty1(), false, true), vd_2, vd_5, g);
-  AddEdge(Edge(NodeFactory().GetNasty2(), false, true), vd_1, vd_2, g);
-
-  return Reposition(g);
-}
-
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::Get11() const noexcept
 {
   ConceptMap g;
@@ -606,10 +522,6 @@ ribi::cmap::ConceptMapFactory::GetAllTests() const noexcept
     Get4(),
     Get5(),
     Get6(),
-    Get7(),
-    Get8(),
-    Get9(),
-    Get10(),
     Get11()
   };
   return v;
