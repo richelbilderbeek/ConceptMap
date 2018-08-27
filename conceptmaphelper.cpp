@@ -14,27 +14,6 @@
 #include "fileio.h"
 #include "conceptmapregex.h"
 
-#ifdef REALLY_KEEP_THIS_20180813
-///Send the file its content to std::cout/std::clog/whatever
-template <class Stream>
-void FileToStream(const std::string& filename, Stream& stream)
-{
-  const auto lines = ribi::FileIo().FileToVector(filename);
-  std::copy(std::begin(lines), std::end(lines), std::ostream_iterator<std::string>(stream, "\n"));
-  stream << '\n';
-}
-
-void ribi::cmap::ClogFile(const std::string& filename)
-{
-  FileToStream(filename, std::clog);
-}
-
-void ribi::cmap::CoutFile(const std::string& filename)
-{
-  FileToStream(filename, std::cout);
-}
-#endif // REALLY_KEEP_THIS_20180813
-
 std::size_t ribi::cmap::FindLastSpaceBeforeMaxLen(
   const std::string& s,
   const std::size_t max_len

@@ -29,12 +29,6 @@ int CountTallyTotal(const std::map<T, int>& t)
   );
 }
 
-///Send the file its content to std::clog
-void ClogFile(const std::string& filename);
-
-///Send the file its content to std::cout
-void CoutFile(const std::string& filename);
-
 ///Create a tally of value occurrances
 ///For example {"A", "A", "B"} would result in {{"A",2},{"B",1}}
 ///The sum of the tally frequencies will be equal to the length of the input vector
