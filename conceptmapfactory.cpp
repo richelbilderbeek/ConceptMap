@@ -275,10 +275,10 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeFourEdgesNoCente
   //These coordinats are tested as such
   const auto vd_1 = AddVertex(Node(Concept("A")), g);
   const auto vd_2 = AddVertex(Node(Concept("B")), g);
-  AddEdge(Edge(Node(Concept("<->")), true, true), g);
-  AddEdge(Edge(Node(Concept("-->")), true, false), g);
-  AddEdge(Edge(Node(Concept("<--")), false, true), g);
-  AddEdge(Edge(Node(Concept("---")), false, false), g);
+  AddEdge(Edge(Node(Concept("<->")), true, true), vd_1, vd_2, g);
+  AddEdge(Edge(Node(Concept("-->")), true, false), vd_1, vd_2, g);
+  AddEdge(Edge(Node(Concept("<--")), false, true), vd_1, vd_2, g);
+  AddEdge(Edge(Node(Concept("---")), false, false), vd_1, vd_2, g);
   return g;
 }
 
