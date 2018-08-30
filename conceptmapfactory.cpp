@@ -215,17 +215,15 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetStarShaped() const noex
   ConceptMap g;
 
   //Not needed to connect to center node
-  AddVertex(CenterNodeFactory().CreateFromStrings(
-    "A (not truly) star-shaped concept map is ..."), g
-  );
-  const auto vd_1 = AddVertex(NodeFactory().CreateFromStrings("X"), g);
-  const auto vd_2 = AddVertex(NodeFactory().CreateFromStrings("Useful"), g);
-  const auto vd_3 = AddVertex(NodeFactory().CreateFromStrings("In"), g);
-  const auto vd_4 = AddVertex(NodeFactory().CreateFromStrings("Debugging"), g);
+  AddVertex(Node(Concept("A star-shaped concept map is ..."), NodeType::center), g);
+  const auto vd_1 = AddVertex(Node(Concept("A")), g);
+  const auto vd_2 = AddVertex(Node(Concept("B")), g);
+  const auto vd_3 = AddVertex(Node(Concept("C")), g);
+  const auto vd_4 = AddVertex(Node(Concept("D")), g);
 
-  AddEdge(Edge(NodeFactory().CreateFromStrings("2"), false, true), vd_1, vd_2, g);
-  AddEdge(Edge(NodeFactory().CreateFromStrings("3"), false, true), vd_1, vd_3, g);
-  AddEdge(Edge(NodeFactory().CreateFromStrings("4"), false, true), vd_1, vd_4, g);
+  AddEdge(Edge(Node(Concept("2")), false, true), vd_1, vd_2, g);
+  AddEdge(Edge(Node(Concept("3")), false, true), vd_1, vd_3, g);
+  AddEdge(Edge(Node(Concept("4")), false, true), vd_1, vd_4, g);
 
   return Reposition(g);
 
