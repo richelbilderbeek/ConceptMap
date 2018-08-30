@@ -69,6 +69,14 @@ BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_two_nodes)
   BOOST_CHECK_EQUAL(0, boost::num_edges(concept_map));
 }
 
+BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_two_node_four_edges_no_center)
+{
+  const auto concept_map = ConceptMapFactory().GetTwoNodeFourEdgesNoCenter();
+  BOOST_CHECK_EQUAL(0, CountCenterNodes(concept_map));
+  BOOST_CHECK_EQUAL(2, boost::num_vertices(concept_map));
+  BOOST_CHECK_EQUAL(4, boost::num_edges(concept_map));
+}
+
 BOOST_AUTO_TEST_CASE(ribi_concept_map_concept_factory_two_node_one_edge)
 {
   const auto concept_map = ConceptMapFactory().GetTwoNodeOneEdge();

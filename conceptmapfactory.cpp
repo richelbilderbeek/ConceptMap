@@ -269,6 +269,19 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetThreeNodeTwoEdgeNoCente
   return g;
 }
 
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodeFourEdgesNoCenter() const noexcept
+{
+  ConceptMap g;
+  //These coordinats are tested as such
+  const auto vd_1 = AddVertex(Node(Concept("A")), g);
+  const auto vd_2 = AddVertex(Node(Concept("B")), g);
+  AddEdge(Edge(Node(Concept("<->")), true, true), g);
+  AddEdge(Edge(Node(Concept("-->")), true, false), g);
+  AddEdge(Edge(Node(Concept("<--")), false, true), g);
+  AddEdge(Edge(Node(Concept("---")), false, false), g);
+  return g;
+}
+
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetTwoNodes() const noexcept
 {
   ConceptMap g;

@@ -80,6 +80,12 @@ public:
   ///    first  second
   ConceptMap GetThreeNodeTwoEdgeNoCenter() const noexcept;
 
+  ///      -->
+  /// one  ---  two
+  ///      <--
+  ///      <->
+  ConceptMap GetTwoNodeFourEdgesNoCenter() const noexcept;
+
   /// Two single nodes without an edge
   /// center       one
   ConceptMap GetTwoNodes() const noexcept;
@@ -91,6 +97,7 @@ public:
   /// one --- two
   ///    second
   ConceptMap GetTwoNodeOneEdgeNoCenter() const noexcept;
+
 
   ///Unrated and human-friendly concept map
   ConceptMap GetUnrated() const noexcept;
