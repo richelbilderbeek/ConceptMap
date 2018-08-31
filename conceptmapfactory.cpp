@@ -210,6 +210,13 @@ ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLonelyNode() const noex
   return g;
 }
 
+ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetLonelyNodeWithExample() const noexcept
+{
+  ConceptMap g;
+  AddVertex(Node(Concept("normal", Examples( { Example("example") } )), NodeType::normal, 100, 200), g);
+  return g;
+}
+
 ribi::cmap::ConceptMap ribi::cmap::ConceptMapFactory::GetStarShaped() const noexcept
 {
   ConceptMap g;

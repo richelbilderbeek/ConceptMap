@@ -47,6 +47,9 @@ public:
   /// Just one normal node with text 'normal'
   ConceptMap GetLonelyNode() const noexcept;
 
+  /// Just one normal node with text 'normal' and one example
+  ConceptMap GetLonelyNodeWithExample() const noexcept;
+
   /// Concept map with one node connected to the focal question
   /// All other nodes are connected to that non-focal node
   ConceptMap GetStarShaped() const noexcept;

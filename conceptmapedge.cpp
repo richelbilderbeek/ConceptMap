@@ -286,8 +286,7 @@ ribi::cmap::Edge ribi::cmap::XmlToEdge(
 bool ribi::cmap::operator==(const ribi::cmap::Edge& lhs, const ribi::cmap::Edge& rhs)
 {
   if (lhs.GetId() != rhs.GetId()) return false;
-  assert(HasSameData(lhs, rhs));
-  return true;
+  return HasSameData(lhs, rhs);
 }
 
 bool ribi::cmap::operator!=(const Edge& lhs, const Edge& rhs)
