@@ -289,7 +289,7 @@ ribi::cmap::Node ribi::cmap::GetCenterNode(const ConceptMap& c)
     ;
     throw std::invalid_argument(msg.str());
   }
-  return GetNode(FindCenterNode(c), c);
+  return ToNode(FindCenterNode(c), c);
 }
 
 ribi::cmap::Edge ribi::cmap::GetEdge(
@@ -335,7 +335,7 @@ ribi::cmap::Node ribi::cmap::GetFirstNode(const ConceptMap& c)
     ;
     throw std::invalid_argument(msg.str());
   }
-  return GetNode(*vertices(c).first, c);
+  return ToNode(*vertices(c).first, c);
 }
 
 std::string ribi::cmap::GetFocusName(
@@ -360,7 +360,7 @@ ribi::cmap::Node ribi::cmap::GetFrom(const Edge& edge, const ConceptMap& c)
 
 ribi::cmap::Node ribi::cmap::GetFrom(const EdgeDescriptor ed, const ConceptMap& c) noexcept
 {
-  return GetNode(boost::source(ed, c), c);
+  return ToNode(boost::source(ed, c), c);
 }
 
 std::pair<const ribi::cmap::Node&, const ribi::cmap::Node&>
@@ -378,7 +378,7 @@ ribi::cmap::GetFromTo(
   return { from, to };
 }
 
-const ribi::cmap::Node& ribi::cmap::GetNode(
+const ribi::cmap::Node& ribi::cmap::ToNode(
   const ribi::cmap::VertexDescriptor vd, const ribi::cmap::ConceptMap& g
 ) noexcept
 {
@@ -470,7 +470,7 @@ ribi::cmap::Node ribi::cmap::GetTo(const Edge& edge, const ConceptMap& c)
 
 ribi::cmap::Node ribi::cmap::GetTo(const EdgeDescriptor ed, const ConceptMap& c) noexcept
 {
-  return GetNode(boost::target(ed, c), c);
+  return ToNode(boost::target(ed, c), c);
 }
 
 bool ribi::cmap::HasCenterNode(const ConceptMap& c) noexcept
