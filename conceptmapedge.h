@@ -85,8 +85,8 @@ const Examples& GetExamples(const Edge& edge) noexcept;
 ///This is different than an example being complex.
 bool GetIsComplex(const Edge& edge) noexcept;
 
-const Node& ToNode(const Edge& edge) noexcept;
-Node& ToNode(Edge& edge) noexcept;
+const Node& GetNode(const Edge& edge) noexcept;
+Node& GetNode(Edge& edge) noexcept;
 
 std::string GetText(const Edge& edge) noexcept;
 

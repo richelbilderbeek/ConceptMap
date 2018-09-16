@@ -74,7 +74,7 @@ Node GetFrom(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
 ///Checks if from != to
 std::pair<const Node&, const Node&> GetFromTo(const EdgeDescriptor ed, const ConceptMap& c);
 
-const Node& ToNode(const VertexDescriptor vd, const ConceptMap& c) noexcept;
+const Node& GetNode(const VertexDescriptor vd, const ConceptMap& c) noexcept;
 
 Node GetTo(const EdgeDescriptor ed, const ConceptMap& c) noexcept;
 Node GetTo(const Edge& edge, const ConceptMap& c);

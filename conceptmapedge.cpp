@@ -97,12 +97,12 @@ bool ribi::cmap::GetIsComplex(const Edge& edge) noexcept
   return GetIsComplex(edge.GetNode());
 }
 
-const ribi::cmap::Node& ribi::cmap::ToNode(const Edge& edge) noexcept
+const ribi::cmap::Node& ribi::cmap::GetNode(const Edge& edge) noexcept
 {
   return edge.GetNode();
 }
 
-ribi::cmap::Node& ribi::cmap::ToNode(Edge& edge) noexcept
+ribi::cmap::Node& ribi::cmap::GetNode(Edge& edge) noexcept
 {
   return edge.GetNode();
 }
