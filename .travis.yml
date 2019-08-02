@@ -13,6 +13,8 @@ install:
   - sudo apt-get install -qq cppcheck
   # GraphViz
   - sudo apt-get install -qq graphviz
+  # ImageMagick
+  - sudo apt-get install -qq imagemagick
   # Codecov
   - sudo pip install codecov
   # OCLint
@@ -32,7 +34,7 @@ services:
 script: 
   # Build and run tests
   - qmake -qt=qt5
-  - make debug -s
+  - make debug --silent
   - ./ConceptMapTest
   # cppcheck
   - cppcheck --quiet --error-exitcode=1 . 
