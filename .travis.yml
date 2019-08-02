@@ -2,10 +2,6 @@ language: cpp
 dist: bionic
 compiler: gcc
 
-# Xenial
-services:
-  - xvfb
-
 install: 
   - sudo apt update -qq
   # Boost
@@ -35,12 +31,8 @@ addons:
   apt: 
     packages: libboost-all-dev
 
-# On Trusty only:
-# # Start virtual X server, from https://docs.travis-ci.com/user/gui-and-headless-browsers/
-# before_script:
-#  - "export DISPLAY=:99.0"
-#  - "sh -e /etc/init.d/xvfb start"
-#  - sleep 3 # give xvfb some time to start
+services:
+  - xvfb
 
 script: 
   # Build and run tests
