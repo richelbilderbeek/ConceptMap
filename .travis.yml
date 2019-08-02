@@ -27,10 +27,6 @@ install:
   - git clone https://github.com/richelbilderbeek/RibiLibraries
   - cd $my_github
 
-addons:
-  apt: 
-    packages: libboost-all-dev
-
 services:
   - xvfb
 
