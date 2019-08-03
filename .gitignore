@@ -47,3 +47,5 @@ RibiClassesTestDesktop
 create_one_edge_with_head_command.dot
 QtQuadBezierArrowItemTest1.png
 *.pro.user.*
+.qmake.stash
+Makefile.*
