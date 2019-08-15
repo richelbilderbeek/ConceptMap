@@ -48,3 +48,9 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+after_failure:
+  - find . -name SaveToImage.dot
+  - find . -name SaveToImage.svg
+  - cat $(find . -name SaveToImage.dot)
+  - cat $(find . -name SaveToImage.svg)
