@@ -579,8 +579,11 @@ void ribi::cmap::SaveSummaryToImage(const ConceptMap& g, const std::string& png_
   const std::string dot_filename{"SaveToImage.dot"};
   const std::string svg_filename{"SaveToImage.svg"};
   SaveSummaryToFile(g, dot_filename);
+  assert(is_regular_file(dot_filename));
   convert_dot_to_svg(dot_filename, svg_filename);
+  assert(is_regular_file(svg_filename));
   convert_svg_to_png(svg_filename, png_filename);
+  assert(is_regular_file(png_filename));
   ribi::FileIo().DeleteFile(dot_filename);
   ribi::FileIo().DeleteFile(svg_filename);
 }
