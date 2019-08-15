@@ -15,6 +15,7 @@ install:
   - sudo apt-get install -qq graphviz
   # ImageMagick
   - sudo apt-get install -qq imagemagick
+  - convert --help
   # Codecov
   - sudo pip install codecov
   # OCLint
