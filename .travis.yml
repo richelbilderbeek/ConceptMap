@@ -7,8 +7,9 @@ install:
   # Boost
   - sudo apt install -qq libboost-all-dev
   # Qt5
-  - sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev
-  - export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
+  - sudo apt-get install -qq qt5-qmake qt5-default
+  #- sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev
+  #- export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
   # cppcheck
   - sudo apt-get install -qq cppcheck
   # GraphViz
