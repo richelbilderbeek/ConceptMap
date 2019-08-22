@@ -14,6 +14,8 @@ install:
   - sudo apt-get install -qq cppcheck
   # GraphViz
   - sudo apt-get install -qq graphviz
+  # GraphViz fonts
+  - sudo apt-get install -qq texlive-fonts-extra
   # ImageMagick
   - sudo apt-get install -qq imagemagick
   - convert --help || true
