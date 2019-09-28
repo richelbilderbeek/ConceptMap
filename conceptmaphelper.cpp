@@ -80,7 +80,7 @@ std::string ribi::cmap::ReplaceTrailingSpaces(std::string s, const char x)
   if (sz == 0) return s;
 
   //i!=0, because if s[0] is a space, it is already converted to bell
-  for (int i = sz - 1; i != 0; ++i)
+  for (int i = sz - 1; i != 0; --i)
   {
     assert(i >= 0);
     assert(i < static_cast<int>(s.size()));
