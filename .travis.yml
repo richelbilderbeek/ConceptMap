@@ -15,7 +15,9 @@ install:
   # GraphViz
   - sudo apt-get install -qq graphviz
   # ImageMagick
-  - sudo apt-get install imagemagick libperl-dev gcc libjpeg62-dev libbz2-dev libtiff4-dev libwmf-dev libz-dev libpng12-dev libx11-dev libxt-dev libxext-dev libxml2-dev libfreetype6-dev liblcms1-dev libexif-dev perl libjasper-dev libltdl3-dev graphviz gs-gpl pkg-config
+  - sudo apt-get install -qq imagemagick graphviz gsfonts
+  - sudo apt-get install -qq gcc perl libz1g-dev libltdl-dev libpng-dev libtiff-dev liblcms2-dev 
+  - sudo apt-get install -qq libperl-dev libjpeg62-dev libbz2-dev libwmf-dev libx11-dev libxt-dev libxext-dev libxml2-dev libfreetype6-dev libexif-dev pkg-config
   # Codecov
   - sudo pip install codecov
   # OCLint
