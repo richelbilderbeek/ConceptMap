@@ -6,15 +6,23 @@
 #convert-im6.q16: unable to read font `(null)' @ error/annotate.c/RenderFreetype/1362.
 #convert-im6.q16: non-conforming drawing primitive definition `text' @ error/draw.c/DrawImage/3265.
 
-# remove in case you already installed imagemagick from apt-get
+# Remove, just in case you already installed imagemagick from apt-get
 sudo apt-get remove imagemagick
+
+# Install deps
 sudo apt-get install libperl-dev gcc libjpeg62-dev libbz2-dev libtiff4-dev libwmf-dev libz-dev libpng12-dev libx11-dev libxt-dev libxext-dev libxml2-dev libfreetype6-dev liblcms1-dev libexif-dev perl libjasper-dev libltdl3-dev graphviz gs-gpl pkg-config
 
-#get image magick from source and compile it
-cd ~/sources
+# Download and extract source
 wget ftp://ftp.imagemagick.org/pub/ImageMagick/ImageMagick.tar.gz
 tar xvfz ImageMagick.tar.gz
-cd ImageMagick-6.5.4-2
+
+# Go into the ImageMagick-[version] folder
+cd $(ls | egrep "ImageMagick")
+
+# Build ImageMagick
 ./configure --disable-openmp --with-gs-font-dir=/usr/share/fonts/type1/gsfonts
 make
 sudo make install
+
+# Leave the ~/ImageMagick-[version] folder again
+cd ..
