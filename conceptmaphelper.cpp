@@ -76,12 +76,14 @@ std::string ribi::cmap::ReplaceLeadingAndTrailingSpaces(
 
 std::string ribi::cmap::ReplaceTrailingSpaces(std::string s, const char x)
 {
-  const std::size_t sz = s.size();
+  const int sz = static_cast<int>(s.size());
   if (sz == 0) return s;
 
   //i!=0, because if s[0] is a space, it is already converted to bell
-  for (std::size_t i=sz-1; i!=0; ++i)
+  for (int i = sz - 1; i != 0; ++i)
   {
+    assert(i >= 0);
+    assert(i < static_cast<int>(s.size()));
     if (s[i] == ' ')
       s[i] = x;
     else
