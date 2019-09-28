@@ -14,11 +14,8 @@ install:
   - sudo apt-get install -qq cppcheck
   # GraphViz
   - sudo apt-get install -qq graphviz
-  # GraphViz fonts
-  - sudo apt-get install -qq fontconfig libfreetype6-dev
   # ImageMagick
-  - sudo apt-get install -qq imagemagick
-  - convert --help || true
+  - sudo ./scripts/install_imagemagick
   # Codecov
   - sudo pip install codecov
   # OCLint
