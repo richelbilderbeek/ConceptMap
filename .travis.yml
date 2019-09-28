@@ -22,7 +22,7 @@ install:
   # Codecov
   - sudo pip install codecov
   # OCLint
-  - ./install_oclint
+  - ./scripts/install_oclint
   # GSL and other GitHubs
   - my_github=${PWD##*/}  
   - cd ..
