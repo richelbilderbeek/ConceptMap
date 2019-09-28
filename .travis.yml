@@ -8,8 +8,6 @@ install:
   - sudo apt install -qq libboost-all-dev
   # Qt5
   - sudo apt-get install -qq qt5-qmake qt5-default
-  #- sudo apt-get install -qq libqt5webkit5-dev qtdeclarative5-dev
-  #- export QMAKE=/usr/lib/x86_64-linux-gnu/qt5/bin/qmake
   # cppcheck
   - sudo apt-get install -qq cppcheck
   # GraphViz
@@ -43,10 +41,10 @@ script:
   # cppcheck
   - cppcheck --quiet --error-exitcode=1 . 
   # Codecov
-  - ./get_code_cov >/dev/null
+  - ./scripts/get_code_cov >/dev/null
   - codecov >/dev/null
   # OCLint
-  - ./do_oclint
+  - ./scripts/do_oclint
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
