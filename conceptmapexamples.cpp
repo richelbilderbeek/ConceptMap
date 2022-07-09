@@ -8,7 +8,7 @@
 
 #include <boost/bind.hpp>
 #include <boost/lambda/lambda.hpp>
-#include <gsl/gsl_assert>
+#include <gsl/assert>
 #include "conceptmapregex.h"
 #include "graphviz_decode.h"
 #include "graphviz_encode.h"

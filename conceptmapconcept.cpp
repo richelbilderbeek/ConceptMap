@@ -3,7 +3,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <boost/lexical_cast.hpp>
-#include <gsl/gsl_assert>
+#include <gsl/assert>
 #include "conceptmapconceptfactory.h"
 #include "conceptmaphelper.h"
 #include "conceptmapcompetency.h"
