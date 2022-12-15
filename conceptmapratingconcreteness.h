@@ -1,6 +1,7 @@
 #ifndef CONCEPTMAPRATINGCONCRETENESS_H
 #define CONCEPTMAPRATINGCONCRETENESS_H
 
+#include <string>
 #include <map>
 #include "conceptmapfwd.h"
 

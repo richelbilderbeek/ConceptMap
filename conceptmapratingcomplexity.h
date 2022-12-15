@@ -2,6 +2,7 @@
 #define CONCEPTMAPRATINGCOMPLEXITY_H
 
 #include <map>
+#include <string>
 #include "conceptmapfwd.h"
 
 namespace ribi {

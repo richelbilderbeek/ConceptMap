@@ -1,6 +1,7 @@
 #ifndef CONCEPTMAPRATINGSPECIFICITY_H
 #define CONCEPTMAPRATINGSPECIFICITY_H
 
+#include <string>
 #include <map>
 #include "conceptmapfwd.h"
 

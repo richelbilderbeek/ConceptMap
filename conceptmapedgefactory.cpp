@@ -72,7 +72,7 @@ std::vector<ribi::cmap::Edge> ribi::cmap::EdgeFactory::GetNastyTests() const noe
 {
   std::vector<Edge> result;
 
-  for (const auto node: NodeFactory().GetNastyTests())
+  for (const auto& node: NodeFactory().GetNastyTests())
   {
     Edge edge(node);
     edge.SetHeadArrow(true);
